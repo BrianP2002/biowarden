@@ -1,0 +1,49 @@
+spec_version: "1"
+name: seq_fastp
+version_note: >-
+  fastp 1.4.0. Every behaviour the checkers rely on was run on this version; the evidence is
+  quoted in engine/rules/seq_fastp.py.
+rules:
+  # F83. fastp -q/-u/-e are read-filter options, not trimmers. A conditional call rule: it fires
+  # only for a call with a quality option and no --cut_* option when the reads have 3' tails.
+  - id: fastp.quality_trimming
+    slot: flag_semantics
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [fastp]
+    declare:
+      key: low_quality_goal
+      values: [trim_tails, filter_reads]
+      required: false
+      description: >-
+        What the quality options are for: trim_tails = remove the low-quality 3' ends (needs
+        --cut_right, --cut_tail or --cut_front); filter_reads = drop reads with many low-quality
+        bases (-q and -u are enough).
+    check: fastp_quality_trimming
+    message: >-
+      fastp -q sets the qualified-base cut-off of a read filter: it drops reads and trims nothing,
+      so the low-quality tails of the reads that survive stay in the output.
+
+  # F87. fastp detects single-end adapters automatically only from 10,000 reads. A conditional
+  # call rule: it fires for a single-end call without -a on a smaller file whose reads end in a
+  # known adapter.
+  - id: fastp.adapter_detection
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [fastp]
+    declare:
+      key: adapter_trimming
+      values: [adapter_given, none_needed]
+      required: false
+      description: >-
+        Whether the adapter is trimmed with a sequence named in the call (adapter_given: -a ...)
+        or must stay (none_needed).
+    check: fastp_adapter_detection
+    message: >-
+      fastp's automatic adapter detection for single-end reads needs 10,000 reads: a smaller file
+      is not trimmed at all, and the only trace is 'No adapter detected' on stderr.

@@ -1,0 +1,28 @@
+spec_version: "1"
+name: struct_mdtraj
+version_note: "mdtraj 1.10.3, gemmi 0.7.5 (python-struct environment)"
+rules:
+  # F92. In an mdtraj selection `resid N` is the 0-based residue index; the PDB residue number is
+  # `resSeq N`. A fact rule: it fires for mdtraj code that selects with `resid N` on a structure
+  # file where the residue with index N does not carry the number N.
+  - id: mdtraj.resid_index
+    slot: index_base
+    kind: fact
+    tier: T1
+    incidents: [mdtraj-selection-docs]
+    applies:
+      tools: [python-struct, python-bio, python3, python]
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:pdb|ent|cif|mmcif)(?:\.gz)?(?![\w-]|\.\w)'
+    declare:
+      key: residue_numbering
+      values: ["pdb_number", "residue_index"]
+      required: false
+      description: >-
+        What the residue numbers in the code mean: pdb_number (the residue numbers written in the
+        PDB file, mdtraj's resSeq) or residue_index (the 0-based position of the residue in the
+        topology, mdtraj's resid).
+    check: mdtraj_resid_index
+    message: >-
+      mdtraj's `resid N` is the 0-based residue index, not the PDB residue number (`resSeq N`), so
+      on a chain that does not start at 0 it selects the residue N positions in, silently.

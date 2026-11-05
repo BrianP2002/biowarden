@@ -1,0 +1,28 @@
+spec_version: "1"
+name: struct_mmseqs
+version_note: "MMseqs2 18.8cc5c (bio-struct environment)"
+rules:
+  # F94. mmseqs clustering demands 80% coverage of both sequences by default (-c 0.8,
+  # --cov-mode 0), so partial sequences are never clustered with the protein they come from. A
+  # conditional call rule: it needs the declaration only when the input FASTA holds fragments and
+  # the coverage mode is not 1 or 2.
+  - id: mmseqs.cluster_coverage
+    slot: coverage
+    kind: call
+    tier: T1
+    incidents: [MMseqs2-defaults]
+    applies:
+      tools: [mmseqs]
+      subcommands: ["easy-cluster", "cluster", "easy-linclust", "linclust"]
+    declare:
+      key: fragment_policy
+      values: ["with_parent", "separate"]
+      required: false
+      description: >-
+        What should happen to partial sequences (fragments) in the input: with_parent (each one
+        belongs to the cluster of the longer sequence it was cut from) or separate (a fragment
+        that does not cover 80% of both sequences stays a cluster of its own).
+    check: mmseqs_cluster_coverage
+    message: >-
+      mmseqs easy-cluster requires 80% coverage of both sequences by default, so fragments are
+      never clustered with their parent protein and are counted as extra clusters.

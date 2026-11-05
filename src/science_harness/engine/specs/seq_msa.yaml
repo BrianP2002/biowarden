@@ -1,0 +1,28 @@
+spec_version: "1"
+name: seq_msa
+version_note: >-
+  MAFFT v7.526, MUSCLE 5.3. Every behaviour the checker relies on was run on these versions; the
+  evidence is quoted in engine/rules/seq_msa.py.
+rules:
+  # F86. mafft and muscle align sequences as written; a reverse-complemented member is not flipped
+  # unless mafft gets --adjustdirection. A conditional call rule: it fires only when the input holds
+  # a sequence that shares more 10-mers with the others as reverse complement.
+  - id: msa.sequence_orientation
+    slot: strand
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [mafft, muscle]
+    declare:
+      key: sequence_orientation
+      values: [same_strand, mixed_strands]
+      required: false
+      description: >-
+        Whether all sequences are on the same strand (same_strand) or some are written as their
+        reverse complement (mixed_strands: flip them first, or use mafft --adjustdirection).
+    check: msa_sequence_orientation
+    message: >-
+      mafft and muscle align the sequences as written: a member given as the reverse complement of
+      the others is aligned as unrelated sequence, with exit status 0 and an alignment of the
+      right number of rows.

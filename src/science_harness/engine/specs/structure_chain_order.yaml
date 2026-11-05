@@ -1,0 +1,37 @@
+spec_version: "1"
+name: structure_chain_order
+version_note: >-
+  mockfold 0.1.0, backends tfoldlike and boltzlike (the fixture in bench/fixtures/mockfold.py,
+  which stands in for tFold-TCR and Boltz-class predictors). Every behaviour the checker relies on
+  was run on this version; the evidence is quoted in engine/rules/structure_chain_order.py.
+rules:
+  # T01. tfoldlike assembles the complex as B:A + M:N + P (D:G + M:N + P) whatever the order of the
+  # request and names the output chains by role code, while downstream code pairs output chain k
+  # with request entity k. The fault is silent: exit 0, a valid PDB, chains in the wrong place. A
+  # conditional call rule: it is silent when the request already follows the backend's order and
+  # for an order-preserving backend (boltzlike); it needs the declaration only when the order of
+  # the request file differs from the one the backend assembles.
+  - id: structure.chain_order
+    slot: chain_order
+    kind: call
+    tier: T1
+    incidents: [T01]
+    applies:
+      tools: [mockfold]
+      subcommands: [predict]
+    declare:
+      key: chain_pairing
+      values: [by_request_position, by_role]
+      required: false
+      description: >-
+        How your code pairs the output chains of this prediction with the request entities:
+        by_request_position (output chain k is request entity k, as for most predictors) or by_role
+        (through the role code that tfoldlike writes as the chain ID). Needed only when the
+        entities in the request file are listed in a different order than the backend assembles
+        them (tfoldlike: B, A, D, G, M, N, P).
+    check: structure_chain_order
+    message: >-
+      tfoldlike assembles chains in a fixed role order (B:A + M:N + P) whatever the order of the
+      request and names the output chains by role code, so code that pairs output chain k with
+      request entity k silently pairs entities with the wrong chains when the request lists them
+      in another order.

@@ -1,0 +1,29 @@
+spec_version: "1"
+name: struct_bfactor
+version_note: "gemmi 0.7.5; B-factor conventions of AlphaFold, ESMFold2, Boltz and RFdiffusion outputs"
+rules:
+  # F97. The B-factor column of a predicted structure holds pLDDT on 0-100 (AlphaFold) or 0-1
+  # (ESMFold2, Boltz-2 metrics) and RFdiffusion writes a 0/1 flag; a cutoff written for the other
+  # scale selects nothing or everything. A fact rule over structure files named in any command.
+  - id: struct.bfactor_scale
+    slot: metric_scale
+    kind: fact
+    tier: T1
+    incidents: [STR-19, STR-20, STR-21]
+    applies:
+      tools: [awk, gawk, mawk, perl, python-struct, python-bio, python3, python]
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:pdb|ent|cif|mmcif)(?:\.gz)?(?![\w-]|\.\w)'
+    declare:
+      key: bfactor_scale
+      values: ["0_1", "0_100", "experimental_b"]
+      required: false
+      description: >-
+        The scale of the B-factor column the code compares with a cutoff: 0_1 (pLDDT as a
+        fraction), 0_100 (pLDDT in percent, AlphaFold) or experimental_b (a crystallographic
+        B-factor, not a confidence).
+    check: struct_bfactor_scale
+    message: >-
+      The B-factor column of a predicted structure holds pLDDT on 0-100 or on 0-1 depending on the
+      predictor, so a cutoff written for the other scale (B > 70 on a 0-1 file) silently selects
+      nothing or everything.

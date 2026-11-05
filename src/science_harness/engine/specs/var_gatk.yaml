@@ -1,0 +1,31 @@
+spec_version: "1"
+name: var_gatk
+version_note: >-
+  GATK 4.6.2.0 (run with --java-options -Xmx512m), bcftools 1.24. Every behaviour the checkers
+  rely on was run on these versions; the evidence is quoted in engine/rules/var_gatk.py.
+rules:
+  # F56. VariantFiltration filters a record when the JEXL expression is true; a record that lacks
+  # the annotation makes the expression unevaluable and passes (unless
+  # --missing-values-evaluate-as-failing). A conditional call rule: it reads the VCF of -V and is
+  # silent unless some record lacks an attribute the expression compares.
+  - id: gatk.missing_annotation
+    slot: missing_value
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [gatk]
+      subcommands: [VariantFiltration]
+      options_any: [--filter-expression, -filter]
+    declare:
+      key: missing_annotation
+      values: [record_kept, record_removed]
+      required: false
+      description: >-
+        What happens to a record that has no value for the tested field (QUAL ".", an INFO tag it
+        lacks): record_kept = it stays among the records the call keeps; record_removed = it is
+        removed.
+    check: gatk_missing_annotation
+    message: >-
+      GATK VariantFiltration does not filter a record that lacks the annotation of the
+      expression (it passes) unless --missing-values-evaluate-as-failing is given.

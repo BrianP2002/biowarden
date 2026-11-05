@@ -1,0 +1,5186 @@
+{
+ "bcftools.filter_pass_dot": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 5400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 2700,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0005,
+  "killed": 5400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   6900
+  ],
+  "right_undeclared": [
+   0,
+   6900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "be115c318ace3ee3a888d90caa6175923c77c724f1c3d9d07493f25742da5ad0",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bcftools.format_filter_scope": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 8102,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 8102,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 3300,
+    "n": 7796,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3300,
+    "n": 3898,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0005,
+  "killed": 6600,
+  "mode": "block",
+  "recall": 0.5644,
+  "right_declared": [
+   0,
+   8102
+  ],
+  "right_undeclared": [
+   0,
+   8102
+  ],
+  "seeds": "0-299",
+  "spec_hash": "be115c318ace3ee3a888d90caa6175923c77c724f1c3d9d07493f25742da5ad0",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bcftools.isec_representation": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 3600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 1800,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.001,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3600
+  ],
+  "right_undeclared": [
+   0,
+   3600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "be115c318ace3ee3a888d90caa6175923c77c724f1c3d9d07493f25742da5ad0",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bcftools.merge_absent_sites": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3000,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "be115c318ace3ee3a888d90caa6175923c77c724f1c3d9d07493f25742da5ad0",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bcftools.missing_value_filter": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6300,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6300,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   6300
+  ],
+  "right_undeclared": [
+   0,
+   6300
+  ],
+  "seeds": "0-299",
+  "spec_hash": "be115c318ace3ee3a888d90caa6175923c77c724f1c3d9d07493f25742da5ad0",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bcftools.region_semantics": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2760,
+    "unknown": 60
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 2760,
+    "n": 2760,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 780,
+    "n": 1620,
+    "unknown": 60
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 840,
+    "n": 840,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0013,
+  "killed": 1620,
+  "mode": "block",
+  "recall": 0.6585,
+  "right_declared": [
+   0,
+   2760
+  ],
+  "right_undeclared": [
+   2760,
+   2760
+  ],
+  "seeds": "0-299",
+  "spec_hash": "f5c5f8d6a7efa5c64e260e8f5cab029eec100faa8a08638c244ccabaaecff1f2",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bcftools.regions_file_base": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 900,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   1800
+  ],
+  "seeds": "0-299",
+  "spec_hash": "f5c5f8d6a7efa5c64e260e8f5cab029eec100faa8a08638c244ccabaaecff1f2",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bcftools.subset_monomorphic": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 3600,
+    "n": 6600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 3300,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 6600,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   5700
+  ],
+  "right_undeclared": [
+   0,
+   5700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "be115c318ace3ee3a888d90caa6175923c77c724f1c3d9d07493f25742da5ad0",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedops.bedmap_score_column": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 4500,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 4500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0014,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 0.4667,
+  "right_declared": [
+   0,
+   2700
+  ],
+  "right_undeclared": [
+   0,
+   2700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "352d129b78ce85ef25ae2e016b9821859e374ae947c53ef09b89d0b1f89e9bb7",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedops.element_of_amount": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 7200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 3600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.002,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.3333,
+  "right_declared": [
+   0,
+   1800
+  ],
+  "right_undeclared": [
+   0,
+   1800
+  ],
+  "seeds": "0-299",
+  "spec_hash": "352d129b78ce85ef25ae2e016b9821859e374ae947c53ef09b89d0b1f89e9bb7",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedops.sorted_input": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 3900,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 5400,
+  "mode": "block",
+  "recall": 0.6923,
+  "right_declared": [
+   0,
+   5700
+  ],
+  "right_undeclared": [
+   0,
+   5700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "352d129b78ce85ef25ae2e016b9821859e374ae947c53ef09b89d0b1f89e9bb7",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.closest_distance_unit": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 2700
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1500,
+    "unknown": 1500
+   }
+  },
+  "false_block_upper": 0.0014,
+  "killed": 1500,
+  "mode": "block",
+  "recall": 0.3333,
+  "right_declared": [
+   0,
+   2700
+  ],
+  "right_undeclared": [
+   0,
+   2700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.duplicate_policy": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 600
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 1200
+   }
+  },
+  "false_block_upper": 0.0012,
+  "killed": 1200,
+  "mode": "block",
+  "recall": 0.3333,
+  "right_declared": [
+   0,
+   3000
+  ],
+  "right_undeclared": [
+   0,
+   3000
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.groupby_unsorted": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.002,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.75,
+  "right_declared": [
+   0,
+   1800
+  ],
+  "right_undeclared": [
+   0,
+   1800
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.map_unweighted": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2100,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2700,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0018,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.3478,
+  "right_declared": [
+   0,
+   2100
+  ],
+  "right_undeclared": [
+   0,
+   2100
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.merge_bookended": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2100,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2100,
+    "unknown": 1200
+   }
+  },
+  "false_block_upper": 0.0018,
+  "killed": 1200,
+  "mode": "block",
+  "recall": 0.1905,
+  "right_declared": [
+   0,
+   2100
+  ],
+  "right_undeclared": [
+   0,
+   2100
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.prec_significant": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 1200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 4800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 2400,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0031,
+  "killed": 4800,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   1200
+  ],
+  "right_undeclared": [
+   600,
+   1200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.spliced_without_split": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.001,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3600
+  ],
+  "right_undeclared": [
+   0,
+   3600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.split_reciprocal": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6354,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6354,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2646,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2646,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.4535,
+  "right_declared": [
+   0,
+   6354
+  ],
+  "right_undeclared": [
+   0,
+   6354
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.subtract_trims": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 879,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 879,
+    "n": 1800,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0015,
+  "killed": 1758,
+  "mode": "block",
+  "recall": 0.3907,
+  "right_declared": [
+   0,
+   2400
+  ],
+  "right_undeclared": [
+   0,
+   2400
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bedtools.window_boundary": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2890,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2890,
+    "unknown": 1800
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1010,
+    "n": 2620,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1310,
+    "unknown": 1010
+   }
+  },
+  "false_block_upper": 0.0013,
+  "killed": 1010,
+  "mode": "block",
+  "recall": 0.257,
+  "right_declared": [
+   0,
+   2890
+  ],
+  "right_undeclared": [
+   0,
+   2890
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5055782a5f641f46110c548d301a600cc55e242bf7ff35af0452359e28d204a6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "blast.stale_database": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3000,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "3c104564a8e7290c4f71e7cef1000492567b072ca32396569effc879e8f1cb18",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "blastn.megablast_default": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6675,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6675,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2325,
+    "n": 4650,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2325,
+    "n": 2325,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 4650,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   6675
+  ],
+  "right_undeclared": [
+   0,
+   6675
+  ],
+  "seeds": "0-299",
+  "spec_hash": "3c104564a8e7290c4f71e7cef1000492567b072ca32396569effc879e8f1cb18",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bowtie2.maxins_default": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 9900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 7200,
+    "n": 7200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 5400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 3000,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0004,
+  "killed": 5400,
+  "mode": "block",
+  "recall": 0.6429,
+  "right_declared": [
+   0,
+   9900
+  ],
+  "right_undeclared": [
+   7200,
+   7200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "f0755e0f3cf2e777232d6b80e0dcd40c0a5ba82ad26e89283f20e9377b5d9e0a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "bwa.mem_min_score": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 17400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 8700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 6600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 3300,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0002,
+  "killed": 6000,
+  "mode": "block",
+  "recall": 0.6061,
+  "right_declared": [
+   0,
+   17400
+  ],
+  "right_undeclared": [
+   0,
+   8700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "50f067bb186fe4500fcd6c4fdd67ae48c99367e54c57d8c7fe3703ae577c388b",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "cutadapt.adapters_per_read": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 9000,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6300,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 6600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 3300,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0004,
+  "killed": 5400,
+  "mode": "block",
+  "recall": 0.5455,
+  "right_declared": [
+   0,
+   9000
+  ],
+  "right_undeclared": [
+   0,
+   6300
+  ],
+  "seeds": "0-299",
+  "spec_hash": "c313743e0ece54854f42bcfc11a45e2b592eea521a446b87934c0be82c904edf",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "deeptools.bamcoverage_track_units": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0061,
+  "killed": 2100,
+  "mode": "block",
+  "recall": 0.5833,
+  "right_declared": [
+   0,
+   600
+  ],
+  "right_undeclared": [
+   600,
+   600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "bd47f23992fe0fcd06ffe04026c2cc6b702fed5f45c7f34adb596fbd75ac211a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "deeptools.duplicates_semantics": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1500,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1500,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 300,
+    "n": 900,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0025,
+  "killed": 1500,
+  "mode": "block",
+  "recall": 0.5556,
+  "right_declared": [
+   0,
+   1500
+  ],
+  "right_undeclared": [
+   0,
+   1500
+  ],
+  "seeds": "0-299",
+  "spec_hash": "bd47f23992fe0fcd06ffe04026c2cc6b702fed5f45c7f34adb596fbd75ac211a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "deeptools.matrix_missing_data": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0015,
+  "killed": 1200,
+  "mode": "block",
+  "recall": 0.4,
+  "right_declared": [
+   0,
+   2400
+  ],
+  "right_undeclared": [
+   0,
+   1800
+  ],
+  "seeds": "0-299",
+  "spec_hash": "bd47f23992fe0fcd06ffe04026c2cc6b702fed5f45c7f34adb596fbd75ac211a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "deeptools.matrix_skip_zeros": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0031,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   1200
+  ],
+  "right_undeclared": [
+   0,
+   1200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "bd47f23992fe0fcd06ffe04026c2cc6b702fed5f45c7f34adb596fbd75ac211a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "deeptools.multibamsummary_regions": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 300,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 300,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0061,
+  "killed": 600,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   600
+  ],
+  "right_undeclared": [
+   0,
+   300
+  ],
+  "seeds": "0-299",
+  "spec_hash": "bd47f23992fe0fcd06ffe04026c2cc6b702fed5f45c7f34adb596fbd75ac211a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "diamond.hit_cap": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5554,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5554,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2827,
+    "n": 5692,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2227,
+    "n": 2846,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 5054,
+  "mode": "block",
+  "recall": 0.5919,
+  "right_declared": [
+   0,
+   5554
+  ],
+  "right_undeclared": [
+   0,
+   5554
+  ],
+  "seeds": "0-299",
+  "spec_hash": "b221b5ad64ccbbfb2ce8b9466e837516e9183fc17cd76beccf84e7ff242d3d88",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "diamond.sensitivity_mode": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4322,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4322,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2278,
+    "n": 4556,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2278,
+    "n": 2278,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 4556,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   4322
+  ],
+  "right_undeclared": [
+   0,
+   4322
+  ],
+  "seeds": "0-299",
+  "spec_hash": "b221b5ad64ccbbfb2ce8b9466e837516e9183fc17cd76beccf84e7ff242d3d88",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "fastp.adapter_detection": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4922,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4922,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 4978,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 2878,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.4582,
+  "right_declared": [
+   0,
+   4922
+  ],
+  "right_undeclared": [
+   0,
+   4922
+  ],
+  "seeds": "0-299",
+  "spec_hash": "1a5117b1ebb04c9e6b0b0a259e3bc4ff8b299646b4728168c38722e979d2261e",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "fastp.quality_trimming": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6304,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6304,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2396,
+    "n": 5692,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1605,
+    "n": 3296,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 4001,
+  "mode": "block",
+  "recall": 0.4451,
+  "right_declared": [
+   0,
+   6304
+  ],
+  "right_undeclared": [
+   0,
+   6304
+  ],
+  "seeds": "0-299",
+  "spec_hash": "1a5117b1ebb04c9e6b0b0a259e3bc4ff8b299646b4728168c38722e979d2261e",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "fastq.phred_offset": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 9600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 9600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 4500,
+    "n": 9300,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 4800,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0004,
+  "killed": 6900,
+  "mode": "block",
+  "recall": 0.4894,
+  "right_declared": [
+   0,
+   9600
+  ],
+  "right_undeclared": [
+   0,
+   9600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "740c90b290921cacb04bf1e3232c9718d8313622f03ed3cd33ec0c967ac45989",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "featurecounts.counts_unit": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5400,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 4800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 2400,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.5,
+  "right_declared": [
+   0,
+   5400
+  ],
+  "right_undeclared": [
+   0,
+   5400
+  ],
+  "seeds": "0-299",
+  "spec_hash": "2916f456603028f4503403a0f638a632cbdfedb4422a1952f7820b14c6ceaf59",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "featurecounts.read_pairs": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 4800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 3000,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0031,
+  "killed": 4500,
+  "mode": "block",
+  "recall": 0.5769,
+  "right_declared": [
+   0,
+   1200
+  ],
+  "right_undeclared": [
+   900,
+   1200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "2916f456603028f4503403a0f638a632cbdfedb4422a1952f7820b14c6ceaf59",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "featurecounts.strandedness": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 4200,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.002,
+  "killed": 6300,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   1800
+  ],
+  "right_undeclared": [
+   0,
+   2700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "2916f456603028f4503403a0f638a632cbdfedb4422a1952f7820b14c6ceaf59",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "gatk.missing_annotation": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0041,
+  "killed": 1200,
+  "mode": "block",
+  "recall": 0.2667,
+  "right_declared": [
+   0,
+   900
+  ],
+  "right_undeclared": [
+   0,
+   900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "da4abaf783ad6087c4b689bbb64b7ddf29c025f4961bffe1cafcf9a454f3f5d6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "hisat2.rna_strandness": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2208,
+    "unknown": 109
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 2208,
+    "n": 3408,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 5892,
+    "unknown": 1091
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3192,
+    "n": 3192,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0017,
+  "killed": 5892,
+  "mode": "block",
+  "recall": 0.6486,
+  "right_declared": [
+   0,
+   2208
+  ],
+  "right_undeclared": [
+   2208,
+   3408
+  ],
+  "seeds": "0-299",
+  "spec_hash": "6674b0a20003575f334fd7622fcd152a55ce768267b23b3e3d2814c9ee300d5d",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "hmmer.split_database": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 4800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 2400,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 4800,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   5400
+  ],
+  "right_undeclared": [
+   0,
+   4200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "ffc4fd153cf743984a660a70117596584d3925aa4e65de466dc9275395151ab2",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "htseq.min_mapq": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0031,
+  "killed": 3000,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   1200
+  ],
+  "right_undeclared": [
+   0,
+   2700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "b8444c15661aa5692ac3e77d5a1dab9b95041a99516f9ee0203194cb58c0de7e",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "htseq.strandedness": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3750,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 5700,
+    "n": 5700,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2850,
+    "n": 2850,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0015,
+  "killed": 8550,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   2400
+  ],
+  "right_undeclared": [
+   0,
+   3750
+  ],
+  "seeds": "0-299",
+  "spec_hash": "b8444c15661aa5692ac3e77d5a1dab9b95041a99516f9ee0203194cb58c0de7e",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "kallisto.strand_option": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1500,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1500,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 5400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 2700,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0025,
+  "killed": 5400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   1500
+  ],
+  "right_undeclared": [
+   900,
+   1500
+  ],
+  "seeds": "0-299",
+  "spec_hash": "215247f04376863c649cc80ce5528b3264d79ca9a1585c89c4dfefdcfaac3dd6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "liftover.chain_contigs": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 3300,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 3300,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.5455,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "456552d13e1e36779a67b297ce30da639958b02668ee72f4bc514139dc2cf3ce",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "liftover.stale_columns": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 3300,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 1500,
+  "mode": "block",
+  "recall": 0.1515,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "456552d13e1e36779a67b297ce30da639958b02668ee72f4bc514139dc2cf3ce",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "liftover.unmapped_discarded": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3300,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 3300,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 1200,
+  "mode": "block",
+  "recall": 0.1818,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "456552d13e1e36779a67b297ce30da639958b02668ee72f4bc514139dc2cf3ce",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "macs3.control_contigs": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0031,
+  "killed": 1200,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   1200
+  ],
+  "right_undeclared": [
+   0,
+   1200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "e95f4183df253e097dcb9a97edd88c67969528ebb124f093d4912e64619009e5",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "macs3.effective_genome_size": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0061,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.8571,
+  "right_declared": [
+   0,
+   600
+  ],
+  "right_undeclared": [
+   0,
+   600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "e95f4183df253e097dcb9a97edd88c67969528ebb124f093d4912e64619009e5",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "macs3.extsize_needs_nomodel": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0041,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.5455,
+  "right_declared": [
+   0,
+   900
+  ],
+  "right_undeclared": [
+   0,
+   900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "e95f4183df253e097dcb9a97edd88c67969528ebb124f093d4912e64619009e5",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "macs3.paired_end_format": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0041,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   900
+  ],
+  "right_undeclared": [
+   0,
+   900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "e95f4183df253e097dcb9a97edd88c67969528ebb124f093d4912e64619009e5",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "macs3.peaks_xls_start": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 900,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.002,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   1800
+  ],
+  "right_undeclared": [
+   0,
+   1800
+  ],
+  "seeds": "0-299",
+  "spec_hash": "e95f4183df253e097dcb9a97edd88c67969528ebb124f093d4912e64619009e5",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "matrix.log_scale_state": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1211,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2418,
+    "n": 4800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1211,
+    "n": 2400,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0015,
+  "killed": 3629,
+  "mode": "block",
+  "recall": 0.504,
+  "right_declared": [
+   0,
+   2400
+  ],
+  "right_undeclared": [
+   0,
+   1211
+  ],
+  "seeds": "0-299",
+  "spec_hash": "1a421e8da9e8a006d835b5d6550b7de31cfd159f1558f8d53a34e68a48524b58",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "mda.protein_selection": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6300,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6300,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 900,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   6300
+  ],
+  "right_undeclared": [
+   0,
+   6300
+  ],
+  "seeds": "0-299",
+  "spec_hash": "2ed701bf8e04c2925b962e786f693d95f800716392f305c8b1fa2ff8edab8400",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "mdtraj.resid_index": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 80,
+    "n": 320,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 80,
+    "n": 200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0061,
+  "killed": 160,
+  "mode": "block",
+  "recall": 0.3077,
+  "right_declared": [
+   0,
+   600
+  ],
+  "right_undeclared": [
+   0,
+   600
+  ],
+  "seeds": "0-39",
+  "spec_hash": "dc1e94776a87a64a62424881797580481890e61f9bbcf5f4a32a950427495be9",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "minimap2.short_reads_preset": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 11746,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5873,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 8654,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 4327,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0003,
+  "killed": 6000,
+  "mode": "block",
+  "recall": 0.4622,
+  "right_declared": [
+   0,
+   11746
+  ],
+  "right_undeclared": [
+   0,
+   5873
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5926fdcf7641aa002b5a02e9df730c810231b4246e193c0c6132c971b55d6504",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "mkdssp.poly_seq_scheme": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0014,
+  "killed": 4500,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   2700
+  ],
+  "right_undeclared": [
+   0,
+   2700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a6bfc82f65617e26fc95fb4732b346a6811ce979751db63002b0de7e2777fe32",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "mmseqs.cluster_coverage": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 899,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 899,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 300,
+    "n": 601,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 300,
+    "n": 301,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0041,
+  "killed": 600,
+  "mode": "block",
+  "recall": 0.6652,
+  "right_declared": [
+   0,
+   899
+  ],
+  "right_undeclared": [
+   0,
+   899
+  ],
+  "seeds": "0-299",
+  "spec_hash": "1364838da978f5ddff1ea872b78cb29ec221274208517dd6f7ee5ba5fc38166c",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "msa.sequence_orientation": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 4200,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 6300,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   5700
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "aa5f4799bbdd4cf809476f7830eacc59d541449bc9116af97e2afca6d5531a0f",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "pdbtools.modified_residues": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 3300,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1800,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.4706,
+  "right_declared": [
+   0,
+   4200
+  ],
+  "right_undeclared": [
+   0,
+   4200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "327085c597214131908a1285a7a2df5c922eab2a3f48dd049a84045424cafe41",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "pdbtools.selaltloc_digits": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1500,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1500,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1500,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0025,
+  "killed": 1500,
+  "mode": "block",
+  "recall": 0.5,
+  "right_declared": [
+   0,
+   1500
+  ],
+  "right_undeclared": [
+   0,
+   1500
+  ],
+  "seeds": "0-299",
+  "spec_hash": "327085c597214131908a1285a7a2df5c922eab2a3f48dd049a84045424cafe41",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "picard.markduplicates_remove": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0041,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.6154,
+  "right_declared": [
+   0,
+   900
+  ],
+  "right_undeclared": [
+   900,
+   900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "03df1c6344f47e46bb99d78b218c8ac337fbd413fdc9be8b2907c17f672d03b1",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "plink.allele_order": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 3600,
+    "n": 7200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3600,
+    "n": 3600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.002,
+  "killed": 7200,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   1800
+  ],
+  "right_undeclared": [
+   0,
+   1800
+  ],
+  "seeds": "0-299",
+  "spec_hash": "e6860122cba435e47fe702d44b6b29316eef90b7b23d5924111b617fb475c315",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "plink.subset_monomorphic": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.5714,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "e6860122cba435e47fe702d44b6b29316eef90b7b23d5924111b617fb475c315",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "plink.vcf_multiallelic": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2100,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 600,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0018,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.375,
+  "right_declared": [
+   0,
+   2100
+  ],
+  "right_undeclared": [
+   0,
+   2100
+  ],
+  "seeds": "0-299",
+  "spec_hash": "e6860122cba435e47fe702d44b6b29316eef90b7b23d5924111b617fb475c315",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "prody.chain_scheme": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4800,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0008,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.5,
+  "right_declared": [
+   0,
+   4800
+  ],
+  "right_undeclared": [
+   0,
+   4800
+  ],
+  "seeds": "0-299",
+  "spec_hash": "ed63e9319c46f4518cd0974dd064eef9600b449467df04abd74f1be6aa98bda5",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "prody.range_end": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5400,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.5,
+  "right_declared": [
+   0,
+   5400
+  ],
+  "right_undeclared": [
+   0,
+   5400
+  ],
+  "seeds": "0-299",
+  "spec_hash": "ed63e9319c46f4518cd0974dd064eef9600b449467df04abd74f1be6aa98bda5",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "rdkit.pdb_bond_orders": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.8571,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "dbd25f4e57879dda1b3b6567359e922a7899f61ee761081ea24b4ec0d9113a97",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "rsem.strandedness": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 4200,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.002,
+  "killed": 6300,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   1800
+  ],
+  "right_undeclared": [
+   0,
+   2700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "5b06d0af45089548d7410b859a6172916cdcb7d7d3035d48d5a533f41168c9d6",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "salmon.duplicate_transcripts": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.002,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   1800
+  ],
+  "right_undeclared": [
+   0,
+   3000
+  ],
+  "seeds": "0-299",
+  "spec_hash": "3a41d88a10049d167399016c87f0e7bede1796b0c176bfc274115a488c8e9d6c",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "salmon.quant_duplicates": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3000,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "3a41d88a10049d167399016c87f0e7bede1796b0c176bfc274115a488c8e9d6c",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "samtools.fixmate_grouping": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 1800,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   4200
+  ],
+  "right_undeclared": [
+   0,
+   4200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a8c649cbb58a942bc1ba6a3e8e04ff3df4be9b4b1e746c73cbe5839c72d2cb4a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "samtools.idxstats_unmapped": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 1200
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1200,
+    "unknown": 1200
+   }
+  },
+  "false_block_upper": 0.0008,
+  "killed": 1200,
+  "mode": "block",
+  "recall": 0.3333,
+  "right_declared": [
+   0,
+   4800
+  ],
+  "right_undeclared": [
+   0,
+   3600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a8c649cbb58a942bc1ba6a3e8e04ff3df4be9b4b1e746c73cbe5839c72d2cb4a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "samtools.mapq_unique_cutoff": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 19200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 9600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 6000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 3000,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0002,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 0.4667,
+  "right_declared": [
+   0,
+   19200
+  ],
+  "right_undeclared": [
+   0,
+   9600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a8c649cbb58a942bc1ba6a3e8e04ff3df4be9b4b1e746c73cbe5839c72d2cb4a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "samtools.merge_combine_rg": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5100,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5100,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   5100
+  ],
+  "right_undeclared": [
+   0,
+   5100
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a8c649cbb58a942bc1ba6a3e8e04ff3df4be9b4b1e746c73cbe5839c72d2cb4a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "samtools.split_flag_after_bwa_m": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 3600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 3600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0012,
+  "killed": 3600,
+  "mode": "block",
+  "recall": 0.5,
+  "right_declared": [
+   0,
+   3000
+  ],
+  "right_undeclared": [
+   0,
+   3000
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a8c649cbb58a942bc1ba6a3e8e04ff3df4be9b4b1e746c73cbe5839c72d2cb4a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "samtools.stats_nm_missing": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 3000,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 2700,
+  "mode": "block",
+  "recall": 0.45,
+  "right_declared": [
+   0,
+   4200
+  ],
+  "right_undeclared": [
+   0,
+   4200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a8c649cbb58a942bc1ba6a3e8e04ff3df4be9b4b1e746c73cbe5839c72d2cb4a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.concat_join": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4500,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4500,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0008,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 0.875,
+  "right_declared": [
+   0,
+   4500
+  ],
+  "right_undeclared": [
+   0,
+   4500
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a3823b555f20c1afd6865a79887f867f34da73c858892d2d9726fb1687d2b492",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.control_label": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 1800,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.001,
+  "killed": 3900,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   3600
+  ],
+  "right_undeclared": [
+   0,
+   3600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a3823b555f20c1afd6865a79887f867f34da73c858892d2d9726fb1687d2b492",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.counts_needed": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3300,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "67bda27e29c09e5b37bc61b08753a92eb5fc2b02008e33e45c070533735a6144",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.csv_orientation": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 3600,
+    "n": 3600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 3000,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 5700,
+  "mode": "block",
+  "recall": 0.8636,
+  "right_declared": [
+   0,
+   4200
+  ],
+  "right_undeclared": [
+   0,
+   4200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "d17a9e1a971c92a384be9717a13b0cb09e7c5196c9409090779e20dbf3553f0a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.de_raw_default": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4500,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4500,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0008,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.5,
+  "right_declared": [
+   0,
+   4500
+  ],
+  "right_undeclared": [
+   0,
+   4500
+  ],
+  "seeds": "0-299",
+  "spec_hash": "67bda27e29c09e5b37bc61b08753a92eb5fc2b02008e33e45c070533735a6144",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.double_transform": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 3300,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 3000,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0012,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3000
+  ],
+  "right_undeclared": [
+   0,
+   3000
+  ],
+  "seeds": "0-299",
+  "spec_hash": "67bda27e29c09e5b37bc61b08753a92eb5fc2b02008e33e45c070533735a6144",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.gene_vocabulary": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3300,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3300,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0011,
+  "killed": 3300,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   3300
+  ],
+  "right_undeclared": [
+   0,
+   3300
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a3823b555f20c1afd6865a79887f867f34da73c858892d2d9726fb1687d2b492",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.loom_orientation": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 3600,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 3600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0015,
+  "killed": 6600,
+  "mode": "block",
+  "recall": 0.8462,
+  "right_declared": [
+   0,
+   2400
+  ],
+  "right_undeclared": [
+   0,
+   2400
+  ],
+  "seeds": "0-299",
+  "spec_hash": "d17a9e1a971c92a384be9717a13b0cb09e7c5196c9409090779e20dbf3553f0a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.mito_prefix_case": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4500,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1800,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0008,
+  "killed": 3300,
+  "mode": "block",
+  "recall": 0.8462,
+  "right_declared": [
+   0,
+   4800
+  ],
+  "right_undeclared": [
+   0,
+   4500
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a3823b555f20c1afd6865a79887f867f34da73c858892d2d9726fb1687d2b492",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.mtx_orientation": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 2400,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.001,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 0.7778,
+  "right_declared": [
+   0,
+   3600
+  ],
+  "right_undeclared": [
+   0,
+   3600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "d17a9e1a971c92a384be9717a13b0cb09e7c5196c9409090779e20dbf3553f0a",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.mudata_obs_union": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 2700,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 4800,
+  "mode": "block",
+  "recall": 0.8421,
+  "right_declared": [
+   0,
+   5700
+  ],
+  "right_undeclared": [
+   0,
+   5700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "737f6558b2c172c8bf111c34da6f3dc54bccfd6ad65b810892b6e3b2bd410574",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.obs_assign_position": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5100,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 1800,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   5400
+  ],
+  "right_undeclared": [
+   0,
+   5100
+  ],
+  "seeds": "0-299",
+  "spec_hash": "a3823b555f20c1afd6865a79887f867f34da73c858892d2d9726fb1687d2b492",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.scaled_x_expression": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3900,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1800,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 3300,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   3900
+  ],
+  "right_undeclared": [
+   0,
+   3900
+  ],
+  "seeds": "0-299",
+  "spec_hash": "67bda27e29c09e5b37bc61b08753a92eb5fc2b02008e33e45c070533735a6144",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "sc.small_int_qc": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0009,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   4200
+  ],
+  "right_undeclared": [
+   0,
+   4200
+  ],
+  "seeds": "0-299",
+  "spec_hash": "67bda27e29c09e5b37bc61b08753a92eb5fc2b02008e33e45c070533735a6144",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "seqkit.rmdup_strands": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 7800,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5400,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 6000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 3600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0005,
+  "killed": 4800,
+  "mode": "block",
+  "recall": 0.5,
+  "right_declared": [
+   0,
+   7800
+  ],
+  "right_undeclared": [
+   0,
+   5400
+  ],
+  "seeds": "0-299",
+  "spec_hash": "4d4bfe5e23899cd06ffe756d87df53233785db965d5897292ddc74b7e9cfeb16",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "seqtk.trimfq_floor": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 6600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 6000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 3600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 4200,
+  "mode": "block",
+  "recall": 0.4375,
+  "right_declared": [
+   0,
+   6600
+  ],
+  "right_undeclared": [
+   0,
+   6600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "4686815f1ee1aaedd581731804515232d25010d1222ff82a316f36f12d16f3f3",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "star.genecounts_column": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5334,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5334,
+    "unknown": 1200
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 4800,
+    "n": 10866,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3600,
+    "n": 6066,
+    "unknown": 1200
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 8400,
+  "mode": "block",
+  "recall": 0.4961,
+  "right_declared": [
+   0,
+   5334
+  ],
+  "right_undeclared": [
+   0,
+   5334
+  ],
+  "seeds": "0-299",
+  "spec_hash": "907a24f33650147768b539a8c3d0d518fe929803e599b391d4e93e8272e637a1",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "stringtie.strandedness": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 1500,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2100,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 4200,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2100,
+    "n": 2100,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0025,
+  "killed": 6300,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   1500
+  ],
+  "right_undeclared": [
+   0,
+   2100
+  ],
+  "seeds": "0-299",
+  "spec_hash": "7fa81cccb2fff9629a6376fcb22ca302e1704791eef8503e5a2010c6aa84ab51",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "struct.altloc_policy": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5100,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5100,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 2700,
+  "mode": "block",
+  "recall": 0.6,
+  "right_declared": [
+   0,
+   5100
+  ],
+  "right_undeclared": [
+   0,
+   5100
+  ],
+  "seeds": "0-299",
+  "spec_hash": "755467b17af43359fd6241106817d11f2dfc9ee820f2ac46b54ad67bfaf44036",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "struct.bfactor_scale": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 6000,
+    "n": 6600,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 3000,
+    "n": 3300,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0006,
+  "killed": 9000,
+  "mode": "block",
+  "recall": 0.9091,
+  "right_declared": [
+   0,
+   5700
+  ],
+  "right_undeclared": [
+   0,
+   5700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "fdd5bc2415f49c0a7ccaaaebde571fce0e83e478d44fca34557437d48e46d224",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "structure.chain_order": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 7044,
+    "unknown": 300
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3148,
+    "unknown": 300
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1948,
+    "n": 1948,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1948,
+    "n": 1948,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0005,
+  "killed": 3896,
+  "mode": "block",
+  "recall": 1.0,
+  "right_declared": [
+   0,
+   7044
+  ],
+  "right_undeclared": [
+   0,
+   3148
+  ],
+  "seeds": "0-299",
+  "spec_hash": "557370e601e25877c353594a96f843a89317d606f94cf1f7e27cba02d5913978",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "tabix.region_strings_bed": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 2700,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 1800,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 900,
+    "n": 900,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0014,
+  "killed": 1800,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   2700
+  ],
+  "right_undeclared": [
+   0,
+   2700
+  ],
+  "seeds": "0-299",
+  "spec_hash": "84232f5721c43f300d930e24491ac8ed8f836d25e8931ae55ccb5f840bb98aea",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "tabix.regions_file_base": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0012,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3000
+  ],
+  "right_undeclared": [
+   0,
+   3000
+  ],
+  "seeds": "0-299",
+  "spec_hash": "84232f5721c43f300d930e24491ac8ed8f836d25e8931ae55ccb5f840bb98aea",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "tmalign.normalisation": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 11400,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3300,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 5700,
+    "n": 15000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 3300,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0003,
+  "killed": 8100,
+  "mode": "block",
+  "recall": 0.4426,
+  "right_declared": [
+   0,
+   11400
+  ],
+  "right_undeclared": [
+   0,
+   3300
+  ],
+  "seeds": "0-299",
+  "spec_hash": "6cbe7671104f16f174d88a3460b6355be1fc0c97f1313832a850e470b9fe1d55",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "trimmomatic.minlen_order": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3600,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.001,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3600
+  ],
+  "right_undeclared": [
+   0,
+   3600
+  ],
+  "seeds": "0-299",
+  "spec_hash": "85816e0ea294032f2f5b36a48c2f48de8a821c4db62af43dff18b830f801d19f",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "var.missing_threshold": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 5100,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 5100,
+    "n": 5100,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0007,
+  "killed": 3000,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   5100
+  ],
+  "right_undeclared": [
+   5100,
+   5100
+  ],
+  "seeds": "0-299",
+  "spec_hash": "3f7dfafd571d7c9e0f057ff08dc9a44f1325a256c6556bd09f93463265ffa69c",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "vcf.indel_interval_anchor": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 9000,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 9000,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 7200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2700,
+    "n": 3600,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0004,
+  "killed": 2700,
+  "mode": "block",
+  "recall": 0.25,
+  "right_declared": [
+   0,
+   9000
+  ],
+  "right_undeclared": [
+   0,
+   9000
+  ],
+  "seeds": "0-299",
+  "spec_hash": "79ec13f83769ce281a7bc6b96f709d8a92d4c6aba5b3a53d25c44b3f6aff8b85",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "vcftools.bed_header": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 4200,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 2400,
+    "n": 4200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0012,
+  "killed": 4800,
+  "mode": "block",
+  "recall": 0.5714,
+  "right_declared": [
+   0,
+   3000
+  ],
+  "right_undeclared": [
+   0,
+   3000
+  ],
+  "seeds": "0-299",
+  "spec_hash": "3f7dfafd571d7c9e0f057ff08dc9a44f1325a256c6556bd09f93463265ffa69c",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "vcftools.keep_filtered_dot": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 2400,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1200,
+    "n": 1200,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0012,
+  "killed": 2400,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   3000
+  ],
+  "right_undeclared": [
+   0,
+   3000
+  ],
+  "seeds": "0-299",
+  "spec_hash": "3f7dfafd571d7c9e0f057ff08dc9a44f1325a256c6556bd09f93463265ffa69c",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ },
+ "vcftools.subset_monomorphic": {
+  "admitted": true,
+  "cells": {
+   "right_declared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4500,
+    "unknown": 0
+   },
+   "right_undeclared": {
+    "crashed": 0,
+    "failed": 0,
+    "n": 4500,
+    "unknown": 0
+   },
+   "wrong_declared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 3000,
+    "unknown": 0
+   },
+   "wrong_undeclared": {
+    "crashed": 0,
+    "failed": 1500,
+    "n": 1500,
+    "unknown": 0
+   }
+  },
+  "false_block_upper": 0.0008,
+  "killed": 3000,
+  "mode": "block",
+  "recall": 0.6667,
+  "right_declared": [
+   0,
+   4500
+  ],
+  "right_undeclared": [
+   0,
+   4500
+  ],
+  "seeds": "0-299",
+  "spec_hash": "3f7dfafd571d7c9e0f057ff08dc9a44f1325a256c6556bd09f93463265ffa69c",
+  "tools": {
+   "bcftools": "bcftools 1.24",
+   "bedtools": "bedtools v2.31.1",
+   "samtools": "samtools 1.24"
+  }
+ }
+}

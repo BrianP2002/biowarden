@@ -1,0 +1,30 @@
+spec_version: "1"
+name: struct_rdkit
+version_note: "RDKit 2024.09.2 (python-struct environment)"
+rules:
+  # F100. RDKit's PDB reader makes every bond single unless CONECT records repeat serials for
+  # higher orders; ligand coordinates usually come without them. A fact rule: it fires for RDKit
+  # code that reads a PDB file and takes a bond-order dependent property, on a ligand without
+  # order information whose geometry shows double or aromatic bonds.
+  - id: rdkit.pdb_bond_orders
+    slot: bond_order
+    kind: fact
+    tier: T1
+    incidents: [R2-STR-45]
+    applies:
+      tools: [python-struct, python-bio, python3, python]
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:pdb|ent)(?![\w-]|\.\w)'
+    declare:
+      key: bond_orders
+      values: ["conect", "template", "single_bonds"]
+      required: false
+      description: >-
+        Where the bond orders the code relies on come from: conect (repeated serials in the PDB
+        file's CONECT records), template (assigned from a SMILES or SDF template) or single_bonds
+        (RDKit's proximity bonding, every bond single, is acceptable).
+    check: rdkit_pdb_bond_orders
+    message: >-
+      RDKit's PDB reader makes every bond single unless CONECT records repeat serials for higher
+      orders, so the weight, formula and aromaticity of a ligand read from plain coordinates are
+      silently wrong.

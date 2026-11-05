@@ -1,0 +1,50 @@
+spec_version: "1"
+name: seq_diamond
+version_note: >-
+  DIAMOND 2.2.8 (BLAST+ 2.17.0 as a cross-check). Every behaviour the checkers rely on was run on
+  this version; the evidence is quoted in engine/rules/seq_diamond.py.
+rules:
+  # F79. diamond blastp/blastx report at most 25 target sequences per query by default. A
+  # conditional call rule: it reruns the call with -k 0 on small inputs and fails only when a query
+  # has more hit subjects than the cap in force.
+  - id: diamond.hit_cap
+    slot: record_count
+    kind: call
+    tier: T1
+    incidents: [GEN-36]
+    applies:
+      tools: [diamond]
+      subcommands: [blastp, blastx]
+    declare:
+      key: hit_limit
+      values: [all_hits, top_hits]
+      required: false
+      description: >-
+        Whether every hit of a query is needed (all_hits: use --max-target-seqs 0) or only the best
+        few (top_hits: the capped list is intended).
+    check: diamond_hit_cap
+    message: >-
+      diamond reports at most 25 target sequences per query by default and nothing marks the cut,
+      so a query with 40 homologs looks like a query with 25 and the weakest homologs are missing.
+
+  # F80. Without a sensitivity flag diamond runs its default mode, which misses homologs below about
+  # 50% identity. A conditional call rule: it reruns the call with --ultra-sensitive on small inputs.
+  - id: diamond.sensitivity_mode
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [diamond]
+      subcommands: [blastp, blastx]
+    declare:
+      key: homology_range
+      values: [close, remote]
+      required: false
+      description: >-
+        How distant the homologs of interest are: close = above about 60% identity, the default mode
+        is enough; remote = distant homologs matter, use --ultra-sensitive (or check a lower mode).
+    check: diamond_sensitivity_mode
+    message: >-
+      diamond's default mode misses homologs below about 50% identity: the query simply has
+      no row in the output, with exit status 0 and no warning.

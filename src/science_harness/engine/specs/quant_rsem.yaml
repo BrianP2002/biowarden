@@ -1,0 +1,28 @@
+spec_version: "1"
+name: quant_rsem
+version_note: >-
+  RSEM 1.3.1. Every behaviour the checker relies on was run on this version; the evidence is quoted
+  in engine/rules/quant_rsem.py.
+rules:
+  # --strandedness forward|reverse on an unstranded BAM silently drops about half of the reads.
+  # A conditional rule: it reads the transcriptome BAM given to --alignments.
+  - id: rsem.strandedness
+    slot: strand
+    kind: call
+    tier: T1
+    incidents: [GEN-20]
+    applies:
+      tools: [rsem-calculate-expression]
+    declare:
+      key: library_strandedness
+      values: [unstranded, forward, reverse]
+      required: false
+      description: >-
+        The library type of the alignments: forward = read 1 maps to the transcript's strand
+        (--strandedness forward), reverse = read 1 maps to the opposite strand (dUTP, Illumina
+        TruSeq Stranded; --strandedness reverse), unstranded = either (--strandedness none).
+    check: rsem_strandedness
+    message: >-
+      rsem-calculate-expression --strandedness forward|reverse keeps only alignments in that
+      orientation, so on an unstranded library about half of the reads are dropped without an
+      error, and on the other stranded orientation all of them.

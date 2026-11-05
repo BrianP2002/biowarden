@@ -1,0 +1,24 @@
+schema_version: "0"
+tool:
+  name: mockfold
+  backend: tfoldlike
+  version: "0.1.0"
+slots:
+  chain_order:
+    tool_policy: declared_by_tool   # assembles B:A + M:N + P whatever the request order
+    key: role
+    order: [B, A, D, G, M, N, P]
+    chain_ids: key                  # output chains are named by role code
+    consumer_policy: input_order    # downstream code pairs output chain k with request entity k
+    required: [M, N, P]
+    exactly_one_of: [[B, A], [D, G]]
+  metric_scale:
+    plddt: {min: 0.0, max: 1.0}     # real tFold writes B-factor pLDDT on 0-1, ESMFold2 on 0-100
+  record_count:
+    chains: equals_entities
+invariants:
+  - {id: I1, slot: chain_order, oracle: chain_sequence_roundtrip}
+  - {id: I2, slot: record_count, oracle: record_count}
+  - {id: I3, slot: metric_scale, oracle: finite_coordinates_and_scale}
+probes:
+  - {id: M1, slot: chain_order, kind: permute_entities}

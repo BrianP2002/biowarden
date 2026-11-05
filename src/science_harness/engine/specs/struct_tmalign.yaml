@@ -1,0 +1,28 @@
+spec_version: "1"
+name: struct_tmalign
+version_note: "TM-align 20240303 (bio-struct environment)"
+rules:
+  # F93. TMalign prints a TM-score normalised by structure 1 and another normalised by structure 2.
+  # A call rule on TMalign, conditional: it needs a declaration only when the two structures (first
+  # chain of each) have different lengths, because only then the two values differ.
+  - id: tmalign.normalisation
+    slot: metric_normalisation
+    kind: call
+    tier: T1
+    incidents: [STR-22]
+    applies:
+      tools: [TMalign]
+    declare:
+      key: tmscore_normalisation
+      values: ["structure_1", "structure_2", "average", "given_length"]
+      required: false
+      description: >-
+        Which length normalises the TM-score you report: structure_1 (the first file's length),
+        structure_2 (the second file's), average (TMalign -a T) or given_length (TMalign -u N).
+        The value to quote for a model against an experimental structure is the one normalised by
+        the reference.
+    check: tmalign_normalisation
+    message: >-
+      TMalign prints two TM-scores, normalised by structure 1 and by structure 2; when the
+      structures differ in length they differ, and the first line is not the reference-normalised
+      one unless the reference is the first file.

@@ -1,0 +1,112 @@
+{
+ "format": 1,
+ "sets_sha256": "ad16ad91f4c9e64995a41587aec6b581f7e3a7ed224947c942ad8957e6a0a84d",
+ "entries": [
+  {
+   "model": "claude-haiku-5-5",
+   "arm": "bare",
+   "cell": "bare/implicit/forced",
+   "n": 1030,
+   "sha256": "d951b9aa86a35dca41dbefcda5e8ef273d87d4bf8404cf4e95b5c8ccd3d27bc3"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "arm": "block-nonote",
+   "cell": "bare/implicit/forced",
+   "n": 1030,
+   "sha256": "818f406bf2718b40e7e9dd2a262c0ab9a0b985b07b1490983065cf9a8d13cdd3"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "arm": "warn-nonote",
+   "cell": "bare/implicit/forced",
+   "n": 590,
+   "sha256": "ab75bef9f1e505c4f0a738bb5ff0da05637320881a217a080ad41247e110fef4"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "arm": "bare",
+   "cell": "full/explicit/free",
+   "n": 624,
+   "sha256": "3eb2971507084ac1eebd30dde6b282ed9ad732f2c91d7dd13ac37be74bc33da1"
+  },
+  {
+   "model": "claude-haiku-5-5",
+   "arm": "block-nonote",
+   "cell": "full/explicit/free",
+   "n": 624,
+   "sha256": "6d405ff2dd06ee17adf0e232bedfb8857f66b38c94a468ec562dd1c2d7521627"
+  },
+  {
+   "model": "deepseek/deepseek-v4.1-flash",
+   "arm": "bare",
+   "cell": "bare/implicit/forced",
+   "n": 1030,
+   "sha256": "c0ee81d6f93479a06623af5128e668371b882a1185c25cd121a26207aab39e2a"
+  },
+  {
+   "model": "deepseek/deepseek-v4.1-flash",
+   "arm": "block-nonote",
+   "cell": "bare/implicit/forced",
+   "n": 1030,
+   "sha256": "7a8950188867ca374e5d0e8c9e56aff746c4b392338d0fbad05293c26afe0b0e"
+  },
+  {
+   "model": "deepseek/deepseek-v4.1-flash",
+   "arm": "warn-nonote",
+   "cell": "bare/implicit/forced",
+   "n": 590,
+   "sha256": "02e31462b1092c0813b0236df97d8bffc337a22b259dcf92bc3cea86c736bf10"
+  },
+  {
+   "model": "deepseek/deepseek-v4.1-flash",
+   "arm": "bare",
+   "cell": "full/explicit/free",
+   "n": 624,
+   "sha256": "7f3a7e5bc35b48890255abeaeea496fd2d6348964a6eea75dc8b61381e5f6fd8"
+  },
+  {
+   "model": "deepseek/deepseek-v4.1-flash",
+   "arm": "block-nonote",
+   "cell": "full/explicit/free",
+   "n": 624,
+   "sha256": "ce951893c57b37568a32d87fee34dc3e185cb9328f8928787a09a2c60206638a"
+  },
+  {
+   "model": "openai/gpt-oss-120b",
+   "arm": "bare",
+   "cell": "bare/implicit/forced",
+   "n": 1030,
+   "sha256": "5433651022cac4cb630e1d57fbec379b1bb3a3d867b274fbf66bfcb035170be4"
+  },
+  {
+   "model": "openai/gpt-oss-120b",
+   "arm": "block-nonote",
+   "cell": "bare/implicit/forced",
+   "n": 1030,
+   "sha256": "0731eef40c459c1e56caf42686987ad6ffeeeb2e0dda87efbf2cfeca22756b1e"
+  },
+  {
+   "model": "openai/gpt-oss-120b",
+   "arm": "warn-nonote",
+   "cell": "bare/implicit/forced",
+   "n": 590,
+   "sha256": "34c0c3fce7b3069c3b7cfed88f197ee9ea9cc8a6c5a6389c078392418f1b6dea"
+  },
+  {
+   "model": "openai/gpt-oss-120b",
+   "arm": "bare",
+   "cell": "full/explicit/free",
+   "n": 624,
+   "sha256": "0359a259c7527fff1bbdcf8782374877fcd7873db8ecf3892a2488ec73d05958"
+  },
+  {
+   "model": "openai/gpt-oss-120b",
+   "arm": "block-nonote",
+   "cell": "full/explicit/free",
+   "n": 624,
+   "sha256": "3994e1abc7a9f01f145fee76dc80abe62daf549201b2f0a58d24aa1ee9e4a9bb"
+  }
+ ],
+ "total": 11694
+}

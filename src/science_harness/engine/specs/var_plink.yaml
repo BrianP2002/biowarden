@@ -1,0 +1,78 @@
+spec_version: "1"
+name: var_plink
+version_note: >-
+  plink 1.9 (27 Sep build), plink2 2.0.0-a.7, bcftools 1.24. Every behaviour the checkers rely on
+  was run on these versions; the evidence is quoted in engine/rules/var_plink.py.
+rules:
+  # F57. plink --keep ... --make-bed writes every variant for the kept samples, also those at
+  # which they are all homozygous for one allele; --mac 1 drops them.
+  - id: plink.subset_monomorphic
+    slot: record_count
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [plink, plink2]
+      options_any: [--keep, --remove]
+    declare:
+      key: subset_sites
+      values: [keep_all_sites, variant_sites_only, filtered_downstream]
+      required: false
+      description: >-
+        Which sites the call writes after selecting samples: keep_all_sites = every site of the
+        input, also those where the selected samples are all homozygous for one allele;
+        variant_sites_only = only the sites where they differ; filtered_downstream = a later stage
+        of the pipeline drops the monomorphic ones.
+    check: plink_subset_monomorphic
+    message: >-
+      Selecting samples with plink --keep keeps every variant, including those at which the kept
+      samples are all homozygous for one allele; --mac 1 drops them.
+
+  # F58. plink 1.9 puts the MINOR allele in A1 when it imports a VCF (A2 is the major one);
+  # --keep-allele-order makes A1 the ALT allele. --freq reports the frequency of A1, the
+  # association tests use A1 as the tested allele. A conditional call rule: it reads the VCF of
+  # --vcf and is silent unless ALT is the major allele at some site.
+  - id: plink.allele_order
+    slot: allele_coding
+    kind: call
+    tier: T1
+    incidents: [GEN-30, R2-OMX-25]
+    applies:
+      tools: [plink]
+      options_any: [--vcf]
+    declare:
+      key: plink_a1_allele
+      values: [minor_allele, alt_allele]
+      required: false
+      description: >-
+        Which allele is A1 in this call: minor_allele = the less frequent allele of the data
+        (plink 1.9 default for a VCF), alt_allele = the ALT allele of the VCF (--keep-allele-order).
+    check: plink_allele_order
+    message: >-
+      plink 1.9 sets A1 to the minor allele of the data when it imports a VCF, not to ALT, so the
+      MAF column and the tested or counted allele are the REF allele wherever ALT is the major one.
+
+  # F59. plink 1.9 --vcf reads a site with two ALT alleles as biallelic: the first ALT is kept and
+  # every genotype call of another ALT allele becomes missing, without a warning
+  # (--biallelic-only skips such sites). A conditional call rule: it reads the VCF of --vcf and is
+  # silent unless a multiallelic site has calls of its second ALT allele.
+  - id: plink.vcf_multiallelic
+    slot: record_count
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [plink]
+      options_any: [--vcf]
+    declare:
+      key: vcf_multiallelic
+      values: [first_alt_only, biallelic_only]
+      required: false
+      description: >-
+        How multiallelic VCF sites are read: first_alt_only = the first ALT allele is kept and the
+        calls of the other ALT alleles become missing (plink 1.9 default); biallelic_only = such
+        sites are skipped (--biallelic-only).
+    check: plink_vcf_multiallelic
+    message: >-
+      plink 1.9 --vcf keeps only the first ALT allele of a multiallelic site and turns the calls of
+      the other ALT alleles into missing genotypes, without a warning.

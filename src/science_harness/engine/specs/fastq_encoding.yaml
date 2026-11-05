@@ -1,0 +1,33 @@
+spec_version: "1"
+name: fastq_encoding
+version_note: "samtools 1.24, GNU awk 4.2.1; Phred+33 / Phred+64 FASTQ (Cock et al. 2010)"
+rules:
+  # F13. A Phred+64 FASTQ read as Phred+33 parses fine and every quality is 31 too high. A fact
+  # rule: it sniffs the first reads of the FASTQ files a command names. A quality character below
+  # ';' proves +33 (silent); only ';'..'h' with a character above 'J' proves +64 (the risky
+  # state); anything else is ambiguous (unknown, a warning). It looks only at commands that read
+  # qualities as numbers or run a program that does (see the checker docstring), so head, cat,
+  # wc and friends stay silent. `tools` is empty on purpose: awk, python3, perl, samtools, seqtk,
+  # `bash -c` pipelines, ... all count.
+  - id: fastq.phred_offset
+    slot: units
+    kind: fact
+    tier: T1
+    incidents: [GEN-38]
+    applies:
+      tools: []
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.f(?:ast)?q(?:\.b?gz)?(?![\w-]|\.\w)'
+    declare:
+      key: fastq_quality_offset
+      values: ["33", "64"]
+      required: false
+      description: >-
+        The ASCII offset of the FASTQ quality characters: 33 (Sanger, Illumina 1.8+) or 64
+        (Illumina 1.3-1.7); quality = ord(character) - offset.
+    check: fastq_phred_offset
+    params:
+      max_reads: 1000
+    message: >-
+      A Phred+64 FASTQ read as Phred+33 parses fine but every quality is 31 too high, so a Q30
+      cutoff written for +33 accepts every base.

@@ -1,0 +1,27 @@
+spec_version: "1"
+name: seq_trimmomatic
+version_note: >-
+  Trimmomatic 0.41 (bioconda wrapper). Every behaviour the checker relies on was run on this
+  version; the evidence is quoted in engine/rules/seq_trimmomatic.py.
+rules:
+  # F85. Trimmomatic runs its steps in the order given, so a MINLEN before the trimming steps
+  # filters the untrimmed reads. A conditional call rule: it reruns the call with MINLEN moved to the end
+  # and fails only when the two runs keep a different number of reads.
+  - id: trimmomatic.minlen_order
+    slot: step_order
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [trimmomatic]
+    declare:
+      key: minlen_stage
+      values: [after_trimming, before_trimming]
+      required: false
+      description: >-
+        Which length MINLEN filters: after_trimming = the length left once the trimming steps have
+        run (put MINLEN last); before_trimming = the untrimmed length (intended).
+    check: trimmomatic_minlen_order
+    message: >-
+      Trimmomatic executes its steps in the order given: a MINLEN before SLIDINGWINDOW, LEADING or
+      TRAILING checks the untrimmed length, and reads that the later steps cut short survive.

@@ -1,0 +1,31 @@
+spec_version: "1"
+name: aln_bwa
+version_note: >-
+  bwa 0.7.19 (r1273), samtools 1.24. Every behaviour the checker relies on was run on these
+  versions; the evidence is quoted in engine/rules/aln_bwa.py.
+rules:
+  # F30. `bwa mem` outputs no alignment that scores below -T (default 30), and a read of L bases
+  # scores at most L with the default match score, so reads shorter than 30 bases (common after
+  # adapter trimming) come out unmapped. A conditional call rule: it samples the read files named
+  # in the call and is silent when no read is that short.
+  - id: bwa.mem_min_score
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bwa]
+      subcommands: [mem]
+    declare:
+      key: short_read_policy
+      values: [drop_short, keep_all]
+      required: false
+      description: >-
+        What the call should do with reads that cannot reach the minimum output score -T: drop_short
+        = leaving them unmapped is intended; keep_all = every read must be aligned (-T must then be
+        at most the best score of the shortest read: its length times -A).
+    check: bwa_mem_min_score
+    message: >-
+      bwa mem outputs no alignment scoring below -T (default 30) and a read of L bases scores at
+      most L, so reads shorter than 30 bases (for example after adapter trimming) are all written
+      as unmapped, silently.

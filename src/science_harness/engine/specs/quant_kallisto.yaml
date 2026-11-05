@@ -1,0 +1,43 @@
+spec_version: "1"
+name: quant_kallisto
+version_note: >-
+  kallisto 0.52.0. Every behaviour the rule relies on was run on this version; the evidence is
+  quoted in the comment below and in docs/research/pack-quant-report.md.
+rules:
+  # kallisto is unstranded unless told otherwise. Verified (640 simulated read pairs, 3 libraries):
+  # an unstranded library with --rf-stranded or --fr-stranded exits 0 and reports "processed 640
+  # reads, 337 reads pseudoaligned" (resp. 303), est_counts summing to 337 (303), i.e. about half
+  # the reads are silently dropped; a dUTP library with --fr-stranded pseudoaligns nothing and
+  # exits 1; with --rf-stranded all 640 count. The option names the convention (--fr-stranded =
+  # first read forward, --rf-stranded = first read reverse), so the built-in option_implies_declared
+  # check applies: the agent must state the library type, and it must agree with the option.
+  - id: kallisto.strand_option
+    slot: strand
+    kind: call
+    tier: T0
+    incidents: [GEN-20]
+    applies:
+      tools: [kallisto]
+      subcommands: [quant]
+      options_any: [--fr-stranded, --rf-stranded]
+    declare:
+      key: library_strandedness
+      values: [unstranded, forward, reverse]
+      required: true
+      description: >-
+        The library type of the reads: forward = read 1 comes from the transcript's strand
+        (--fr-stranded), reverse = read 1 comes from the opposite strand (dUTP, Illumina TruSeq
+        Stranded; --rf-stranded), unstranded = either strand (no option).
+    check: option_implies_declared
+    params:
+      option_map:
+        --fr-stranded: forward
+        --rf-stranded: reverse
+      fix_option:
+        forward: --fr-stranded
+        reverse: --rf-stranded
+        unstranded: the call without --fr-stranded/--rf-stranded
+    message: >-
+      kallisto quant --fr-stranded / --rf-stranded keeps only fragments in that orientation, so on
+      an unstranded library about half of the reads are dropped without an error, and on the other
+      stranded orientation all of them.

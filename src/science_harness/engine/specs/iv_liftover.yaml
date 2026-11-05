@@ -1,0 +1,61 @@
+spec_version: "1"
+name: iv_liftover
+version_note: >-
+  UCSC liftOver (bio-a conda environment) with hand-built chain files. Every behaviour the
+  checkers rely on was run on this build; the evidence is quoted in engine/rules/iv_liftover.py.
+rules:
+  # F74. -bedPlus=6 copies the narrowPeak columns after the sixth unchanged; the summit offset
+  # (column 10) is stale once an indel lies between the peak start and the summit.
+  - id: liftover.stale_columns
+    slot: derived_column
+    kind: call
+    tier: T1
+    incidents: [GEN-11]
+    applies:
+      tools: [liftOver]
+    declare:
+      key: summit_offset
+      values: [not_used, relifted]
+      required: false
+      description: >-
+        not_used = only the lifted peak intervals are used, never the summit offset (column 10);
+        relifted = the summit positions are lifted separately as one-base intervals.
+    check: iv_liftover_stale_columns
+    message: >-
+      liftOver copies the narrowPeak columns after the sixth unchanged, so the summit offset in
+      column 10 no longer points at the summit base once an insertion or deletion of the chain
+      lies between the peak start and the summit.
+
+  # The fourth argument holds every interval that does not lift; /dev/null throws them away.
+  - id: liftover.unmapped_discarded
+    slot: completeness
+    kind: call
+    tier: T1
+    incidents: [GEN-11]
+    applies:
+      tools: [liftOver]
+    declare:
+      key: dropped_records
+      values: [accepted]
+      required: false
+      description: >-
+        accepted = losing the intervals that do not lift (partly or wholly deleted in the new
+        assembly) is intended.
+    check: iv_liftover_unmapped_discarded
+    message: >-
+      liftOver drops intervals with more than 5 percent of their bases deleted in the new assembly
+      (default -minMatch=0.95) into the unmapped file; sent to /dev/null, the output is silently
+      shorter than the input.
+
+  # A BED whose contig names are not the chain's source names lifts nothing and says nothing.
+  - id: liftover.chain_contigs
+    slot: contig_naming
+    kind: call
+    tier: T1
+    incidents: [GEN-11]
+    applies:
+      tools: [liftOver]
+    check: iv_liftover_chain_contigs
+    message: >-
+      a BED whose contig names differ from the source names of the chain (1 against chr1) has
+      every interval written to the unmapped file; the main output is empty and liftOver exits 0.

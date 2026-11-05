@@ -1,0 +1,28 @@
+spec_version: "1"
+name: aln_minimap2
+version_note: >-
+  minimap2 2.31, samtools 1.24, checked on the family F35 data. Every behaviour the checker relies
+  on was run on this version; the evidence is quoted in engine/rules/aln_minimap2.py.
+rules:
+  # F35. minimap2's defaults and long-read presets drop reads under about 60 bases even when they
+  # match exactly; -x sr is the short-read preset. A conditional call rule: it samples the query
+  # files named in the call and is silent when almost no read is that short.
+  - id: minimap2.short_reads_preset
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [minimap2]
+    declare:
+      key: short_read_policy
+      values: [drop_short, keep_all]
+      required: false
+      description: >-
+        What the call should do with reads that are too short for the preset: drop_short = losing
+        reads under about 60 bases is intended; keep_all = every read must be mapped (use -x sr).
+    check: minimap2_short_reads_preset
+    message: >-
+      minimap2 with its default parameters (or a long-read preset) leaves reads shorter than about
+      60 bases unmapped even when they match the genome exactly, silently; -x sr is the short-read
+      preset.

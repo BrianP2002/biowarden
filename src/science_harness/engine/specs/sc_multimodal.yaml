@@ -1,0 +1,28 @@
+spec_version: "1"
+name: sc_multimodal
+version_note: >-
+  mudata 0.3.10, anndata 0.11.4 (python-sc). Fact rule over .h5mu files read with h5py.
+  See rules/sc_multimodal.py.
+rules:
+  # F106. MuData.n_obs is the union of the modalities' cells.
+  - id: sc.mudata_obs_union
+    slot: cell_set
+    kind: fact
+    tier: T1
+    incidents: [SCD-22]
+    applies:
+      tools: [python-sc, python3, python]
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5mu(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: mudata_cells
+      values: [union, intersection]
+      required: false
+      description: >-
+        The cell set a count of a MuData is meant to describe: union (cells of any modality, what
+        MuData.n_obs gives) or intersection (cells measured in every modality).
+    check: sc_mudata_obs_union
+    message: >-
+      MuData.n_obs, obs_names and shape cover the union of the modalities' cells, so a count of
+      "cells with both RNA and ATAC" read from them includes cells that lack a modality.

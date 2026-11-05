@@ -1,0 +1,54 @@
+spec_version: "1"
+name: expression_matrix
+version_note: >-
+  Fact rule over text tables read by the engine itself (no external tool is run). Behaviour of the
+  calling tools checked with gawk 4.2.1, perl 5 and python 3.12 on synthetic workspaces.
+rules:
+  - id: matrix.log_scale_state
+    slot: matrix_state
+    kind: fact
+    tier: T1
+    incidents: [SCD-05, SCD-19]
+    applies:
+      # tools that compute on the values; head, cat, wc, ls, cut, grep only look and are not watched
+      tools:
+        - awk
+        - gawk
+        - mawk
+        - nawk
+        - python
+        - python3
+        - python3.8
+        - python3.9
+        - python3.10
+        - python3.11
+        - python3.12
+        - python3.13
+        - perl
+        - Rscript
+        - R
+        - datamash
+        - sort
+        - mlr
+        - csvtk
+        - xsv
+        - qsv
+        - julia
+        - ruby
+        - node
+        - sqlite3
+        - duckdb
+      file_patterns:
+        - '(?<![\w./+-])[\w./+-]+\.(?:tsv|csv|txt|tab|dat|matrix)(?:\.gz)?(?![\w])'
+    declare:
+      key: matrix_state
+      values: [raw_counts, log_transformed, normalized]
+      required: false
+      description: >-
+        State of the expression matrix you are about to compute on: raw_counts (non-negative
+        integers), log_transformed (for example log2(count+1)) or normalized (CPM, TPM, FPKM or
+        size-factor scaled). Needed only when the file is not raw integer counts.
+    check: expression_matrix_state
+    message: >-
+      a matrix of log-transformed or normalised values is a valid table, so thresholds, means and
+      fold changes computed on it as if it held raw counts give plausible but wrong numbers

@@ -1,0 +1,102 @@
+spec_version: "1"
+name: iv_macs3
+version_note: >-
+  MACS3 3.0.4 (callpeak). Every behaviour the checkers rely on was run on this version; the
+  evidence is quoted in engine/rules/iv_macs3.py.
+rules:
+  # F72 / GEN-26. -f BAM and the default -f AUTO read a paired-end BAM as single-end tags.
+  - id: macs3.paired_end_format
+    slot: read_layout
+    kind: call
+    tier: T1
+    incidents: [GEN-26]
+    applies:
+      tools: [macs3]
+      subcommands: [callpeak]
+    declare:
+      key: read_layout
+      values: [fragments, single_end_tags]
+      required: false
+      description: >-
+        What one tag of the treatment BAM is: fragments = the span of a read pair (-f BAMPE),
+        single_end_tags = one read per pair, extended by --extsize (-f BAM or the default AUTO).
+    check: iv_macs3_paired_format
+    message: >-
+      -f BAM and the default -f AUTO read a paired-end BAM in single-end mode: the second mate of
+      every pair is ignored and the first mate is extended by --extsize instead of using the real
+      fragment, so peak boundaries move and close binding sites merge; -f BAMPE uses the fragments.
+
+  # -g defaults to hs (2.9e9): wrong for any other genome, and every p/q value follows it.
+  - id: macs3.effective_genome_size
+    slot: genome_size
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [macs3]
+      subcommands: [callpeak]
+    check: iv_macs3_genome_size
+    params:
+      factor: 5
+    message: >-
+      callpeak -g defaults to the human genome size (hs, 2,913,022,398 bases) and builds its
+      background lambda from it, so on a genome of another size every p-value, q-value and fold
+      enrichment is off and weak peaks are called (or true ones lost).
+
+  # --extsize needs --nomodel; without it the predicted fragment length is used, silently.
+  - id: macs3.extsize_needs_nomodel
+    slot: fragment_length
+    kind: call
+    tier: T0
+    incidents: []
+    applies:
+      tools: [macs3]
+      subcommands: [callpeak]
+      options_any: [--extsize]
+    declare:
+      key: fragment_length
+      values: [model, fixed]
+      required: false
+      description: >-
+        Where the fragment length comes from: model = the length MACS3 predicts from the data,
+        fixed = the --extsize value (which also needs --nomodel).
+    check: iv_macs3_extsize_nomodel
+    message: >-
+      --extsize is used only together with --nomodel: without it MACS3 builds the fragment model
+      and extends reads by the predicted length, silently ignoring the value given.
+
+  # The start column of a MACS _peaks.xls is 1-based; BED (narrowPeak, summits.bed) is 0-based.
+  - id: macs3.peaks_xls_start
+    slot: index_base
+    kind: fact
+    tier: T1
+    incidents: [GEN-26]
+    applies:
+      tools: []
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.xls(?![\w-]|\.\w)'
+    declare:
+      key: peak_coordinates
+      values: [one_based, zero_based]
+      required: false
+      description: >-
+        The coordinate base the command assumes for the start column of the MACS peaks table:
+        one_based (the xls convention) or zero_based (BED).
+    check: iv_macs3_xls_start
+    message: >-
+      the start column of a MACS _peaks.xls is 1-based (narrowPeak start + 1), so using it as a BED
+      start shifts every peak one base to the right.
+
+  # Treatment contigs without a single control read are skipped by callpeak, silently.
+  - id: macs3.control_contigs
+    slot: completeness
+    kind: call
+    tier: T1
+    incidents: [GEN-27]
+    applies:
+      tools: [macs3]
+      subcommands: [callpeak]
+    check: iv_macs3_control_contigs
+    message: >-
+      callpeak with a control (-c) calls peaks only on contigs that have control reads: a
+      treatment contig with no control read is skipped without a message, so its peaks are lost.

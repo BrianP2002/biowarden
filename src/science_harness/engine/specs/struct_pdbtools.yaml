@@ -1,0 +1,51 @@
+spec_version: "1"
+name: struct_pdbtools
+version_note: "pdb-tools 2.7.0, gemmi 0.7.5, Biopython 1.88, ProDy 2.6.1 (bio-struct environment)"
+rules:
+  # F95. pdb_selaltloc compares residue numbers as strings ('10' > '9' is False), so an altloc
+  # residue next to a change of digit count (9/10, 99/100) is merged with its neighbour and atoms
+  # are lost. A call rule: it re-runs the grouping logic of pdb-tools 2.7.0 on the file and fails
+  # only when that would write fewer atoms than the file has distinct atoms.
+  - id: pdbtools.selaltloc_digits
+    slot: record_count
+    kind: call
+    tier: T1
+    incidents: [R2-STR-16]
+    applies:
+      tools: [pdb_selaltloc]
+    declare:
+      key: selaltloc_residues
+      values: ["verified"]
+      required: false
+      description: >-
+        verified: the output of pdb_selaltloc is compared with its input (residue and atom count)
+        before it is used.
+    check: pdbtools_selaltloc_digits
+    message: >-
+      pdb_selaltloc compares residue numbers as text, so an altloc residue numbered 9, 99 or 999
+      (or the one after a fully split residue) is merged with its neighbour and atoms or whole
+      residues vanish from the output.
+  # F96. Sequence extractors turn modified residues (MSE, SEP, ...) into X, drop them, or map
+  # them to the parent letter. A fact rule over structure files: it fires for unhandled extraction
+  # code (pdb_tofasta or Python) on a file with modified polymer residues.
+  - id: pdbtools.modified_residues
+    slot: residue_alphabet
+    kind: fact
+    tier: T1
+    incidents: [R2-STR-03, R2-STR-28]
+    applies:
+      tools: [pdb_tofasta, python-struct, python-bio, python3, python]
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:pdb|ent|cif|mmcif)(?:\.gz)?(?![\w-]|\.\w)'
+    declare:
+      key: modified_residues
+      values: ["parent_letter", "X", "omitted"]
+      required: false
+      description: >-
+        How modified residues (selenomethionine MSE, phosphoserine SEP, ...) appear in the sequence
+        you extract: parent_letter (M, S, ...), X, or omitted.
+    check: pdbtools_modified_residues
+    message: >-
+      Sequence extractors disagree on modified residues: pdb_tofasta, gemmi and seq1 write X,
+      Biopython's peptide builders drop them, ProDy writes the parent letter, so a SeMet or
+      phospho-residue silently changes the sequence.

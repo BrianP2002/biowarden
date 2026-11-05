@@ -1,0 +1,119 @@
+spec_version: "1"
+name: sc_matrix_state
+version_note: >-
+  scanpy 1.11.5, anndata 0.11.4 (python-sc). Fact rules over .h5ad files read with h5py; the
+  state of X is decided from a bounded sample of stored values. See rules/sc_matrix_state.py.
+rules:
+  # F101. rank_genes_groups defaults to use_raw=None = "use .raw if present".
+  - id: sc.de_raw_default
+    slot: matrix_state
+    kind: fact
+    tier: T1
+    incidents: [SCD-22, R2-OMX-01]
+    applies:
+      tools: [python-sc, python3, python]
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: de_input
+      values: ["X", raw]
+      required: false
+      description: >-
+        The matrix scanpy's rank_genes_groups should read: X, or raw (.raw.X). The default
+        use_raw=None reads .raw whenever it exists.
+    check: sc_de_raw_default
+    message: >-
+      rank_genes_groups reads .raw instead of X when the object has one, so a .raw that holds counts
+      or unlogged values gives log fold changes far from those of the log-normalised X.
+
+  # F102. calculate_qc_metrics sums a cell's counts in the dtype of a sparse int8 / int16 matrix.
+  - id: sc.small_int_qc
+    slot: dtype_overflow
+    kind: fact
+    tier: T1
+    incidents: [R2-OMX-16]
+    applies:
+      tools: [python-sc, python3, python]
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: x_dtype
+      values: [int8, int16, int32, int64, uint16, float32, float64]
+      required: false
+      description: >-
+        The dtype X of the object is stored with (the data type of its values on disk).
+    check: sc_small_int_qc
+    message: >-
+      calculate_qc_metrics on a sparse int16 matrix overflows when it sums a cell's counts, so the
+      percent-of-counts-in-top-N metrics are negative or above 100 for cells above 32,767 UMIs.
+
+  # F103. log1p / normalize_total applied to an X that is already normalised.
+  - id: sc.double_transform
+    slot: matrix_state
+    kind: fact
+    tier: T1
+    incidents: [SCD-19]
+    applies:
+      tools: [python-sc, python3, python]
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: x_state
+      values: [counts, log_normalized, normalized, scaled]
+      required: false
+      description: >-
+        What X of the object holds: counts (integers), log_normalized (for example log1p of counts
+        per 10,000), normalized (CPM / CP10K, not logged) or scaled (z-scores).
+    check: sc_double_transform
+    message: >-
+      sc.pp.log1p warns about an already log-transformed X only when adata.uns has a 'log1p' key;
+      an object written by another tool is silently log-transformed a second time.
+
+  # F104. UMI-count steps (min_counts, total_counts) run on a normalised X.
+  - id: sc.counts_needed
+    slot: matrix_state
+    kind: fact
+    tier: T1
+    incidents: [SCD-19, SCD-23]
+    applies:
+      tools: [python-sc, python3, python]
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: x_state
+      values: [counts, log_normalized, normalized, scaled]
+      required: false
+      description: >-
+        What X of the object holds: counts (integers), log_normalized (for example log1p of counts
+        per 10,000), normalized (CPM / CP10K, not logged) or scaled (z-scores).
+    check: sc_counts_needed
+    message: >-
+      filter_cells(min_counts=...) and calculate_qc_metrics read X; on a normalised X they filter
+      and report sums of normalised values, not UMI counts.
+
+  # F112. X holds z-scores, the expression values live in .raw.
+  - id: sc.scaled_x_expression
+    slot: matrix_state
+    kind: fact
+    tier: T1
+    incidents: [SCD-22]
+    applies:
+      tools: [python-sc, python3, python]
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: x_state
+      values: [counts, log_normalized, normalized, scaled]
+      required: false
+      description: >-
+        What X of the object holds: counts (integers), log_normalized (for example log1p of counts
+        per 10,000), normalized (CPM / CP10K, not logged) or scaled (z-scores).
+    check: sc_scaled_x_expression
+    message: >-
+      after sc.pp.scale, X holds z-scores (negative, centred); 'expressed' (X > 0) or a mean read
+      from X is not an expression level, the log-normalised values are in .raw.

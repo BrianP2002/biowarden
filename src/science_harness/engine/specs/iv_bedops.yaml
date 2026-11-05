@@ -1,0 +1,80 @@
+spec_version: "1"
+name: iv_bedops
+version_note: >-
+  BEDOPS 2.4.42 (bedops, bedmap, closest-features, sort-bed). Every behaviour the checkers rely on
+  was run on this version; the evidence is quoted in engine/rules/iv_bedops.py.
+rules:
+  # F70. The BEDOPS programs need sort-bed order and check nothing without --ec: a BED in genome
+  # order (chr1, chr2, ..., chr10) gives zero counts or NA for the later chromosomes, exit 0.
+  - id: bedops.sorted_input
+    slot: sort_order
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedmap, bedops, closest-features]
+    check: iv_bedops_sorted_input
+    message: >-
+      BEDOPS programs assume every input is in sort-bed order (chromosome names as text, then
+      start, then end) and check nothing without --ec, so a BED in genome order or with a start
+      that goes backwards gives zero counts or missed overlaps and exit 0.
+
+  # F71. bedmap score operations read column 5 of the map file. A bedGraph has no column 5; a
+  # narrowPeak holds the scaled score there and the fold enrichment in column 7.
+  - id: bedops.bedmap_score_column
+    slot: score_column
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedmap]
+      options_any:
+        - --mean
+        - --sum
+        - --median
+        - --min
+        - --max
+        - --stdev
+        - --variance
+        - --wmean
+        - --tmean
+        - --kth
+        - --mad
+        - --cv
+        - --echo-map-score
+        - --min-element
+        - --max-element
+    declare:
+      key: bedmap_value_column
+      values: ["5"]
+      required: false
+      description: >-
+        The value the statistic is meant to use is the one in column 5 of the map file (the score
+        column of a narrowPeak is the scaled score, not the signal value).
+    check: iv_bedops_bedmap_score_column
+    message: >-
+      bedmap score operations take the value from column 5 of the map file: a bedGraph (value in
+      column 4) gives 0.000000 or NAN, a narrowPeak file gives the scaled score instead of the
+      signal value in column 7.
+
+  # BEDOPS --help: "by default, -e 100% is used". Without an amount the reference element must be
+  # covered entirely; -n keeps the elements that are not entirely covered.
+  - id: bedops.element_of_amount
+    slot: overlap_amount
+    kind: call
+    tier: T0
+    incidents: []
+    applies:
+      tools: [bedops]
+      options_any: [-e, --element-of, -n, --not-element-of]
+    declare:
+      key: overlap_amount
+      values: [full, any]
+      required: false
+      description: >-
+        full = the reference element must be covered 100 percent (the default of -e and -n);
+        any = at least one base of overlap (write -e 1).
+    check: iv_bedops_element_of_amount
+    message: >-
+      bedops -e and -n default to 100 percent: without an amount a reference element that is only
+      partly overlapped does not count as an element of the other files.

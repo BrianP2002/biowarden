@@ -1,0 +1,134 @@
+spec_version: "1"
+name: aln_samtools
+version_note: >-
+  samtools 1.24 on output of STAR 2.7.11b, bwa 0.7.19, bowtie2 2.5.5, hisat2 2.2.3 and minimap2
+  2.31. Every behaviour the checkers rely on was run on these versions; the evidence is quoted in
+  engine/rules/aln_samtools.py.
+rules:
+  # F29. MAPQ means different things per aligner: `-q 1` is "unique" for bwa (multi-mapped reads
+  # get 0) but keeps multi-mapped reads of bowtie2 and HISAT2 (MAPQ 1) and of STAR (3 and 1). A
+  # conditional call rule: it samples the alignment file named in the call and is silent unless
+  # the cutoff keeps a multi-mapped record of that file.
+  - id: samtools.mapq_unique_cutoff
+    slot: mapq_semantics
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [samtools]
+      subcommands: [view]
+    declare:
+      key: mapq_filter_goal
+      values: [unique_only, quality_only]
+      required: false
+      description: >-
+        What the -q cutoff of this call is for: unique_only = keep only reads that map to one
+        place (the cutoff must then lie above every MAPQ the aligner gives multi-mapped reads);
+        quality_only = a plain mapping-quality threshold, multi-mapped reads may stay.
+    check: samtools_mapq_unique_cutoff
+    message: >-
+      MAPQ is not comparable across aligners: bwa gives multi-mapped reads 0, but bowtie2 and
+      HISAT2 give them 1 and STAR gives 3 (2 loci) or 1 (3-4 loci), so `samtools view -q 1` keeps
+      multi-mapped reads of those aligners.
+
+  # F32. samtools stats takes `mismatches` and `error rate` from the NM tag; STAR does not write NM
+  # by default, so stats prints 0 for any data. A conditional call rule: it samples the alignment
+  # file named in the call and is silent when the alignments carry NM; it fails when NM is missing
+  # and the sample shows mismatches (STAR's nM, an MD tag, X in the CIGAR), and only warns when
+  # nothing shows whether there are mismatches.
+  - id: samtools.stats_nm_missing
+    slot: tag_state
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [samtools]
+      subcommands: [stats]
+    declare:
+      key: stats_mismatches
+      values: [not_used]
+      required: false
+      description: >-
+        Say not_used when the call is run for something other than the `mismatches`, `error rate`
+        and mismatch-per-cycle output (read counts, insert sizes, coverage), so a file without NM
+        tags is fine.
+    check: samtools_stats_nm_missing
+    message: >-
+      samtools stats computes `mismatches` and `error rate` from the NM tag; alignments without NM
+      (STAR writes NH HI AS nM by default) give mismatches 0 and error rate 0, silently.
+
+  # F36. samtools fixmate pairs mates by adjacency and only refuses a coordinate-sorted header; a
+  # BAM with mates scattered and any other header is accepted and every read is treated as
+  # unpaired (mate fields and proper-pair flag cleared). A call rule that samples the input file.
+  - id: samtools.fixmate_grouping
+    slot: record_order
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [samtools]
+      subcommands: [fixmate]
+    check: samtools_fixmate_grouping
+    message: >-
+      samtools fixmate needs the records of a read name next to each other (sort -n or collate) and
+      only refuses a coordinate-sorted header: on any other scattered input it clears the mate
+      fields and the proper-pair flag of every read, silently, and markdup then works on single reads.
+
+  # F37. `samtools merge -c` keeps ONE @RG line per colliding ID: the first file's. When two lanes of
+  # different samples share a read group ID, the second sample's reads are relabelled with the
+  # first sample's SM. A call rule that reads the @RG lines of the input files.
+  - id: samtools.merge_combine_rg
+    slot: header_state
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [samtools]
+      subcommands: [merge]
+    check: samtools_merge_combine_rg
+    message: >-
+      samtools merge -c combines @RG lines with colliding IDs into the first file's line, so reads of
+      another sample that share the ID are relabelled with the first sample's SM; without -c the
+      colliding ID is renamed and both samples survive.
+
+  # F38. samtools idxstats puts an unmapped read that has a mapped mate in column 4 of that mate's
+  # contig, not in the `*` row; reading the `*` row alone undercounts the unmapped reads. A call
+  # rule that runs `samtools idxstats` read-only and warns (unknown) when contig rows hold unmapped
+  # reads; it fails only when the agent declares that it reads the `*` row alone.
+  - id: samtools.idxstats_unmapped
+    slot: record_count
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [samtools]
+      subcommands: [idxstats]
+    declare:
+      key: idxstats_unmapped
+      values: [contig_rows_included, star_row_only]
+      required: false
+      description: >-
+        Which unmapped counts of the idxstats table you use: contig_rows_included = column 4 of
+        every row, the unmapped mates placed beside their mapped partner included; star_row_only =
+        the `*` row, which holds only reads without a coordinate.
+    check: samtools_idxstats_unmapped
+    message: >-
+      samtools idxstats lists an unmapped read whose mate is mapped under the mate's contig, so the
+      `*` row holds only the fully unmapped pairs and undercounts the unmapped reads.
+
+  # F39. `bwa mem -M` flags the shorter parts of a chimeric read 0x100 (secondary), not 0x800
+  # (supplementary), so a flag test on 0x800 finds none of them. A call rule that reads the @PG
+  # line of the input file: it fails when a `samtools view -f ... 0x800` (or -F 0x800 alone) is
+  # applied to a file whose bwa mem command line has -M.
+  - id: samtools.split_flag_after_bwa_m
+    slot: flag_semantics
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [samtools]
+      subcommands: [view]
+    check: samtools_split_flag_bwa_m
+    message: >-
+      bwa mem -M writes the shorter split hits of a chimeric read as secondary (0x100), not
+      supplementary (0x800), so samtools view -f 0x800 finds none and -F 0x800 leaves them in.

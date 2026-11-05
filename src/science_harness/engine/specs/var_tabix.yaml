@@ -1,0 +1,51 @@
+spec_version: "1"
+name: var_tabix
+version_note: >-
+  tabix and bgzip (htslib) 1.24, bcftools 1.24, bedtools 2.31.1. Every behaviour the checkers rely
+  on was run on these versions; the evidence is quoted in engine/rules/var_tabix.py.
+rules:
+  # F61. A tabix -R / -T regions file is read as BED only when its name ends in .bed or .bed.gz,
+  # as 1-based `chrom from to` otherwise (the same rule as bcftools -R/-T, GEN-01).
+  - id: tabix.regions_file_base
+    slot: index_base
+    kind: call
+    tier: T1
+    incidents: [GEN-01]
+    applies:
+      tools: [tabix]
+      options_any: [-R, --regions, -T, --targets]
+    declare:
+      key: region_file_base
+      values: [zero_based_half_open, one_based_closed]
+      required: false
+      description: >-
+        How tabix reads the coordinates of the -R/-T file in this call. State it only when the
+        file name does not already decide it: a name ending in .bed or .bed.gz is read as BED
+        (zero_based_half_open), any other name as chrom from to (one_based_closed).
+    check: tabix_regions_file_base
+    message: >-
+      tabix reads a regions file as BED (0-based, half-open) only when its name ends in .bed or
+      .bed.gz and as 1-based closed otherwise, so BED windows kept under another name start one
+      base early.
+
+  # F61. A region string chr:start-end is always 1-based and closed, also for a zero-based (BED)
+  # index. A conditional call rule: it reads the .tbi header and fires only for a zero-based index.
+  - id: tabix.region_strings_bed
+    slot: index_base
+    kind: call
+    tier: T1
+    incidents: [GEN-04]
+    applies:
+      tools: [tabix]
+    declare:
+      key: region_coordinates
+      values: [one_based_closed, zero_based_half_open]
+      required: false
+      description: >-
+        What the numbers of your region strings are: one_based_closed = already 1-based and
+        closed, as tabix reads them (a BED window [S, E) is S+1 to E); zero_based_half_open = BED
+        coordinates copied as they are.
+    check: tabix_region_strings_bed
+    message: >-
+      A tabix region string chr:start-end is always 1-based and closed, also for a BED index, so a
+      BED window [100, 200) is chr1:101-200 and chr1:100-200 also returns the interval that ends at 100.

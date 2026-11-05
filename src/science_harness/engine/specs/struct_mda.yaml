@@ -1,0 +1,29 @@
+spec_version: "1"
+name: struct_mda
+version_note: "MDAnalysis 2.9.0, mdtraj 1.10.3, ProDy 2.6.1, gemmi 0.7.5 (python-struct environment)"
+rules:
+  # F99. MDAnalysis's `protein` / `backbone` keywords are a fixed residue-name list without SEP,
+  # TPO, PTR, CSO or MLY (mdtraj, ProDy and gemmi include them). A fact rule: it fires for
+  # MDAnalysis code that selects with those keywords on a file holding such residues.
+  - id: mda.protein_selection
+    slot: selection_scope
+    kind: fact
+    tier: T1
+    incidents: [MDAnalysis-selection-docs]
+    applies:
+      tools: [python-struct, python-bio, python3, python]
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:pdb|ent|cif|mmcif)(?:\.gz)?(?![\w-]|\.\w)'
+    declare:
+      key: protein_selection
+      values: ["includes_modified", "standard_only"]
+      required: false
+      description: >-
+        What the protein selection should contain: includes_modified (phosphorylated and other
+        modified amino acids belong to the protein) or standard_only (only the residue names of
+        MDAnalysis's fixed protein list).
+    check: mda_protein_selection
+    message: >-
+      MDAnalysis's `protein` keyword is a fixed residue-name list that leaves out phosphorylated
+      and other modified residues (SEP, TPO, PTR, CSO, MLY), so a residue count or a distance
+      matrix silently misses them.

@@ -1,0 +1,30 @@
+spec_version: "1"
+name: aln_bowtie2
+version_note: >-
+  bowtie2 2.5.5, samtools 1.24, checked on the family F33 data. Every behaviour the checker relies
+  on was run on these versions; the evidence is quoted in engine/rules/aln_bowtie2.py.
+rules:
+  # F33. bowtie2 -X (default 500) decides which pairs are concordant (flag 0x2). A required call
+  # rule, because the default is documented and dangerous for libraries with longer inserts, and a
+  # T0 rule cannot read the reads to tell: the agent states the longest fragment of its library.
+  - id: bowtie2.maxins_default
+    slot: default_param
+    kind: call
+    tier: T0
+    incidents: []
+    applies:
+      tools: [bowtie2]
+      options_any: ["-1", "-2"]
+    declare:
+      key: fragment_length_max
+      values: [up_to_500, over_500]
+      required: true
+      description: >-
+        The longest fragment (insert) the paired reads of this call can have: up_to_500 = none is
+        longer than 500 bases (the bowtie2 default -X is enough); over_500 = some are longer, so
+        -X must be raised above 500 or those pairs align discordantly (flag 0x2 clear).
+    check: bowtie2_maxins
+    message: >-
+      bowtie2 reports a pair whose fragment is longer than -X (default 500) as aligned
+      discordantly, with the proper-pair flag 0x2 clear, so counts or filters on concordant pairs
+      silently drop every pair of a long-insert library.

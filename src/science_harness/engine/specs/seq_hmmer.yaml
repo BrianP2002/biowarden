@@ -1,0 +1,29 @@
+spec_version: "1"
+name: seq_hmmer
+version_note: >-
+  HMMER 3.4. Every behaviour the checker relies on was run on this version; the evidence is
+  quoted in engine/rules/seq_hmmer.py.
+rules:
+  # F88. A HMMER E-value is the P-value times the number of target sequences (profiles for
+  # hmmscan) in the file, so searching the parts of a database one by one divides every E-value by
+  # the number of parts. A conditional call rule: it fires only when the target file has numbered
+  # siblings and the call sets no -Z.
+  - id: hmmer.split_database
+    slot: metric_scale
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [hmmsearch, phmmer, nhmmer, hmmscan]
+    declare:
+      key: evalue_database
+      values: [whole_collection, this_file]
+      required: false
+      description: >-
+        Which database the E-values refer to: whole_collection = all the sibling files together
+        (add -Z with the total count), this_file = the file searched is the whole database.
+    check: hmmer_split_database
+    message: >-
+      A HMMER E-value is the P-value times the number of sequences in the file searched, so
+      searching the pieces of a database one by one gives E-values that many times smaller than a
+      search of the whole database.

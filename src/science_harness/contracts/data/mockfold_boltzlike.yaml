@@ -1,0 +1,20 @@
+schema_version: "0"
+tool:
+  name: mockfold
+  backend: boltzlike
+  version: "0.1.0"
+slots:
+  chain_order:
+    tool_policy: input_order
+    chain_ids: positional           # A, B, C, ... in request order
+    consumer_policy: input_order
+  metric_scale:
+    plddt: {min: 0.0, max: 100.0}
+  record_count:
+    chains: equals_entities
+invariants:
+  - {id: I1, slot: chain_order, oracle: chain_sequence_roundtrip}
+  - {id: I2, slot: record_count, oracle: record_count}
+  - {id: I3, slot: metric_scale, oracle: finite_coordinates_and_scale}
+probes:
+  - {id: M1, slot: chain_order, kind: permute_entities}

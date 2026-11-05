@@ -1,0 +1,50 @@
+spec_version: "1"
+name: quant_htseq
+version_note: >-
+  HTSeq 2.1.2 (htseq-count). Every behaviour the checkers rely on was run on this version; the
+  evidence is quoted in engine/rules/quant_htseq.py.
+rules:
+  # F41 / GEN-22. `-s` defaults to yes (forward-stranded). A conditional rule: it reads the BAM and
+  # the GTF and stays silent whenever the call's strandedness agrees with the reads.
+  - id: htseq.strandedness
+    slot: strand
+    kind: call
+    tier: T1
+    incidents: [GEN-22, GEN-20]
+    applies:
+      tools: [htseq-count]
+    declare:
+      key: library_strandedness
+      values: [unstranded, forward, reverse]
+      required: false
+      description: >-
+        The library type of the alignments: forward = read 1 maps to the strand of its gene
+        (htseq-count -s yes), reverse = read 1 maps to the opposite strand (dUTP, Illumina TruSeq
+        Stranded; -s reverse), unstranded = reads map to both strands (-s no).
+    check: htseq_strandedness
+    message: >-
+      htseq-count counts only reads on the gene's strand unless told otherwise (-s defaults to
+      yes), so a reverse-stranded or unstranded library silently loses almost all or half of its
+      reads, which show up only in __no_feature.
+
+  # F44. `-a` defaults to 10 (featureCounts -Q to 0). Conditional on the BAM holding unique
+  # alignments below the floor.
+  - id: htseq.min_mapq
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: [GEN-22]
+    applies:
+      tools: [htseq-count]
+    declare:
+      key: low_mapq_reads
+      values: [keep, drop]
+      required: false
+      description: >-
+        What the call does with unique alignments of low mapping quality: keep = they are counted
+        (-a 0), drop = they are skipped on purpose (the default -a 10 or a higher floor).
+    check: htseq_min_mapq
+    message: >-
+      htseq-count skips alignments with MAPQ below 10 by default (-a), so unique reads of an
+      aligner such as BWA or Bowtie 2 with MAPQ 0-3 are left out of the counts and only appear in
+      __too_low_aQual.

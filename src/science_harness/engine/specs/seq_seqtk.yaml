@@ -1,0 +1,27 @@
+spec_version: "1"
+name: seq_seqtk
+version_note: >-
+  seqtk 1.5-r133. Every behaviour the checker relies on was run on this version; the evidence is
+  quoted in engine/rules/seq_seqtk.py.
+rules:
+  # F81. seqtk trimfq never trims a read below 30 bases by default (-l 30). A conditional call
+  # rule: it reruns the call with -l 1 and fails only when some read would come out shorter.
+  - id: seqtk.trimfq_floor
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [seqtk]
+      subcommands: [trimfq]
+    declare:
+      key: trim_floor
+      values: [keep_minimum, no_minimum]
+      required: false
+      description: >-
+        Whether reads must keep a minimum length (keep_minimum: the -l floor is intended) or every
+        low-quality tail must go however short the read becomes (no_minimum: use -l 1).
+    check: seqtk_trimfq_floor
+    message: >-
+      seqtk trimfq stops trimming at 30 bases (-l 30 by default), so a read whose good part is
+      shorter keeps low-quality bases, with exit status 0 and no message.

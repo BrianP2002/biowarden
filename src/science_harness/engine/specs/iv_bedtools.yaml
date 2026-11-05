@@ -1,0 +1,218 @@
+spec_version: "1"
+name: iv_bedtools
+version_note: >-
+  bedtools 2.31.1, samtools 1.24. Every behaviour the checkers rely on was run on these versions;
+  the evidence is quoted in engine/rules/iv_bedtools.py.
+rules:
+  # F65 / GEN-40. intersect -split with a fraction option depends on the other b records.
+  - id: bedtools.split_reciprocal
+    slot: tool_logic
+    kind: call
+    tier: T1
+    incidents: [GEN-40]
+    applies:
+      tools: [bedtools]
+      subcommands: [intersect]
+      options_any: [-split]
+    check: iv_bedtools_split_reciprocal
+    message: >-
+      bedtools intersect -split with -r/-F/-f reports a different set of pairs when a second b
+      record lies inside the span of an a record (even in an intron): perfect pairs are dropped
+      with exit 0 and no message.
+
+  # F66. map -o mean over a bedGraph averages lines, not bases.
+  - id: bedtools.map_unweighted
+    slot: weighting
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [map]
+      options_any: [-o]
+    declare:
+      key: signal_weighting
+      values: [per_base, per_interval]
+      required: false
+      description: >-
+        What the mean of a bedGraph window should be: per_base = the depth averaged over the
+        bases of the window, per_interval = the mean of the values of the lines that touch it.
+    check: iv_bedtools_map_unweighted
+    message: >-
+      bedtools map -o mean averages the values of the lines of a bedGraph that touch a window,
+      counting a long or protruding line like a short one, so it is not the mean depth per base
+      unless all lines are equally long and inside the window.
+
+  # F67. Without -split a spliced read covers the bases it skipped.
+  - id: bedtools.spliced_without_split
+    slot: split
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [genomecov, coverage, multicov, intersect, window]
+    declare:
+      key: spliced_reads
+      values: [exons, span]
+      required: false
+      description: >-
+        What a spliced read (CIGAR with N) stands for: exons = only its aligned blocks (-split),
+        span = the whole interval from its first to its last aligned base.
+    check: iv_bedtools_spliced_without_split
+    message: >-
+      bedtools genomecov/coverage/multicov/intersect take a spliced read as one interval from its
+      first to its last base unless -split is given, so the introns it skips count as covered.
+
+  # F68. subtract trims the overlapping bases and keeps the rest of the feature.
+  - id: bedtools.subtract_trims
+    slot: overlap_policy
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [subtract]
+    declare:
+      key: overlap_policy
+      values: [remove, trim]
+      required: false
+      description: >-
+        What happens to an a feature that a b region overlaps: remove = the whole feature goes
+        (-A), trim = only the overlapping bases are cut out and the rest stays.
+    check: iv_bedtools_subtract_trims
+    message: >-
+      bedtools subtract cuts out the overlapping bases and keeps the rest of an a feature (split
+      in two when the b region lies inside it); only a feature covered completely disappears,
+      unless -A is given.
+
+  # F69. window -w N stops one base short of a gap of N.
+  - id: bedtools.window_boundary
+    slot: distance_unit
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [window]
+    declare:
+      key: window_boundary
+      values: [gap_inclusive, window_exclusive]
+      required: false
+      description: >-
+        Whether a b interval with exactly N bases between it and the a interval belongs to
+        "within N": gap_inclusive = yes (needs -w N+1), window_exclusive = no (what -w N does).
+    check: iv_bedtools_window_boundary
+    message: >-
+      bedtools window -w N reaches a gap of N-1 bases, not N: a b interval exactly N bases away
+      is left out without a message.
+
+  # F69. closest -d prints gap+1 and -1 for a chromosome without b features.
+  - id: bedtools.closest_distance_unit
+    slot: distance_unit
+    kind: call
+    tier: T0
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [closest]
+      options_any: [-d, -D]
+    declare:
+      key: distance_unit
+      values: [bedtools_distance, bases_between]
+      required: false
+      description: >-
+        What the distance column of closest -d/-D holds: bedtools_distance = 0 for overlap, gap+1
+        otherwise, -1 for none; bases_between = the number of bases between the intervals.
+    check: iv_bedtools_closest_distance_unit
+    message: >-
+      bedtools closest -d/-D print the gap plus one (a gap of 1000 bases is 1001), 0 for overlap
+      and -1 for a chromosome without b features, so a threshold on the column is off by one.
+
+  # F75. multicov skips duplicate-flagged and QC-fail reads, its sibling subcommands do not.
+  - id: bedtools.duplicate_policy
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [multicov, coverage, intersect, genomecov, window]
+    declare:
+      key: duplicate_policy
+      values: [keep, exclude]
+      required: false
+      description: >-
+        Whether reads flagged as PCR duplicates (0x400) count: keep = every alignment record,
+        exclude = only reads without the flag.
+    check: iv_bedtools_duplicate_policy
+    message: >-
+      bedtools multicov skips reads flagged 0x400 (and 0x200) by default while coverage,
+      intersect, genomecov and window count every record, so the same BAM gives different counts.
+
+  # merge joins touching intervals as well as overlapping ones.
+  - id: bedtools.merge_bookended
+    slot: interval_semantics
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [merge]
+    declare:
+      key: adjacent_policy
+      values: [keep, merge]
+      required: false
+      description: >-
+        Whether intervals that touch without sharing a base (one ends where the next starts)
+        belong to the same region: merge = yes (the default of -d 0), keep = no (-d -1).
+    check: iv_bedtools_merge_bookended
+    message: >-
+      bedtools merge joins book-ended intervals as well as overlapping ones unless -d is
+      negative, so tiled or adjacent intervals collapse into one region.
+
+  # groupby needs the input grouped by the -g columns.
+  - id: bedtools.groupby_unsorted
+    slot: record_order
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [groupby]
+    check: iv_bedtools_groupby_unsorted
+    message: >-
+      bedtools groupby closes a group whenever the key changes, so input that is not sorted by the
+      group columns reports the same group several times with partial sums.
+
+  # -prec N prints N significant digits (%g), not N decimals.
+  # Evidence: bedtools map -c 4 -o sum on 12.3456789 + 1234.56789 + 0.00123456 prints 1246.914803
+  # by default, 1.2e+03 with -prec 2, 1247 with -prec 4, 1246.9148 with -prec 8; the help says
+  # "Sets the decimal precision for output (Default: 5)". Exit 0, stderr empty. Decided from the
+  # call alone with the built-in option rule, so the declaration is required when -prec is used.
+  - id: bedtools.prec_significant
+    slot: units
+    kind: call
+    tier: T0
+    incidents: []
+    applies:
+      tools: [bedtools]
+      subcommands: [map, groupby, merge]
+      options_any: [-prec]
+    declare:
+      key: precision_unit
+      values: [significant_digits, decimal_places]
+      required: true
+      description: >-
+        What -prec N counts: significant_digits = N significant digits (1234.5678 with -prec 4
+        is 1235), decimal_places = N digits after the decimal point.
+    check: option_implies_declared
+    params:
+      option_map:
+        -prec: significant_digits
+      fix_option:
+        decimal_places: no -prec at all (full precision) and round yourself, for example awk printf "%.3f"
+    message: >-
+      bedtools -prec N keeps N significant digits (printf %g), not N decimals: -prec 4 writes
+      1234.56789 as 1235 and a small value in exponent form (1.2e+03), though the help calls it
+      the decimal precision.

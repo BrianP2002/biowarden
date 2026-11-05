@@ -1,0 +1,123 @@
+spec_version: "1"
+name: sc_annotation
+version_note: >-
+  scanpy 1.11.5, anndata 0.11.4, pandas 2.3.3 (python-sc). Fact rules over .h5ad files read with
+  h5py, plus the table / vocabulary named next to them. See rules/sc_annotation.py.
+rules:
+  # F105. A table of cell annotations pasted into adata.obs by position.
+  - id: sc.obs_assign_position
+    slot: label_alignment
+    kind: fact
+    tier: T1
+    incidents: [R2-OMX-14]
+    applies:
+      tools: &py [python-sc, python3, python]
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.(?:csv|tsv|txt)(?:\.gz)?(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: obs_join
+      values: [by_index, by_position]
+      required: false
+      description: >-
+        How a table of cell annotations is joined to the cells: by_index (on the barcode) or
+        by_position (row i of the table to cell i).
+    check: sc_obs_assign_position
+    message: >-
+      adata.obs['x'] = table['x'].values, or adata.obs = table, joins by position (the second one
+      even renames the cells without moving X): with the barcodes in another order every label
+      lands on the wrong cell and nothing warns.
+
+  # F108. Control cells spelled differently in each file.
+  - id: sc.control_label
+    slot: control_label
+    kind: fact
+    tier: T1
+    incidents: [SCD-06]
+    applies:
+      tools: *py
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: control_label
+      values: [ctrl, control, non-targeting, NT, scramble, multiple]
+      required: false
+      description: >-
+        The label that marks control cells in the perturbation column of the files; multiple when
+        the files spell it differently and the code covers every spelling.
+    check: sc_control_label
+    message: >-
+      a filter written for one control spelling ('ctrl') selects nothing in a file that spells it
+      another way ('non-targeting'), and an empty selection raises no error.
+
+  # F109. Gene names matched against a model vocabulary in another namespace.
+  - id: sc.gene_vocabulary
+    slot: id_namespace
+    kind: fact
+    tier: T1
+    incidents: [SCD-34]
+    applies:
+      tools: *py
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.(?:json|txt|csv|tsv)(?:\.gz)?(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: gene_namespace
+      values: [symbol, ensembl_id]
+      required: false
+      description: >-
+        The namespace of the gene names matched against the vocabulary: symbol (HGNC / MGI
+        symbols) or ensembl_id (ENSG... identifiers).
+    check: sc_gene_vocabulary
+    message: >-
+      adata.var_names in one namespace (Ensembl ids) against a vocabulary in another (symbols) has
+      an empty or tiny intersection, and neither pandas nor the model code warns.
+
+  # F110. anndata.concat defaults to join='inner'.
+  - id: sc.concat_join
+    slot: gene_set
+    kind: fact
+    tier: T1
+    incidents: [SCD-22]
+    applies:
+      tools: *py
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: concat_genes
+      values: [intersection, union]
+      required: false
+      description: >-
+        The gene set the merged object should have: intersection (genes in every file) or union
+        (every gene of any file, missing ones filled with zero).
+    check: sc_concat_join
+    message: >-
+      anndata.concat keeps only the genes present in every object (join='inner') unless told
+      join='outer', so batch-specific genes vanish from the merged object without a warning.
+
+  # F111. The mitochondrial prefix is case-sensitive: MT- (human) against mt- (mouse).
+  - id: sc.mito_prefix_case
+    slot: gene_naming
+    kind: fact
+    tier: T1
+    incidents: [SCD-34]
+    applies:
+      tools: *py
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.h5ad(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: mito_prefix
+      values: ["MT-", "mt-", both]
+      required: false
+      description: >-
+        The prefix of the mitochondrial genes in the data: MT- (human), mt- (mouse) or both (the
+        code folds the case).
+    check: sc_mito_prefix_case
+    message: >-
+      startswith('MT-') is case-sensitive; mouse mitochondrial genes are mt-Nd1, so no gene is
+      flagged and pct_counts_mt is exactly 0 for every cell.

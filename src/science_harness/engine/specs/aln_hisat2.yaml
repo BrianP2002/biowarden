@@ -1,0 +1,31 @@
+spec_version: "1"
+name: aln_hisat2
+version_note: >-
+  hisat2 2.2.3, StringTie, samtools 1.24, checked on the family F34 data. Every behaviour the
+  checker relies on was run on these versions; the evidence is quoted in engine/rules/aln_hisat2.py.
+rules:
+  # F34. --rna-strandness is never checked against the reads and flips the XS strand of every
+  # alignment when wrong. A required call rule (T0): the agent states the library; the checker
+  # compares it with the option value and with paired versus single-end letters.
+  - id: hisat2.rna_strandness
+    slot: strand
+    kind: call
+    tier: T0
+    incidents: [GEN-20]
+    applies:
+      tools: [hisat2]
+      options_any: ["--rna-strandness"]
+    declare:
+      key: library_strandedness
+      values: [forward, reverse]
+      required: true
+      description: >-
+        The strand-specific protocol of the reads: forward = read 1 (or the single read) is on the
+        same strand as the transcript (hisat2 F or FR); reverse = read 1 is on the opposite strand,
+        the dUTP protocol of TruSeq Stranded (hisat2 R or RF).
+    check: hisat2_rna_strandness
+    message: >-
+      hisat2 --rna-strandness is not checked against the reads: a wrong value aligns just as well
+      but writes the opposite strand into XS:A, so StringTie and Cufflinks assemble every
+      transcript on the wrong strand; a one-letter value (F, R) on paired reads is also accepted
+      and makes the mates disagree.

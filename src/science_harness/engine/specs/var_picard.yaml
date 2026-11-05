@@ -1,0 +1,28 @@
+spec_version: "1"
+name: var_picard
+version_note: >-
+  Picard 3.5.0 (conda wrapper, run with -Xmx512m), samtools 1.24. Every behaviour the checker
+  relies on was run on these versions; the evidence is quoted in engine/rules/var_picard.py.
+rules:
+  # F64. MarkDuplicates flags duplicates (0x400) and keeps them in the output unless
+  # REMOVE_DUPLICATES=true. Decided from the call alone: the optional declaration states what the
+  # output should hold and must agree with the option.
+  - id: picard.markduplicates_remove
+    slot: default_param
+    kind: call
+    tier: T0
+    incidents: []
+    applies:
+      tools: [picard, gatk]
+      subcommands: [MarkDuplicates, MarkDuplicatesSpark]
+    declare:
+      key: duplicate_output
+      values: [flagged, removed]
+      required: true
+      description: >-
+        What the output of MarkDuplicates holds: flagged = every read, the duplicates carrying flag
+        0x400 (the default); removed = the duplicates are gone (REMOVE_DUPLICATES=true).
+    check: picard_markduplicates_remove
+    message: >-
+      Picard MarkDuplicates writes every read of the input and only flags the duplicates (0x400)
+      unless REMOVE_DUPLICATES=true, so counting the records of its output counts the duplicates too.

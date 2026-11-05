@@ -1,0 +1,71 @@
+spec_version: "1"
+name: quant_featurecounts
+version_note: >-
+  Subread featureCounts 2.1.1. Every behaviour the checkers rely on was run on this version; the
+  evidence is quoted in engine/rules/quant_featurecounts.py.
+rules:
+  # F42 / GEN-24. -p alone declares paired-end input and counts every mate; --countReadPairs
+  # counts fragments. Required: the default is dangerous and an incident backs it.
+  - id: featurecounts.read_pairs
+    slot: record_count
+    kind: call
+    tier: T0
+    incidents: [GEN-24]
+    applies:
+      tools: [featureCounts]
+      options_any: [-p]
+    declare:
+      key: count_unit
+      values: [read, fragment]
+      required: true
+      description: >-
+        What one count is: fragment = one per read pair (--countReadPairs), read = one per mate
+        (-p without --countReadPairs, which counts every mate of a pair).
+    check: featurecounts_read_pairs
+    message: >-
+      since Subread 2.0.2 featureCounts -p only declares paired-end input and counts every mate as
+      a read, so each fragment adds 2 to a gene unless --countReadPairs is given.
+
+  # F43 / GEN-20. -s defaults to 0 (unstranded). Conditional: it sniffs the BAM against the GTF.
+  - id: featurecounts.strandedness
+    slot: strand
+    kind: call
+    tier: T1
+    incidents: [GEN-20]
+    applies:
+      tools: [featureCounts]
+    declare:
+      key: library_strandedness
+      values: [unstranded, forward, reverse]
+      required: false
+      description: >-
+        The library type of the alignments: forward = read 1 maps to the strand of its gene
+        (-s 1), reverse = read 1 maps to the opposite strand (dUTP, Illumina TruSeq Stranded;
+        -s 2), unstranded = reads map to both strands (-s 0).
+    check: featurecounts_strandedness
+    message: >-
+      featureCounts counts unstranded unless told otherwise (-s defaults to 0): on a stranded
+      library it drops every read that overlaps genes on both strands as ambiguous, and a stranded
+      -s that is not the library's leaves most reads unassigned.
+
+  # A counts table made by `featureCounts -p` without --countReadPairs holds reads, not pairs.
+  # The command is on the first line of the table, so a later command knows what the numbers are.
+  - id: featurecounts.counts_unit
+    slot: units
+    kind: fact
+    tier: T1
+    incidents: [GEN-24]
+    applies:
+      tools: []
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*(?i:count)[\w.+/@~-]*\.(?:txt|tsv)(?![\w-]|\.\w)'
+    declare:
+      key: count_unit
+      values: [read, fragment]
+      required: false
+      description: >-
+        What one count of the table is: read = one per mate, fragment = one per read pair.
+    check: featurecounts_counts_unit
+    message: >-
+      a featureCounts table made with -p and without --countReadPairs holds reads (mates), twice
+      the number of fragments, so fragment-level arithmetic on it is off by a factor of 2.

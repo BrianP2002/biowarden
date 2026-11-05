@@ -1,0 +1,50 @@
+spec_version: "1"
+name: quant_salmon
+version_note: >-
+  salmon 2.8.0 (the Rust rewrite). Every behaviour the checkers rely on was run on this version;
+  the evidence is quoted in engine/rules/quant_salmon.py.
+rules:
+  # F45. `salmon index` collapses exact-duplicate transcripts unless --keepDuplicates.
+  - id: salmon.duplicate_transcripts
+    slot: completeness
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [salmon]
+      subcommands: [index]
+    declare:
+      key: duplicate_transcripts
+      values: [keep, drop]
+      required: false
+      description: >-
+        What the index does with transcripts whose sequence is identical to an earlier one: keep =
+        all stay in the index and share their reads (--keepDuplicates), drop = only the first is
+        indexed, the others get no row in quant.sf (the default).
+    check: salmon_duplicate_transcripts
+    message: >-
+      salmon index silently drops transcripts with a sequence identical to an earlier one: they get
+      no row in quant.sf or quant.genes.sf and their reads are credited to the retained copy.
+
+  # A quant table from such an index lacks the duplicates; a later command that computes with it
+  # does not know. The index is found through cmd_info.json next to the table.
+  - id: salmon.quant_duplicates
+    slot: completeness
+    kind: fact
+    tier: T1
+    incidents: []
+    applies:
+      tools: []
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*quant(?:\.genes)?\.sf(?![\w-]|\.\w)'
+    declare:
+      key: duplicate_transcripts
+      values: [keep, drop]
+      required: false
+      description: >-
+        keep = the table has every transcript, drop = the index removed duplicates and the retained
+        copy carries the pooled reads.
+    check: salmon_quant_duplicates
+    message: >-
+      a salmon table from an index that removed exact-duplicate transcripts has no row for them,
+      so per-gene or per-transcript arithmetic on it misses those genes.

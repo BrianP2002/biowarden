@@ -1,0 +1,27 @@
+spec_version: "1"
+name: quant_stringtie
+version_note: >-
+  StringTie 3.0.3. Every behaviour the checker relies on was run on this version; the evidence is
+  quoted in engine/rules/quant_stringtie.py.
+rules:
+  # --rf / --fr that do not match the reads leave genes with little or no coverage, exit 0.
+  - id: stringtie.strandedness
+    slot: strand
+    kind: call
+    tier: T1
+    incidents: [GEN-23, GEN-20]
+    applies:
+      tools: [stringtie]
+    declare:
+      key: library_strandedness
+      values: [unstranded, forward, reverse]
+      required: false
+      description: >-
+        The library type of the alignments: forward = read 1 maps to the strand of its gene
+        (--fr), reverse = read 1 maps to the opposite strand (dUTP, Illumina TruSeq Stranded;
+        --rf), unstranded = reads map to both strands (no flag).
+    check: stringtie_strandedness
+    message: >-
+      stringtie --rf / --fr counts only reads in one orientation, so a flag that does not match the
+      library (dUTP is --rf, not --fr) leaves genes with little or no coverage and TPM, and on an
+      unstranded library it halves them, with exit 0 and no message.

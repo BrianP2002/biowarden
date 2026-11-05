@@ -1,0 +1,33 @@
+spec_version: "1"
+name: aln_star
+version_note: >-
+  STAR 2.7.11b (--quantMode GeneCounts), checked on the family F31 data. Every behaviour the
+  checker relies on was run on this version; the evidence is quoted in engine/rules/aln_star.py.
+rules:
+  # F31. ReadsPerGene.out.tab has three count columns (unstranded, first-read strand, second-read
+  # strand) and does not say which suits the library. A fact rule: it fires only when the table
+  # itself shows a stranded library (one stranded column holds most of the counts) and the command
+  # picks counts out of the table with another column or with a column it does not show.
+  - id: star.genecounts_column
+    slot: strand
+    kind: fact
+    tier: T1
+    incidents: [GEN-20, GEN-22]
+    applies:
+      tools: []
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*ReadsPerGene\.out\.tab(?![\w-])'
+    declare:
+      key: genecounts_column
+      values: [unstranded, first_read_strand, second_read_strand]
+      required: false
+      description: >-
+        The column of ReadsPerGene.out.tab the command reads: unstranded = column 2,
+        first_read_strand = column 3 (first mate on the gene's strand: forward-stranded libraries,
+        htseq-count -s yes), second_read_strand = column 4 (first mate on the opposite strand: dUTP
+        libraries such as TruSeq Stranded, htseq-count -s reverse).
+    check: star_genecounts_column
+    message: >-
+      STAR writes three count columns to ReadsPerGene.out.tab and does not say which suits the
+      library: on a dUTP library column 3 holds only the pairs that leak the wrong way and column 2
+      loses every pair that overlaps a gene on the other strand.

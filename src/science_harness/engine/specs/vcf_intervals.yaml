@@ -1,0 +1,32 @@
+spec_version: "1"
+name: vcf_intervals
+version_note: "bcftools 1.24 (htslib 1.24), GNU awk 4.2.1; VCF 4.2 anchor-base convention"
+rules:
+  # F10. A BED interval built from POS and the length of REF (bcftools %POS0/%END, awk
+  # $2-1 .. $2-1+length(REF)) is the REF allele span: for an indel it includes the anchor base the
+  # record does not change, so it starts one base before the bases deleted or replaced. A fact rule:
+  # it stays silent on ordinary reads and on VCFs without anchored indels (checker docstring has
+  # the exact heuristics and their limits). `tools` is empty on purpose: the command may be
+  # bcftools, awk, python3, perl, zcat or a `bash -c` pipeline; the checker decides from the text.
+  - id: vcf.indel_interval_anchor
+    slot: interval_closure
+    kind: fact
+    tier: T1
+    incidents: []
+    applies:
+      tools: []
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:vcf|bcf)(?:\.b?gz)?(?![\w-]|\.\w)'
+    declare:
+      key: interval_meaning
+      values: [ref_span, replaced_bases]
+      required: false
+      description: >-
+        What the intervals mean: ref_span = the span of the REF allele (VCF anchor base included),
+        replaced_bases = the reference bases the record substitutes or deletes (anchor excluded).
+    check: vcf_indel_interval_anchor
+    params:
+      max_records: 10000
+    message: >-
+      A BED interval built from POS and the length of REF includes the VCF anchor base of every
+      indel, so it starts one base before the bases the record deletes or replaces.

@@ -1,0 +1,51 @@
+spec_version: "1"
+name: seq_blast
+version_note: >-
+  BLAST+ 2.17.0 (makeblastdb, blastn, blastp). Every behaviour the checkers rely on was run on this
+  version; the evidence is quoted in engine/rules/seq_blast.py.
+rules:
+  # F77. blastn runs megablast by default (word size 28): a diverged copy of a reference region
+  # (80-90% identity) holds no exact 28-mer and gets no hit. A conditional call rule: it reruns the
+  # call with -task blastn on small inputs and fails only when a query would gain a significant hit.
+  - id: blastn.megablast_default
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [blastn]
+    declare:
+      key: blast_sensitivity
+      values: [near_identical, divergent]
+      required: false
+      description: >-
+        How close the queries are to the reference: near_identical = same-species or assembly
+        matches above about 90% identity, megablast is intended; divergent = the queries may be
+        diverged copies or short oligos, use -task blastn (or dc-megablast, blastn-short).
+    check: blastn_megablast_default
+    message: >-
+      blastn without -task runs megablast, which needs an exact 28-base seed, so queries that are
+      diverged copies of the reference (80-90% identity) or shorter than about 28 bases get no hit,
+      with exit status 0 and no message.
+
+  # F78. A BLAST database is a snapshot of the FASTA at the time of makeblastdb. A conditional
+  # call rule: it compares the sequence count recorded in NAME.pjs/.njs with the FASTA named by the
+  # database title and fails only when they differ.
+  - id: blast.stale_database
+    slot: index_state
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [blastp, blastn, blastx, tblastn, tblastx, psiblast]
+    declare:
+      key: database_currency
+      values: [current, frozen]
+      required: false
+      description: >-
+        Whether the search must see the FASTA as it is now (current: rebuild the database with
+        makeblastdb first) or the older snapshot the database holds (frozen: intended).
+    check: blast_stale_database
+    message: >-
+      A BLAST database does not follow the FASTA it was built from: sequences added or changed
+      afterwards are invisible to blastp -db, with exit status 0 and no warning.

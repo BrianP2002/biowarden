@@ -1,0 +1,9 @@
+samtools: samtools 1.24
+bcftools: bcftools 1.24
+bedtools: bedtools v2.31.1
+bwrap: bubblewrap 0.4.0
+python: Python 3.12.13
+sha256 samtools: d54e803bb57befc7137cd22252d1f4e6975bfc435490216f9887a307416427b6
+sha256 bcftools: 8c32104ca30f3a1306cda6ee3796529f5eb79be19c8652e9640aae38a4038db4
+sha256 bedtools: e427ac7446b5ced687861cf77b4cd4aed5242314065804433607aa1ea7361bc2
+sha256 libbz2.so.1.0.8: 24d938d2c40f191685ee857bd553f70307f24ff22ab184609c6b4a113ee2f587

@@ -1,0 +1,26 @@
+spec_version: "1"
+name: seq_seqkit
+version_note: >-
+  seqkit v2.14.0. Every behaviour the checker relies on was run on this version; the evidence is
+  quoted in engine/rules/seq_seqkit.py.
+rules:
+  # F82. seqkit rmdup -s compares both strands unless -P is given. A conditional call rule: it
+  # reads the sequence files of the call and fails only when a reverse-complement pair exists.
+  - id: seqkit.rmdup_strands
+    slot: strand
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [seqkit]
+    declare:
+      key: duplicate_strand_policy
+      values: [both_strands, same_strand_only]
+      required: false
+      description: >-
+        Whether a sequence and its reverse complement are the same sequence (both_strands) or two
+        sequences compared as written (same_strand_only: add -P to seqkit rmdup).
+    check: seqkit_rmdup_strands
+    message: >-
+      seqkit rmdup -s also treats a sequence and its reverse complement as duplicates unless -P is
+      given, so guides, primers and barcodes listed on both strands are merged silently.

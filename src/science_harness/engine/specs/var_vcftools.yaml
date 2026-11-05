@@ -1,0 +1,105 @@
+spec_version: "1"
+name: var_vcftools
+version_note: >-
+  vcftools 0.1.17, bcftools 1.24 (htslib 1.24), plink 1.9, plink2 2.0.0-a.7. Every behaviour the
+  checkers rely on was run on these versions; the evidence is quoted in engine/rules/var_vcftools.py.
+rules:
+  # F53. `vcftools --bed` and `--exclude-bed` skip the first line of the BED file as a header, so a
+  # BED file without a header loses its first interval. A call rule that reads the first line of
+  # the file; it has no declaration (nothing the agent could state makes the file safe).
+  - id: vcftools.bed_header
+    slot: input_format
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [vcftools]
+      options_any: [--bed, --exclude-bed]
+    check: vcftools_bed_header
+    message: >-
+      vcftools --bed / --exclude-bed treat the first line of the BED file as a header and skip it,
+      so a BED file without a header silently loses its first interval.
+
+  # F55. vcftools keeps every record unless asked; `--keep-filtered PASS` drops the records whose
+  # FILTER is "." (never filtered) while `--remove-filtered-all` keeps them. A conditional call
+  # rule: it reads the VCF and is silent unless some record has FILTER ".".
+  - id: vcftools.keep_filtered_dot
+    slot: filter_semantics
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [vcftools]
+      options_any: [--keep-filtered, --remove-filtered, --remove-filtered-all]
+    declare:
+      key: unfiltered_records
+      values: [keep, drop]
+      required: false
+      description: >-
+        What happens to records whose FILTER column is "." (no filter was applied to them):
+        keep = they stay with the PASS records; drop = only FILTER=PASS records stay.
+    check: vcftools_keep_filtered_dot
+    message: >-
+      vcftools --keep-filtered PASS drops the records whose FILTER is "." (never filtered), which
+      --remove-filtered-all keeps; a caller that applies no filters leaves every record at ".".
+
+  # F57. vcftools --keep/--indv writes every site of the input for the kept individuals, also those
+  # where nobody carries an alternate allele; --mac 1 (or --non-ref-ac-any 1) drops them.
+  - id: vcftools.subset_monomorphic
+    slot: record_count
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [vcftools]
+      options_any: [--keep, --indv, --remove, --remove-indv]
+    declare:
+      key: subset_sites
+      values: [keep_all_sites, variant_sites_only, filtered_downstream]
+      required: false
+      description: >-
+        Which sites the call writes after selecting samples: keep_all_sites = every site of the
+        input, also those where no selected sample carries an alternate allele; variant_sites_only
+        = only the sites where one does; filtered_downstream = a later stage of the pipeline drops
+        the monomorphic ones.
+    check: vcftools_subset_monomorphic
+    message: >-
+      Selecting individuals with vcftools --keep/--indv keeps every site, including those at which
+      none of them carries an alternate allele; --mac 1 drops them.
+
+  # F60. Missingness thresholds point in opposite directions: vcftools --max-missing X keeps the
+  # sites with at least a fraction X of the genotypes CALLED (1 = no missing data, 0 = anything),
+  # plink --geno X / --mind X remove the variants / samples with a missing RATE above X. Verified
+  # on a six-site VCF with one missing call: vcftools --max-missing 1 kept 5, 0.75 and 0.1 kept all
+  # 6; plink --geno 0.1 removed the site (and a multiallelic one), plink2 --geno 0.1 the site only.
+  # The option name decides what the number means, so the built-in option_implies_declared check
+  # applies: the agent states what its number means and it must agree with the option.
+  - id: var.missing_threshold
+    slot: metric_scale
+    kind: call
+    tier: T0
+    incidents: [GEN-31]
+    applies:
+      tools: [vcftools, plink, plink2]
+      options_any: [--max-missing, --geno, --mind]
+    declare:
+      key: missing_threshold_meaning
+      values: [completeness, missing_rate]
+      required: true
+      description: >-
+        What the number given to the option means: completeness = the minimum fraction of called
+        (non-missing) genotypes, so 1 allows no missing data (vcftools --max-missing); missing_rate
+        = the maximum fraction of missing genotypes, so 0 allows none (plink --geno, --mind).
+    check: option_implies_declared
+    params:
+      option_map:
+        --max-missing: completeness
+        --geno: missing_rate
+        --mind: missing_rate
+      fix_option:
+        completeness: "--max-missing <fraction called> in vcftools or --geno <1 - fraction called> in plink (a completeness of 0.9 is --max-missing 0.9 and --geno 0.1)"
+        missing_rate: "--geno <rate> in plink or --max-missing <1 - rate> in vcftools (a missing rate of 0.1 is --geno 0.1 and --max-missing 0.9)"
+    message: >-
+      vcftools --max-missing X keeps the sites with at least a fraction X of the genotypes called,
+      while plink --geno X removes the variants with a missing rate above X, so a rate copied from
+      one to the other keeps almost every site or removes almost every site.

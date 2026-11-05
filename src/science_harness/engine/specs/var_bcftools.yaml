@@ -1,0 +1,159 @@
+spec_version: "1"
+name: var_bcftools
+version_note: >-
+  bcftools 1.24 (htslib 1.24), vcftools 0.1.17. Every behaviour the checkers rely on was run on
+  these versions; the evidence is quoted in engine/rules/var_bcftools.py.
+rules:
+  # F54. A FORMAT field in a -i/-e expression is one test per record, true when ANY sample
+  # satisfies it, so -i 'FMT/GQ>=20' and -e 'FMT/GQ<20' select different sites on a multi-sample
+  # file. A conditional call rule: it reads the VCF named in the call and is silent unless some
+  # record has samples that satisfy the test and samples that do not.
+  - id: bcftools.format_filter_scope
+    slot: filter_semantics
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bcftools]
+      subcommands: [view, filter, query]
+      options_any: [-i, --include, -e, --exclude]
+    declare:
+      key: format_filter_scope
+      values: [any_sample, all_samples]
+      required: false
+      description: >-
+        Which sites the FORMAT condition of the call keeps: any_sample = a site is kept when at
+        least one sample satisfies the condition (what -i 'FMT/X op v' does); all_samples = a site
+        is kept only when every sample does (what -e 'FMT/X <negated op> v' or -i 'MIN(FMT/X)'
+        does).
+    check: bcftools_format_filter_scope
+    message: >-
+      A FORMAT field in a bcftools -i/-e expression is true for a site when ANY sample satisfies
+      it, so -i 'FMT/GQ>=20' keeps sites where one sample has GQ >= 20 and -e 'FMT/GQ<20' keeps
+      only sites where every sample does.
+
+  # F55. A record whose FILTER is "." has not been through any filter. `-f PASS`,
+  # `-i 'FILTER="PASS"'` and `-e 'FILTER!="PASS"'` drop it; `-f .,PASS` keeps it. A conditional call
+  # rule: it reads the VCF and is silent unless some record has FILTER ".".
+  - id: bcftools.filter_pass_dot
+    slot: filter_semantics
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bcftools]
+      subcommands: [view, filter, query, isec, merge]
+      options_any: [-f, --apply-filters, -i, --include, -e, --exclude]
+    declare:
+      key: unfiltered_records
+      values: [keep, drop]
+      required: false
+      description: >-
+        What happens to records whose FILTER column is "." (no filter was applied to them):
+        keep = they stay with the PASS records; drop = only FILTER=PASS records stay.
+    check: bcftools_filter_pass_dot
+    message: >-
+      bcftools -f PASS (and FILTER="PASS" tests) drop the records whose FILTER is ".", the records
+      no filter was applied to, which -f .,PASS keeps.
+
+  # F56. A comparison on a missing value (QUAL ".", an INFO tag the record lacks) is false for every
+  # operator, so `-i 'INFO/QD>=2'` removes the records without QD and `-e 'INFO/QD<2'` keeps them.
+  # A conditional call rule for expressions with one comparison: silent unless some record lacks
+  # the value; undeclared, only the -e form fails.
+  - id: bcftools.missing_value_filter
+    slot: missing_value
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bcftools]
+      subcommands: [view, filter, query]
+      options_any: [-i, --include, -e, --exclude]
+    declare:
+      key: missing_annotation
+      values: [record_kept, record_removed]
+      required: false
+      description: >-
+        What happens to a record that has no value for the tested field (QUAL ".", an INFO tag it
+        lacks): record_kept = it stays among the records the call keeps; record_removed = it is
+        removed.
+    check: bcftools_missing_value_filter
+    message: >-
+      A bcftools comparison on a missing value is false for every operator, so -e 'INFO/QD<2' keeps
+      the records that have no QD and -i 'INFO/QD>=2' removes them.
+
+  # F57. bcftools view -s/-S writes every site of the input for the selected samples, also the sites
+  # at which none of them carries an alternate allele (AC=0); -c 1 drops them. A conditional call
+  # rule: it reads the VCF and is silent unless a site is monomorphic in the selected samples.
+  - id: bcftools.subset_monomorphic
+    slot: record_count
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bcftools]
+      subcommands: [view]
+      options_any: [-s, --samples, -S, --samples-file]
+    declare:
+      key: subset_sites
+      values: [keep_all_sites, variant_sites_only, filtered_downstream]
+      required: false
+      description: >-
+        Which sites the call writes after selecting samples: keep_all_sites = every site of the
+        input, also those where no selected sample carries an alternate allele; variant_sites_only
+        = only the sites where one does; filtered_downstream = a later stage of the pipeline drops
+        the monomorphic ones.
+    check: bcftools_subset_monomorphic
+    message: >-
+      Selecting samples with bcftools view -s/-S keeps every site, including those at which none
+      of the selected samples carries an alternate allele (AC=0); -c 1 drops them.
+
+  # F62. isec matches records by position and alleles as written; the same indel in a repeat written
+  # at the left end by one caller and at the right end by another does not match. A conditional
+  # call rule: it dry-runs `bcftools norm -f` on every input and fires only for records it would
+  # realign.
+  - id: bcftools.isec_representation
+    slot: callset_representation
+    kind: call
+    tier: T1
+    incidents: [GEN-28]
+    applies:
+      tools: [bcftools]
+      subcommands: [isec]
+    declare:
+      key: isec_matching
+      values: [as_written, normalized]
+      required: false
+      description: >-
+        How the records of the inputs are compared: as_written = by position and alleles exactly as
+        each file writes them; normalized = every input was left-aligned with bcftools norm -f
+        first, so the same variant has the same record in all of them.
+    check: bcftools_isec_representation
+    message: >-
+      bcftools isec compares records by position and alleles as written, so an indel in a repeat
+      that one caller writes left-aligned and another right-aligned is not shared; bcftools norm -f
+      ref.fa left-aligns both first.
+
+  # F63. bcftools merge writes ./. for a site an input does not list; -0 writes 0/0. A conditional
+  # call rule for single-sample VCFs that list different sites (gVCFs are left alone).
+  - id: bcftools.merge_absent_sites
+    slot: missing_value
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [bcftools]
+      subcommands: [merge]
+    declare:
+      key: absent_sites
+      values: [missing, reference]
+      required: false
+      description: >-
+        What a site that an input VCF does not list means for its sample: missing = no data
+        (genotype ./., the merge default); reference = homozygous reference (genotype 0/0, -0),
+        as for variants-only calls from complete coverage.
+    check: bcftools_merge_absent_sites
+    message: >-
+      bcftools merge writes ./. for the samples of an input that does not list a site, so an
+      allele frequency from variants-only single-sample VCFs divides by the called alleles only;
+      -0 writes 0/0.

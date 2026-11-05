@@ -1,0 +1,111 @@
+spec_version: "1"
+name: iv_deeptools
+version_note: >-
+  deepTools 3.5.6 (bamCoverage, computeMatrix, multiBamSummary). Every behaviour the checkers rely
+  on was run on this version; the evidence is quoted in engine/rules/iv_deeptools.py.
+rules:
+  # F73. A bin with no interval in the bigWig is NaN in the matrix; means that skip NaN then
+  # count only the bins that have reads. T1: it reads the bigWig and the regions.
+  - id: deeptools.matrix_missing_data
+    slot: missing_value
+    kind: call
+    tier: T1
+    incidents: [deepTools-computeMatrix-missingDataAsZero]
+    applies:
+      tools: [computeMatrix]
+    declare:
+      key: missing_signal
+      values: [zero, na]
+      required: false
+      description: >-
+        What a bin without an entry in the bigWig means: zero = no reads (add
+        --missingDataAsZero), na = unknown (leave NaN and skip it on purpose).
+    check: iv_deeptools_matrix_missing_data
+    message: >-
+      computeMatrix writes NaN for every bin that has no entry in a sparse bigWig, so a mean over
+      the matrix that skips NaN covers only the bins with signal and overstates the coverage.
+
+  # F73. --skipZeros removes regions without signal from the matrix.
+  - id: deeptools.matrix_skip_zeros
+    slot: record_count
+    kind: call
+    tier: T1
+    incidents: [deepTools-computeMatrix-skipZeros]
+    applies:
+      tools: [computeMatrix]
+      options_any: [--skipZeros]
+    declare:
+      key: zero_regions
+      values: [drop, keep]
+      required: false
+      description: >-
+        What happens to regions with no signal: drop = they leave the matrix (--skipZeros),
+        keep = every region keeps its row.
+    check: iv_deeptools_matrix_skip_zeros
+    message: >-
+      computeMatrix --skipZeros removes every region without signal from the matrix, so a mean over
+      the matrix is a mean over the regions that have signal and the rows no longer match the BED.
+
+  # bamCoverage defaults: raw counts, bins of 50, bin value = reads touching the bin.
+  - id: deeptools.bamcoverage_track_units
+    slot: units
+    kind: call
+    tier: T0
+    incidents: [deepTools-bamCoverage-defaults]
+    applies:
+      tools: [bamCoverage]
+    declare:
+      key: track_unit
+      values: [reads_per_bin, depth, normalized]
+      required: true
+      description: >-
+        What one value of the track is: reads_per_bin = number of reads that overlap the bin
+        (raw, the default with --binSize 50), depth = per-base depth (--binSize 1, raw),
+        normalized = scaled by --normalizeUsing or --scaleFactor.
+    check: iv_deeptools_track_units
+    message: >-
+      bamCoverage writes raw counts per 50-base bin by default, where a bin value is the number of
+      reads that overlap the bin (not the depth) and libraries of different size are not
+      comparable until --normalizeUsing is set.
+
+  # F76. --ignoreDuplicates is positional, the duplicate flag is not looked at.
+  - id: deeptools.duplicates_semantics
+    slot: flag_semantics
+    kind: call
+    tier: T1
+    incidents: [deepTools-ignoreDuplicates]
+    applies:
+      tools: [bamCoverage, bamCompare, multiBamSummary]
+    declare:
+      key: duplicates
+      values: [keep, exclude]
+      required: false
+      description: >-
+        Whether reads flagged as duplicates (0x400) are counted: keep = counted (the deepTools
+        default), exclude = left out (--samFlagExclude 1024).
+    check: iv_deeptools_duplicates
+    message: >-
+      deepTools counts reads flagged 0x400 by default, and --ignoreDuplicates keeps one read per
+      start and strand without looking at the flag, so duplicates marked by 5' end or trimmed after
+      marking survive it and unflagged reads that share a start are collapsed.
+
+  # multiBamSummary BED-file: no names, rows in BAM contig order, absent contigs dropped.
+  - id: deeptools.multibamsummary_regions
+    slot: record_order
+    kind: call
+    tier: T1
+    incidents: [deepTools-multiBamSummary-BED-file]
+    applies:
+      tools: [multiBamSummary]
+      subcommands: [BED-file]
+    declare:
+      key: region_join
+      values: [coordinates]
+      required: false
+      description: >-
+        coordinates = the counts are matched to regions on chr/start/end, not by line number.
+    check: iv_deeptools_multibamsummary_regions
+    message: >-
+      multiBamSummary BED-file writes rows without region names, ordered by the contig order of the
+      BAM header and then by start, and drops a region on a contig the BAM does not have, so counts
+      matched to regions by line number shift.

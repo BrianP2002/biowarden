@@ -1,0 +1,76 @@
+spec_version: "1"
+name: sc_orientation
+version_note: >-
+  scanpy 1.11.5, scipy 1.15.2, pandas 2.3.3, loompy 3.0.8 (python-sc); gawk 4.2.1. Fact rules over
+  delimited count tables, MatrixMarket and loom files read by the engine itself (h5py for loom).
+  See rules/sc_orientation.py.
+rules:
+  # F107 workspaces (counts.csv exported from the same matrix). A count table with cells in
+  # columns, worked along its rows.
+  - id: sc.csv_orientation
+    slot: orientation
+    kind: fact
+    tier: T1
+    incidents: [SCD-06]
+    applies:
+      tools: &tools [python-sc, python3, python, awk, gawk]
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.(?:csv|tsv|txt)(?:\.gz)?(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: matrix_orientation
+      values: [cells_by_genes, genes_by_cells]
+      required: false
+      description: >-
+        What a count table holds: cells_by_genes (one row per cell) or genes_by_cells (one row per
+        gene, one column per cell).
+    check: sc_csv_orientation
+    message: >-
+      a genes x cells table worked along its rows describes the genes instead of the cells; a
+      per-row count or sum is a plausible number either way.
+
+  # F107. A MatrixMarket matrix with genes in rows (10x layout), worked along its rows.
+  - id: sc.mtx_orientation
+    slot: orientation
+    kind: fact
+    tier: T1
+    incidents: [SCD-06]
+    applies:
+      tools: *tools
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.mtx(?:\.gz)?(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: matrix_orientation
+      values: [cells_by_genes, genes_by_cells]
+      required: false
+      description: >-
+        What a MatrixMarket count matrix holds: cells_by_genes (one row per barcode) or
+        genes_by_cells (one row per feature, the Cell Ranger layout).
+    check: sc_mtx_orientation
+    message: >-
+      the 10x matrix.mtx has one row per gene; scipy.io.mmread and sc.read_mtx return it as
+      written, so row sums are gene totals, not cell totals.
+
+  # F107 workspaces (cells.loom exported from the same matrix). A loom file is genes x cells.
+  - id: sc.loom_orientation
+    slot: orientation
+    kind: fact
+    tier: T1
+    incidents: [SCD-06]
+    applies:
+      tools: *tools
+      file_patterns:
+        - '(?<![\w./~+-])[\w./~+-]+\.loom(?![\w])'
+        - '(?<![\w./~+-])[\w./~+-]+\.py(?![\w.])'
+    declare:
+      key: matrix_orientation
+      values: [cells_by_genes, genes_by_cells]
+      required: false
+      description: >-
+        What a loom matrix holds: genes_by_cells (rows are genes, as the loom format defines) or
+        cells_by_genes.
+    check: sc_loom_orientation
+    message: >-
+      a loom matrix has one row per gene; loompy and h5py return it as stored, so a per-row sum is a
+      gene total, not a cell total (scanpy.read_loom transposes).

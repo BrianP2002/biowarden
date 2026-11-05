@@ -1,0 +1,51 @@
+spec_version: "1"
+name: struct_prody
+version_note: "ProDy 2.6.1, gemmi 0.7.5, Biopython 1.88, MDAnalysis 2.9.0 (python-struct environment)"
+rules:
+  # F89. ProDy names the chains of an mmCIF after label_asym_id, the other libraries after
+  # auth_asym_id. A fact rule: it fires for code that calls ProDy's mmCIF parser without
+  # unite_chains=True, on an mmCIF where the two names differ for a polymer chain.
+  - id: prody.chain_scheme
+    slot: chain_id_scheme
+    kind: fact
+    tier: T1
+    incidents: [R2-STR-07]
+    applies:
+      tools: [python-struct, python-bio, python3, python]
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:cif|mmcif)(?:\.gz)?(?![\w-]|\.\w)'
+    declare:
+      key: chain_id_scheme
+      values: ["auth", "label"]
+      required: false
+      description: >-
+        Which chain names the code means: auth (auth_asym_id, the author chain IDs of the PDB entry
+        and of gemmi / Biopython) or label (label_asym_id, the archive's own IDs, what ProDy's
+        parseMMCIF returns by default).
+    check: prody_chain_scheme
+    message: >-
+      ProDy's parseMMCIF names chains after label_asym_id while gemmi and Biopython use the author
+      IDs (auth_asym_id); when the two differ the same chain name is another chain, silently.
+  # F91. ProDy reads 'resnum 10:15' as a Python slice (end excluded) and 'resnum 10 to 15' as
+  # inclusive. A fact rule: it fires for ProDy code with a ':' range whose end residue exists in
+  # the file.
+  - id: prody.range_end
+    slot: interval_closure
+    kind: fact
+    tier: T1
+    incidents: [ProDy-select-docs]
+    applies:
+      tools: [python-struct, python-bio, python3, python]
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:pdb|ent|cif|mmcif)(?:\.gz)?(?![\w-]|\.\w)'
+    declare:
+      key: range_end
+      values: ["inclusive", "exclusive"]
+      required: false
+      description: >-
+        Whether the end of a numeric range in the selection is part of it: inclusive (both ends
+        selected) or exclusive (the end is left out, as in a Python slice).
+    check: prody_range_end
+    message: >-
+      In a ProDy selection a range written with a colon ('resnum 10:15') excludes its end residue,
+      while 'resnum 10 to 15' and MDAnalysis ranges include it, so the last residue is dropped.

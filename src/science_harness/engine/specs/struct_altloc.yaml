@@ -1,0 +1,29 @@
+spec_version: "1"
+name: struct_altloc
+version_note: "ProDy 2.6.1, gemmi 0.7.5, Biopython 1.88, pdb-tools 2.7.0 (python-struct environment)"
+rules:
+  # F90. ProDy's parsePDB and gemmi's remove_alternative_conformations keep the FIRST conformer;
+  # Biopython keeps the highest-occupancy one. A fact rule: it fires for code that computes on
+  # coordinates of a structure whose major conformer is not the first listed.
+  - id: struct.altloc_policy
+    slot: altloc_policy
+    kind: fact
+    tier: T1
+    incidents: [R2-STR-05]
+    applies:
+      tools: [python-struct, python-bio, python3, python]
+      file_patterns:
+        - '(?<![\w.+/@~-])[\w.+/@~-]*\.(?:pdb|ent|cif|mmcif)(?:\.gz)?(?![\w-]|\.\w)'
+    declare:
+      key: altloc_policy
+      values: ["highest_occupancy", "first_listed", "all_conformers"]
+      required: false
+      description: >-
+        Which alternate location of an atom the code uses: highest_occupancy (the main
+        conformer), first_listed (altloc A, the default of ProDy and of gemmi's
+        remove_alternative_conformations) or all_conformers (every one is kept or averaged).
+    check: struct_altloc_policy
+    message: >-
+      Libraries keep different alternate locations by default (ProDy and gemmi the first listed,
+      Biopython the one with the highest occupancy), so when the main conformer is not altloc A the
+      coordinates silently belong to the minor conformer.

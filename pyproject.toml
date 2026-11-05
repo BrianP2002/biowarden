@@ -1,0 +1,58 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "trustworthy-bio-mcp"
+version = "0.0.1"
+description = "Contract and oracle layer for reliable bio tool calls, with a benchmark for silent tool errors (temporary name)."
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+dependencies = [
+    "pydantic>=2",
+    "pyyaml",
+    "gemmi",
+    "fastmcp",
+    "h5py",
+]
+
+[project.optional-dependencies]
+# The benchmark runner talks to the model APIs through these two SDKs, and stage2.planned() imports
+# the runner's plan(); the engine and the rules need neither. Reference environment: anthropic
+# 2.3.0, openai 3.40.0.
+bench = ["anthropic>=2.3,<3", "openai>=3.40,<4"]
+# the tests import the runner, so the development extra repeats the two lines of `bench`
+dev = ["pytest", "pytest-xdist", "ruff", "anthropic>=2.3,<3", "openai>=3.40,<4"]
+figures = ["matplotlib"]  # tools/make_figures.py
+
+[project.scripts]
+mockfold = "science_harness.bench.fixtures.mockfold:main"
+science-harness-gateway = "science_harness.gateway.server:main"
+tbm-mcp = "science_harness.engine.mcp_server:main"
+tbm-guard = "science_harness.engine.guard:main"
+science-harness-keys = "science_harness.keys:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/science_harness"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = ["slow: builds real workspaces and runs the real tools (family gates, rule calibration)"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["science_harness", "helpers"]

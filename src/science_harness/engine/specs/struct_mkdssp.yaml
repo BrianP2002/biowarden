@@ -1,0 +1,26 @@
+spec_version: "1"
+name: struct_mkdssp
+version_note: "mkdssp 4.5.3 / libcifpp (bio-struct environment), gemmi 0.7.5"
+rules:
+  # F98. mkdssp 4 takes the residues of an mmCIF from _pdbx_poly_seq_scheme; files written by
+  # gemmi, Biopython and pdb_tocif lack it and give a valid DSSP result with 0 residues. A call
+  # rule on mkdssp, conditional: it fires only for an mmCIF input without the table.
+  - id: mkdssp.poly_seq_scheme
+    slot: input_format
+    kind: call
+    tier: T1
+    incidents: [mkdssp-4.5.3]
+    applies:
+      tools: [mkdssp]
+    declare:
+      key: mkdssp_input
+      values: ["mmcif_complete", "pdb_converted"]
+      required: false
+      description: >-
+        The form of the structure given to mkdssp: mmcif_complete (an archive-style mmCIF with the
+        _pdbx_poly_seq_scheme table) or pdb_converted (a PDB-format file made from the model).
+    check: mkdssp_poly_seq_scheme
+    message: >-
+      mkdssp 4 reads the residues of an mmCIF from _pdbx_poly_seq_scheme; an mmCIF without it
+      (written by gemmi, Biopython or pdb_tocif) gives a valid DSSP result with 0 residues, so a
+      secondary-structure count silently becomes 0.

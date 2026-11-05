@@ -1,0 +1,513 @@
+{
+ "format": 1,
+ "about": "The rules written for each family's trap, by trap mechanism (final review, section 4). A rule that fires on a family without being listed here is foreign. 'reachable' in bench.stage2 means that one of the family's own rules would block. seed_parity limits the own rules to seeds of that parity; route_rules adds own rules for another route (the primary cell is the forced route). Kept beside the task builders and not in the specs: a spec edit changes the hash of the whole file and demotes every rule in it.",
+ "families": {
+  "F1": {
+   "rules": [
+    "bcftools.regions_file_base",
+    "bcftools.region_semantics"
+   ]
+  },
+  "F2": {
+   "rules": [],
+   "note": "tabix.region_strings_bed is tabix-only; this family reads regions with samtools"
+  },
+  "F3": {
+   "rules": [],
+   "note": "the free route (bcftools -R) meets the foreign bcftools.region_semantics"
+  },
+  "F4": {
+   "rules": [],
+   "note": "must-detect, default cell only; never part of the primary cell"
+  },
+  "F5": {
+   "rules": []
+  },
+  "F6": {
+   "rules": []
+  },
+  "F7": {
+   "rules": [
+    "bcftools.region_semantics"
+   ]
+  },
+  "F8": {
+   "rules": []
+  },
+  "F9": {
+   "rules": []
+  },
+  "F10": {
+   "rules": [
+    "vcf.indel_interval_anchor"
+   ]
+  },
+  "F11": {
+   "rules": []
+  },
+  "F12": {
+   "rules": []
+  },
+  "F13": {
+   "rules": [
+    "fastq.phred_offset"
+   ]
+  },
+  "F14": {
+   "rules": []
+  },
+  "F15": {
+   "rules": [
+    "matrix.log_scale_state"
+   ]
+  },
+  "F16": {
+   "rules": []
+  },
+  "F17": {
+   "rules": []
+  },
+  "F18": {
+   "rules": [],
+   "note": "the foreign bcftools.region_semantics blocks every call (a control all the same)"
+  },
+  "F19": {
+   "rules": []
+  },
+  "F20": {
+   "rules": [],
+   "note": "the foreign bcftools.region_semantics blocks the faulted twin only"
+  },
+  "F21": {
+   "rules": []
+  },
+  "F22": {
+   "rules": [
+    "fastq.phred_offset"
+   ],
+   "seed_parity": "even",
+   "note": "own rule fires on even seeds only (stated +33, data +64); odd seeds are not covered"
+  },
+  "F23": {
+   "rules": [],
+   "route_rules": {
+    "free": [
+     "featurecounts.strandedness",
+     "htseq.strandedness"
+    ]
+   },
+   "note": "no own rule on the forced route; the strandedness rules fire on the free route"
+  },
+  "F24": {
+   "rules": [],
+   "note": "the foreign matrix.log_scale_state blocks every trial"
+  },
+  "F25": {
+   "rules": []
+  },
+  "F26": {
+   "rules": []
+  },
+  "F27": {
+   "rules": []
+  },
+  "F28": {
+   "rules": [],
+   "note": "the foreign bcftools.region_semantics blocks every call"
+  },
+  "F29": {
+   "rules": [
+    "samtools.mapq_unique_cutoff"
+   ]
+  },
+  "F30": {
+   "rules": [
+    "bwa.mem_min_score"
+   ]
+  },
+  "F31": {
+   "rules": [
+    "star.genecounts_column"
+   ]
+  },
+  "F32": {
+   "rules": [
+    "samtools.stats_nm_missing"
+   ]
+  },
+  "F33": {
+   "rules": [
+    "bowtie2.maxins_default"
+   ]
+  },
+  "F34": {
+   "rules": [
+    "hisat2.rna_strandness"
+   ],
+   "note": "required-declaration rule; excluded by default (implicit tier does not say the library)"
+  },
+  "F35": {
+   "rules": [
+    "minimap2.short_reads_preset"
+   ]
+  },
+  "F36": {
+   "rules": [
+    "samtools.fixmate_grouping"
+   ]
+  },
+  "F37": {
+   "rules": [
+    "samtools.merge_combine_rg"
+   ]
+  },
+  "F38": {
+   "rules": [
+    "samtools.idxstats_unmapped"
+   ],
+   "note": "the rule only warns, so a blocking arm cannot block this family"
+  },
+  "F39": {
+   "rules": [
+    "samtools.split_flag_after_bwa_m"
+   ]
+  },
+  "F41": {
+   "rules": [
+    "htseq.strandedness"
+   ]
+  },
+  "F42": {
+   "rules": [
+    "featurecounts.read_pairs"
+   ],
+   "note": "required-declaration rule; foreign featurecounts.strandedness blocks clean trials"
+  },
+  "F43": {
+   "rules": [
+    "featurecounts.strandedness"
+   ]
+  },
+  "F44": {
+   "rules": [
+    "htseq.min_mapq"
+   ],
+   "note": "htseq.strandedness also fires on the default call but is not this family's trap"
+  },
+  "F45": {
+   "rules": [
+    "salmon.duplicate_transcripts",
+    "salmon.quant_duplicates"
+   ]
+  },
+  "F46": {
+   "rules": [
+    "rsem.strandedness"
+   ]
+  },
+  "F53": {
+   "rules": [
+    "vcftools.bed_header"
+   ]
+  },
+  "F54": {
+   "rules": [
+    "bcftools.format_filter_scope"
+   ]
+  },
+  "F55": {
+   "rules": [
+    "bcftools.filter_pass_dot"
+   ]
+  },
+  "F56": {
+   "rules": [
+    "bcftools.missing_value_filter"
+   ]
+  },
+  "F57": {
+   "rules": [
+    "bcftools.subset_monomorphic"
+   ]
+  },
+  "F58": {
+   "rules": [
+    "plink.allele_order"
+   ]
+  },
+  "F59": {
+   "rules": [
+    "plink.vcf_multiallelic"
+   ],
+   "note": "foreign var.missing_threshold and plink.allele_order block the clean twin"
+  },
+  "F60": {
+   "rules": [
+    "var.missing_threshold"
+   ]
+  },
+  "F61": {
+   "rules": [
+    "tabix.regions_file_base"
+   ]
+  },
+  "F62": {
+   "rules": [
+    "bcftools.isec_representation"
+   ]
+  },
+  "F63": {
+   "rules": [
+    "bcftools.merge_absent_sites"
+   ]
+  },
+  "F64": {
+   "rules": [
+    "picard.markduplicates_remove"
+   ]
+  },
+  "F65": {
+   "rules": [
+    "bedtools.split_reciprocal"
+   ]
+  },
+  "F66": {
+   "rules": [
+    "bedtools.map_unweighted"
+   ]
+  },
+  "F67": {
+   "rules": [
+    "bedtools.spliced_without_split"
+   ]
+  },
+  "F68": {
+   "rules": [
+    "bedtools.subtract_trims"
+   ]
+  },
+  "F69": {
+   "rules": [
+    "bedtools.window_boundary",
+    "bedtools.closest_distance_unit"
+   ],
+   "note": "both rules only warn when nothing is declared"
+  },
+  "F70": {
+   "rules": [
+    "bedops.sorted_input"
+   ]
+  },
+  "F71": {
+   "rules": [
+    "bedops.bedmap_score_column"
+   ]
+  },
+  "F72": {
+   "rules": [
+    "macs3.paired_end_format"
+   ]
+  },
+  "F73": {
+   "rules": [
+    "deeptools.matrix_missing_data"
+   ]
+  },
+  "F74": {
+   "rules": [
+    "liftover.stale_columns"
+   ]
+  },
+  "F75": {
+   "rules": [
+    "bedtools.duplicate_policy"
+   ],
+   "note": "the rule only warns when nothing is declared"
+  },
+  "F76": {
+   "rules": [
+    "deeptools.duplicates_semantics"
+   ]
+  },
+  "F77": {
+   "rules": [
+    "blastn.megablast_default"
+   ]
+  },
+  "F78": {
+   "rules": [
+    "blast.stale_database"
+   ]
+  },
+  "F79": {
+   "rules": [
+    "diamond.hit_cap"
+   ]
+  },
+  "F80": {
+   "rules": [
+    "diamond.sensitivity_mode"
+   ]
+  },
+  "F81": {
+   "rules": [
+    "seqtk.trimfq_floor"
+   ]
+  },
+  "F82": {
+   "rules": [
+    "seqkit.rmdup_strands"
+   ]
+  },
+  "F83": {
+   "rules": [
+    "fastp.quality_trimming"
+   ]
+  },
+  "F84": {
+   "rules": [
+    "cutadapt.adapters_per_read"
+   ]
+  },
+  "F85": {
+   "rules": [
+    "trimmomatic.minlen_order"
+   ]
+  },
+  "F86": {
+   "rules": [
+    "msa.sequence_orientation"
+   ]
+  },
+  "F87": {
+   "rules": [
+    "fastp.adapter_detection"
+   ]
+  },
+  "F88": {
+   "rules": [
+    "hmmer.split_database"
+   ]
+  },
+  "F89": {
+   "rules": [
+    "prody.chain_scheme"
+   ]
+  },
+  "F90": {
+   "rules": [
+    "struct.altloc_policy"
+   ]
+  },
+  "F91": {
+   "rules": [
+    "prody.range_end"
+   ]
+  },
+  "F92": {
+   "rules": [
+    "mdtraj.resid_index"
+   ]
+  },
+  "F93": {
+   "rules": [
+    "tmalign.normalisation"
+   ]
+  },
+  "F94": {
+   "rules": [
+    "mmseqs.cluster_coverage"
+   ]
+  },
+  "F95": {
+   "rules": [
+    "pdbtools.selaltloc_digits"
+   ]
+  },
+  "F96": {
+   "rules": [
+    "pdbtools.modified_residues"
+   ]
+  },
+  "F97": {
+   "rules": [
+    "struct.bfactor_scale"
+   ]
+  },
+  "F98": {
+   "rules": [
+    "mkdssp.poly_seq_scheme"
+   ]
+  },
+  "F99": {
+   "rules": [
+    "mda.protein_selection"
+   ]
+  },
+  "F100": {
+   "rules": [
+    "rdkit.pdb_bond_orders"
+   ]
+  },
+  "F101": {
+   "rules": [
+    "sc.de_raw_default"
+   ]
+  },
+  "F102": {
+   "rules": [
+    "sc.small_int_qc"
+   ]
+  },
+  "F103": {
+   "rules": [
+    "sc.double_transform"
+   ]
+  },
+  "F104": {
+   "rules": [
+    "sc.counts_needed"
+   ]
+  },
+  "F105": {
+   "rules": [
+    "sc.obs_assign_position"
+   ]
+  },
+  "F106": {
+   "rules": [
+    "sc.mudata_obs_union"
+   ]
+  },
+  "F107": {
+   "rules": [
+    "sc.mtx_orientation"
+   ]
+  },
+  "F108": {
+   "rules": [
+    "sc.control_label"
+   ]
+  },
+  "F109": {
+   "rules": [
+    "sc.gene_vocabulary"
+   ]
+  },
+  "F110": {
+   "rules": [
+    "sc.concat_join"
+   ]
+  },
+  "F111": {
+   "rules": [
+    "sc.mito_prefix_case"
+   ]
+  },
+  "F112": {
+   "rules": [
+    "sc.scaled_x_expression"
+   ]
+  }
+ }
+}

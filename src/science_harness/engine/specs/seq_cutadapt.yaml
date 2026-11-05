@@ -1,0 +1,27 @@
+spec_version: "1"
+name: seq_cutadapt
+version_note: >-
+  cutadapt 5.2. Every behaviour the checker relies on was run on this version; the evidence is
+  quoted in engine/rules/seq_cutadapt.py.
+rules:
+  # F84. cutadapt removes one adapter per read unless -n says more. A conditional call rule: it
+  # samples the reads and fires only when some read contains two of the listed adapters.
+  - id: cutadapt.adapters_per_read
+    slot: default_param
+    kind: call
+    tier: T1
+    incidents: []
+    applies:
+      tools: [cutadapt]
+    declare:
+      key: adapters_per_read
+      values: [one, all]
+      required: false
+      description: >-
+        How many of the listed adapters a read can carry: one = they are alternatives, one per read
+        (the default -n 1 is right); all = a read can carry several and all must be removed (-n N
+        with N the number of adapters, or a linked adapter FRONT...BACK).
+    check: cutadapt_adapters_per_read
+    message: >-
+      cutadapt removes at most one adapter per read (-n 1 by default), the best-scoring of all those
+      listed, so a read with a 5' primer and a 3' adapter keeps one of them.
