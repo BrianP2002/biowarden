@@ -1,0 +1,16 @@
+{
+ "id": "intervals-06",
+ "domain": "intervals",
+ "tool": "bedops",
+ "trap_class": "default full-overlap threshold",
+ "intent": "Select the peaks from peaks.bed that overlap at least one promoter in promoters.bed and keep their original records for a promoter-versus-distal comparison. Both files are already sorted with sort-bed.",
+ "silent_error": "bedops --element-of without a number uses its default of 100%: a peak is kept only if all of its bases are covered by the promoter file. Peaks that overlap a promoter by part of their length (peak_01, peak_04) are dropped without any message, so the promoter-bound set shrinks from 4 peaks to 2 and the distal set is contaminated with promoter peaks. The output is a normal sorted BED subset with exit 0. The bedops usage text states it: '-e, --element-of [bp | percentage] ... by default, -e 100% is used. bedops -e 1 is also popular.'",
+ "files": {
+  "peaks.bed": "chr1\t900\t1300\tpeak_01\t50\nchr1\t1850\t2100\tpeak_02\t60\nchr1\t3000\t3400\tpeak_03\t70\nchr1\t5200\t5500\tpeak_04\t40\nchr2\t700\t900\tpeak_05\t90\nchr2\t1500\t1700\tpeak_06\t30\n",
+  "promoters.bed": "chr1\t800\t1100\tGENE1_up\nchr1\t1800\t2200\tGENE3_up\nchr1\t5100\t5300\tGENE4_up\nchr2\t600\t1000\tGENE6_up\n"
+ },
+ "setup": [],
+ "faulted": "bedops --element-of peaks.bed promoters.bed > peaks_at_promoters.bed",
+ "clean": "bedops --element-of 1 peaks.bed promoters.bed > peaks_at_promoters.bed",
+ "observe": "cat peaks_at_promoters.bed"
+}

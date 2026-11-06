@@ -1,0 +1,19 @@
+{
+ "id": "sc-04",
+ "domain": "sc",
+ "tool": "anndata",
+ "trap_class": "loom layer choice",
+ "intent": "Load the velocyto loom file of one neurosphere run into AnnData and record the total UMI count of every cell (all reads assigned to a gene, spliced or not) in umi_per_cell.csv, for later cell-level quality control.",
+ "silent_error": "anndata.io.read_loom has X_name='spliced' by default and uses the layer of that name as X whenever it exists (docstring: 'Loompy key with which the data matrix X is initialized'); the loom's main matrix (in velocyto output the sum of spliced, unspliced and ambiguous) is relegated to layers['matrix']. The per-cell UMI totals therefore count only spliced reads, systematically too low and by a cell-dependent amount, with no warning and exit 0.",
+ "files": {
+  "make_loom.py": "import numpy as np\nimport loompy\n\nrng = np.random.default_rng(4)\ngenes = np.array([\"Sox2\", \"Nes\", \"Dcx\", \"Tubb3\", \"Map2\", \"Gfap\", \"Olig2\", \"Actb\"])\nacc = np.array([\"ENSMUSG00000074637\", \"ENSMUSG00000004891\", \"ENSMUSG00000031285\", \"ENSMUSG00000062380\",\n                \"ENSMUSG00000015222\", \"ENSMUSG00000020932\", \"ENSMUSG00000039830\", \"ENSMUSG00000029580\"])\ncells = np.array([\"possorted_genome_bam_K3L9P:ACGTTGCA\", \"possorted_genome_bam_K3L9P:TTGACCAA\",\n                  \"possorted_genome_bam_K3L9P:GGATCCTA\", \"possorted_genome_bam_K3L9P:CAGTAGGC\",\n                  \"possorted_genome_bam_K3L9P:ATCGGATT\", \"possorted_genome_bam_K3L9P:TCCAGTTG\"])\nmu = np.array([5, 6, 4, 4, 3, 2, 1, 14.0])\nspliced = rng.poisson(mu[:, None] * 1.0, size=(8, 6))\nunspliced = rng.poisson(mu[:, None] * 0.7, size=(8, 6))\nambiguous = rng.poisson(mu[:, None] * 0.2, size=(8, 6))\ntotal = spliced + unspliced + ambiguous\nloompy.create(\"possorted_genome_bam_K3L9P.loom\", total,\n              {\"Gene\": genes, \"Accession\": acc},\n              {\"CellID\": cells})\nwith loompy.connect(\"possorted_genome_bam_K3L9P.loom\") as ds:\n    ds.layers[\"spliced\"] = spliced\n    ds.layers[\"unspliced\"] = unspliced\n    ds.layers[\"ambiguous\"] = ambiguous\n",
+  "load_loom.py": "import anndata as ad\nimport numpy as np\nimport pandas as pd\n\nadata = ad.io.read_loom(\"possorted_genome_bam_K3L9P.loom\")\numi = pd.Series(np.asarray(adata.X.sum(axis=1)).ravel(), index=adata.obs_names, name=\"umi_total\")\numi.to_csv(\"umi_per_cell.csv\")\nadata.write_h5ad(\"neurospheres.h5ad\")\n",
+  "load_loom_v2.py": "import anndata as ad\nimport numpy as np\nimport pandas as pd\n\nadata = ad.io.read_loom(\"possorted_genome_bam_K3L9P.loom\", X_name=\"\")\numi = pd.Series(np.asarray(adata.X.sum(axis=1)).ravel(), index=adata.obs_names, name=\"umi_total\")\numi.to_csv(\"umi_per_cell.csv\")\nadata.write_h5ad(\"neurospheres.h5ad\")\n"
+ },
+ "setup": [
+  "python-sc make_loom.py"
+ ],
+ "faulted": "python-sc load_loom.py",
+ "clean": "python-sc load_loom_v2.py",
+ "observe": "cat umi_per_cell.csv"
+}

@@ -18,7 +18,7 @@ lies anywhere else.
 
 Exit status: 0 all good, 1 a check failed, 2 it could not run (usage, missing key, snapshot).
 Only endpoints, credits, smoke and probe call an API; keys are read through
-science_harness.keys and are never printed.
+biowarden.keys and are never printed.
 """
 
 from __future__ import annotations
@@ -39,7 +39,7 @@ from pathlib import Path
 from typing import Any, NamedTuple
 
 ROOT = Path(__file__).resolve().parents[1]
-PACKAGE = "science_harness"
+PACKAGE = "biowarden"
 OPENROUTER = "https://openrouter.ai/api/v1"
 SMOKE_FAMILIES = ("F1", "F2", "F3", "F5", "F6", "F7", "F8", "F9", "F10", "F11")  # x 2 twins = 20
 PROBE_FAMILIES = ("F1", "F2", "F3", *(f"F{n}" for n in range(5, 22)))  # 20 x 2 twins = 40
@@ -74,7 +74,7 @@ def check_snapshot(snapshot: str | None) -> None:
 
 
 def model_id(name: str) -> str:
-    from science_harness.bench.runner.pricing import ALIASES
+    from biowarden.bench.runner.pricing import ALIASES
 
     return ALIASES.get(name, name)
 
@@ -118,7 +118,7 @@ def endpoint_report(model: str, tag: str, payload: Any) -> tuple[str, list[str]]
 
 
 def pinned_models(names: Sequence[str] | None) -> dict[str, str]:
-    from science_harness.bench.runner.agent_openai import PINNED_PROVIDERS
+    from biowarden.bench.runner.agent_openai import PINNED_PROVIDERS
 
     if not names:
         return dict(PINNED_PROVIDERS)
@@ -131,7 +131,7 @@ def pinned_models(names: Sequence[str] | None) -> dict[str, str]:
 
 def cmd_endpoints(args: argparse.Namespace, fetch: Fetch = fetch_json) -> int:
     check_snapshot(args.snapshot)
-    from science_harness.keys import get_key
+    from biowarden.keys import get_key
 
     key = get_key("openrouter")  # the listing is public; a key does no harm if it asks for one
     failed = False
@@ -159,11 +159,11 @@ def cmd_credits(args: argparse.Namespace, fetch: Fetch = fetch_json) -> int:
     if "/" not in model:
         say(f"credits: {model} is billed by Anthropic, which has no balance endpoint; not checked")
         return 0
-    from science_harness.keys import get_key
+    from biowarden.keys import get_key
 
     key = get_key("openrouter")
     if not key:
-        raise Refused("no OpenRouter key found (python -I -m science_harness.keys)")
+        raise Refused("no OpenRouter key found (python -I -m biowarden.keys)")
     left = remaining_credit(fetch(f"{OPENROUTER}/credits", key))
     enough = left >= args.need
     say(f"credits: ${left:.2f} left, ${args.need:.2f} needed: {'ok' if enough else 'NOT ENOUGH'}")
@@ -286,24 +286,24 @@ def probe_runner(model: str, out: Path, max_usd: float) -> Callable[[Any], dict[
     import anthropic
     import openai
 
-    from science_harness.bench.runner.agent import AgentConfig, CircuitBreaker
-    from science_harness.bench.runner.agent_openai import OPENROUTER_URL, provider_routing
-    from science_harness.bench.runner.trial import Budget, Clients, run_trial
-    from science_harness.bench.tasks.tools import ToolEnv
-    from science_harness.keys import get_key
+    from biowarden.bench.runner.agent import AgentConfig, CircuitBreaker
+    from biowarden.bench.runner.agent_openai import OPENROUTER_URL, provider_routing
+    from biowarden.bench.runner.trial import Budget, Clients, run_trial
+    from biowarden.bench.tasks.tools import ToolEnv
+    from biowarden.keys import get_key
 
     clients = Clients()
     if "/" in model:
         key = get_key("openrouter")
         if not key:
-            raise Refused("no OpenRouter key found (python -I -m science_harness.keys)")
+            raise Refused("no OpenRouter key found (python -I -m biowarden.keys)")
         clients.openrouter = openai.OpenAI(
             api_key=key, base_url=OPENROUTER_URL, max_retries=0, timeout=600
         )
     else:
         key = get_key("anthropic")
         if not key:
-            raise Refused("no Anthropic key found (python -I -m science_harness.keys)")
+            raise Refused("no Anthropic key found (python -I -m biowarden.keys)")
         clients.anthropic = anthropic.Anthropic(api_key=key, max_retries=0)
     tools = ToolEnv.discover(Path.cwd())
     if tools is None:
@@ -317,7 +317,7 @@ def probe_runner(model: str, out: Path, max_usd: float) -> Callable[[Any], dict[
 
 def cmd_probe(args: argparse.Namespace, make_runner: Callable[..., Any] = probe_runner) -> int:
     check_snapshot(args.snapshot)
-    from science_harness.bench.runner.cli import plan
+    from biowarden.bench.runner.cli import plan
 
     model = model_id(args.model)
     out = fresh_directory(Path(args.out) / "probe" / model.replace("/", "__"))
@@ -361,7 +361,7 @@ class Block(NamedTuple):
 
 
 def cell_of(cell: str) -> tuple[str, str, str]:
-    from science_harness.bench import stage2
+    from biowarden.bench import stage2
 
     if cell in ("primary", "pilot"):
         return stage2.PRIMARY_CELL
@@ -388,7 +388,7 @@ def blocks(cell: str, arm: str, chunk: int, size: int, sets: dict[str, Any] | No
     of an arm are grouped by block. Arm `aa` is the bare replicate on P (repetition 1, primary
     cell): `--reps 2` resumes repetition 0 and runs repetition 1.
     """
-    from science_harness.bench import stage2
+    from biowarden.bench import stage2
 
     contract, tier, route = cell_of(cell)
     if cell == "pilot":  # one call: bare, seeds 0-4, every family
@@ -416,7 +416,7 @@ def blocks(cell: str, arm: str, chunk: int, size: int, sets: dict[str, Any] | No
 def chunk_count(cell: str, size: int, sets: dict[str, Any] | None) -> int:
     if cell == "pilot":
         return 1
-    from science_harness.bench import stage2
+    from biowarden.bench import stage2
 
     reg = stage2.Registry.from_sets(sets or {})
     longest = max((len(s) for s in reg.seeds_for(cell_of(cell)).values()), default=0)
@@ -440,7 +440,7 @@ def cmd_chunks(args: argparse.Namespace) -> int:
 
 def plan_manifest(sets: dict[str, Any], sets_bytes: bytes) -> dict[str, Any]:
     """Every planned (model, arm, cell): how many trial ids, and the sha256 of the sorted ids."""
-    from science_harness.bench import stage2
+    from biowarden.bench import stage2
 
     reg = stage2.Registry.from_sets(sets)
     entries = []
@@ -475,9 +475,9 @@ def expected_ids(
     model: str, cell: str, sets: dict[str, Any] | None, aa: bool, exclude: Sequence[str]
 ) -> dict[str, list[str]]:
     """arm -> the trial ids a finished job of (model, cell) must have records for."""
-    from science_harness.bench import stage2
-    from science_harness.bench.runner.cli import plan
-    from science_harness.bench.tasks.families import all_families
+    from biowarden.bench import stage2
+    from biowarden.bench.runner.cli import plan
+    from biowarden.bench.tasks.families import all_families
 
     contract, tier, route = cell_of(cell)
     if cell == "pilot":

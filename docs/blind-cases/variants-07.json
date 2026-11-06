@@ -1,0 +1,15 @@
+{
+ "id": "variants-07",
+ "domain": "variants",
+ "tool": "vcftools",
+ "trap_class": "inverted missing threshold",
+ "intent": "Remove the sites where more than 20% of the samples have a missing genotype, and write the remaining sites to a new VCF.",
+ "silent_error": "vcftools --max-missing is the minimum FRACTION OF SAMPLES WITH DATA (1 = no missing data allowed, 0 = anything goes), not a maximum missing rate. '--max-missing 0.2' therefore keeps every site that is genotyped in at least 20% of the samples, i.e. sites with up to 80% missing calls, while the intent needs '--max-missing 0.8'. The log only reports 'kept N out of a possible M Sites'. Exit 0. Documented in the vcftools manual (--max-missing: 0 allows sites that are completely missing, 1 indicates no missing data allowed).",
+ "files": {
+  "cohort.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr5,length=180000>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tWT01\tWT02\tWT03\tWT04\tWT05\tWT06\tWT07\tWT08\tWT09\tWT10\nchr5\t5200\t.\tC\tT\t88\tPASS\t.\tGT\t0/1\t1/1\t0/0\t0/0\t0/0\t0/1\t1/1\t0/0\t0/1\t1/1\nchr5\t6570\t.\tA\tG\t88\tPASS\t.\tGT\t0/0\t0/0\t1/1\t./.\t0/1\t0/0\t1/1\t0/1\t0/0\t1/1\nchr5\t7940\t.\tT\tA\t88\tPASS\t.\tGT\t0/1\t./.\t0/0\t0/0\t0/1\t0/1\t./.\t./.\t1/1\t1/1\nchr5\t9310\t.\tC\tG\t88\tPASS\t.\tGT\t./.\t./.\t0/0\t./.\t0/1\t0/0\t./.\t0/1\t./.\t./.\nchr5\t10680\t.\tG\tA\t88\tPASS\t.\tGT\t./.\t./.\t./.\t./.\t./.\t0/0\t1/1\t./.\t./.\t0/1\nchr5\t12050\t.\tT\tA\t88\tPASS\t.\tGT\t./.\t./.\t./.\t./.\t./.\t0/1\t./.\t./.\t./.\t./.\n"
+ },
+ "setup": [],
+ "faulted": "vcftools --vcf cohort.vcf --max-missing 0.2 --recode --recode-INFO-all --out filtered",
+ "clean": "vcftools --vcf cohort.vcf --max-missing 0.8 --recode --recode-INFO-all --out filtered",
+ "observe": "grep -v '^#' filtered.recode.vcf | cut -f2 | tr '\\n' ' '; echo"
+}

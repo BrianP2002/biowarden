@@ -1,0 +1,16 @@
+{
+ "id": "core-12",
+ "domain": "core",
+ "tool": "awk",
+ "trap_class": "CRLF in lookup list",
+ "intent": "Pull the expression rows of the five genes listed in genes_of_interest.txt (one gene symbol per line) out of expression.tsv, keeping the header line.",
+ "silent_error": "The gene list has Windows line endings, so awk reads each key as 'IL6\\r', 'TNF\\r', ... and the lookup $1 in want never matches the clean symbols of expression.tsv; only the last name, which has no line terminator at all, matches. awk exits 0 and prints no warning; the output is a header plus one row, which reads like 'only SOCS3 is in the table'. Carriage returns are invisible in a terminal.",
+ "files": {
+  "expression.tsv": "gene\tTPM\nACTB\t812.4\nGAPDH\t655.1\nIL6\t12.7\nTNF\t31.9\nCXCL8\t140.2\nSTAT3\t58.3\nNFKB1\t44.0\nIL1B\t22.6\nCCL2\t76.5\nSOCS3\t19.8\n",
+  "genes_of_interest.txt": "IL6\r\nTNF\r\nSTAT3\r\nIL1B\r\nSOCS3"
+ },
+ "setup": [],
+ "faulted": "awk 'NR==FNR {want[$1]; next} FNR==1 || $1 in want' genes_of_interest.txt expression.tsv > selected_expr.tsv",
+ "clean": "tr -d '\\r' < genes_of_interest.txt | awk 'NR==FNR {want[$1]; next} FNR==1 || $1 in want' - expression.tsv > selected_expr.tsv",
+ "observe": "cat selected_expr.tsv"
+}

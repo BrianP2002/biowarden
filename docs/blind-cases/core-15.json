@@ -1,0 +1,19 @@
+{
+ "id": "core-15",
+ "domain": "core",
+ "tool": "python-bio",
+ "trap_class": "reverse-strand read orientation",
+ "intent": "Write the reads of sample_reads.bam back out as a FASTQ file, each read exactly as it was sequenced (same sequence and quality strings as in the original FASTQ), so they can be re-mapped with a different aligner.",
+ "silent_error": "In a BAM the SEQ and QUAL of a read aligned to the reverse strand (flag 0x10) are stored reverse-complemented and reversed (SAM specification, SEQ/QUAL fields), and pysam's query_sequence / query_qualities return the stored values. Writing them unchanged gives a FASTQ in which the 3 reverse-strand reads (frag_2, frag_4, frag_6) are the reverse complement of what was sequenced, with reversed qualities; samtools fastq would undo this. Nothing fails and every record is well-formed FASTQ, but re-mapping would place these reads on the opposite strand.",
+ "files": {
+  "sample_reads.sam": "@HD\tVN:1.6\tSO:coordinate\n@SQ\tSN:ctg1\tLN:400\nfrag_1\t0\tctg1\t15\t60\t36M\t*\t0\t0\tCTCCCCCCTACGCGCGTGCTGCTTGCCGGCAATGAA\tH?BBIADBBGAHDEEE?CIC<DD<FI<CI?G??C5E\nfrag_2\t16\tctg1\t55\t60\t36M\t*\t0\t0\tGGAATGTAGTGTGTACCGAACGCCTCTTGTGACCCA\tFICFEICC5?5DBI?CC<FG?IGCCDAIGII?55FG\nfrag_3\t0\tctg1\t95\t60\t36M\t*\t0\t0\tACAGCAAGATACACGGCGCAGGTGTAACTCTCTTGC\t<FIEHHCGFGAFIIE5I<GD??<BE<C?GCGFIGAE\nfrag_4\t16\tctg1\t135\t60\t36M\t*\t0\t0\tCCCTCGTCTCATGTAAAGACCGGCGAAAAGAGCTCA\t5D<DEFEDFBFBE5<5FHAGIDEFEH?C???<<H<A\nfrag_5\t0\tctg1\t175\t60\t36M\t*\t0\t0\tTGGAGGGTGACGCGGTCATTCTGCCGATTGAGACCA\tDCIAFI?G5<G<G5BCID??FG5AHBCEEB<5B55?\nfrag_6\t16\tctg1\t215\t60\t36M\t*\t0\t0\tCTTGGGAGTTGGTTCGGCCTCCCATCTATTAGTCAG\tGED<GHGCCEEC5B<F5A?FAIFAAHAC?AIDAH5H\n",
+  "bam_to_fastq.py": "import pysam\n\nwith pysam.AlignmentFile(\"sample_reads.bam\", \"rb\") as bam, open(\"recovered.fastq\", \"w\") as out:\n    for read in bam.fetch(until_eof=True):\n        if read.is_unmapped or read.is_secondary or read.is_supplementary:\n            continue\n        qual = pysam.qualities_to_qualitystring(read.query_qualities)\n        out.write(\"@%s\\n%s\\n+\\n%s\\n\" % (read.query_name, read.query_sequence, qual))\n",
+  "bam_to_fastq_v2.py": "import pysam\n\nCOMP = str.maketrans(\"ACGTNacgtn\", \"TGCANtgcan\")\n\nwith pysam.AlignmentFile(\"sample_reads.bam\", \"rb\") as bam, open(\"recovered.fastq\", \"w\") as out:\n    for read in bam.fetch(until_eof=True):\n        if read.is_unmapped or read.is_secondary or read.is_supplementary:\n            continue\n        seq = read.query_sequence\n        qual = pysam.qualities_to_qualitystring(read.query_qualities)\n        if read.is_reverse:\n            seq = seq.translate(COMP)[::-1]\n            qual = qual[::-1]\n        out.write(\"@%s\\n%s\\n+\\n%s\\n\" % (read.query_name, seq, qual))\n"
+ },
+ "setup": [
+  "samtools view -b -o sample_reads.bam sample_reads.sam"
+ ],
+ "faulted": "python-bio bam_to_fastq.py",
+ "clean": "python-bio bam_to_fastq_v2.py",
+ "observe": "paste - - - - < recovered.fastq | cut -f1,2"
+}

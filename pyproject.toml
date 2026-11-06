@@ -3,9 +3,9 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "trustworthy-bio-mcp"
+name = "biowarden"
 version = "0.0.1"
-description = "Contract and oracle layer for reliable bio tool calls, with a benchmark for silent tool errors (temporary name)."
+description = "Pre-run checks for silent errors in bioinformatics tool calls made by LLM agents, with a benchmark of 105 task families."
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 readme = "README.md"
@@ -33,14 +33,14 @@ dev = ["pytest", "pytest-xdist", "ruff", "anthropic>=2.3,<3", "openai>=3.40,<4"]
 figures = ["matplotlib"]  # tools/make_figures.py
 
 [project.scripts]
-mockfold = "science_harness.bench.fixtures.mockfold:main"
-science-harness-gateway = "science_harness.gateway.server:main"
-tbm-mcp = "science_harness.engine.mcp_server:main"
-tbm-guard = "science_harness.engine.guard:main"
-science-harness-keys = "science_harness.keys:main"
+mockfold = "biowarden.bench.fixtures.mockfold:main"
+biowarden-gateway = "biowarden.gateway.server:main"
+biowarden-mcp = "biowarden.engine.mcp_server:main"
+biowarden = "biowarden.engine.guard:main"
+biowarden-keys = "biowarden.keys:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/science_harness"]
+packages = ["src/biowarden"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -55,4 +55,4 @@ target-version = "py310"
 select = ["E", "F", "I", "UP", "B"]
 
 [tool.ruff.lint.isort]
-known-first-party = ["science_harness", "helpers"]
+known-first-party = ["biowarden", "helpers"]

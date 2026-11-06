@@ -1,0 +1,18 @@
+{
+ "id": "core-06",
+ "domain": "core",
+ "tool": "bcftools",
+ "trap_class": "stale AF after subsetting",
+ "intent": "From the three affected samples P1, P2 and P3 only (ignore the controls), keep the variants whose alternate-allele frequency among those three samples is at least 0.5.",
+ "silent_error": "bcftools view -s recomputes only INFO/AC and INFO/AN for the subset; INFO/AF keeps the value of the full cohort (bcftools view usage: '-I, --no-update  Do not (re)calculate INFO fields for the subset (currently INFO/AC and INFO/AN)'). Filtering the subset on INFO/AF therefore tests the six-sample frequency: var2, which no affected sample carries (AC=0), is kept because the cohort AF is 0.5, and var1 (3-sample AF 0.667) is lost because its cohort AF is 0.333. No warning; the output VCF is well formed and contains AC/AN/AF that contradict each other.",
+ "files": {
+  "family_cohort.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr1,length=248956422>\n##INFO=<ID=AC,Number=A,Type=Integer,Description=\"Allele count in genotypes\">\n##INFO=<ID=AN,Number=1,Type=Integer,Description=\"Total number of alleles in called genotypes\">\n##INFO=<ID=AF,Number=A,Type=Float,Description=\"Allele frequency in the cohort\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tP1\tP2\tP3\tC1\tC2\tC3\nchr1\t1000\tvar1\tA\tG\t60\tPASS\tAC=4;AN=12;AF=0.3333\tGT\t0/1\t0/1\t1/1\t0/0\t0/0\t0/0\nchr1\t2000\tvar2\tC\tT\t60\tPASS\tAC=6;AN=12;AF=0.5000\tGT\t0/0\t0/0\t0/0\t1/1\t1/1\t1/1\nchr1\t3000\tvar3\tG\tA\t60\tPASS\tAC=2;AN=12;AF=0.1667\tGT\t0/1\t0/0\t0/0\t0/1\t0/0\t0/0\nchr1\t4000\tvar4\tT\tC\t60\tPASS\tAC=10;AN=12;AF=0.8333\tGT\t1/1\t0/1\t1/1\t1/1\t0/1\t1/1\nchr1\t5000\tvar5\tA\tT\t60\tPASS\tAC=1;AN=12;AF=0.0833\tGT\t0/0\t0/0\t0/0\t0/0\t0/0\t0/1\n"
+ },
+ "setup": [
+  "bgzip -c family_cohort.vcf > family_cohort.vcf.gz",
+  "bcftools index -t family_cohort.vcf.gz"
+ ],
+ "faulted": "bcftools view -s P1,P2,P3 family_cohort.vcf.gz | bcftools view -i 'INFO/AF>=0.5' -o affected_common.vcf",
+ "clean": "bcftools view -s P1,P2,P3 family_cohort.vcf.gz | bcftools +fill-tags -- -t AF | bcftools view -i 'INFO/AF>=0.5' -o affected_common.vcf",
+ "observe": "bcftools query -f '%ID\\tAC=%INFO/AC\\tAN=%INFO/AN\\tAF=%INFO/AF\\n' affected_common.vcf"
+}

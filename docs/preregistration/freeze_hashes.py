@@ -10,7 +10,7 @@ Stage 2 (docs/preregistration/stage2-draft.md)
     python docs/preregistration/freeze_hashes.py --stage2 --code-root runs/stage2-code \\
         --repo-root . [--sets FILE ...] [--write FILE | --verify FILE]
 
-`--code-root` is the snapshot the jobs import (`<code-root>/src/science_harness`) and `--repo-root`
+`--code-root` is the snapshot the jobs import (`<code-root>/src/biowarden`) and `--repo-root`
 the checkout that is committed and tagged. There is no default for either, and the two `src/` trees
 must be the same files. The manifest has one `sha256  path` line for every file of the package
 (`__pycache__` and `.pyc` excluded), `pyproject.toml`, `tools/stage2_job.sbatch` and the two
@@ -19,7 +19,7 @@ every `--sets` file (freeze 2: the sets file with its seed registry, the plan
 manifest, the draft; a path is relative to `--repo-root`). It also has one digest per group and a
 root digest over all the lines. `code` equals the `code_digest` the runner stamps on each record.
 
-Exit status 2: an unknown flag, a missing root, a root without `src/science_harness`, a group
+Exit status 2: an unknown flag, a missing root, a root without `src/biowarden`, a group
 without files (printed as MISSING, never as the digest of empty input), a group below its expected
 size, a `src/` that differs from the snapshot, or a mismatch under `--verify`. Nothing is written
 then, and `--write` does not replace a different file unless `--overwrite` is given.
@@ -37,22 +37,22 @@ from pathlib import Path
 # -- stage 1: the digests of the published freeze files; do not change -------------------------
 
 LEGACY_GROUPS = {
-    "scorer": ["src/science_harness/bench/score.py"],
-    "analysis": ["src/science_harness/bench/analysis.py"],
-    "stage1": ["src/science_harness/bench/stage1.py"],
-    "engine": ["src/science_harness/engine/*.py", "src/science_harness/engine/rules/*.py"],
-    "specs": ["src/science_harness/engine/specs/*.yaml"],
-    "promotion": ["src/science_harness/engine/specs/promotion.json"],
+    "scorer": ["src/biowarden/bench/score.py"],
+    "analysis": ["src/biowarden/bench/analysis.py"],
+    "stage1": ["src/biowarden/bench/stage1.py"],
+    "engine": ["src/biowarden/engine/*.py", "src/biowarden/engine/rules/*.py"],
+    "specs": ["src/biowarden/engine/specs/*.yaml"],
+    "promotion": ["src/biowarden/engine/specs/promotion.json"],
     "tasks": [
-        "src/science_harness/bench/tasks/families.py",
-        "src/science_harness/bench/tasks/common.py",
-        "src/science_harness/bench/tasks/instance.py",
-        "src/science_harness/bench/tasks/extra/f07_regions_vs_targets.py",
-        "src/science_harness/bench/tasks/extra/f10_indel_bed.py",
-        "src/science_harness/bench/tasks/extra/f13_phred_offset.py",
-        "src/science_harness/bench/tasks/extra/f15_log_scale.py",
+        "src/biowarden/bench/tasks/families.py",
+        "src/biowarden/bench/tasks/common.py",
+        "src/biowarden/bench/tasks/instance.py",
+        "src/biowarden/bench/tasks/extra/f07_regions_vs_targets.py",
+        "src/biowarden/bench/tasks/extra/f10_indel_bed.py",
+        "src/biowarden/bench/tasks/extra/f13_phred_offset.py",
+        "src/biowarden/bench/tasks/extra/f15_log_scale.py",
     ],
-    "runner": ["src/science_harness/bench/runner/*.py"],
+    "runner": ["src/biowarden/bench/runner/*.py"],
 }
 
 
@@ -73,7 +73,7 @@ def legacy_main(root: Path) -> int:
 
 # -- stage 2 ------------------------------------------------------------------------------------
 
-PACKAGE = "science_harness"
+PACKAGE = "biowarden"
 SRC = f"src/{PACKAGE}"
 PYPROJECT = "pyproject.toml"
 JOB_TEMPLATE = "tools/stage2_job.sbatch"

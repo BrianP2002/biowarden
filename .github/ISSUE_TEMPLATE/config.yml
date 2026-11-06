@@ -1,0 +1,3 @@
+# Two forms cover the usual reports: a block that was wrong, and a silent error the layer missed.
+# A blank issue is allowed for everything else (a documentation error, a crash). No external contact link.
+blank_issues_enabled: true

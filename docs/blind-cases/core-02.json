@@ -1,0 +1,16 @@
+{
+ "id": "core-02",
+ "domain": "core",
+ "tool": "samtools",
+ "trap_class": "BED start off-by-one",
+ "intent": "Extract the sequences of the three 20 bp primer binding sites listed in primer_sites.bed (BED: chromosome, start, end) from genome.fa into a FASTA file.",
+ "silent_error": "A BED line is 0-based, half-open, but a samtools faidx region string chr:start-end is 1-based and inclusive (samtools-view man page, Regions: 'RNAME[:STARTPOS[-ENDPOS]] and all position coordinates are 1-based'; the same region syntax is used by samtools faidx). Pasting the BED start and end into the region string returns end-start+1 = 21 bases starting one base to the left of the primer, so every sequence is one base too long and shifted. faidx exits 0 and prints no warning; the FASTA headers look right and the sequences are plausible DNA.",
+ "files": {
+  "genome.fa": ">chr7\nCGCCTGTACTTCCAACTCCTTTACAGTCTTTCCGCACGTCTGGTTCTCCCGATATCGATG\nTCCGTCCCTCCTCAACTGCAACATGGGTTCTCGCATCTCCGACTTCAGGTCCTCCAATAC\nGCCACCCTTTAGCTTCCAGGCTCAACTAGTCTGGACGAAACCACTCTCGTGGGTCCTCTA\nAGGTAATCATAAGAATTATCTTCGGCGCACGAAGGCCAACCCGACTTCCTTAATGACGTA\n>chr12\nTATATTCGAAGAGTACCCTCTGCAAGATTGTAATGGGGACGGCCGCTATGCCTGCGGTTG\nCAGGCAACCATTCCACTGTACCCTCCCTGGAGTCCAAAGTGAGCCGGCTTGCCGATTGGG\nGTCTATAATGTAACCCTCGATTTAAGTACATTTTAGTGACCTCTATCGTATCCCCGATAC\n",
+  "primer_sites.bed": "chr7\t10\t30\tKRAS_F\nchr7\t150\t170\tKRAS_R\nchr12\t60\t80\tTP53_F\n"
+ },
+ "setup": [],
+ "faulted": "awk '{print $1\":\"$2\"-\"$3}' primer_sites.bed | xargs samtools faidx genome.fa > primer_seqs.fa",
+ "clean": "awk '{print $1\":\"$2+1\"-\"$3}' primer_sites.bed | xargs samtools faidx genome.fa > primer_seqs.fa",
+ "observe": "grep -v '>' primer_seqs.fa | awk '{print length($0), $0}'"
+}

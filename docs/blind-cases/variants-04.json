@@ -1,0 +1,21 @@
+{
+ "id": "variants-04",
+ "domain": "variants",
+ "tool": "bcftools",
+ "trap_class": "contig name mismatch",
+ "intent": "Fill in the ID column of the cohort VCF with the rsIDs from the dbSNP extract VCF, matching on position and alleles.",
+ "silent_error": "The cohort VCF names its contig '1' while the dbSNP extract names it 'chr1'. bcftools annotate -a matches records on the literal contig string, so no record is ever matched: the output is a normal-looking VCF whose ID column is still '.' for every variant. No warning, exit 0. The mismatch has to be removed first (bcftools annotate --rename-chrs on one of the files). The bcftools man page notes for the region options that 'sequence names must match exactly, chr20 is not the same as 20'.",
+ "files": {
+  "cohort.vcf": "##fileformat=VCFv4.2\n##contig=<ID=1,length=249250621>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tT1\tT2\n1\t10177\t.\tC\tT\t50\tPASS\t.\tGT\t0/1\t0/1\n1\t10352\t.\tT\tG\t50\tPASS\t.\tGT\t0/1\t0/1\n1\t11008\t.\tT\tC\t50\tPASS\t.\tGT\t1/1\t0/0\n1\t14464\t.\tG\tC\t50\tPASS\t.\tGT\t1/1\t0/1\n1\t15211\t.\tA\tT\t50\tPASS\t.\tGT\t1/1\t0/1\n1\t16103\t.\tG\tT\t50\tPASS\t.\tGT\t0/1\t0/0\n",
+  "dbsnp_extract.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr1,length=248956422>\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nchr1\t10177\trs367896724\tC\tT\t.\t.\t.\nchr1\t10352\trs555500075\tT\tG\t.\t.\t.\nchr1\t11008\trs575272151\tT\tC\t.\t.\t.\nchr1\t14464\trs546169444\tG\tC\t.\t.\t.\nchr1\t15211\trs7277033\tA\tT\t.\t.\t.\nchr1\t16103\trs118100551\tG\tT\t.\t.\t.\n"
+ },
+ "setup": [
+  "bgzip -c cohort.vcf > cohort.vcf.gz",
+  "bcftools index cohort.vcf.gz",
+  "bgzip -c dbsnp_extract.vcf > dbsnp_extract.vcf.gz",
+  "bcftools index dbsnp_extract.vcf.gz"
+ ],
+ "faulted": "bcftools annotate -a dbsnp_extract.vcf.gz -c ID -o annotated.vcf cohort.vcf.gz",
+ "clean": "printf 'chr1\\t1\\n' > rename_map.txt && bcftools annotate --rename-chrs rename_map.txt -Oz -o dbsnp_renamed.vcf.gz dbsnp_extract.vcf.gz && bcftools index dbsnp_renamed.vcf.gz && bcftools annotate -a dbsnp_renamed.vcf.gz -c ID -o annotated.vcf cohort.vcf.gz",
+ "observe": "bcftools query -f '%CHROM\\t%POS\\t%ID\\n' annotated.vcf"
+}

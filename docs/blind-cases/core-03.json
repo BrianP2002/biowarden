@@ -1,0 +1,17 @@
+{
+ "id": "core-03",
+ "domain": "core",
+ "tool": "samtools",
+ "trap_class": "secondary supplementary counted",
+ "intent": "Count how many of the 8 sequenced reads in library_aln.bam were mapped to the reference (each read counted once), to report a mapping rate.",
+ "silent_error": "samtools view -c -F 4 only removes unmapped records. Secondary (0x100) and supplementary (0x800) alignment records of multi-mapping and chimeric reads are also mapped records, so they are counted again: 10 'mapped reads' for a library of 8 reads (flagstat shows the same inflation as 'mapped' versus 'primary mapped'; documented in the samtools-flagstat man page). The correct count excludes flags 0x4, 0x100 and 0x800 (-F 2308). No message is printed; the number is just an integer.",
+ "files": {
+  "library_aln.sam": "@HD\tVN:1.6\tSO:coordinate\n@SQ\tSN:tig1\tLN:500\n@SQ\tSN:tig2\tLN:500\nread1\t0\ttig1\t20\t60\t50M\t*\t0\t0\tTTCCAGCCTGGCTCGATCCTGATGAAGTAATGATTTTGACTAGGACCCCT\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\nread2\t16\ttig1\t90\t60\t50M\t*\t0\t0\tGATGCGAATCTTGGGTGGATTGTCCTTAATAGCCTTAGAAACCGAGCGTA\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\nread3\t0\ttig1\t210\t60\t50M\t*\t0\t0\tCGGAGGAGAGGCCTGTCCGCTGACGTCGCTGGCGCATTGACAAAGCTCGC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\nread7\t0\ttig1\t300\t60\t25M25S\t*\t0\t0\tAGATTGAGGCTTCCACTCCGTATAGGGAACGACGTTCCACACAAATTGTC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tSA:Z:tig2,200,+,25S25M,60,0;\nread6\t0\ttig1\t400\t3\t50M\t*\t0\t0\tGTTATTTCCCGTATTACCGTGTACTGACCTTCAGGGTGAAGCTCCACGCG\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\nread4\t16\ttig2\t40\t60\t50M\t*\t0\t0\tACCCATCCCAATGGCAATAATAGACAAGTAAGTATAGCGGAAGACAAACC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\nread6\t256\ttig2\t120\t3\t50M\t*\t0\t0\tGTTATTTCCCGTATTACCGTGTACTGACCTTCAGGGTGAAGCTCCACGCG\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\nread7\t2048\ttig2\t200\t60\t25H25M\t*\t0\t0\tGGAACGACGTTCCACACAAATTGTC\tIIIIIIIIIIIIIIIIIIIIIIIII\tSA:Z:tig1,300,+,25M25S,60,0;\nread5\t0\ttig2\t300\t60\t50M\t*\t0\t0\tTTTTCATTATTGGAGGGCTTGTGGCCTGCCATGCGAGTTGCCCGTGTTCA\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\nread6\t256\ttig2\t420\t3\t50M\t*\t0\t0\tGTTATTTCCCGTATTACCGTGTACTGACCTTCAGGGTGAAGCTCCACGCG\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\nread8\t4\t*\t0\t0\t*\t*\t0\t0\tACGGACCTGGCTACAAGGGATAGCACATGAAGTTACACCGGATCTTCGTC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\n"
+ },
+ "setup": [
+  "samtools view -b -o library_aln.bam library_aln.sam"
+ ],
+ "faulted": "samtools view -c -F 4 library_aln.bam > mapped_reads.txt",
+ "clean": "samtools view -c -F 2308 library_aln.bam > mapped_reads.txt",
+ "observe": "cat mapped_reads.txt"
+}

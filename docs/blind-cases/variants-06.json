@@ -1,0 +1,21 @@
+{
+ "id": "variants-06",
+ "domain": "variants",
+ "tool": "bcftools",
+ "trap_class": "overlapping chunks duplicates",
+ "intent": "Combine the two chunk VCFs of chr2 into a single sorted callset for the chromosome.",
+ "silent_error": "Plain 'bcftools concat' only appends the files in the order given and assumes they are disjoint and consecutive. With overlapping windows the overlap is emitted twice (duplicate records) and the output is no longer coordinate-sorted, so counts and allele counts are inflated and the file cannot be indexed. The only messages are informational ('Checking the headers...', 'Concatenating ...'). Exit 0. Documented in the bcftools concat man page: the inputs must be disjoint and given in order 'unless the -a, --allow-overlaps option is specified', and -d/--rm-dups is needed to emit the shared records once.",
+ "files": {
+  "chunk_a.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr2,length=500000>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tN1\tN2\nchr2\t10100\t.\tA\tC\t70\tPASS\t.\tGT\t0/1\t0/0\nchr2\t10450\t.\tG\tA\t70\tPASS\t.\tGT\t0/0\t0/1\nchr2\t10900\t.\tG\tA\t70\tPASS\t.\tGT\t1/1\t0/0\nchr2\t11200\t.\tT\tG\t70\tPASS\t.\tGT\t1/1\t1/1\nchr2\t11800\t.\tT\tC\t70\tPASS\t.\tGT\t0/0\t1/1\nchr2\t12300\t.\tA\tT\t70\tPASS\t.\tGT\t1/1\t0/1\n",
+  "chunk_b.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr2,length=500000>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tN1\tN2\nchr2\t11800\t.\tT\tC\t70\tPASS\t.\tGT\t0/0\t1/1\nchr2\t12300\t.\tA\tT\t70\tPASS\t.\tGT\t1/1\t0/1\nchr2\t12950\t.\tC\tT\t70\tPASS\t.\tGT\t0/0\t0/1\nchr2\t13400\t.\tT\tA\t70\tPASS\t.\tGT\t0/1\t1/1\nchr2\t13900\t.\tC\tA\t70\tPASS\t.\tGT\t0/0\t0/0\nchr2\t14500\t.\tT\tA\t70\tPASS\t.\tGT\t0/1\t0/1\n"
+ },
+ "setup": [
+  "bgzip -c chunk_a.vcf > chunk_a.vcf.gz",
+  "bcftools index chunk_a.vcf.gz",
+  "bgzip -c chunk_b.vcf > chunk_b.vcf.gz",
+  "bcftools index chunk_b.vcf.gz"
+ ],
+ "faulted": "bcftools concat -o chr2.vcf chunk_a.vcf.gz chunk_b.vcf.gz",
+ "clean": "bcftools concat -a -d all -o chr2.vcf chunk_a.vcf.gz chunk_b.vcf.gz",
+ "observe": "bcftools query -f '%POS\\n' chr2.vcf | tr '\\n' ' '; echo"
+}

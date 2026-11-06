@@ -1,0 +1,17 @@
+{
+ "id": "core-09",
+ "domain": "core",
+ "tool": "bedtools",
+ "trap_class": "spliced reads span introns",
+ "intent": "Make a bedGraph of per-base read coverage from the spliced RNA-seq alignments in rnaseq_sample.bam, so that the coverage of the exons can be displayed in a genome browser.",
+ "silent_error": "bedtools genomecov -ibam treats every alignment as one block from its start to its end, so the N (skipped region) of a spliced read is counted as covered unless -split is given (bedtools genomecov usage: '-split  Treat \"split\" BAM or BED12 entries as distinct BED intervals when computing coverage. For BAM files, this uses the CIGAR \"N\" and \"D\" operations'). The faulted bedGraph shows a continuous depth of 4 over the whole 200 nt intron (280 covered bases instead of 84) although nothing was sequenced there. Exit 0, valid bedGraph, no message.",
+ "files": {
+  "rnaseq_sample.sam": "@HD\tVN:1.6\tSO:coordinate\n@SQ\tSN:chr4\tLN:400\nrna_05\t0\tchr4\t21\t255\t40M\t*\t0\t0\tGCCCTTCTGCCAATTTAGCTAAGTGTAATATGCGTCGTAT\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nrna_06\t0\tchr4\t25\t255\t40M\t*\t0\t0\tTTCTGCCAATTTAGCTAAGTGTAATATGCGTCGTATTGCA\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nrna_01\t0\tchr4\t41\t255\t20M200N20M\t*\t0\t0\tAAGTGTAATATGCGTCGTATGTGCGCTTCTCGATCTTGCC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nrna_02\t16\tchr4\t45\t255\t16M200N24M\t*\t0\t0\tGTAATATGCGTCGTATGTGCGCTTCTCGATCTTGCCTCAC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nrna_03\t0\tchr4\t50\t255\t11M200N29M\t*\t0\t0\tATGCGTCGTATGTGCGCTTCTCGATCTTGCCTCACGCCGC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nrna_04\t16\tchr4\t55\t255\t6M200N34M\t*\t0\t0\tTCGTATGTGCGCTTCTCGATCTTGCCTCACGCCGCAGTAG\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nrna_07\t16\tchr4\t261\t255\t36M\t*\t0\t0\tGTGCGCTTCTCGATCTTGCCTCACGCCGCAGTAGAA\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nrna_08\t16\tchr4\t265\t255\t36M\t*\t0\t0\tGCTTCTCGATCTTGCCTCACGCCGCAGTAGAAGGGT\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\n"
+ },
+ "setup": [
+  "samtools view -b -o rnaseq_sample.bam rnaseq_sample.sam"
+ ],
+ "faulted": "bedtools genomecov -ibam rnaseq_sample.bam -bg > coverage.bedgraph",
+ "clean": "bedtools genomecov -ibam rnaseq_sample.bam -bg -split > coverage.bedgraph",
+ "observe": "cat coverage.bedgraph; awk '{n+=$3-$2} END {print \"covered_bases\", n}' coverage.bedgraph"
+}

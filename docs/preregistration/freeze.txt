@@ -1,0 +1,9 @@
+scorer    a19888417ea64658e56e72cf3d3d22906985eaa18c4fc12314d699ce6fd36adc
+analysis  69866a1c3b4da85c32e5f2f9c510c4af15882d9c3ebc29b72a0741966d2652e7
+engine    1f9c2eb49f13d33ca1bf56a5fb971cc7257aff18a29c9340bd5093ca93ce648c
+specs     ac71652308c75377d78a22b816c3ff3eb9add8ee041435707d894f1caa81075e
+promotion 948f7a130e146cba9ccf80a3a23cc0f247d13b45e21c4af4ae43d7e498929ffb
+tasks     fc340a44fb11e762e5ecf7c4f2fb3f32ef5f20dfb46d77c94f99fb97f7d33abc
+runner    5d5e8537a2bef4e03a2a1d4be90de9eb26cc7f02871bd162c5c5fe93f5b6eefd
+stage1    115999c773b5e76e4e453efbd6203a2ac8e90bf1d5053e3b77b4c4a24adf8816
+stage1 analysis digest recorded after jobs were submitted and before any stage-1 result was inspected

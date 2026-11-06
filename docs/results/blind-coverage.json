@@ -1,0 +1,4955 @@
+{
+ "cases": [
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "4.17",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "9.75",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "align-01",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "snpA 4\nsnpB 3\nsnpC 2",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "snpA 5\nsnpB 3\nsnpC 3",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "align-02",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "74 RG:Z:S1.libA\n     67 RG:Z:S2.libB",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "74 RG:Z:S1.libA\n     37 RG:Z:S2.libB",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "align-03",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t100\t200\texon_a\t3.00\nchr1\t400\t700\texon_b\t1.00\nchr1\t800\t850\texon_c\t2.00",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t100\t200\texon_a\t300\nchr1\t400\t700\texon_b\t300\nchr1\t800\t850\texon_c\t100",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "align-04",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ">ctrl_01\tACGCGGTTAAAAAGCAGTTAGTCCTATCGTTAGTGGCGG\n>ctrl_02\tTCAGGCTATGTATCCCTATTCAGCACGCACGTCGATTCG\n>ctrl_03\tGTACGGTAGCCCGTCGGCTTAACGACTATAGTCGCATTG\n>ctrl_04\tTCCAAGCCACACTATGTCGGCCCAGGACCTAGTCATCGA\n>ctrl_05\tAATAAGACCGTATATGCATTGGATCGTAATCTCGAAGTA\n>ctrl_06\tCGTTCTGCAACGCCTTTCCAGTTGTGCGGATAAATGCCG\n>ctrl_07\tAAGTACGGTAGCCCGTCGGCTTAACGACTATAGTCGCAT\n>ctrl_08\tTAGTGGCGGACAATCCGAAGCAGCGCGGGCAAAATGTTT\n>ctrl_09\tTTGTCGAACCGTCCAAATGGCTTAAAGCGATTCTTGTGA\n>ctrl_10\tTGGCCCGCCCAGATCGATGATGATCGACATCCGGATACG\n>ctrl_11\tGTTGCTCGGTAGTGCCGCACGAATGCCCAATTCACGCGG\n>ctrl_12\tATTGGTGGCCTACAAATACAAATAAGACCGTATATGCAT",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ">ctrl_01\tACGCGGTTAAAAAGCAGTTAGTCCTATCGTTAGTGGCGG\n>ctrl_02\tTCCACCGCTGCTCCAGCTAACCGAATCGACGTGCGTGCT\n>ctrl_03\tGTACGGTAGCCCGTCGGCTTAACGACTATAGTCGCATTG\n>ctrl_04\tGTTAGAGAGAGGCTGTTCTCTTCGATGACTAGGTCCTGG\n>ctrl_05\tAATAAGACCGTATATGCATTGGATCGTAATCTCGAAGTA\n>ctrl_06\tTACCGTACTTCGTGGATGGAGCGGCATTTATCCGCACAA\n>ctrl_07\tAAGTACGGTAGCCCGTCGGCTTAACGACTATAGTCGCAT\n>ctrl_08\tTGGAAAGGCGTTGCAGAACGTAAACATTTTGCCCGCGCT\n>ctrl_09\tTTGTCGAACCGTCCAAATGGCTTAAAGCGATTCTTGTGA\n>ctrl_10\tTGTATGGGACGATAACATTCACGTATCCGGATGTCGATC\n>ctrl_11\tGTTGCTCGGTAGTGCCGCACGAATGCCCAATTCACGCGG\n>ctrl_12\tGTACTTCGAGATTACGATCCAATGCATATACGGTCTTAT",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "align-05",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "30\n0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bwa"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bwa.mem_min_score",
+      "reads_below_min_score",
+      "block"
+     ]
+    ],
+    "message": "FIX: add -T 20 (the lowest best score among the sampled reads) to bwa mem or, if dropping reads under 30 bases is intended, declare it: --declare short_read_policy=drop_short\nBLOCKED, the command did not run. bwa.mem_min_score [default_param/T1]: bwa mem outputs no alignment scoring below -T 30 (default): 16 of 30 sampled reads are shorter than 30 bases (the shortest has 20, best score 20), so they come out as unmapped records however well they match.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bwa"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "align-06",
+   "outcome": "caught",
+   "tool": "bwa"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "60 + 0 paired in sequencing\n60 + 0 properly paired (100.00% : N/A)\n     14 83\n     16 99\n     16 147\n     14 163",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bwa"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "0 + 0 paired in sequencing\n0 + 0 properly paired (N/A : N/A)\n     30 0\n     30 16",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bwa"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "align-07",
+   "outcome": "warned",
+   "tool": "bwa"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "@SQ\tSN:contig1\tLN:3120\nrd01\t929\t100M\nrd02\t1538\t100M\nrd03\t2887\t100M\nrd04\t561\t100M\nrd05\t2075\t100M\nrd06\t2630\t100M\nrd07\t1997\t100M\nrd08\t2028\t100M",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bwa"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "@SQ\tSN:contig1\tLN:3000\nrd01\t929\t72M28S\nrd02\t1418\t100M\nrd03\t2767\t100M\nrd04\t561\t100M\nrd05\t1955\t100M\nrd06\t2510\t100M\nrd07\t1877\t100M\nrd08\t1908\t100M",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bwa"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "align-08",
+   "outcome": "warned",
+   "tool": "bwa"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "24\n24\nIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII############",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bowtie2",
+     "perl"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "fastq.phred_offset",
+      "phred64_undeclared",
+      "block"
+     ]
+    ],
+    "message": "\u202664 and compute Q as ord(c) - 64 (Q30 is the character '^' or above) or convert the file to Phred+33 first (subtract 31 from every quality character) and use the converted file\nBLOCKED, the command did not run. fastq.phred_offset [units/T1]: run_2010.fastq is Phred+64, not Phred+33: its quality characters span 'B'..'h' (ASCII 66..104, 24 reads looked at), none below ';' (59) and some above 'J' (74); read as Phred+33 every quality is 31 too high (even the lowest character 'B' would read as Q33, so a cutoff written for +33 accepts every base; Q30 is '?' or above for +33 but '^' or above for +64).",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bowtie2"
+    ],
+    "warnings": []
+   },
+   "id": "align-09",
+   "outcome": "caught",
+   "tool": "bowtie2"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [],
+    "message": "FIX: this call sets -X 2000; declare the longest fragment of the library: --declare fragment_length_max=over_500\nBLOCKED, the command did not run. bowtie2.maxins_default [default_param/T0]: state which default_param convention you intend (bowtie2 reports a pair whose fragment is longer than -X (default 500) as aligned discordantly, with the proper-pair flag 0x2 clear, so counts or filters on concordant pairs silently drop every pair of a long-insert library.)",
+    "observed": "",
+    "requests": [
+     [
+      "bowtie2.maxins_default",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bowtie2"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": true,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [],
+    "message": "\u2026t over 500 bases discordant (default -X 500). If every fragment is at most 500 bases, re-run with --declare fragment_length_max=up_to_500; if some are longer, add -X <longest fragment> (for example -X 1000) and --declare fragment_length_max=over_500\nBLOCKED, the command did not run. bowtie2.maxins_default [default_param/T0]: state which default_param convention you intend (bowtie2 reports a pair whose fragment is longer than -X (default 500) as aligned discordantly, with the proper-pair flag 0x2 clear, so counts or filters on concordant pairs silently drop every pair of a long-insert library.)",
+    "observed": "",
+    "requests": [
+     [
+      "bowtie2.maxins_default",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bowtie2"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "align-10",
+   "outcome": "declaration",
+   "tool": "bowtie2"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "14\n0\n104M700N150M500N159M\n105M700N150M500N134M\n110M700N150M500N142M",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "minimap2"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "0\n6\n108S152M142S\n120S152M156S\n132S152M118S",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "minimap2"
+    ],
+    "warnings": []
+   },
+   "id": "align-11",
+   "outcome": "missed",
+   "tool": "minimap2"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "60 + 0 paired in sequencing\n60 + 0 properly paired (100.00% : N/A)\n     60 60",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "minimap2"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "0 + 0 paired in sequencing\n0 + 0 properly paired (N/A : N/A)\n      1 50\n      2 59\n     57 60",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "minimap2"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "align-12",
+   "outcome": "warned",
+   "tool": "minimap2"
+  },
+  {
+   "clean": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "12\nm64011_190830_220126/4000/ccs\t0\t2382\nm64011_190830_220126/4211/ccs\t0\t1522\nm64011_190830_220126/4422/ccs\t0\t1206",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "1\nm64011_190830_220126\t0\t1206\nm64011_190830_220126\t0\t1522\nm64011_190830_220126\t0\t1753",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "id": "align-13",
+   "outcome": "missed",
+   "tool": "STAR"
+  },
+  {
+   "clean": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "geneA\t24\ngeneB\t12",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "geneA\t12\ngeneB\t6",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "id": "align-14",
+   "outcome": "missed",
+   "tool": "STAR"
+  },
+  {
+   "clean": {
+    "calls_checked": 6,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "20\n0\n      1 30M500N30M\n      1 30M700N30M\n      1 35M500N25M\n      1 35M700N25M",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "hisat2",
+     "perl",
+     "python",
+     "python3"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 6,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "4\n9\n      5 *\n      2 54M6S\n      2 55M5S\n      2 56M4S",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "hisat2",
+     "perl",
+     "python",
+     "python3"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "align-15",
+   "outcome": "warned",
+   "tool": "hisat2-build"
+  },
+  {
+   "clean": {
+    "calls_checked": 4,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "30\n0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "hisat2",
+     "perl",
+     "python3",
+     "samtools"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 4,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "46\n16",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "hisat2",
+     "perl",
+     "python3",
+     "samtools"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "align-16",
+   "outcome": "warned",
+   "tool": "hisat2"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "10",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "13",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "align-17",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "2\n      8 RG:Z:lane1\n      8 RG:Z:lane2",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "align",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "1\n     16 RG:Z:lane1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "id": "align-18",
+   "outcome": "missed",
+   "tool": "STAR"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "1.625",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "3.095",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "core-01",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "20 TCCAACTCCTTTACAGTCTT\n20 CTGGACGAAACCACTCTCGT\n20 CAGGCAACCATTCCACTGTA",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "21 TTCCAACTCCTTTACAGTCTT\n21 TCTGGACGAAACCACTCTCGT\n21 GCAGGCAACCATTCCACTGTA",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "core-02",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "7",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "10",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "id": "core-03",
+   "outcome": "missed",
+   "tool": "samtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 6,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1:1014143\trs142614334\nchr1:1018704\trs9442372\nchr2:47641559\trs63750447\nchr2:215593408\trs4986790\nchrX:66765161\trs6152\nchrX:153760603\trs1800290",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "bcftools",
+     "sort"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1:1014143\t.\nchr1:1018704\t.\nchr2:47641559\t.\nchr2:215593408\t.\nchrX:66765161\t.\nchrX:153760603\t.",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "core-04",
+   "outcome": "missed",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [],
+    "message": "\u2026n is dropped). --declare is not a bcftools option: the sandbox checker reads it and removes it before bcftools runs. Setting --regions-overlap or --targets-overlap alone does not lift this block.\nBLOCKED, the command did not run. bcftools.region_semantics [interval_semantics/T0]: state which interval_semantics convention you intend (-R/-r (and -T/-t with --targets-overlap 1|2) keep every record that overlaps a region, but -T/-t (and -R/-r with --regions-overlap 0|pos) only records whose POS lies in one, so a gVCF reference block or a deletion that begins before the region is silently dropped.)",
+    "observed": "",
+    "requests": [
+     [
+      "bcftools.region_semantics",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": true,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bcftools.regions_file_base",
+      "bed_content_read_one_based",
+      "block"
+     ]
+    ],
+    "message": "\u2026me does not end in .bed or .bed.gz, but its 3 data lines look like BED intervals (0-based, half-open), so each interval would start one base early; read as 1-based it selects 7 records of proband_calls.vcf.gz, read as BED 4\nAlso: bcftools.region_semantics [interval_semantics/T0]: state which interval_semantics convention you intend (-R/-r (and -T/-t with --targets-overlap 1|2) keep every record that overlaps a region, but -T/-t (and -R/-r with --regions-overlap 0|pos) only records whose POS lies in one, so a gVCF reference block or a deletion that begins before the region is silently dropped.)",
+    "observed": "",
+    "requests": [
+     [
+      "bcftools.region_semantics",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "core-05",
+   "outcome": "caught",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 3,
+    "decision": "block",
+    "exit": 255,
+    "findings": [
+     [
+      "bcftools.subset_monomorphic",
+      "monomorphic_sites_kept",
+      "block"
+     ]
+    ],
+    "message": "\u2026ep_all_sites if the monomorphic sites are wanted, subset_sites=filtered_downstream if a later stage drops them\nBLOCKED, the command did not run. bcftools.subset_monomorphic [record_count/T1]: selecting samples does not select variants: bcftools view writes every site of family_cohort.vcf.gz, 2 of 5 sites of family_cohort.vcf.gz have no alternate allele in the 3 selected samples (for example var2); a count or list of its records includes the sites where nobody carries an alternate allele.\nFailed to read from standard input: unknown file type\nFailed to read from standard input: unknown file type",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": true,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "block",
+    "exit": 255,
+    "findings": [
+     [
+      "bcftools.subset_monomorphic",
+      "monomorphic_sites_kept",
+      "block"
+     ]
+    ],
+    "message": "\u2026e in the selected samples or --declare subset_sites=keep_all_sites if the monomorphic sites are wanted, subset_sites=filtered_downstream if a later stage drops them\nBLOCKED, the command did not run. bcftools.subset_monomorphic [record_count/T1]: selecting samples does not select variants: bcftools view writes every site of family_cohort.vcf.gz, 2 of 5 sites of family_cohort.vcf.gz have no alternate allele in the 3 selected samples (for example var2); a count or list of its records includes the sites where nobody carries an alternate allele.\nFailed to read from standard input: unknown file type",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "core-06",
+   "outcome": "both",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "rs2274976\t80/200\nrs1260326\t24/200\nrs780094\t150/200\nrs1128249\t185/200",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "rs2274976\t80/200\nrs1476413\t196/200\nrs4846048\t200/200\nrs1260326\t24/200\nrs780094\t150/200\nrs1128249\t185/200",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "core-07",
+   "outcome": "missed",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "112100\t0/0:34\t0/1:41\t0/1:38\n112250\t./.:4\t0/0:29\t0/1:33\n112310\t0/0:31\t./.:3\t1/1:36\n112480\t./.:5\t./.:2\t./.:6\n112600\t0/0:27\t0/0:30\t./.:7\n112755\t1/1:44\t0/1:39\t0/1:12",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bcftools.format_filter_scope",
+      "scope_undeclared",
+      "block"
+     ]
+    ],
+    "message": "\u2026IX: re-run with --declare format_filter_scope=any_sample if keeping sites where one sample satisfies the condition is what you want drop the sites where any sample fails: -e 'FMT/DP<10' or require it of every sample: -i 'MIN(FMT/DP)>=10'\nBLOCKED, the command did not run. bcftools.format_filter_scope [filter_semantics/T1]: -i keeps a site when ANY of the 3 samples satisfies the FORMAT test; in trio_calls.vcf.gz 3 of 6 records have samples that satisfy FMT/DP>=10 and samples that do not (for example chr5:112250, chr5:112310, chr5:112600), so 'any sample' and 'all samples' select different sites.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "core-08",
+   "outcome": "caught",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr4\t20\t24\t1\nchr4\t24\t40\t2\nchr4\t40\t44\t3\nchr4\t44\t49\t4\nchr4\t49\t54\t5\nchr4\t54\t60\t6\nchr4\t60\t64\t1\nchr4\t260\t264\t5\nchr4\t264\t280\t6\nchr4\t280\t284\t5\nchr4\t284\t289\t4\nchr4\t289\t294\t3\nchr4\t294\t296\t2\nchr4\t296\t300\t1\ncovered_bases 84",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bedtools.spliced_without_split",
+      "spliced_reads_without_split",
+      "block"
+     ]
+    ],
+    "message": "FIX: add -split to bedtools genomecov so that only the aligned blocks count or declare --declare spliced_reads=span if the whole span of each read is what you want\nBLOCKED, the command did not run. bedtools.spliced_without_split [split/T1]: rnaseq_sample.bam holds spliced reads (CIGAR N, e.g. at chr4:41) and bedtools genomecov without -split treats each read as one interval from its first to its last base: every intron the reads skip is reported as covered.",
+    "observed": "covered_bases",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "id": "core-09",
+   "outcome": "caught",
+   "tool": "bedtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "MIR1 ATTGCCGTTCCTCATGGCCGCCGCAGCATT\nMIR2 AGGCCTAGATGGTTGAGAGGCAAGGCGACA\nMIR3 TCGTTCTTCTTTAATCTCAACAGGTGAATG",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "MIR1 ATTGCCGTTCCTCATGGCCGCCGCAGCATT\nMIR2 TGTCGCCTTGCCTCTCAACCATCTAGGCCT\nMIR3 CATTCACCTGTTGAGATTAAAGAAGAACGA",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "id": "core-10",
+   "outcome": "missed",
+   "tool": "bedtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "BRCA1\t39\nEGFR\t484\nKRAS\t131\nMYC\t182\nPTEN\t20\nTP53\t79",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools",
+     "sort"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "TP53\t41\nBRCA1\t17\nEGFR\t233\nMYC\t95\nKRAS\t60\nPTEN\t8\nTP53\t38\nBRCA1\t22\nEGFR\t251\nMYC\t87\nKRAS\t71\nPTEN\t12",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "id": "core-11",
+   "outcome": "missed",
+   "tool": "bedtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "gene\tTPM\nIL6\t12.7\nTNF\t31.9\nSTAT3\t58.3\nIL1B\t22.6\nSOCS3\t19.8",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "gene\tTPM\nSOCS3\t19.8",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk"
+    ],
+    "warnings": []
+   },
+   "id": "core-12",
+   "outcome": "missed",
+   "tool": "awk"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "19\trs429358\t44908684\t1e-300\n11\trs12361912\t2160994\t1e-30\n3\trs9939609\t53820527\t2.5e-12\n16\trs1421085\t53800954\t7.7e-09",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "sort"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "2\trs1260326\t27730940\t0.0021\n20\trs6060369\t33000112\t0.048\n6\trs2395029\t31464003\t0.6\n11\trs12361912\t2160994\t1e-30",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "sort"
+    ],
+    "warnings": []
+   },
+   "id": "core-13",
+   "outcome": "missed",
+   "tool": "sort"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "n_peaks 6\ntotal_width 2960\nchr1 2 1050\nchr2 2 1110\nchr7 1 350\nchrX 1 450",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-bio"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "n_peaks 5\ntotal_width 2510\nchr1 2 1050\nchr2 2 1110\nchr7 1 350",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-bio"
+    ],
+    "warnings": []
+   },
+   "id": "core-14",
+   "outcome": "missed",
+   "tool": "python-bio"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "@frag_1\tCTCCCCCCTACGCGCGTGCTGCTTGCCGGCAATGAA\n@frag_2\tTGGGTCACAAGAGGCGTTCGGTACACACTACATTCC\n@frag_3\tACAGCAAGATACACGGCGCAGGTGTAACTCTCTTGC\n@frag_4\tTGAGCTCTTTTCGCCGGTCTTTACATGAGACGAGGG\n@frag_5\tTGGAGGGTGACGCGGTCATTCTGCCGATTGAGACCA\n@frag_6\tCTGACTAATAGATGGGAGGCCGAACCAACTCCCAAG",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-bio"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "core",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "@frag_1\tCTCCCCCCTACGCGCGTGCTGCTTGCCGGCAATGAA\n@frag_2\tGGAATGTAGTGTGTACCGAACGCCTCTTGTGACCCA\n@frag_3\tACAGCAAGATACACGGCGCAGGTGTAACTCTCTTGC\n@frag_4\tCCCTCGTCTCATGTAAAGACCGGCGAAAAGAGCTCA\n@frag_5\tTGGAGGGTGACGCGGTCATTCTGCCGATTGAGACCA\n@frag_6\tCTTGGGAGTTGGTTCGGCCTCCCATCTATTAGTCAG",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-bio"
+    ],
+    "warnings": []
+   },
+   "id": "core-15",
+   "outcome": "missed",
+   "tool": "python-bio"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t4000\t5000\tLOC_A\t0\t+\nchr1\t15000\t16000\tLOC_B\t0\t-\nchr1\t22500\t23500\tLOC_C\t0\t-\nchr2\t2000\t3000\tLOC_D\t0\t+\nchr2\t9500\t10500\tLOC_E\t0\t-",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t4000\t5000\tLOC_A\t0\t+\nchr1\t11000\t12000\tLOC_B\t0\t-\nchr1\t20000\t21000\tLOC_C\t0\t-\nchr2\t2000\t3000\tLOC_D\t0\t+\nchr2\t7000\t8000\tLOC_E\t0\t-",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-01",
+   "outcome": "missed",
+   "tool": "bedtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ">enhA::chr1:10-40\nCGTTTCCGGGTATTACCACAACGGGGCAAG\n>enhB::chr1:60-90\nGTCGTCCTACTGCAACTCCAAGAGTTACAT\n>enhC::chr2:30-60\nGGTTAATCAAGACGGAAACCTAGGTACTTT\n>enhD::chr2:80-110\nTCCGACGGCACTTCTTGGATGGCTCTCGGC",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ">enhA::chr1:10-40\nCGTTTCCGGGTATTACCACAACGGGGCAAG\n>enhB::chr1:60-90\nGTCGTCCTACTGCAACTCCAAGAGTTACAT\n>enhC::chr2:30-60\nTAGCGGCAAGATGGTTAATCAAGACGGAAA\n>enhD::chr2:80-110\nGTGTCAGCAGAATCCGACGGCACTTCTTGG",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-02",
+   "outcome": "missed",
+   "tool": "bedtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t1000\t1400\tpeak_01\t120\t.\nchr1\t6000\t6300\tpeak_04\t60\t.",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bedtools.subtract_trims",
+      "subtract_trims_not_removes",
+      "block"
+     ]
+    ],
+    "message": "FIX: add -A to remove every a feature that overlaps b by one base (or use bedtools intersect -v) or declare --declare overlap_policy=trim if the trimmed pieces are what you want\nBLOCKED, the command did not run. bedtools.subtract_trims [overlap_policy/T1]: bedtools subtract does not drop a feature that overlaps blacklist.bed, it cuts out the overlapping bases: 4 output line(s) are shortened or split pieces of peaks.bed features (peak_02 and others) that a plain overlap test would remove.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-03",
+   "outcome": "caught",
+   "tool": "bedtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t100\t140\t1\nchr1\t140\t150\t2\nchr1\t150\t190\t1\nchr1\t200\t265\t1\nchr1\t265\t275\t2\nchr1\t275\t285\t3\nchr1\t285\t300\t4\nchr1\t900\t915\t3\nchr1\t915\t920\t2\nchr1\t920\t925\t3\nchr1\t925\t935\t2\nchr1\t935\t970\t1\nchr1\t980\t1080\t1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bedtools.spliced_without_split",
+      "spliced_reads_without_split",
+      "block"
+     ]
+    ],
+    "message": "FIX: add -split to bedtools genomecov so that only the aligned blocks count or declare --declare spliced_reads=span if the whole span of each read is what you want\nBLOCKED, the command did not run. bedtools.spliced_without_split [split/T1]: rnaseq.bam holds spliced reads (CIGAR N, e.g. at chr1:251) and bedtools genomecov without -split treats each read as one interval from its first to its last base: every intron the reads skip is reported as covered.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-04",
+   "outcome": "caught",
+   "tool": "bedtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t900\t1300\tpeak_01\t50\t.\nchr1\t1850\t2100\tpeak_02\t60\t.\nchr1\t5200\t5500\tpeak_04\t40\t.\nchr2\t700\t900\tpeak_05\t90\t.",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t900\t1300\tpeak_01\t50\t.\nchr1\t900\t1300\tpeak_01\t50\t.\nchr1\t1850\t2100\tpeak_02\t60\t.\nchr1\t5200\t5500\tpeak_04\t40\t.\nchr1\t5200\t5500\tpeak_04\t40\t.\nchr2\t700\t900\tpeak_05\t90\t.",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedtools"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-05",
+   "outcome": "missed",
+   "tool": "bedtools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t900\t1300\tpeak_01\t50\nchr1\t1850\t2100\tpeak_02\t60\nchr1\t5200\t5500\tpeak_04\t40\nchr2\t700\t900\tpeak_05\t90",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedops"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bedops.element_of_amount",
+      "amount_not_stated",
+      "block"
+     ]
+    ],
+    "message": "FIX: bedops --element-of 1 reference.bed map.bed selects on at least one base of overlap (or give a percentage such as 50%) or declare --declare overlap_amount=full if 100 percent is what you want\nBLOCKED, the command did not run. bedops.element_of_amount [overlap_amount/T0]: bedops --element-of without an amount defaults to 100 percent: only reference elements entirely covered by the other files qualify, so partly overlapped elements are silently left out (or, for -n, kept).",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bedops"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-06",
+   "outcome": "caught",
+   "tool": "bedops"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t1200\t1500\tpeak_01\t55\tGENE_A\nchr2\t800\t1100\tpeak_02\t60\tGENE_B\nchr2\t4000\t4300\tpeak_03\t41\tGENE_C\nchr3\t300\t600\tpeak_04\t75\tGENE_D\nchr10\t2200\t2500\tpeak_05\t88\tGENE_E\nchr11\t900\t1200\tpeak_06\t35\tGENE_F\nchrX\t1500\t1800\tpeak_07\t64\tGENE_G",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedmap"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bedops.sorted_input",
+      "not_in_sort_bed_order",
+      "block"
+     ]
+    ],
+    "message": "FIX: sort-bed peaks.bed > peaks.sorted.bed and use the sorted copy for every input file or add --ec so that BEDOPS stops on a file that is out of order\nBLOCKED, the command did not run. bedops.sorted_input [sort_order/T1]: bedmap reads its inputs in sort-bed order and checks nothing without --ec, so this call returns wrong results (zero counts, NA, missed overlaps) silently; peaks.bed: data line 5 (chr10 2200-2500) comes after chr3, but chr10 sorts before chr3 as text (sort-bed order is chr1, chr10, chr11, chr2, ..., not genome order).",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bedmap"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-07",
+   "outcome": "caught",
+   "tool": "bedmap"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t1000\t2000\tGENE_A\t16.916667\nchr1\t4000\t5000\tGENE_B\t3.000000\nchr1\t8000\t9000\tGENE_C\tNAN\nchr2\t1000\t3000\tGENE_D\t15.000000",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "bedmap"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bedops.bedmap_score_column",
+      "no_score_column",
+      "block"
+     ]
+    ],
+    "message": "FIX: awk 'BEGIN{OFS=\"\\t\"}{print $1,$2,$3,\".\",$4}' signal.bedGraph > signal.score5.bed, then use that file as the map file\nBLOCKED, the command did not run. bedops.bedmap_score_column [score_column/T1]: bedmap score operations read the value from column 5 of the map file, but signal.bedGraph has only 4 columns (a bedGraph keeps its value in column 4): the result is 0.000000 or NAN, silently.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bedmap"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-08",
+   "outcome": "caught",
+   "tool": "bedmap"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "vcf.indel_interval_anchor",
+      "anchor_base_in_interval",
+      "block"
+     ]
+    ],
+    "message": "\u2026awk -F'\\t' -v OFS='\\t' '{s=$2-1; if (length($3)>length($4) && substr($3,1,1)==substr($4,1,1)) s++; print $1,s,$2-1+length($3)}'\nBLOCKED, the command did not run. vcf.indel_interval_anchor [interval_closure/T1]: variants.vcf has 4 of its first 7 records with an indel allele whose REF and ALT share the first base (the VCF anchor, e.g. chr1:1060 REF=ACGTAC ALT=A), and this command builds intervals from POS and the length of REF, which gives the REF allele span with the anchor included: the REF span of that record is chr1:1059-1065 (0-based, end exclusive) but the deleted bases are chr1:1060-1065.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools",
+     "bedops"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": true,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "snv_ex1\ndel_ex1\nsnv_ex3",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bedops"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-09",
+   "outcome": "missed",
+   "tool": "vcf2bed"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t1000\t1100\tpeak_01\t850\t+\nchr1\t5100\t5300\tpeak_02\t640\t+\nchr1\t12100\t12300\tpeak_02\t640\t+\nchr1\t5400\t5450\tpeak_03\t410\t.\nchr1\t12400\t12450\tpeak_03\t410\t.\nchr1\t8000\t8100\tpeak_04\t320\t-\nchr1\t15000\t15200\tpeak_05\t770\t+",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "liftOver"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t1000\t1100\tpeak_01\t1\t+\nchr1\t5100\t5300\tpeak_02\t1\t+\nchr1\t12100\t12300\tpeak_02\t2\t+\nchr1\t5400\t5450\tpeak_03\t1\t.\nchr1\t12400\t12450\tpeak_03\t2\t.\nchr1\t8000\t8100\tpeak_04\t1\t-\nchr1\t15000\t15200\tpeak_05\t1\t+",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "liftOver"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-10",
+   "outcome": "missed",
+   "tool": "liftOver"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [],
+    "message": "\u2026ch bin (raw counts) (--binSize 100): re-run with --declare track_unit=reads_per_bin or change the options for another unit: add --binSize 1 and omit --normalizeUsing and --scaleFactor, or add --normalizeUsing CPM (or RPKM, BPM, RPGC with --effectiveGenomeSize)\nBLOCKED, the command did not run. deeptools.bamcoverage_track_units [units/T0]: state which units convention you intend (bamCoverage writes raw counts per 50-base bin by default, where a bin value is the number of reads that overlap the bin (not the depth) and libraries of different size are not comparable until --normalizeUsing is set.)",
+    "observed": "",
+    "requests": [
+     [
+      "deeptools.bamcoverage_track_units",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bamCoverage"
+    ],
+    "warnings": []
+   },
+   "clean_asked": true,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [],
+    "message": "\u2026ch bin (raw counts) (--binSize 100): re-run with --declare track_unit=reads_per_bin or change the options for another unit: add --binSize 1 and omit --normalizeUsing and --scaleFactor, or add --normalizeUsing CPM (or RPKM, BPM, RPGC with --effectiveGenomeSize)\nBLOCKED, the command did not run. deeptools.bamcoverage_track_units [units/T0]: state which units convention you intend (bamCoverage writes raw counts per 50-base bin by default, where a bin value is the number of reads that overlap the bin (not the depth) and libraries of different size are not comparable until --normalizeUsing is set.)",
+    "observed": "",
+    "requests": [
+     [
+      "deeptools.bamcoverage_track_units",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bamCoverage"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-11",
+   "outcome": "declaration",
+   "tool": "bamCoverage"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t0\t20000\t0\nchrM\t0\t2000\t3.03562",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bamCompare"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t0\t10000\t-0.767339\nchr1\t10000\t15000\t-0.758992\nchr1\t15000\t20000\t-0.749038\nchrM\t0\t2000\t2.20163",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bamCompare"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-12",
+   "outcome": "missed",
+   "tool": "bamCompare"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "#'chr'\t'start'\t'end'\t'sampleA.bam'\t'sampleB.bam'\nchr1\t1000\t1200\t1.0\t2.0\nchr1\t2000\t2200\t3.0\t1.0\nchr1\t3000\t3200\t2.0\t2.0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "multiBamSummary"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "#'chr'\t'start'\t'end'\t'sampleA.bam'\t'sampleB.bam'\nchr1\t1000\t1200\t6.0\t2.0\nchr1\t2000\t2200\t3.0\t9.0\nchr1\t3000\t3200\t3.0\t2.0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "multiBamSummary"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-13",
+   "outcome": "missed",
+   "tool": "multiBamSummary"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "bin labels\t\t-0.3Kb\t\ttick\t\t\t0.3Kb\nbins\t\t1.0\t2.0\t3.0\t4.0\t5.0\t6.0\nsignal\tgenes\t2.0\t2.0\t2.0\t2.6666666666666665\t2.6666666666666665\t2.6666666666666665",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "computeMatrix"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "deeptools.matrix_missing_data",
+      "missing_bins_not_zero",
+      "block"
+     ]
+    ],
+    "message": "FIX: add --missingDataAsZero (a bin with no entry means no reads) and --declare missing_signal=zero or --declare missing_signal=na if NaN is wanted and the average skips them on purpose\nBLOCKED, the command did not run. deeptools.matrix_missing_data [missing_value/T1]: signal.bw has no entry for 18 bins of 3 of the 6 regions (for example chr1:14000-14001): computeMatrix writes NaN for them, so any mean that skips NaN (numpy nanmean, pandas mean, a plot of the mean profile) covers only the bins that have signal and overstates it.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "computeMatrix"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-14",
+   "outcome": "caught",
+   "tool": "computeMatrix"
+  },
+  {
+   "clean": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t19772\t20228\t717\t19.9687\t74.0923\t71.7227\nchr1\t49744\t50221\t912\t30.8049\t96.2623\t91.2633\nchr1\t79780\t80214\t896\t29.961\t92.8147\t89.6849",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "macs3"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "intervals",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t19749\t19977\t237\t14.2319\t26.6842\t23.7473\nchr1\t49780\t50001\t252\t14.9096\t28.3498\t25.2607\nchr1\t79738\t79990\t370\t20.5931\t42.0196\t37.0221",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "macs3"
+    ],
+    "warnings": []
+   },
+   "id": "intervals-15",
+   "outcome": "missed",
+   "tool": "macs3"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "ENSG00000100001\t29\nENSG00000100002\t20\nENSG00000100003\t8\nENSG00000100004\t39\n__no_feature\t2\n__ambiguous\t0\n__too_low_aQual\t0\n__not_aligned\t0\n__alignment_not_unique\t0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "htseq-count"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "htseq.strandedness",
+      "stranded_option_mismatch",
+      "block"
+     ]
+    ],
+    "message": "FIX: re-run with -s reverse (declare library_strandedness=reverse)\nBLOCKED, the command did not run. htseq.strandedness [strand/T1]: -s yes (the default) tells htseq-count the library is forward, but liver_rep1.bam is reverse-stranded (dUTP): 2 of 98 reads sit on their gene's strand; only 2 of 98 informative reads would be counted.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "htseq-count"
+    ],
+    "warnings": []
+   },
+   "id": "quant-01",
+   "outcome": "caught",
+   "tool": "htseq-count"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Geneid\tStart\tEnd\tLength\th3k27ac_chip.bam\npeak_1\t1001\t1300\t300\t6\npeak_2\t2401\t2650\t250\t6\npeak_3\t5001\t5400\t400\t9\npeak_4\t801\t1100\t300\t5",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "featureCounts"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Geneid\tStart\tEnd\tLength\th3k27ac_chip.bam\npeak_1\t1000\t1300\t301\t9\npeak_2\t2400\t2650\t251\t6\npeak_3\t5000\t5400\t401\t11\npeak_4\t800\t1100\t301\t6",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "featureCounts"
+    ],
+    "warnings": []
+   },
+   "id": "quant-02",
+   "outcome": "missed",
+   "tool": "featureCounts"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Geneid\tChr\theart_lv1.bam\nENSG00000200001\t1;1\t26\nENSG00000200002\t1;1\t30\nENSG00000200003\t2\t20\nENSG00000198888\tMT\t14\nENSG00000198804\tMT\t10",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "featureCounts"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Geneid\tChr\theart_lv1.bam\nENSG00000200001\t1;1\t26\nENSG00000200002\t1;1\t30\nENSG00000200003\t2\t20\nENSG00000198888\tMT\t0\nENSG00000198804\tMT\t0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "featureCounts"
+    ],
+    "warnings": []
+   },
+   "id": "quant-03",
+   "outcome": "missed",
+   "tool": "featureCounts"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Geneid\taligned.bam\nBSU_00010\t24\nBSU_00500\t15\nBSU_30010\t0\nBSU_30020\t0\nBSU_30030\t0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "featureCounts"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Geneid\taligned.bam\nBSU_00010\t24\nBSU_00500\t15\nBSU_30010\t8\nBSU_30020\t4\nBSU_30030\t6",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "featureCounts"
+    ],
+    "warnings": []
+   },
+   "id": "quant-04",
+   "outcome": "missed",
+   "tool": "featureCounts"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Name\tNumReads\nENST00000500001\t25\nENST00000500002\t35\nENST00000500003\t25",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "salmon"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Name\tNumReads\nENST00000500001\t52\nENST00000500002\t35\nENST00000500003\t25",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "salmon"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "quant-05",
+   "outcome": "warned",
+   "tool": "salmon"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "transcript_id\texpected_count\nENST00000610001\t37.21\nENST00000610002\t22.79\nENST00000610003\t30.00\nENST00000610004\t25.00",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "rsem-calculate-expression",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "transcript_id\texpected_count\nENST00000610001\t48.00\nENST00000610002\t40.00\nENST00000610003\t30.00\nENST00000610004\t25.00",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "rsem-calculate-expression"
+    ],
+    "warnings": []
+   },
+   "id": "quant-06",
+   "outcome": "missed",
+   "tool": "rsem-calculate-expression"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "target_id\test_counts\nENST00000700001\t60\nENST00000700002\t40\nENST00000700003\t30\nENST00000700004\t20\nENST00000700005\t25",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "kallisto"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "target_id\test_counts\nENST00000700001\t47\nENST00000700002\t30\nENST00000700003\t0\nENST00000700004\t0\nENST00000700005\t0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "kallisto"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "quant-07",
+   "outcome": "warned",
+   "tool": "kallisto"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "target_id\test_counts\nENST00000800001\t29\nENST00000800002\t30\nENST00000800003\t20\nENST00000800004\t51",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "kallisto"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "target_id\test_counts\nENST00000800001\t80\nENST00000800002\t30\nENST00000800003\t20",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "kallisto"
+    ],
+    "warnings": []
+   },
+   "id": "quant-08",
+   "outcome": "missed",
+   "tool": "kallisto"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "transcript_id\texpected_count\nENST00000900001\t40.00\nENST00000900002\t12.00\nENST00000900003\t30.00",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "rsem-calculate-expression"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "transcript_id\texpected_count\nENST00000900001\t52.00\nENST00000900002\t0.00\nENST00000900003\t30.00",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "rsem-calculate-expression"
+    ],
+    "warnings": []
+   },
+   "id": "quant-09",
+   "outcome": "missed",
+   "tool": "rsem-calculate-expression"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr3\t504\t1473\t+\nchr3\t2508\t3497\t-\nchr3\t4014\t4997\t+\ntranscripts=3 exons=6",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "stringtie"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr3\t504\t800\t.\nchr3\t1201\t1473\t.\nchr3\t2508\t2800\t.\ntranscripts=3 exons=3",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "stringtie"
+    ],
+    "warnings": []
+   },
+   "id": "quant-10",
+   "outcome": "missed",
+   "tool": "stringtie"
+  },
+  {
+   "clean": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "gene_id,ctrl,treated\nENSG00000300001|LRRC8X,20,8\nENSG00000300002|CDK5RX,14,18\nENSG00000300003|SPTBNX,8,8\nENSG00000300004|HOXB9X,6,16",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python",
+     "stringtie"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "gene_id,ctrl,treated\nENSG00000300001|LRRC8X,40,16\nENSG00000300002|CDK5RX,28,36\nENSG00000300003|SPTBNX,16,16\nENSG00000300004|HOXB9X,12,32",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python",
+     "stringtie"
+    ],
+    "warnings": []
+   },
+   "id": "quant-11",
+   "outcome": "missed",
+   "tool": "prepDE.py"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "gene_id,ctrl_1,ctrl_2,treat_1\nENSG00000141510,204293.6,190010.9,236507.9\nENSG00000012048,56094.2,56460.4,64285.7\nENSG00000139618,25623.3,28230.2,26190.5\nENSG00000171862,3462.6,3257.3,3174.6\nENSG00000133703,94182.8,73832.8,73809.5\nENSG00000146648,419667.6,442453.9,391269.8\nENSG00000105810,15928.0,15200.9,15873.0\nENSG00000168769,56094.2,40173.7,46825.4\nENSG00000187048,0.0,0.0,0.0\nENSG00000100030,124653.7,150380.0,142063.5",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-bio"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "gene_id,ctrl_1,ctrl_2,treat_1\nENSG00000141510,157082.0,146076.8,181818.2\nENSG00000012048,43131.0,43405.7,49420.4\nENSG00000139618,19701.8,21702.8,20134.2\nENSG00000171862,2662.4,2504.2,2440.5\nENSG00000133703,72417.5,56761.3,56741.9\nENSG00000146648,322683.7,340150.3,300793.2\nENSG00000105810,12247.1,11686.1,12202.6\nENSG00000168769,43131.0,30884.8,35997.6\nENSG00000187048,0.0,0.0,0.0\nENSG00000100030,95846.6,115609.3,109212.9\n__no_feature,130457.9,130634.4,130567.4\n__ambiguous,22896.7,22954.9,22574.7\n__too_low_aQual,9052.2,9182.0,9151.9\n__not_aligned,14909.5,15025.0,15253.2\n__alignment_not_unique,53780.6,53422.4,53691.3",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-bio"
+    ],
+    "warnings": []
+   },
+   "id": "quant-12",
+   "outcome": "missed",
+   "tool": "python-bio"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "gene_id,ctrl,treated\nENSG00000150001,70,67\nENSG00000150002,35,40\nENSG00000150003,50,35\nENSG00000150004,20,26\nENSG00000150005,27,36\nMSTRG.21.1,22,40\nMSTRG.40.1,18,12\nMSTRG.40.2,10,30\ntotal 252 286",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-bio"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "gene_id,ctrl,treated\nENSG00000150001,70,67\nENSG00000150002,35,40\nENSG00000150003,50,35\nENSG00000150004,20,26\nENSG00000150005,27,36\ntotal 202 204",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-bio"
+    ],
+    "warnings": []
+   },
+   "id": "quant-13",
+   "outcome": "missed",
+   "tool": "python-bio"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "CCDC88X\t35\nPLEKHM3X\t22\nRBM47X\t35\nSLC38A9X\t50\nTMEM63X\t28\n__no_feature\t0\n__ambiguous\t0\n__too_low_aQual\t0\n__not_aligned\t0\n__alignment_not_unique\t0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "htseq-count"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "NM_001303\t4\nNM_001400\t0\nNM_001401\t0\nNM_001402\t0\nNM_001555\t0\nNM_001900\t22\nNM_014698\t4\nNM_019027\t35\nNM_173514\t9\n__no_feature\t0\n__ambiguous\t96\n__too_low_aQual\t0\n__not_aligned\t0\n__alignment_not_unique\t0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "htseq-count"
+    ],
+    "warnings": []
+   },
+   "id": "quant-14",
+   "outcome": "missed",
+   "tool": "htseq-count"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "peak_A 9\npeak_B 6\npeak_C 7\nUnassigned_Duplicate\t11",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "featureCounts",
+     "samtools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "quant",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "peak_A 15\npeak_B 11\npeak_C 7\nUnassigned_Duplicate\t0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "featureCounts"
+    ],
+    "warnings": []
+   },
+   "id": "quant-15",
+   "outcome": "missed",
+   "tool": "featureCounts"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ",Epcam,Krt8,Krt18,Vim,Col1a1,Ptprc,Actb,Gapdh\nctrl,24.0,45.0,48.0,15.0,7.0,5.0,151.0,106.0\ntreated,29.0,56.0,38.0,20.0,13.0,3.0,143.0,103.0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ",Epcam,Krt8,Krt18,Vim,Col1a1,Ptprc,Actb,Gapdh\nctrl,38.087906,41.86697,42.23567,35.454445,17.38155,24.996958,49.38143,47.19745\ntreated,39.19648,42.948265,40.711296,36.93937,29.289206,14.690596,49.00135,46.939247",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-01",
+   "outcome": "missed",
+   "tool": "anndata"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "(9, 12)\nActb Ager Cd68 Col1a1 Foxj1 Gapdh Hopx Pecam1 Ptprc Scgb1a1 Sftpb Sftpc",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "(9, 8)\nSftpc Ager Scgb1a1 Cd68 Ptprc Col1a1 Actb Gapdh",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-02",
+   "outcome": "missed",
+   "tool": "anndata"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "cross_batch_neighbour_fraction 0.55",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "cross_batch_neighbour_fraction 0.13",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-03",
+   "outcome": "missed",
+   "tool": "scanpy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "CellID,umi_total\npossorted_genome_bam_K3L9P:ACGTTGCA,73.0\npossorted_genome_bam_K3L9P:TTGACCAA,93.0\npossorted_genome_bam_K3L9P:GGATCCTA,88.0\npossorted_genome_bam_K3L9P:CAGTAGGC,80.0\npossorted_genome_bam_K3L9P:ATCGGATT,96.0\npossorted_genome_bam_K3L9P:TCCAGTTG,78.0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "CellID,umi_total\npossorted_genome_bam_K3L9P:ACGTTGCA,40.0\npossorted_genome_bam_K3L9P:TTGACCAA,54.0\npossorted_genome_bam_K3L9P:GGATCCTA,43.0\npossorted_genome_bam_K3L9P:CAGTAGGC,52.0\npossorted_genome_bam_K3L9P:ATCGGATT,54.0\npossorted_genome_bam_K3L9P:TCCAGTTG,33.0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-04",
+   "outcome": "missed",
+   "tool": "anndata"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "3 Antibody Capture\n      6 Gene Expression",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "6 Gene Expression",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-05",
+   "outcome": "missed",
+   "tool": "scanpy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "BANK1 CASP3 CD2 CD3D CD79A CD79B ENO1 FCGR3A IL7R LCK PTMA RPS27A \n7",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "AKT1 CASP3 COX4I1 FTH1 GSTP1 IL32 JUN LGALS1 NKG7 RHOA STAT3 YWHAZ \n0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-06",
+   "outcome": "missed",
+   "tool": "scanpy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "names,scores,logfoldchanges\nCXCL12,5.3973517,2.187151\nAPOD,3.7970667,5.149501\nCOL1A2,3.5888722,0.5981585",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "names,scores,logfoldchanges\nDCN,6.0029836,1.7312332\nCOL1A2,5.371631,1.4193833\nCOL1A1,3.550922,1.1503793",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-07",
+   "outcome": "missed",
+   "tool": "scanpy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "names,scores,logfoldchanges\nVEGFA,9.072321,1.7592957\nMYC,8.002626,0.7240836\nCCND1,6.7266793,1.1039935\nSLC2A1,6.0837603,1.949606",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "names,scores,logfoldchanges\nVEGFA,9.072319,2.5340533\nMYC,8.002669,1.0436041\nCCND1,6.7266865,1.5903952\nSLC2A1,6.0837564,2.8065739",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-08",
+   "outcome": "missed",
+   "tool": "scanpy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "(12, 12)\nGSM5012001 GSM5012002 GSM5012004 GSM5012005",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "(11, 13)\nSox2 Pax6 Nes Dcx",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-09",
+   "outcome": "missed",
+   "tool": "scanpy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "batch,ifn_score\ndeep,-0.14\nshallow,-0.09",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "batch,ifn_score\ndeep,-2.84\nshallow,-0.53",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-10",
+   "outcome": "missed",
+   "tool": "scanpy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "13\nMSB1_10,10.0\nMSB1_08,7.5\nMSB1_15,6.7",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "16\nMSB1_00,0.0\nMSB1_01,0.0\nMSB1_02,0.0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-11",
+   "outcome": "missed",
+   "tool": "scanpy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "['prot', 'rna']\n{'prot': (5, 3), 'rna': (9, 6)}",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "['rna']\n{'rna': (9, 6)}",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-12",
+   "outcome": "missed",
+   "tool": "mudata"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "6 {'atac': 6, 'rna': 6}\n6 cells in both",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "10 {'atac': 8, 'rna': 8}\n6 cells in both",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-13",
+   "outcome": "missed",
+   "tool": "mudata"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Actb 43.8 36.2\nGapdh 26.8 22.7\nSox2 8.7 10.3\nNes 3.7 4.7\nPax6 2.5 3.3\nMki67 0.8 1.5",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "Actb 43.8 36.2\nGapdh 26.8 22.7\nSox2 8.7 1.5\nNes 3.7 4.7\nPax6 2.5 3.3\nMki67 0.8 10.3",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-14",
+   "outcome": "missed",
+   "tool": "loompy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "(5, 6) ['CellID', 'Cluster', 'Sample']\n[0, 0, 1, 1, -1, -1]\n['run1', 'run1', 'run1', 'run1', 'run2', 'run2']",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "sc",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "(5, 6) ['CellID']\nno Cluster attribute\nno Sample attribute",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-sc"
+    ],
+    "warnings": []
+   },
+   "id": "sc-15",
+   "outcome": "missed",
+   "tool": "loompy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "reads 24 bases 1970 bases_below_Q6 0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "seqtk"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "reads 24 bases 2400 bases_below_Q6 430",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "seqtk"
+    ],
+    "warnings": []
+   },
+   "id": "seq-01",
+   "outcome": "missed",
+   "tool": "seqtk"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "ctg1:21-89 len=69 first=ATG last=TGA frame_ok=1\nctg1:154-237 len=84 first=ATG last=TAG frame_ok=1\nctg2:31-93 len=63 first=ATG last=TAA frame_ok=1\nctg2:134-190 len=57 first=ATG last=TAG frame_ok=1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "seqtk"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "ctg1:22-89 len=68 first=TGC last=TGA frame_ok=0\nctg1:155-237 len=83 first=TGT last=TAG frame_ok=0\nctg2:32-93 len=62 first=TGA last=TAA frame_ok=0\nctg2:135-190 len=56 first=TGG last=TAG frame_ok=0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "seqtk"
+    ],
+    "warnings": []
+   },
+   "id": "seq-02",
+   "outcome": "missed",
+   "tool": "seqtk"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "MT-ND1 mitochondrion, Danio rerio aa=111 internal_stops=0 Met=9 last=*\nMT-ND2 mitochondrion, Danio rerio aa=126 internal_stops=0 Met=12 last=*\nMT-CO1 mitochondrion, Danio rerio aa=141 internal_stops=0 Met=10 last=*\nMT-ATP8 mitochondrion, Danio rerio aa=71 internal_stops=0 Met=6 last=*",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "seqkit"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "MT-ND1 mitochondrion, Danio rerio aa=111 internal_stops=4 Met=1 last=*\nMT-ND2 mitochondrion, Danio rerio aa=126 internal_stops=3 Met=6 last=R\nMT-CO1 mitochondrion, Danio rerio aa=141 internal_stops=4 Met=2 last=R\nMT-ATP8 mitochondrion, Danio rerio aa=71 internal_stops=2 Met=1 last=*",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "seqkit"
+    ],
+    "warnings": []
+   },
+   "id": "seq-03",
+   "outcome": "missed",
+   "tool": "seqkit"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "records=12\nadaptor_A_bottom adaptor_A_top adaptor_B_bottom adaptor_B_top adaptor_C_bottom adaptor_C_top adaptor_D_bottom_req2 adaptor_D_top adaptor_E_bottom adaptor_E_top adaptor_F_bottom adaptor_F_top_req2",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "seqkit"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "seqkit.rmdup_strands",
+      "reverse_complement_duplicates",
+      "block"
+     ]
+    ],
+    "message": "FIX: add -P (--only-positive-strand) to compare sequences as written or, if a reverse-complement pair is one sequence: --declare duplicate_strand_policy=both_strands\nBLOCKED, the command did not run. seqkit.rmdup_strands [strand/T1]: seqkit rmdup -s also treats a sequence and its reverse complement as duplicates: oligo_requests.fa holds 6 such pair(s) (for example AAAATATAGAGTTTAGACGAGGGA and TCCCTCGTCTAAACTCTATATTTT), and one of each pair is dropped.",
+    "observed": "records=",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "seqkit"
+    ],
+    "warnings": []
+   },
+   "id": "seq-04",
+   "outcome": "caught",
+   "tool": "seqkit"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "reads=30 bases=2055\nfirst_read_quality=GHHHIHFIHFHHFHFIGHFIHHHGIHIHHGFHHHFHHGII",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "fastp"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "fastq.phred_offset",
+      "phred64_undeclared",
+      "block"
+     ]
+    ],
+    "message": "\u202664 and compute Q as ord(c) - 64 (Q30 is the character '^' or above) or convert the file to Phred+33 first (subtract 31 from every quality character) and use the converted file\nBLOCKED, the command did not run. fastq.phred_offset [units/T1]: lane1_R1.fastq is Phred+64, not Phred+33: its quality characters span 'B'..'h' (ASCII 66..104, 40 reads looked at), none below ';' (59) and some above 'J' (74); read as Phred+33 every quality is 31 too high (even the lowest character 'B' would read as Q33, so a cutoff written for +33 accepts every base; Q30 is '?' or above for +33 but '^' or above for +64).",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "fastp"
+    ],
+    "warnings": []
+   },
+   "id": "seq-05",
+   "outcome": "caught",
+   "tool": "fastp"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "reads=48 bases=2432 reads_ending_in_polyG=0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "fastp"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "reads=48 bases=3600 reads_ending_in_polyG=32",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "fastp"
+    ],
+    "warnings": []
+   },
+   "id": "seq-06",
+   "outcome": "missed",
+   "tool": "fastp"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "reads_kept=36 bases=7602\n@ont_amp_001 runid=7c1f barcode=03\n@ont_amp_002 runid=7c1f barcode=03 rc\n@ont_amp_003 runid=7c1f barcode=03\n@ont_amp_004 runid=7c1f barcode=03 rc",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "cutadapt"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "reads_kept=18 bases=3751\n@ont_amp_001 runid=7c1f barcode=03\n@ont_amp_003 runid=7c1f barcode=03\n@ont_amp_005 runid=7c1f barcode=03\n@ont_amp_007 runid=7c1f barcode=03",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "cutadapt"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "seq-07",
+   "outcome": "warned",
+   "tool": "cutadapt"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "trimmed_1P reads=32\ntrimmed_2P reads=32\ntrimmed_1U reads=0\ntrimmed_2U reads=0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python",
+     "trimmomatic"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "warn",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "trimmed_1P reads=9\ntrimmed_2P reads=9\ntrimmed_1U reads=23\ntrimmed_2U reads=0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python",
+     "trimmomatic"
+    ],
+    "warnings": [
+     [
+      "fastq.phred_offset",
+      "offset_not_provable",
+      "warn"
+     ]
+    ]
+   },
+   "id": "seq-08",
+   "outcome": "warned",
+   "tool": "trimmomatic"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "scaffolds_with_hit=4\nsp1_scaffold12\t96.547\t724\nsp2_scaffold7\t89.256\t726\nsp3_scaffold31\t78.483\t725\nsp4_scaffold4\t71.821\t692",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "blastn"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "scaffolds_with_hit=2\nsp1_scaffold12\t96.685\t724\nsp2_scaffold7\t89.256\t726",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "blastn"
+    ],
+    "warnings": []
+   },
+   "id": "seq-09",
+   "outcome": "missed",
+   "tool": "blastn"
+  },
+  {
+   "clean": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "hits_in_blast=8 sequences_extracted=8\n>AB123456.1 >CP032666.1 >NC_000913.3 >NZ_CP009072.1 >isolate17_contig3 >isolate22_contig9 >isolate31_contig1 >isolate40_contig12",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "blastn",
+     "seqkit",
+     "sort"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "hits_in_blast=8 sequences_extracted=4\n>isolate17_contig3 >isolate22_contig9 >isolate31_contig1 >isolate40_contig12",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "blastn",
+     "seqkit",
+     "sort"
+    ],
+    "warnings": []
+   },
+   "id": "seq-10",
+   "outcome": "missed",
+   "tool": "makeblastdb"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "family_members=45\nLRR_kinase_43\nLRR_kinase_44\nLRR_kinase_45",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "diamond"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "diamond.hit_cap",
+      "hit_cap_binds",
+      "block"
+     ]
+    ],
+    "message": "FIX: add --max-target-seqs 0 (all hits) or, if only the best 25 hits are wanted: --declare hit_limit=top_hits\nBLOCKED, the command did not run. diamond.hit_cap [record_count/T1]: diamond reports at most 25 target sequences per query (the default), and 1 of 1 queries in query.faa have more hit subjects (LRR_kinase_ref has 45): the weakest homologs are missing from the output with no message.",
+    "observed": "family_members=0",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "diamond"
+    ],
+    "warnings": []
+   },
+   "id": "seq-11",
+   "outcome": "caught",
+   "tool": "diamond"
+  },
+  {
+   "clean": {
+    "calls_checked": 14,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "strain_A1 stops=1\nstrain_B2 stops=1\nstrain_C3 stops=2\nstrain_D4 stops=1\nstrain_E5 stops=2\nstrain_F6 stops=1\nalignment_columns=141",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "mafft"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 14,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "strain_A1 stops=0\nstrain_B2 stops=0\nstrain_C3 stops=0\nstrain_D4 stops=0\nstrain_E5 stops=0\nstrain_F6 stops=0\nalignment_columns=140",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "mafft"
+    ],
+    "warnings": []
+   },
+   "id": "seq-12",
+   "outcome": "missed",
+   "tool": "mafft"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "prot_001 lectin_like 6e-45\nprot_002 kinase_like 3e-43\nprot_003 porin_like 2.9e-34\nprot_004 porin_like 2.1e-32",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "hmmscan"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "prot_001 lectin_like 4e-45\nprot_002 kinase_like 2e-43",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "hmmscan"
+    ],
+    "warnings": []
+   },
+   "id": "seq-13",
+   "outcome": "missed",
+   "tool": "hmmscan"
+  },
+  {
+   "clean": {
+    "calls_checked": 14,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "hits=11\nprot001 prot003 prot012 prot019 prot054 prot059 prot060 prot062 prot101 prot111 prot116",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "hmmsearch",
+     "sort"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 14,
+    "decision": "block",
+    "exit": 1,
+    "findings": [
+     [
+      "hmmer.split_database",
+      "evalue_from_one_part",
+      "block"
+     ]
+    ],
+    "message": "\u2026Z 120 (the number of sequences in all 12 files) or, if proteome.part_012.faa is the whole database: --declare evalue_database=this_file\nBLOCKED, the command did not run. hmmer.split_database [metric_scale/T1]: hmmsearch computes E-values from the 10 sequences of proteome.part_012.faa, but proteome.part_012.faa is one of 12 sibling files (proteome.part_001.faa ... proteome.part_012.faa, 120 sequences together): every E-value is 12.0 times smaller than in a search of the whole collection, so an E-value threshold lets through hits that fail it there.\ncat: 'chunks/*.tbl': No such file or directory",
+    "observed": "hits=0",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "awk",
+     "hmmsearch",
+     "sort"
+    ],
+    "warnings": []
+   },
+   "id": "seq-14",
+   "outcome": "caught",
+   "tool": "hmmsearch"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "clusters=4\nASM1_g0012 <- ASM1_g0012\nASM1_g0012 <- ASM2_g0847\nASM1_g0012 <- ASM3_g0301\nASM1_g0012 <- ASM4_g0555\nASM1_g0420 <- ASM1_g0420\nASM1_g0420 <- ASM2_g1102\nASM1_g0420 <- ASM3_g0777\nASM1_g0933 <- ASM1_g0933\nASM1_g0933 <- ASM4_g0099\nASM2_g0615 <- ASM2_g0615",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "awk",
+     "mmseqs"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "seq",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "mmseqs.cluster_coverage",
+      "fragment_policy_undeclared",
+      "block"
+     ]
+    ],
+    "message": "FIX: add --cov-mode 1 and --declare fragment_policy=with_parent so fragments join their parent or --declare fragment_policy=separate if each fragment should be a cluster of its own\nBLOCKED, the command did not run. mmseqs.cluster_coverage [coverage/T1]: proteins.faa holds 5 fragment(s) such as ASM3_g0301, a piece of ASM1_g0012 (at least 10% shorter, at least 50% of its 5-mers inside it), and mmseqs cluster demands that the coverage rule (-c, default 0.8, --cov-mode 0 (the default)) holds for both sequences, so a fragment stays out of its parent's cluster.",
+    "observed": "clusters=0",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "mmseqs"
+    ],
+    "warnings": []
+   },
+   "id": "seq-15",
+   "outcome": "caught",
+   "tool": "mmseqs"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "TM2=0.5355 L1=44 L2=44 Lali=29",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "TMalign"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "TM2=0.9819 L1=24 L2=24 Lali=24",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "TMalign"
+    ],
+    "warnings": []
+   },
+   "id": "struct-01",
+   "outcome": "missed",
+   "tool": "TMalign"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "tmalign.normalisation",
+      "tm_norm_undeclared",
+      "block"
+     ]
+    ],
+    "message": "\u2026malized by length of Structure_2' if native.pdb is the reference, then --declare tmscore_normalisation=structure_2 or --declare tmscore_normalisation=structure_1 if model.pdb is the reference (or use -a T for the average, -u <length> for a given one)\nBLOCKED, the command did not run. tmalign.normalisation [metric_normalisation/T1]: TMalign prints two TM-scores that differ here: structure_1 = model.pdb (34 residues), structure_2 = native.pdb (60 residues). The first line is normalised by structure_1, the second by structure_2; the value to quote is the one normalised by the reference structure.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "TMalign",
+     "awk"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": true,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "tmalign.normalisation",
+      "tm_norm_undeclared",
+      "block"
+     ]
+    ],
+    "message": "\u2026malized by length of Structure_2' if native.pdb is the reference, then --declare tmscore_normalisation=structure_2 or --declare tmscore_normalisation=structure_1 if model.pdb is the reference (or use -a T for the average, -u <length> for a given one)\nBLOCKED, the command did not run. tmalign.normalisation [metric_normalisation/T1]: TMalign prints two TM-scores that differ here: structure_1 = model.pdb (34 residues), structure_2 = native.pdb (60 residues). The first line is normalised by structure_1, the second by structure_2; the value to quote is the one normalised by the reference structure.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "TMalign",
+     "awk"
+    ],
+    "warnings": []
+   },
+   "id": "struct-02",
+   "outcome": "both",
+   "tool": "TMalign"
+  },
+  {
+   "clean": {
+    "calls_checked": 5,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "helix fraction: 0.667",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "mkdssp",
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "helix fraction: 0.917",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "mkdssp",
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-03",
+   "outcome": "missed",
+   "tool": "mkdssp"
+  },
+  {
+   "clean": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "24 ATOM",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "24 ATOM  \n      1 HETATM",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "id": "struct-04",
+   "outcome": "missed",
+   "tool": "pdb_selatom"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "10 SER OG  alt=[ ] occ=  0.60\n20 LEU CG  alt=[ ] occ=  0.50\n20 LEU CD1 alt=[ ] occ=  0.50\n30 LYS CG  alt=[ ] occ=  0.70",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "pdb_selaltloc"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "10 SER OG  alt=[ ] occ=  0.40\n20 LEU CG  alt=[B] occ=  0.50\n20 LEU CG  alt=[C] occ=  0.50\n20 LEU CD1 alt=[B] occ=  0.50\n20 LEU CD1 alt=[C] occ=  0.50\n30 LYS CG  alt=[ ] occ=  0.70",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "pdb_selaltloc"
+    ],
+    "warnings": []
+   },
+   "id": "struct-05",
+   "outcome": "missed",
+   "tool": "pdb_selaltloc"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ">PDB|A\nMKTAYIAKQRQISFVKSHFSRQLE\n>PDB|B\nGSHMLEDPVDAFLNEYKQHA",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "pdb_tofasta"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ">PDB|AB\nMKTAYIAKQRQISFVKSHFSRQLEGSHMLEDPVDAFLNEYKQHA",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "pdb_tofasta"
+    ],
+    "warnings": []
+   },
+   "id": "struct-06",
+   "outcome": "missed",
+   "tool": "pdb_tofasta"
+  },
+  {
+   "clean": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chain A: first 1 last 20\nchain B: first 1 last 20",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 0,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chain A: first 1 last 20\nchain B: first 21 last 40",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [],
+    "warnings": []
+   },
+   "id": "struct-07",
+   "outcome": "missed",
+   "tool": "pdb_reres"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "A-B atom pairs within 4.0 A: 0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "A-B atom pairs within 4.0 A: 24",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-08",
+   "outcome": "missed",
+   "tool": "gemmi"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": ">chain_A\nMKTAYIAKQRMISFVKSHFSRQMLEERLGAEIVKQMRSLG",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "pdbtools.modified_residues",
+      "modified_residues_undeclared",
+      "block"
+     ]
+    ],
+    "message": "FIX: map modified residues to their parent letter, e.g. gemmi.find_tabulated_residue(name).one_letter_code.upper(), before joining the letters then --declare modified_residues=parent_letter (or omitted if intended)\nBLOCKED, the command did not run. pdbtools.modified_residues [residue_alphabet/T1]: xray_model.pdb holds modified residues (MSE) inside the polymer; this way of extracting the sequence writes them as nothing (Biopython's peptide builders skip hetero residues, split the chain).",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-09",
+   "outcome": "caught",
+   "tool": "Bio.PDB"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "residues: 11\ncentroid (A): 13.81 12.89 12.74",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "prody.range_end",
+      "range_end_undeclared",
+      "block"
+     ]
+    ],
+    "message": "FIX: write 'resnum 10 to 20' for both ends included, or 'resnum 10:21' by hand then --declare range_end=inclusive\nBLOCKED, the command did not run. prody.range_end [interval_closure/T1]: ProDy reads 'resnum 10:20' like a Python slice: residue 20 is left out, and kinase_domain.pdb has a residue 20. MDAnalysis would include it.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-10",
+   "outcome": "caught",
+   "tool": "ProDy"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "CA RMSD (A): 0.87",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "CA RMSD (A): 25.99",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-11",
+   "outcome": "missed",
+   "tool": "MDAnalysis"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "end-to-end CA distance (A): 36.1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "end-to-end CA distance (A): 13.9",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-12",
+   "outcome": "missed",
+   "tool": "mdtraj"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "total SASA (A^2): 1714",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "total SASA (A^2): 8094",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-13",
+   "outcome": "missed",
+   "tool": "mdtraj"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "formula: C6H6N2O\nmolecular weight: 122.13\naromatic atoms: 6",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "rdkit.pdb_bond_orders",
+      "bond_orders_undeclared",
+      "block"
+     ]
+    ],
+    "message": "\u2026orders from a template (Chem.AllChem.AssignBondOrdersFromTemplate) or read an SDF/SMILES, or sum the atomic weights of the listed atoms then --declare bond_orders=template (or single_bonds if that is intended)\nBLOCKED, the command did not run. rdkit.pdb_bond_orders [bond_order/T1]: ligand_pose.pdb lists ligand atoms without bond orders (no CONECT record repeats a serial) and has bonds such as N1-C1 1.37 A, i.e. double or aromatic ones; RDKit's PDB reader makes every bond single, fills the valences with implicit hydrogens and finds no aromatic atom, so the weight and the formula come out wrong.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-14",
+   "outcome": "caught",
+   "tool": "RDKit"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "heavy-atom RMSD (A): 7.89",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "struct",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "heavy-atom RMSD (A): 1.34",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "python-struct"
+    ],
+    "warnings": []
+   },
+   "id": "struct-15",
+   "outcome": "missed",
+   "tool": "RDKit"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "2000\t15\t50\t0.3\n3000\t25\t50\t0.5\n6000\t40\t50\t0.8\n8000\t3\t50\t0.06",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "2000\t15\t50\t0.3\n3000\t25\t50\t0.5\n4000\t49\t50\t0.98\n5000\t50\t50\t1\n6000\t40\t50\t0.8\n7000\t48\t50\t0.96\n8000\t3\t50\t0.06",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "variants-01",
+   "outcome": "missed",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [],
+    "message": "\u2026n is dropped). --declare is not a bcftools option: the sandbox checker reads it and removes it before bcftools runs. Setting --regions-overlap or --targets-overlap alone does not lift this block.\nBLOCKED, the command did not run. bcftools.region_semantics [interval_semantics/T0]: state which interval_semantics convention you intend (-R/-r (and -T/-t with --targets-overlap 1|2) keep every record that overlaps a region, but -T/-t (and -R/-r with --regions-overlap 0|pos) only records whose POS lies in one, so a gVCF reference block or a deletion that begins before the region is silently dropped.)",
+    "observed": "",
+    "requests": [
+     [
+      "bcftools.region_semantics",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": true,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bcftools.regions_file_base",
+      "bed_content_read_one_based",
+      "block"
+     ]
+    ],
+    "message": "\u2026its name does not end in .bed or .bed.gz, but its 3 data lines look like BED intervals (0-based, half-open), so each interval would start one base early; read as 1-based it selects 10 records of cohort.vcf.gz, read as BED 7\nAlso: bcftools.region_semantics [interval_semantics/T0]: state which interval_semantics convention you intend (-R/-r (and -T/-t with --targets-overlap 1|2) keep every record that overlaps a region, but -T/-t (and -R/-r with --regions-overlap 0|pos) only records whose POS lies in one, so a gVCF reference block or a deletion that begins before the region is silently dropped.)",
+    "observed": "",
+    "requests": [
+     [
+      "bcftools.region_semantics",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "variants-02",
+   "outcome": "caught",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "1200 1/1 0/1 ./. 0/0\n2400 0/1 1/1 0/1 1/1\n3100 ./. 0/1 0/1 ./.\n4800 ./. ./. ./. ./.\n5600 1/1 0/1 0/1 0/1\n7300 0/1 ./. 0/0 0/1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "2400 0/1 1/1 0/1 1/1\n5600 1/1 0/1 0/1 0/1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "variants-03",
+   "outcome": "missed",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "1\t10177\trs367896724\n1\t10352\trs555500075\n1\t11008\trs575272151\n1\t14464\trs546169444\n1\t15211\trs7277033\n1\t16103\trs118100551",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "1\t10177\t.\n1\t10352\t.\n1\t11008\t.\n1\t14464\t.\n1\t15211\t.\n1\t16103\t.",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "variants-04",
+   "outcome": "missed",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 3,
+    "decision": "block",
+    "exit": 255,
+    "findings": [
+     [
+      "bcftools.subset_monomorphic",
+      "monomorphic_sites_kept",
+      "block"
+     ]
+    ],
+    "message": "\u2026declare subset_sites=keep_all_sites if the monomorphic sites are wanted, subset_sites=filtered_downstream if a later stage drops them\nBLOCKED, the command did not run. bcftools.subset_monomorphic [record_count/T1]: selecting samples does not select variants: bcftools view writes every site of cohort.vcf, 2 of 6 sites of cohort.vcf have no alternate allele in the 4 selected samples (for example .); a count or list of its records includes the sites where nobody carries an alternate allele.\nFailed to read from standard input: unknown file type\nFailed to read from standard input: unknown file type",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": true,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "bcftools.subset_monomorphic",
+      "monomorphic_sites_kept",
+      "block"
+     ]
+    ],
+    "message": "FIX: add -c 1 to drop the sites without an alternate allele in the selected samples or --declare subset_sites=keep_all_sites if the monomorphic sites are wanted, subset_sites=filtered_downstream if a later stage drops them\nBLOCKED, the command did not run. bcftools.subset_monomorphic [record_count/T1]: selecting samples does not select variants: bcftools view writes every site of cohort.vcf, 2 of 6 sites of cohort.vcf have no alternate allele in the 4 selected samples (for example .); a count or list of its records includes the sites where nobody carries an alternate allele.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "variants-05",
+   "outcome": "both",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "10100 10450 10900 11200 11800 12300 12950 13400 13900 14500",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "10100 10450 10900 11200 11800 12300 11800 12300 12950 13400 13900 14500",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools"
+    ],
+    "warnings": []
+   },
+   "id": "variants-06",
+   "outcome": "missed",
+   "tool": "bcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [],
+    "message": "FIX: re-run with --declare missing_threshold_meaning=<completeness|missing_rate>\nBLOCKED, the command did not run. var.missing_threshold [metric_scale/T0]: state which metric_scale convention you intend (vcftools --max-missing X keeps the sites with at least a fraction X of the genotypes called, while plink --geno X removes the variants with a missing rate above X, so a rate copied from one to the other keeps almost every site or removes almost every site.)",
+    "observed": "",
+    "requests": [
+     [
+      "var.missing_threshold",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "vcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": true,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [],
+    "message": "FIX: re-run with --declare missing_threshold_meaning=<completeness|missing_rate>\nBLOCKED, the command did not run. var.missing_threshold [metric_scale/T0]: state which metric_scale convention you intend (vcftools --max-missing X keeps the sites with at least a fraction X of the genotypes called, while plink --geno X removes the variants with a missing rate above X, so a rate copied from one to the other keeps almost every site or removes almost every site.)",
+    "observed": "",
+    "requests": [
+     [
+      "var.missing_threshold",
+      "declaration_missing",
+      "block"
+     ]
+    ],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "vcftools"
+    ],
+    "warnings": []
+   },
+   "id": "variants-07",
+   "outcome": "declaration",
+   "tool": "vcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "#CHROM\tPOS\tREF\tALT\tINFO\nchr9\t2210\tG\tA\tDP=410;AF=0.35;ANN=missense_variant|GENE1\nchr9\t6733\tT\tC\tDP=420;AF=0.40;ANN=missense_variant|GENE3\nchr9\t8021\tG\tC\tDP=377;AF=0.20;ANN=splice_region_variant|GENE4",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "vcftools"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "#CHROM\tPOS\tREF\tALT\tINFO\nchr9\t2210\tG\tA\t.\nchr9\t6733\tT\tC\t.\nchr9\t8021\tG\tC\t.",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "vcftools"
+    ],
+    "warnings": []
+   },
+   "id": "variants-08",
+   "outcome": "missed",
+   "tool": "vcftools"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "IID rs3001_G rs3002_T rs3003_A rs3004_C\nR1 0 2 1 2\nR2 1 2 0 1\nR3 0 1 1 2\nR4 0 2 0 2\nR5 1 2 0 2\nR6 0 1 1 2\nR7 0 2 0 1\nR8 2 2 0 1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "plink"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "plink.allele_order",
+      "a1_is_minor_allele",
+      "block"
+     ]
+    ],
+    "message": "FIX: add --keep-allele-order (A1 = ALT), or read ALT_FREQS from plink2 --freq or --declare plink_a1_allele=minor_allele if A1 = minor allele is intended\nBLOCKED, the command did not run. plink.allele_order [allele_coding/T1]: plink 1.9 sets A1 to the minor allele of the data, not to ALT: at 2 of 4 sites of cohort.vcf the ALT allele is the major one (for example rs3002, ALT frequency 0.88), so there A1 is the REF allele; the MAF column and the tested or counted allele are those of A1.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "plink"
+    ],
+    "warnings": []
+   },
+   "id": "variants-09",
+   "outcome": "caught",
+   "tool": "plink"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "NA12878_rep1 NA12878_rep1\nNA12878_rep2 NA12878_rep2\nNA12891_rep1 NA12891_rep1\nNA12891_rep2 NA12891_rep2\nNA12892_rep1 NA12892_rep1\nNA12892_rep2 NA12892_rep2",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "plink"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "NA12878 rep1\nNA12878 rep2\nNA12891 rep1\nNA12891 rep2\nNA12892 rep1\nNA12892 rep2",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "plink"
+    ],
+    "warnings": []
+   },
+   "id": "variants-10",
+   "outcome": "missed",
+   "tool": "plink"
+  },
+  {
+   "clean": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "#IID\tSCORE1_AVG\nI01\t0.0302677\nI02\t-0.0123324\nI03\t0.00646647\nI04\t-0.00279989\nI05\t0.0193994\nI06\t0.0273332\nI07\t0.0292672\nI08\t0.000600586",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "plink2"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "#IID\tSCORE1_AVG\nI01\t0.0266667\nI02\t-0.0133333\nI03\t0.00666667\nI04\t0.00666667\nI05\t0.02\nI06\t0.02\nI07\t0.04\nI08\t-0.00666667",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "plink2"
+    ],
+    "warnings": []
+   },
+   "id": "variants-11",
+   "outcome": "missed",
+   "tool": "plink2"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "block",
+    "exit": 97,
+    "findings": [
+     [
+      "tabix.region_strings_bed",
+      "bed_region_string_base_undeclared",
+      "block"
+     ]
+    ],
+    "message": "FIX: if 'chr1:100-100' is a BED window, query chr1:101-100 (probes.bed.gz is zero-based) or --declare region_coordinates=one_based_closed if the numbers are already 1-based\nBLOCKED, the command did not run. tabix.region_strings_bed [index_base/T1]: probes.bed.gz is indexed zero-based (BED) but the region string in 'probes.bed.gz chr1:100-100' is read 1-based and closed: a BED window [S, E) is chr:S+1-E, and chr:S-E also returns the interval that ends at S; run read-only, chr:S+1-E prints different records.",
+    "observed": "",
+    "requests": [],
+    "same_result_as_unguarded": false,
+    "tools_seen": [
+     "tabix"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": true,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr1\t99\t100\tprobe_a\nchr1\t100\t150\tprobe_b\nchr1\t299\t300\tprobe_c\nchr1\t300\t350\tprobe_d",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "tabix"
+    ],
+    "warnings": []
+   },
+   "id": "variants-12",
+   "outcome": "missed",
+   "tool": "tabix"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "1200 0/1 1/1 ./. 1/1\n2400 0/1 1/1 1/1 0/1\n3100 ./. 0/1 1/1 ./.\n4800 ./. ./. ./. ./.\n5600 1/1 0/1 0/1 ./.\n7300 0/1 ./. 1/1 0/1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "gatk",
+     "python"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "1200 0/1 1/1 0/0 1/1\n2400 0/1 1/1 1/1 0/1\n3100 0/0 0/1 1/1 0/0\n4800 0/1 1/1 1/1 0/1\n5600 1/1 0/1 0/1 0/1\n7300 0/1 0/1 1/1 0/1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "gatk",
+     "python"
+    ],
+    "warnings": []
+   },
+   "id": "variants-13",
+   "outcome": "missed",
+   "tool": "gatk"
+  },
+  {
+   "clean": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr11\t3350\tCT\tC\nchr11\t4720\tA\tG,AT\nchr11\t6010\tG\tGAA\nchr11\t9150\tTC\tT,TCC",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "gatk",
+     "python"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 2,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "chr11\t3350\tCT\tC\nchr11\t6010\tG\tGAA\nchr11\t9150\tTC\tT,TCC",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "gatk",
+     "python"
+    ],
+    "warnings": []
+   },
+   "id": "variants-14",
+   "outcome": "missed",
+   "tool": "gatk"
+  },
+  {
+   "clean": {
+    "calls_checked": 3,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "VARIANT_TYPE\tHET_SENSITIVITY\tHET_PPV\tVAR_SENSITIVITY\tVAR_PPV\nSNP\t1\t1\t1\t1\nINDEL\t1\t1\t1\t1",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "bcftools",
+     "picard",
+     "tabix"
+    ],
+    "warnings": []
+   },
+   "clean_asked": false,
+   "domain": "variants",
+   "false_block": false,
+   "faulted": {
+    "calls_checked": 1,
+    "decision": "allow",
+    "exit": 0,
+    "findings": [],
+    "message": "",
+    "observed": "VARIANT_TYPE\tHET_SENSITIVITY\tHET_PPV\tVAR_SENSITIVITY\tVAR_PPV\nSNP\t1\t1\t1\t1\nINDEL\t0\t0\t0\t0",
+    "requests": [],
+    "same_result_as_unguarded": true,
+    "tools_seen": [
+     "picard"
+    ],
+    "warnings": []
+   },
+   "id": "variants-15",
+   "outcome": "missed",
+   "tool": "picard"
+  }
+ ],
+ "provenance": {
+  "audit": {
+   "authors": {
+    "agents": 8,
+    "flagged": 0,
+    "tool_calls": 868
+   },
+   "flagged": 0,
+   "reviewers": {
+    "agents": 8,
+    "flagged": 0,
+    "tool_calls": 370
+   }
+  },
+  "dropped_ideas": 121,
+  "model": "claude-sonnet-5-5",
+  "slices": {
+   "align": 18,
+   "core": 15,
+   "intervals": 15,
+   "quant": 15,
+   "sc": 15,
+   "seq": 15,
+   "struct": 15,
+   "variants": 15
+  }
+ },
+ "sandbox": true,
+ "schema": 1,
+ "watched": [
+  "R",
+  "Rscript",
+  "TMalign",
+  "awk",
+  "bamCompare",
+  "bamCoverage",
+  "bcftools",
+  "bedmap",
+  "bedops",
+  "bedtools",
+  "blastn",
+  "blastp",
+  "blastx",
+  "bowtie2",
+  "bwa",
+  "closest-features",
+  "computeMatrix",
+  "csvtk",
+  "cutadapt",
+  "datamash",
+  "diamond",
+  "duckdb",
+  "fastp",
+  "featureCounts",
+  "gatk",
+  "gawk",
+  "hisat2",
+  "hmmscan",
+  "hmmsearch",
+  "htseq-count",
+  "julia",
+  "kallisto",
+  "liftOver",
+  "macs3",
+  "mafft",
+  "mawk",
+  "minimap2",
+  "mkdssp",
+  "mlr",
+  "mmseqs",
+  "mockfold",
+  "multiBamSummary",
+  "muscle",
+  "nawk",
+  "nhmmer",
+  "node",
+  "pdb_selaltloc",
+  "pdb_tofasta",
+  "perl",
+  "phmmer",
+  "picard",
+  "plink",
+  "plink2",
+  "psiblast",
+  "python",
+  "python-bio",
+  "python-sc",
+  "python-struct",
+  "python3",
+  "python3.10",
+  "python3.11",
+  "python3.12",
+  "python3.13",
+  "python3.8",
+  "python3.9",
+  "qsv",
+  "rsem-calculate-expression",
+  "ruby",
+  "salmon",
+  "samtools",
+  "seqkit",
+  "seqtk",
+  "sort",
+  "sqlite3",
+  "stringtie",
+  "tabix",
+  "tblastn",
+  "tblastx",
+  "trimmomatic",
+  "vcftools",
+  "xsv"
+ ]
+}

@@ -1,0 +1,18 @@
+{
+ "id": "core-01",
+ "domain": "core",
+ "tool": "samtools",
+ "trap_class": "zero-depth positions omitted",
+ "intent": "Report the mean per-base sequencing depth over the whole 400 bp target sequence (target1) from the aligned reads in amplicon_run.bam.",
+ "silent_error": "samtools depth prints only positions with at least one read unless -a is given (samtools depth usage: '-a  Output all positions (including zero depth)'). Averaging column 3 with awk (sum/NR) therefore divides by the 210 covered positions instead of the 400 bp of the target, so the dropped-out amplicon and the uncovered flanks are never counted and the mean depth is overstated (3.095x instead of 1.625x). Exit status 0, nothing on stderr about it, and the number looks like an ordinary depth.",
+ "files": {
+  "amplicon_run.sam": "@HD\tVN:1.6\tSO:coordinate\n@SQ\tSN:target1\tLN:400\namp_r01\t0\ttarget1\t1\t60\t50M\t*\t0\t0\tCGTACCGTCGTAGCCATGCTGCTTCATTGCAGGTTCTATTATCAGAGGAG\tFFFFF:F:FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FF::FFF\namp_r02\t16\ttarget1\t11\t60\t50M\t*\t0\t0\tTAGCCATGCTGCTTCATTGCAGGTTCTATTATCAGAGGAGCATCGACTGT\tFFFFFFFFFFF::FFFFFFFFFFFFFF:FFFFFFF:FFFFFFFFFFFFFF\namp_r03\t0\ttarget1\t21\t60\t50M\t*\t0\t0\tGCTTCATTGCAGGTTCTATTATCAGAGGAGCATCGACTGTCTGCAAAAGT\tFF:FFFFFFFFFFF:F:FFFFFFFFFFFFFFFFFFFF:F:FFFFFFFFFF\namp_r04\t16\ttarget1\t31\t60\t50M\t*\t0\t0\tAGGTTCTATTATCAGAGGAGCATCGACTGTCTGCAAAAGTATCCCTCACG\t:F:FF:FFF:FFF::FFFFFFFFF:FFFFFFFFFFFFF:FFFFFFFFFFF\namp_r05\t0\ttarget1\t41\t60\t50M\t*\t0\t0\tATCAGAGGAGCATCGACTGTCTGCAAAAGTATCCCTCACGGTAAGTACGG\tFFFFFFFFFFFFF:FFFFFFFFFFFFFFFFFF:FFFFFFF::FFFFFFFF\namp_r06\t16\ttarget1\t51\t60\t50M\t*\t0\t0\tCATCGACTGTCTGCAAAAGTATCCCTCACGGTAAGTACGGAGCGTCTAGC\tFFFFFF:FFFFF::FFFFF:FFFFF:FFFFFFF:FF:F:FFF:FFFFFFF\namp_r07\t0\ttarget1\t61\t60\t50M\t*\t0\t0\tCTGCAAAAGTATCCCTCACGGTAAGTACGGAGCGTCTAGCAGCAATTAGC\tFFFFFFFFFFF:F:FFFFFFFF:FFFFFFFFFFFFFFF::::FFFF:F:F\namp_r08\t16\ttarget1\t71\t60\t50M\t*\t0\t0\tATCCCTCACGGTAAGTACGGAGCGTCTAGCAGCAATTAGCGTCGGACGGG\tFFFFFFFFFFFF:FF:F:FFFFFF:FFFF::FFFFFFFFFFFFFFFFFFF\namp_r09\t0\ttarget1\t81\t60\t50M\t*\t0\t0\tGTAAGTACGGAGCGTCTAGCAGCAATTAGCGTCGGACGGGTTACACCACG\tFFFFFF:FFFFFFFF:FFFFF:F::FFFFFFFFFFFFFFF:FFFFF:F:F\namp_r10\t16\ttarget1\t91\t60\t50M\t*\t0\t0\tAGCGTCTAGCAGCAATTAGCGTCGGACGGGTTACACCACGAGATCGCCTG\t:FFFFFFFFFFFFFFFFFFFFFFFF:FF:FFFFFFFFF:FFFFFFFFF:F\namp_r11\t0\ttarget1\t101\t60\t50M\t*\t0\t0\tAGCAATTAGCGTCGGACGGGTTACACCACGAGATCGCCTGGGGCTCTGAC\tFFFFFFFFF::FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF:FFFF\namp_r12\t16\ttarget1\t301\t60\t50M\t*\t0\t0\tATATAATGGTCACTTCAGAACGCCGCACCACTACTTGCCCCTTTACGAGC\tFF:F:FFF:FFFFFFFFFFFFFFFF:FF:F:FFFFFFFFFFF:FF:FFFF\namp_r13\t0\ttarget1\t311\t60\t50M\t*\t0\t0\tCACTTCAGAACGCCGCACCACTACTTGCCCCTTTACGAGCAAGACGCCTC\tFFFFFFF:FFFF:FFF:FF:FFFFFFFFFFFF:FF:FFFFFFF:FFFFFF\n"
+ },
+ "setup": [
+  "samtools view -b -o amplicon_run.bam amplicon_run.sam",
+  "samtools index amplicon_run.bam"
+ ],
+ "faulted": "samtools depth amplicon_run.bam | awk '{s+=$3} END {printf \"%.3f\\n\", s/NR}' > mean_depth.txt",
+ "clean": "samtools depth -a amplicon_run.bam | awk '{s+=$3} END {printf \"%.3f\\n\", s/NR}' > mean_depth.txt",
+ "observe": "cat mean_depth.txt"
+}

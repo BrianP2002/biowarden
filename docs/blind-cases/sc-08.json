@@ -1,0 +1,18 @@
+{
+ "id": "sc-08",
+ "domain": "sc",
+ "tool": "scanpy",
+ "trap_class": "log base not recorded",
+ "intent": "Normalise the biopsy counts to 10,000 per cell, transform them to log2(x+1), and list the genes most up-regulated in tumour versus normal cells together with their log2 fold changes (t-test) in tumour_vs_normal.csv.",
+ "silent_error": "scanpy computes logfoldchanges by undoing the log transform with expm1 using the base stored in adata.uns['log1p']['base'] (natural log if absent). A hand-made adata.X = np.log2(adata.X + 1) leaves uns['log1p'] unset, so scanpy assumes natural logs and reports log fold changes inflated by about 1/ln2 (1.44x) with a distorted per-gene pattern. sc.pp.log1p(adata, base=2) records the base. No warning is printed, exit 0, and the table looks like a normal DE table.",
+ "files": {
+  "biopsy_counts.csv": ",MYC,CCND1,VEGFA,SLC2A1,LDHA,KRT5,ALB,COL1A1,ACTB,GAPDH,B2M,TP53\nbiopsy_00,26,22,26,21,25,0,2,1,49,29,17,6\nbiopsy_01,33,24,31,15,23,2,4,7,49,30,14,6\nbiopsy_02,32,28,29,18,32,2,4,3,59,28,26,10\nbiopsy_03,26,27,27,19,20,0,2,3,38,38,15,2\nbiopsy_04,31,25,30,23,8,1,1,1,30,36,15,5\nbiopsy_05,32,16,34,26,21,5,4,4,49,33,16,6\nbiopsy_06,22,16,16,14,23,1,1,1,28,28,8,7\nbiopsy_07,32,23,23,21,35,8,2,5,53,30,20,10\nbiopsy_08,25,23,32,28,31,1,1,6,43,24,17,7\nbiopsy_09,30,20,19,26,38,3,2,8,44,22,16,7\nbiopsy_10,13,4,5,2,6,3,3,6,35,30,12,5\nbiopsy_11,9,7,6,4,11,3,2,4,39,39,11,4\nbiopsy_12,10,5,2,1,3,2,1,4,39,28,17,4\nbiopsy_13,11,7,4,4,8,3,1,3,44,24,14,8\nbiopsy_14,10,3,6,1,7,3,2,3,38,19,24,9\nbiopsy_15,8,6,4,4,9,3,2,3,37,24,15,3\nbiopsy_16,12,7,5,5,18,3,0,6,44,31,20,5\nbiopsy_17,8,9,5,2,5,2,4,1,39,24,10,8\nbiopsy_18,8,6,7,6,7,5,1,6,46,30,15,2\nbiopsy_19,13,8,3,10,8,0,1,4,51,32,25,8\n",
+  "biopsy_groups.csv": "cell,group\nbiopsy_00,tumour\nbiopsy_01,tumour\nbiopsy_02,tumour\nbiopsy_03,tumour\nbiopsy_04,tumour\nbiopsy_05,tumour\nbiopsy_06,tumour\nbiopsy_07,tumour\nbiopsy_08,tumour\nbiopsy_09,tumour\nbiopsy_10,normal\nbiopsy_11,normal\nbiopsy_12,normal\nbiopsy_13,normal\nbiopsy_14,normal\nbiopsy_15,normal\nbiopsy_16,normal\nbiopsy_17,normal\nbiopsy_18,normal\nbiopsy_19,normal\n",
+  "tumour_de.py": "import numpy as np\nimport pandas as pd\nimport scanpy as sc\n\nadata = sc.read_csv(\"biopsy_counts.csv\")\nmeta = pd.read_csv(\"biopsy_groups.csv\", index_col=0)\nadata.obs[\"group\"] = pd.Categorical(meta.loc[adata.obs_names, \"group\"].values)\nsc.pp.normalize_total(adata, target_sum=1e4)\nadata.X = np.log2(adata.X + 1)\n\nsc.tl.rank_genes_groups(adata, \"group\", groups=[\"tumour\"], reference=\"normal\", method=\"t-test\")\nsc.get.rank_genes_groups_df(adata, group=\"tumour\").to_csv(\"tumour_vs_normal.csv\", index=False)\n",
+  "tumour_de_v2.py": "import numpy as np\nimport pandas as pd\nimport scanpy as sc\n\nadata = sc.read_csv(\"biopsy_counts.csv\")\nmeta = pd.read_csv(\"biopsy_groups.csv\", index_col=0)\nadata.obs[\"group\"] = pd.Categorical(meta.loc[adata.obs_names, \"group\"].values)\nsc.pp.normalize_total(adata, target_sum=1e4)\nsc.pp.log1p(adata, base=2)\n\nsc.tl.rank_genes_groups(adata, \"group\", groups=[\"tumour\"], reference=\"normal\", method=\"t-test\")\nsc.get.rank_genes_groups_df(adata, group=\"tumour\").to_csv(\"tumour_vs_normal.csv\", index=False)\n"
+ },
+ "setup": [],
+ "faulted": "python-sc tumour_de.py",
+ "clean": "python-sc tumour_de_v2.py",
+ "observe": "head -n 5 tumour_vs_normal.csv | cut -d, -f1-3"
+}

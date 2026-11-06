@@ -1,0 +1,19 @@
+{
+ "id": "quant-12",
+ "domain": "quant",
+ "tool": "python-bio",
+ "trap_class": "htseq special counter rows",
+ "intent": "Merge the three per-sample htseq-count outputs (*.counts.txt) into one gene-by-sample table of counts per million, where each sample is scaled by its total number of reads counted in genes, and write it to cpm.csv.",
+ "silent_error": "htseq-count appends five pseudo-feature lines to every output (__no_feature, __ambiguous, __too_low_aQual, __not_aligned, __alignment_not_unique; documented in the HTSeq counting manual) that are not genes. Reading the files into a DataFrame keeps them as rows, so counts.sum() includes them in each sample's library size: all CPM values are deflated by about 23 % (157082.0 instead of 204293.6 for ENSG00000141510 in ctrl_1) and cpm.csv contains five non-gene rows with huge 'expression'. The script runs without any message and the table looks fine. The clean script drops the rows starting with '__' before scaling.",
+ "files": {
+  "ctrl_1.counts.txt": "ENSG00000141510\t295\nENSG00000012048\t81\nENSG00000139618\t37\nENSG00000171862\t5\nENSG00000133703\t136\nENSG00000146648\t606\nENSG00000105810\t23\nENSG00000168769\t81\nENSG00000187048\t0\nENSG00000100030\t180\n__no_feature\t245\n__ambiguous\t43\n__too_low_aQual\t17\n__not_aligned\t28\n__alignment_not_unique\t101\n",
+  "ctrl_2.counts.txt": "ENSG00000141510\t350\nENSG00000012048\t104\nENSG00000139618\t52\nENSG00000171862\t6\nENSG00000133703\t136\nENSG00000146648\t815\nENSG00000105810\t28\nENSG00000168769\t74\nENSG00000187048\t0\nENSG00000100030\t277\n__no_feature\t313\n__ambiguous\t55\n__too_low_aQual\t22\n__not_aligned\t36\n__alignment_not_unique\t128\n",
+  "treat_1.counts.txt": "ENSG00000141510\t298\nENSG00000012048\t81\nENSG00000139618\t33\nENSG00000171862\t4\nENSG00000133703\t93\nENSG00000146648\t493\nENSG00000105810\t20\nENSG00000168769\t59\nENSG00000187048\t0\nENSG00000100030\t179\n__no_feature\t214\n__ambiguous\t37\n__too_low_aQual\t15\n__not_aligned\t25\n__alignment_not_unique\t88\n",
+  "merge_counts.py": "import glob\nimport os\nimport pandas as pd\n\nframes = {}\nfor path in sorted(glob.glob(\"*.counts.txt\")):\n    sample = os.path.basename(path).replace(\".counts.txt\", \"\")\n    table = pd.read_csv(path, sep=\"\\t\", header=None, index_col=0, names=[\"gene_id\", sample])\n    frames[sample] = table[sample]\ncounts = pd.DataFrame(frames)\n\ncpm = counts / counts.sum() * 1e6\ncpm.round(1).to_csv(\"cpm.csv\")\n",
+  "merge_counts_v2.py": "import glob\nimport os\nimport pandas as pd\n\nframes = {}\nfor path in sorted(glob.glob(\"*.counts.txt\")):\n    sample = os.path.basename(path).replace(\".counts.txt\", \"\")\n    table = pd.read_csv(path, sep=\"\\t\", header=None, index_col=0, names=[\"gene_id\", sample])\n    frames[sample] = table[sample]\ncounts = pd.DataFrame(frames)\n\ncounts = counts[~counts.index.str.startswith(\"__\")]\ncpm = counts / counts.sum() * 1e6\ncpm.round(1).to_csv(\"cpm.csv\")\n"
+ },
+ "setup": [],
+ "faulted": "python-bio merge_counts.py",
+ "clean": "python-bio merge_counts_v2.py",
+ "observe": "cat cpm.csv"
+}

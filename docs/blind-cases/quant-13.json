@@ -1,0 +1,19 @@
+{
+ "id": "quant-13",
+ "domain": "quant",
+ "tool": "python-bio",
+ "trap_class": "unmapped transcripts dropped",
+ "intent": "Aggregate the transcript-level salmon estimates of the two samples (ctrl/quant.sf, treated/quant.sf) to gene level with the table tx2gene.csv and write an integer gene-by-sample count matrix gene_counts.csv in which the gene counts add up to the reads salmon assigned to transcripts.",
+ "silent_error": "tx2gene.csv was derived from the Ensembl annotation only, so the three StringTie-assembled transcripts (MSTRG.21.1, MSTRG.40.1, MSTRG.40.2) have no gene. After the left merge their gene_id is NaN, and DataFrame.groupby drops NaN keys by default (dropna=True, documented in pandas): their reads simply disappear from the gene-level table. No warning is issued, the script exits 0 and the matrix has the right shape, but it holds 202 / 204 reads instead of 252 / 286 (20 % and 29 % of the assigned reads missing). The clean script keeps unmatched transcripts as their own pseudo-gene, as salmon's own gene-level output does, so the totals are preserved.",
+ "files": {
+  "ctrl/quant.sf": "Name\tLength\tEffectiveLength\tTPM\tNumReads\nENST00000401001\t1300\t1050.000\t126756.226808\t40.000\nENST00000401002\t1050\t800.000\t124775.660764\t30.000\nENST00000401003\t900\t650.000\t127975.036681\t25.000\nENST00000401004\t1400\t1150.000\t28933.486554\t10.000\nENST00000401005\t1700\t1450.000\t114736.239783\t50.000\nENST00000401006\t800\t550.000\t120994.580135\t20.000\nENST00000401007\t1100\t850.000\t58717.958007\t15.000\nENST00000401008\t950\t700.000\t57040.302064\t12.000\nMSTRG.21.1\t1200\t950.000\t77054.443139\t22.000\nMSTRG.40.1\t760\t510.000\t117435.916014\t18.000\nMSTRG.40.2\t980\t730.000\t45580.150051\t10.000\n",
+  "treated/quant.sf": "Name\tLength\tEffectiveLength\tTPM\tNumReads\nENST00000401001\t1300\t1050.000\t61260.955216\t22.000\nENST00000401002\t1050\t800.000\t164464.780337\t45.000\nENST00000401003\t900\t650.000\t53978.184316\t12.000\nENST00000401004\t1400\t1150.000\t71188.619895\t28.000\nENST00000401005\t1700\t1450.000\t70574.924896\t35.000\nENST00000401006\t800\t550.000\t138216.865900\t26.000\nENST00000401007\t1100\t850.000\t103193.587663\t30.000\nENST00000401008\t950\t700.000\t25061.299861\t6.000\nMSTRG.21.1\t1200\t950.000\t123108.139668\t40.000\nMSTRG.40.1\t760\t510.000\t68795.725108\t12.000\nMSTRG.40.2\t980\t730.000\t120156.917141\t30.000\n",
+  "tx2gene.csv": "transcript_id,gene_id\nENST00000401001,ENSG00000150001\nENST00000401002,ENSG00000150001\nENST00000401003,ENSG00000150002\nENST00000401004,ENSG00000150002\nENST00000401005,ENSG00000150003\nENST00000401006,ENSG00000150004\nENST00000401007,ENSG00000150005\nENST00000401008,ENSG00000150005\n",
+  "gene_counts.py": "import pandas as pd\n\nt2g = pd.read_csv(\"tx2gene.csv\")\ntables = {}\nfor sample in [\"ctrl\", \"treated\"]:\n    quant = pd.read_csv(f\"{sample}/quant.sf\", sep=\"\\t\")\n    merged = quant.merge(t2g, left_on=\"Name\", right_on=\"transcript_id\", how=\"left\")\n    tables[sample] = merged.groupby(\"gene_id\")[\"NumReads\"].sum()\ngenes = pd.DataFrame(tables)\ngenes.round().astype(int).to_csv(\"gene_counts.csv\")\n",
+  "gene_counts_v2.py": "import pandas as pd\n\nt2g = pd.read_csv(\"tx2gene.csv\")\ntables = {}\nfor sample in [\"ctrl\", \"treated\"]:\n    quant = pd.read_csv(f\"{sample}/quant.sf\", sep=\"\\t\")\n    merged = quant.merge(t2g, left_on=\"Name\", right_on=\"transcript_id\", how=\"left\")\n    merged[\"gene_id\"] = merged[\"gene_id\"].fillna(merged[\"Name\"])\n    tables[sample] = merged.groupby(\"gene_id\")[\"NumReads\"].sum()\ngenes = pd.DataFrame(tables)\ngenes.round().astype(int).to_csv(\"gene_counts.csv\")\n"
+ },
+ "setup": [],
+ "faulted": "python-bio gene_counts.py",
+ "clean": "python-bio gene_counts_v2.py",
+ "observe": "cat gene_counts.csv; awk -F, 'NR>1{a+=$2; b+=$3} END{print \"total\",a,b}' gene_counts.csv"
+}

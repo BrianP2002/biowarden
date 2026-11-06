@@ -1,0 +1,16 @@
+{
+ "id": "intervals-03",
+ "domain": "intervals",
+ "tool": "bedtools",
+ "trap_class": "partial overlap removal",
+ "intent": "Drop every ChIP-seq peak that overlaps a blacklisted region, so that the peaks which remain are the original, unmodified peak calls.",
+ "silent_error": "bedtools subtract removes only the overlapping bases from each A interval unless -A (or intersect -v) is used. A peak that touches a blacklist region is therefore not dropped but trimmed, and a peak with a blacklist region in its middle is split into two shorter records. The output is a valid BED with the original peak names and scores repeated on the fragments, so the peak count goes up instead of down, trimmed fragments (summit, width and score no longer matching the call) stay in the 'filtered' set, and nothing is reported. Documented in the bedtools subtract manual: '-A Remove entire feature if any overlap. That is, by default, only subtract the portion of A that overlaps B.'",
+ "files": {
+  "peaks.bed": "chr1\t1000\t1400\tpeak_01\t120\t.\nchr1\t2500\t2900\tpeak_02\t95\t.\nchr1\t4000\t4300\tpeak_03\t80\t.\nchr1\t6000\t6300\tpeak_04\t60\t.\nchr2\t500\t900\tpeak_05\t110\t.\nchr2\t3000\t3300\tpeak_06\t70\t.\n",
+  "blacklist.bed": "chr1\t2850\t3500\tblk1\nchr1\t4100\t4150\tblk2\nchr2\t0\t1000\tblk3\nchr2\t2900\t3050\tblk4\n"
+ },
+ "setup": [],
+ "faulted": "bedtools subtract -a peaks.bed -b blacklist.bed > peaks.filtered.bed",
+ "clean": "bedtools intersect -v -a peaks.bed -b blacklist.bed > peaks.filtered.bed",
+ "observe": "cat peaks.filtered.bed"
+}

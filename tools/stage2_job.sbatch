@@ -19,9 +19,9 @@
 #   SETS=docs/preregistration/stage2-sets.json  FREEZE=docs/preregistration/freeze-stage2.txt
 #   SNAP=runs/stage2-code  LOCKS=envs/locks  NEED=$CAP (USD the OpenRouter balance must cover)
 # Switches that skip a check and say so: FREEZE=none, ENV_CHECK=0, SCAN=0. Passed on to the runner
-# as they are: TBM_NEUTRAL_ROOT (where the sandboxed work directories are made; the default is
-# /tmp/tbm-<job id> on the node, and the runner refuses a path that names a trial or a mount without exec)
-# and TBM_BREAKER_LIMIT (consecutive API errors that stop the job, default 10).
+# as they are: BIOWARDEN_NEUTRAL_ROOT (where the sandboxed work directories are made; the default is
+# /tmp/biowarden-<job id> on the node, and the runner refuses a path that names a trial or a mount without exec)
+# and BIOWARDEN_BREAKER_LIMIT (consecutive API errors that stop the job, default 10).
 #
 # cell  what it runs
 # pilot    arm bare, seeds 0-4, every family (minus EXCLUDE), primary-cell settings; no sets file
@@ -45,7 +45,7 @@ case $CELL in
   *) echo "CELL must be pilot, primary or default, not $CELL" >&2; exit 2 ;;
 esac
 
-PKG=science_harness
+PKG=biowarden
 PY=${PYTHON:-$PWD/.venv/bin/python}
 SNAP=${SNAP:-runs/stage2-code}
 SETS=${SETS:-docs/preregistration/stage2-sets.json}
@@ -64,15 +64,15 @@ NEED=${NEED:-$CAP}
 JOB="slurm-${SLURM_JOB_ID}${SLURM_ARRAY_TASK_ID:+_$SLURM_ARRAY_TASK_ID}"  # the runner's job id
 
 SNAP_ABS=$(realpath "$SNAP")
-export SCIENCE_HARNESS_BWRAP=${SCIENCE_HARNESS_BWRAP:-$PWD/.local/bin/bwrap}
+export BIOWARDEN_BWRAP=${BIOWARDEN_BWRAP:-$PWD/.local/bin/bwrap}
 export PYTHONPATH="$SNAP_ABS/src"  # plain python: -I would ignore it
 export PYTHONUNBUFFERED=1  # progress lines reach the log as they happen
 
 # the sandboxed work directories get random names under this root (nothing in them names the
 # trial); it is the node's temp directory by default, one per job so a killed job leaves only its own
-export TBM_NEUTRAL_ROOT=${TBM_NEUTRAL_ROOT:-/tmp/tbm-${SLURM_JOB_ID}}
-mkdir -p "$TBM_NEUTRAL_ROOT"
-trap 'rm -rf "$TBM_NEUTRAL_ROOT"' EXIT
+export BIOWARDEN_NEUTRAL_ROOT=${BIOWARDEN_NEUTRAL_ROOT:-/tmp/biowarden-${SLURM_JOB_ID}}
+mkdir -p "$BIOWARDEN_NEUTRAL_ROOT"
+trap 'rm -rf "$BIOWARDEN_NEUTRAL_ROOT"' EXIT
 
 mkdir -p "$OUT"
 LOG="$OUT/job-${SLURM_JOB_ID}.log"

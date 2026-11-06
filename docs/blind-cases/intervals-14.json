@@ -1,0 +1,20 @@
+{
+ "id": "intervals-14",
+ "domain": "intervals",
+ "tool": "computeMatrix",
+ "trap_class": "missing data not zero",
+ "intent": "Plot the average ChIP-seq signal profile (+/-300 bp around the TSS, 100 bp bins) over all six genes in tss.bed, as a plotProfile data table. signal.bw was converted from a bedGraph that lists only the intervals covered by reads; stretches with no reads simply have no entry.",
+ "silent_error": "computeMatrix treats bins that have no entry in the bigWig as missing (NaN) rather than 0, and plotProfile averages over the non-missing values only (the option text: '--missingDataAsZero: If set, missing data (NAs) will be treated as zeros. The default is to ignore such cases'). Three of the six genes lie in stretches without any reads, so their rows are all NaN and are left out of every bin's mean: the profile is the average of the three covered genes (4.0, 4.0, 4.0, 5.3, 5.3, 5.3), twice as high as the average over all six genes (2.0 ... 2.7) that was asked for. The matrix, the PNG and the data table are well formed, exit 0, and stderr is empty.",
+ "files": {
+  "signal.bedGraph": "chr1\t1700\t2300\t3.0\nchr1\t5700\t6000\t4.0\nchr1\t6000\t6300\t8.0\nchr1\t9700\t10300\t5.0\n",
+  "chrom.sizes": "chr1\t30000\nchr2\t20000\n",
+  "make_bigwig.py": "import pyBigWig\nsizes = [l.split() for l in open('chrom.sizes')]\nbw = pyBigWig.open('signal.bw', 'w')\nbw.addHeader([(c, int(n)) for c, n in sizes])\nrows = [l.split() for l in open('signal.bedGraph')]\nbw.addEntries([r[0] for r in rows], [int(r[1]) for r in rows], ends=[int(r[2]) for r in rows], values=[float(r[3]) for r in rows])\nbw.close()\n",
+  "tss.bed": "chr1\t2000\t2001\tGENE_1\t0\t+\nchr1\t6000\t6001\tGENE_2\t0\t+\nchr1\t9999\t10000\tGENE_3\t0\t-\nchr1\t14000\t14001\tGENE_4\t0\t+\nchr1\t18000\t18001\tGENE_5\t0\t-\nchr2\t3000\t3001\tGENE_6\t0\t+\n"
+ },
+ "setup": [
+  "python-bio make_bigwig.py"
+ ],
+ "faulted": "computeMatrix reference-point -S signal.bw -R tss.bed -b 300 -a 300 --binSize 100 -o matrix.gz -p 1 && plotProfile -m matrix.gz -o profile.png --outFileNameData profile.tsv",
+ "clean": "computeMatrix reference-point -S signal.bw -R tss.bed -b 300 -a 300 --binSize 100 --missingDataAsZero -o matrix.gz -p 1 && plotProfile -m matrix.gz -o profile.png --outFileNameData profile.tsv",
+ "observe": "cat profile.tsv"
+}

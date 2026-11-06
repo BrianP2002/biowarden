@@ -1,0 +1,15 @@
+{
+ "id": "variants-03",
+ "domain": "variants",
+ "tool": "bcftools",
+ "trap_class": "sample-level filter",
+ "intent": "Set to missing every genotype call that is supported by fewer than 10 reads; all the other genotypes and all the sites must stay in the output VCF.",
+ "silent_error": "A bcftools filter expression on a FORMAT tag is evaluated per SITE: '-e FMT/DP<10' is true when ANY sample has DP<10, so the whole record is dropped (here 4 of 6 sites vanish, together with the good genotypes of the other samples) and no genotype is ever set to missing. Per-sample masking needs -S . (--set-GTs) so that only the failing samples are set to missing. Exit 0, nothing printed. Documented in the bcftools man page (filter -S/--set-GTs: 'set genotypes of failed samples to missing value') and in the bcftools filtering how-to, which explains that a FORMAT expression selects sites (any-sample semantics, & versus &&).",
+ "files": {
+  "cohort.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr7,length=300000>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read depth\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tC1\tC2\tC3\tC4\nchr7\t1200\t.\tA\tG\t99\tPASS\t.\tGT:DP\t1/1:28\t0/1:31\t0/1:6\t0/0:30\nchr7\t2400\t.\tC\tT\t99\tPASS\t.\tGT:DP\t0/1:22\t1/1:25\t0/1:27\t1/1:24\nchr7\t3100\t.\tG\tA\t99\tPASS\t.\tGT:DP\t1/1:5\t0/1:33\t0/1:29\t0/0:4\nchr7\t4800\t.\tT\tC\t99\tPASS\t.\tGT:DP\t0/1:8\t0/1:7\t1/1:9\t1/1:6\nchr7\t5600\t.\tA\tC\t99\tPASS\t.\tGT:DP\t1/1:40\t0/1:38\t0/1:41\t0/1:12\nchr7\t7300\t.\tC\tG\t99\tPASS\t.\tGT:DP\t0/1:19\t0/1:3\t0/0:21\t0/1:26\n"
+ },
+ "setup": [],
+ "faulted": "bcftools filter -e 'FMT/DP<10' -o masked.vcf cohort.vcf",
+ "clean": "bcftools filter -S . -e 'FMT/DP<10' -o masked.vcf cohort.vcf",
+ "observe": "bcftools query -f '%POS[ %GT]\\n' masked.vcf"
+}

@@ -1,0 +1,16 @@
+{
+ "id": "intervals-05",
+ "domain": "intervals",
+ "tool": "bedtools",
+ "trap_class": "repeated record per overlap",
+ "intent": "Select the peaks that overlap at least one promoter from promoters.bed, keeping their original coordinates and scores; this peak set will be counted and carried forward to motif analysis.",
+ "silent_error": "With -wa, bedtools intersect writes the original A record once for every B record it overlaps. Peaks sitting between bidirectional or overlapping promoters (peak_01, peak_04) are therefore written twice, so the 'promoter peak set' has 6 records for 4 distinct peaks. The records are byte-identical valid BED lines, nothing is printed on stderr, and a plain line count, a motif-enrichment input or a peak-count statistic silently double counts the peaks that lie between two promoters. The option that reports each A feature once is -u: '-u Write the original A entry _once_ if _any_ overlaps found in B', whereas '-wa Write the original entry in A for each overlap'.",
+ "files": {
+  "peaks.bed": "chr1\t900\t1300\tpeak_01\t50\t.\nchr1\t1850\t2100\tpeak_02\t60\t.\nchr1\t3000\t3400\tpeak_03\t70\t.\nchr1\t5200\t5500\tpeak_04\t40\t.\nchr2\t700\t900\tpeak_05\t90\t.\nchr2\t1500\t1700\tpeak_06\t30\t.\n",
+  "promoters.bed": "chr1\t800\t1100\tGENE1_up\nchr1\t1100\t1400\tGENE2_up\nchr1\t1800\t2000\tGENE3_up\nchr1\t5100\t5400\tGENE4_up\nchr1\t5250\t5600\tGENE5_up\nchr2\t600\t800\tGENE6_up\n"
+ },
+ "setup": [],
+ "faulted": "bedtools intersect -a peaks.bed -b promoters.bed -wa > peaks_at_promoters.bed",
+ "clean": "bedtools intersect -a peaks.bed -b promoters.bed -u > peaks_at_promoters.bed",
+ "observe": "cat peaks_at_promoters.bed"
+}

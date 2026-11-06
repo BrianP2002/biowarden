@@ -1,0 +1,19 @@
+{
+ "id": "sc-14",
+ "domain": "sc",
+ "tool": "loompy",
+ "trap_class": "row order not matched",
+ "intent": "Merge the two plate loom files (same six genes, 6 cells each, Gene and Accession row attributes) into one loom file plates_merged.loom so that every gene row of the merged file holds that gene's counts for the cells of both plates.",
+ "silent_error": "loompy.combine without a key argument stacks the files without checking or re-ordering rows and takes row attributes from the first file (docstring warning: 'if rows are not in the same order in all files, the result may be meaningless'). Plate 2 lists its genes in a different order, so its counts are written under the wrong gene names. Same number of rows, so no error; exit 0 and a valid loom file.",
+ "files": {
+  "make_plates.py": "import numpy as np\nimport loompy\n\nrng = np.random.default_rng(14)\nmeans = {\"Actb\": 40, \"Gapdh\": 25, \"Sox2\": 8, \"Nes\": 5, \"Pax6\": 3, \"Mki67\": 1}\norder1 = [\"Actb\", \"Gapdh\", \"Sox2\", \"Nes\", \"Pax6\", \"Mki67\"]\norder2 = sorted(order1)\nacc = {\"Actb\": \"ENSMUSG00000029580\", \"Gapdh\": \"ENSMUSG00000057666\", \"Sox2\": \"ENSMUSG00000074637\",\n       \"Nes\": \"ENSMUSG00000004891\", \"Pax6\": \"ENSMUSG00000027168\", \"Mki67\": \"ENSMUSG00000031004\"}\n\ndef plate(name, order, n):\n    M = np.vstack([rng.poisson(means[g], size=n) for g in order]).astype(\"float32\")\n    loompy.create(f\"{name}.loom\", M,\n                  {\"Gene\": np.array(order), \"Accession\": np.array([acc[g] for g in order])},\n                  {\"CellID\": np.array([f\"{name}_{i}\" for i in range(n)]), \"Plate\": np.array([name] * n)})\n\nplate(\"P1\", order1, 6)\nplate(\"P2\", order2, 6)\n",
+  "merge_plates.py": "import loompy\n\nloompy.combine([\"P1.loom\", \"P2.loom\"], \"plates_merged.loom\")\n",
+  "merge_plates_v2.py": "import loompy\n\nloompy.combine([\"P1.loom\", \"P2.loom\"], \"plates_merged.loom\", key=\"Accession\")\n"
+ },
+ "setup": [
+  "python-sc make_plates.py"
+ ],
+ "faulted": "python-sc merge_plates.py",
+ "clean": "python-sc merge_plates_v2.py",
+ "observe": "python-sc -c \"import loompy; ds = loompy.connect('plates_merged.loom', 'r'); M = ds[:, :]; p = ds.ca.Plate; [print(g, round(float(r[p == 'P1'].mean()), 1), round(float(r[p == 'P2'].mean()), 1)) for g, r in zip(ds.ra.Gene, M)]\""
+}

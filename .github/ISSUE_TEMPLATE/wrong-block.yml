@@ -1,0 +1,68 @@
+name: Wrong block
+description: The layer blocked a call that was correct, or the fix in its message was wrong.
+title: "[wrong block] "
+labels: ["wrong-block"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A block is wrong when the blocked call would have given a right result, or when the fix in the
+        message would not. The same form fits a wrong warning. Please report one command per issue.
+        Do not paste API keys, patient data or files you may not share.
+  - type: textarea
+    id: command
+    attributes:
+      label: The exact command
+      description: >-
+        The command as it was issued, with its options and any `--declare key=value`. For `biowarden-mcp`,
+        the `tool`, `args` and `declared` of the `run_tool` call.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: The minimal input file, or its first lines
+      description: >-
+        The smallest file that still triggers the block: its first lines, plus the line that matters
+        if that is further down. Write `none` if the call reads no file.
+      render: text
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected
+      description: >-
+        What the tool does with this call and why its result is right, or what the fix should have
+        said.
+    validations:
+      required: true
+  - type: input
+    id: tool-versions
+    attributes:
+      label: Tool versions
+      description: The version of every tool in the command, for example `bcftools 1.24`.
+      placeholder: bcftools 1.24
+    validations:
+      required: true
+  - type: input
+    id: layer-version
+    attributes:
+      label: Layer version and how you ran it
+      description: >-
+        The Version line of `pip show biowarden`, and the front end (`biowarden`,
+        `biowarden-mcp`, the benchmark runner or the library).
+      placeholder: 0.0.1, biowarden
+    validations:
+      required: true
+  - type: textarea
+    id: message
+    attributes:
+      label: The full message
+      description: >-
+        The text the layer printed, unchanged, with the rule id (for example
+        `bcftools.regions_file_base`).
+      render: text
+    validations:
+      required: true

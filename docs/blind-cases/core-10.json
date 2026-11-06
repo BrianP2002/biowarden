@@ -1,0 +1,16 @@
+{
+ "id": "core-10",
+ "domain": "core",
+ "tool": "bedtools",
+ "trap_class": "strand ignored by default",
+ "intent": "Get the sequence of each of the three genes in gene_models.bed (6-column BED: chromosome, start, end, name, score, strand) from genome.fa, so that I can design RT-PCR primers against the transcripts.",
+ "silent_error": "bedtools getfasta reports the forward-strand genomic sequence of every interval and ignores the BED strand column unless -s is given (usage: '-s  Force strandedness. If the feature occupies the antisense strand, the sequence will be reverse complemented. By default, strand information is ignored.'). For MIR2 and MIR3 on the minus strand the faulted FASTA holds the reverse complement of the transcript sequence, ready to be used as wrong primers; it is still valid DNA of the right length. Exit 0, no warning.",
+ "files": {
+  "genome.fa": ">chr2\nTCTTGATGAAACTATCGGGGATTGCCGTTCCTCATGGCCGCCGCAGCATTCCTTGGAGTT\nAGTAAATCCAAACCCAGAACAAACAAGCAAGAAATAGCTTTGTCGCCTTGCCTCTCAACC\nATCTAGGCCTTCCTCAACACTAAAGCTCCTCCTGTCCCGCGCTGGATGGGGGTATCCTGG\nTATAAGTCCAGATTAACTCTCATTCACCTGTTGAGATTAAAGAAGAACGATCGTGGTTTG\nCCACAACTTACACACTACTTCTATTACCCCGAATCGAGAATTAACATCGACAGATGTGGC\n",
+  "gene_models.bed": "chr2\t20\t50\tMIR1\t0\t+\nchr2\t100\t130\tMIR2\t0\t-\nchr2\t200\t230\tMIR3\t0\t-\n"
+ },
+ "setup": [],
+ "faulted": "bedtools getfasta -fi genome.fa -bed gene_models.bed -name > gene_seqs.fa",
+ "clean": "bedtools getfasta -fi genome.fa -bed gene_models.bed -name -s > gene_seqs.fa",
+ "observe": "awk '/^>/ {split(substr($0, 2), a, \"::\"); name = a[1]; next} {print name, $0}' gene_seqs.fa"
+}

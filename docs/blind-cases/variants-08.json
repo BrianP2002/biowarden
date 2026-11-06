@@ -1,0 +1,15 @@
+{
+ "id": "variants-08",
+ "domain": "variants",
+ "tool": "vcftools",
+ "trap_class": "INFO dropped on output",
+ "intent": "Keep only biallelic SNPs with a minor allele frequency of at least 5% and write them to a new VCF; the functional annotation in the INFO column must survive for the next step.",
+ "silent_error": "vcftools --recode writes the INFO column as '.' unless --recode-INFO-all (or --recode-INFO <key>) is given. The filtered VCF still declares the INFO keys in its header and has the right sites and genotypes, but DP, AF and the ANN effect/gene annotation are gone from every record. Nothing is reported, exit 0. Documented in the vcftools manual (--recode, --recode-INFO-all).",
+ "files": {
+  "annotated.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr9,length=140000>\n##INFO=<ID=DP,Number=1,Type=Integer,Description=\"Total depth\">\n##INFO=<ID=AF,Number=A,Type=Float,Description=\"Allele frequency\">\n##INFO=<ID=ANN,Number=.,Type=String,Description=\"Functional annotation: effect|gene\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tS01\tS02\tS03\tS04\tS05\tS06\tS07\tS08\tS09\tS10\tS11\tS12\tS13\tS14\tS15\tS16\tS17\tS18\tS19\tS20\nchr9\t2210\t.\tG\tA\t120\tPASS\tDP=410;AF=0.35;ANN=missense_variant|GENE1\tGT\t0/0\t1/1\t1/1\t0/0\t1/1\t0/0\t1/1\t1/1\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t0/0\t0/0\t1/1\t0/0\t0/0\t0/0\nchr9\t3050\t.\tCT\tC\t120\tPASS\tDP=388;AF=0.28;ANN=frameshift_variant|GENE1\tGT\t0/0\t1/1\t0/1\t0/0\t0/0\t0/0\t1/1\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t1/1\t0/0\t0/0\t1/1\t0/0\nchr9\t4466\t.\tC\tT,G\t120\tPASS\tDP=402;AF=0.22;ANN=synonymous_variant|GENE2\tGT\t0/0\t0/1\t0/0\t1/1\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t1/1\t0/0\t0/0\t0/0\t1/1\nchr9\t5120\t.\tA\tT\t120\tPASS\tDP=395;AF=0.03;ANN=stop_gained|GENE3\tGT\t0/0\t0/1\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\nchr9\t6733\t.\tT\tC\t120\tPASS\tDP=420;AF=0.40;ANN=missense_variant|GENE3\tGT\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t1/1\t0/0\t1/1\t1/1\t1/1\t0/0\t0/0\t0/0\t0/0\t1/1\t1/1\t0/0\t0/0\t1/1\nchr9\t8021\t.\tG\tC\t120\tPASS\tDP=377;AF=0.20;ANN=splice_region_variant|GENE4\tGT\t0/0\t0/0\t0/0\t1/1\t0/0\t1/1\t0/0\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t1/1\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\n"
+ },
+ "setup": [],
+ "faulted": "vcftools --vcf annotated.vcf --remove-indels --min-alleles 2 --max-alleles 2 --maf 0.05 --recode --out filtered",
+ "clean": "vcftools --vcf annotated.vcf --remove-indels --min-alleles 2 --max-alleles 2 --maf 0.05 --recode --recode-INFO-all --out filtered",
+ "observe": "grep -v '^##' filtered.recode.vcf | cut -f1,2,4,5,8"
+}

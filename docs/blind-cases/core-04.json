@@ -1,0 +1,21 @@
+{
+ "id": "core-04",
+ "domain": "core",
+ "tool": "bcftools",
+ "trap_class": "chromosome naming mismatch",
+ "intent": "Add the rs identifiers from the dbSNP file dbsnp_common.vcf.gz to the ID column of my called variants in tumor_calls.vcf.gz, matching on position and alleles.",
+ "silent_error": "bcftools annotate matches the annotation source to the target by exact contig name, and 'chr1' is not '1' (bcftools man page: 'sequence names must match exactly, \"chr20\" is not the same as \"20\"'). The dbSNP file uses Ensembl-style names and the calls use UCSC-style names, so no record matches: annotate exits 0, prints no warning, and writes a complete, valid VCF in which every ID is still '.'. It reads like 'none of my variants are in dbSNP'.",
+ "files": {
+  "tumor_calls.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr1,length=248956422>\n##contig=<ID=chr2,length=242193529>\n##contig=<ID=chrX,length=156040895>\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nchr1\t1014143\t.\tC\tT\t212\tPASS\t.\nchr1\t1018704\t.\tA\tG\t187\tPASS\t.\nchr2\t47641559\t.\tG\tA\t233\tPASS\t.\nchr2\t215593408\t.\tT\tC\t96\tPASS\t.\nchrX\t66765161\t.\tG\tC\t301\tPASS\t.\nchrX\t153760603\t.\tA\tT\t154\tPASS\t.\n",
+  "dbsnp_common.vcf": "##fileformat=VCFv4.2\n##contig=<ID=1,length=248956422>\n##contig=<ID=2,length=242193529>\n##contig=<ID=X,length=156040895>\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\n1\t1014143\trs142614334\tC\tT\t.\t.\t.\n1\t1018704\trs9442372\tA\tG\t.\t.\t.\n2\t47641559\trs63750447\tG\tA\t.\t.\t.\n2\t215593408\trs4986790\tT\tC\t.\t.\t.\nX\t66765161\trs6152\tG\tC\t.\t.\t.\nX\t153760603\trs1800290\tA\tT\t.\t.\t.\n"
+ },
+ "setup": [
+  "bgzip -c tumor_calls.vcf > tumor_calls.vcf.gz",
+  "bcftools index -t tumor_calls.vcf.gz",
+  "bgzip -c dbsnp_common.vcf > dbsnp_common.vcf.gz",
+  "bcftools index -t dbsnp_common.vcf.gz"
+ ],
+ "faulted": "bcftools annotate -a dbsnp_common.vcf.gz -c ID tumor_calls.vcf.gz -o annotated.vcf",
+ "clean": "bcftools query -f '%CHROM\\n' dbsnp_common.vcf.gz | sort -u | awk '{print $1 \"\\tchr\" $1}' > chr_map.txt && bcftools annotate --rename-chrs chr_map.txt dbsnp_common.vcf.gz -Oz -o dbsnp_common_chr.vcf.gz && bcftools index -t dbsnp_common_chr.vcf.gz && bcftools annotate -a dbsnp_common_chr.vcf.gz -c ID tumor_calls.vcf.gz -o annotated.vcf",
+ "observe": "bcftools query -f '%CHROM:%POS\\t%ID\\n' annotated.vcf"
+}

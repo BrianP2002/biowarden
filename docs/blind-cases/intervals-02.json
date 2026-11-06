@@ -1,0 +1,20 @@
+{
+ "id": "intervals-02",
+ "domain": "intervals",
+ "tool": "bedtools",
+ "trap_class": "stale fasta index",
+ "intent": "Extract the DNA sequence of each region listed in regions.bed from genome.fa, one FASTA record per region, named by the BED name column.",
+ "silent_error": "genome.fa.fai was built for an earlier release of genome.fa in which chr1 was 12 bp shorter, so the byte offset it stores for chr2 is 12 bytes too early. bedtools getfasta trusts an existing .fai: it only warns when the FASTA has a newer modification time than the index, and never checks the stored offsets against the FASTA. Here the FASTA was put in place by a rename and keeps an older mtime, so no warning is printed and every chr2 region comes back as the sequence 12 bases upstream of the requested one: clean ACGT of the right length, correct FASTA headers, exit 0, empty stderr. chr1 regions are still correct, which makes the file look healthy.",
+ "files": {
+  "genome.fa": ">chr1\nCGAGCATTAACGTTTCCGGGTATTACCACAACGGGGCAAGCCGAACGGCGACCCCAAGGCGTCGTCCTACTGCAACTCCAAGAGTTACATGAAAAGGAGAACCACACGCTGA\n>chr2\nTACCCCAGCTCATTACCGTAGCGGCAAGATGGTTAATCAAGACGGAAACCTAGGTACTTTGATATGCCGTGTCAGCAGAATCCGACGGCACTTCTTGGATGGCTCTCGGCAGACGTCGTC\n",
+  "genome.fa.fai": "chr1\t100\t6\t100\t101\nchr2\t120\t113\t120\t121\n",
+  "regions.bed": "chr1\t10\t40\tenhA\nchr1\t60\t90\tenhB\nchr2\t30\t60\tenhC\nchr2\t80\t110\tenhD\n"
+ },
+ "setup": [
+  "touch -d '2025-02-01 10:00' genome.fa.fai",
+  "touch -d '2024-03-01 10:00' genome.fa"
+ ],
+ "faulted": "bedtools getfasta -fi genome.fa -bed regions.bed -name > regions.fa",
+ "clean": "samtools faidx genome.fa && bedtools getfasta -fi genome.fa -bed regions.bed -name > regions.fa",
+ "observe": "cat regions.fa"
+}

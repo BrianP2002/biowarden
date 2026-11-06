@@ -1,0 +1,17 @@
+{
+ "id": "core-14",
+ "domain": "core",
+ "tool": "python-bio",
+ "trap_class": "headerless BED first row",
+ "intent": "Report how many peaks peaks.bed contains (a standard 5-column BED file), their total width in bp, and the count and width per chromosome.",
+ "silent_error": "pandas.read_csv uses header='infer' and a BED file has no header line, so the first peak (chrX:1030200-1030650) is consumed as the column names; renaming the columns afterwards hides it. The script reports 5 peaks instead of 6, the 450 bp of the lost peak are missing from the total, and chrX vanishes from the per-chromosome table. No exception or warning is raised; all remaining numbers are integers of the expected type.",
+ "files": {
+  "peaks.bed": "chrX\t1030200\t1030650\tpeak_001\t87\nchr1\t100250\t100700\tpeak_002\t64\nchr1\t220400\t221000\tpeak_003\t112\nchr2\t54010\t54390\tpeak_004\t45\nchr2\t981200\t981930\tpeak_005\t203\nchr7\t400100\t400450\tpeak_006\t71\n",
+  "summarize_peaks.py": "import pandas as pd\n\npeaks = pd.read_csv(\"peaks.bed\", sep=\"\\t\")\npeaks.columns = [\"chrom\", \"start\", \"end\", \"name\", \"score\"]\npeaks[\"width\"] = peaks[\"end\"] - peaks[\"start\"]\nprint(\"n_peaks\", len(peaks))\nprint(\"total_width\", int(peaks[\"width\"].sum()))\nfor chrom, sub in peaks.groupby(\"chrom\", sort=True):\n    print(chrom, len(sub), int(sub[\"width\"].sum()))\n",
+  "summarize_peaks_v2.py": "import pandas as pd\n\npeaks = pd.read_csv(\"peaks.bed\", sep=\"\\t\", header=None, names=[\"chrom\", \"start\", \"end\", \"name\", \"score\"])\npeaks[\"width\"] = peaks[\"end\"] - peaks[\"start\"]\nprint(\"n_peaks\", len(peaks))\nprint(\"total_width\", int(peaks[\"width\"].sum()))\nfor chrom, sub in peaks.groupby(\"chrom\", sort=True):\n    print(chrom, len(sub), int(sub[\"width\"].sum()))\n"
+ },
+ "setup": [],
+ "faulted": "python-bio summarize_peaks.py > peak_summary.txt",
+ "clean": "python-bio summarize_peaks_v2.py > peak_summary.txt",
+ "observe": "cat peak_summary.txt"
+}

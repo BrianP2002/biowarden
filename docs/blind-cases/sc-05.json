@@ -1,0 +1,21 @@
+{
+ "id": "sc-05",
+ "domain": "sc",
+ "tool": "scanpy",
+ "trap_class": "feature types dropped",
+ "intent": "Load the CITE-seq filtered feature-barcode matrix (RNA genes plus antibody-derived tag features, 10x v3 layout) into a single AnnData, save it as cite_seq.h5ad, and write a table of the loaded features to loaded_features.tsv.",
+ "silent_error": "scanpy.read_10x_mtx has gex_only=True by default: every feature whose type is not 'Gene Expression' (Antibody Capture, CRISPR Guide Capture, Custom) is silently removed (documented in the docstring). The antibody-derived tag counts of a CITE-seq run never reach the h5ad; the output is a valid, plausible RNA-only object and nothing is printed.",
+ "files": {
+  "filtered_feature_bc_matrix/matrix.mtx": "%%MatrixMarket matrix coordinate integer general\n%metadata_json: {\"software_version\": \"cellranger-7.1.0\", \"format_version\": 2}\n9 7 60\n1 1 3\n2 1 3\n3 1 1\n4 1 2\n5 1 3\n6 1 11\n7 1 33\n8 1 6\n9 1 6\n1 2 4\n2 2 3\n3 2 2\n4 2 3\n5 2 1\n6 2 6\n7 2 33\n8 2 7\n9 2 12\n1 3 4\n2 3 3\n5 3 1\n6 3 6\n7 3 34\n8 3 2\n9 3 5\n1 4 3\n2 4 7\n3 4 2\n4 4 1\n5 4 1\n6 4 7\n7 4 40\n8 4 5\n9 4 7\n1 5 5\n2 5 1\n3 5 1\n4 5 1\n5 5 2\n6 5 9\n7 5 32\n8 5 6\n9 5 9\n1 6 1\n3 6 2\n4 6 2\n5 6 1\n6 6 10\n7 6 26\n8 6 6\n9 6 5\n1 7 1\n2 7 1\n3 7 1\n4 7 2\n5 7 2\n6 7 17\n7 7 37\n8 7 5\n9 7 7\n",
+  "filtered_feature_bc_matrix/barcodes.tsv": "AAACCCAAGAAACCCA-1\nAAACCCAAGAAACTGT-1\nAAACCCAAGAAAGCAG-1\nAAACCCAAGAAATCCT-1\nAAACCCAAGAACAAGG-1\nAAACCCAAGAACATTC-1\nAAACCCAAGAACGGTA-1\n",
+  "filtered_feature_bc_matrix/features.tsv": "ENSG00000167286\tCD3D\tGene Expression\nENSG00000198851\tCD3E\tGene Expression\nENSG00000177455\tCD19\tGene Expression\nENSG00000156738\tMS4A1\tGene Expression\nENSG00000090382\tLYZ\tGene Expression\nENSG00000075624\tACTB\tGene Expression\nCD3_TotalSeqB\tCD3_TotalSeqB\tAntibody Capture\nCD19_TotalSeqB\tCD19_TotalSeqB\tAntibody Capture\nCD14_TotalSeqB\tCD14_TotalSeqB\tAntibody Capture\n",
+  "load_cite.py": "import scanpy as sc\n\nadata = sc.read_10x_mtx(\"filtered_feature_bc_matrix\")\nadata.var[[\"gene_ids\", \"feature_types\"]].to_csv(\"loaded_features.tsv\", sep=\"\\t\")\nadata.write_h5ad(\"cite_seq.h5ad\")\n",
+  "load_cite_v2.py": "import scanpy as sc\n\nadata = sc.read_10x_mtx(\"filtered_feature_bc_matrix\", gex_only=False)\nadata.var[[\"gene_ids\", \"feature_types\"]].to_csv(\"loaded_features.tsv\", sep=\"\\t\")\nadata.write_h5ad(\"cite_seq.h5ad\")\n"
+ },
+ "setup": [
+  "gzip filtered_feature_bc_matrix/matrix.mtx filtered_feature_bc_matrix/barcodes.tsv filtered_feature_bc_matrix/features.tsv"
+ ],
+ "faulted": "python-sc load_cite.py",
+ "clean": "python-sc load_cite_v2.py",
+ "observe": "tail -n +2 loaded_features.tsv | cut -f3 | sort | uniq -c"
+}

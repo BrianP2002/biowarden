@@ -1,0 +1,16 @@
+{
+ "id": "intervals-10",
+ "domain": "intervals",
+ "tool": "liftOver",
+ "trap_class": "serial number overwrites score",
+ "intent": "Lift the scored peak list peaks.bed (BED6, peak score in column 5) from the old to the new assembly with the supplied chain file. Peaks that fall in a region duplicated in the new assembly must be kept at every copy rather than dropped. The scores are needed afterwards to rank the peaks.",
+ "silent_error": "By default liftOver drops a peak that lands in a duplicated region ('#Duplicated in new' in the unmapped file), so the user turns on -multiple to keep all copies. In -multiple mode liftOver writes a serial number (1, 2, ...) into the 5th BED column unless -noSerial is given. The lifted BED6 therefore carries 1 or 2 where the peak scores 850, 640, 410, 320 and 770 used to be. The file is valid BED, the peak names and coordinates are right, exit 0, and stderr only says 'Reading liftover chains / Mapping coordinates'. Ranking by score afterwards sorts on serial numbers and the real scores are lost. The liftOver usage lists the switch: '-noSerial  In -multiple mode, do not put a serial number in the 5th BED column'.",
+ "files": {
+  "peaks.bed": "chr1\t1000\t1100\tpeak_01\t850\t+\nchr1\t5100\t5300\tpeak_02\t640\t+\nchr1\t5400\t5450\tpeak_03\t410\t.\nchr1\t8000\t8100\tpeak_04\t320\t-\nchr1\t15000\t15200\tpeak_05\t770\t+\n",
+  "old_to_new.chain": "chain 20000000 chr1 20000 + 0 20000 chr1 20000 + 0 20000 1\n20000\n\nchain 900000 chr1 20000 + 5000 5500 chr1 20000 + 12000 12500 2\n500\n\n"
+ },
+ "setup": [],
+ "faulted": "liftOver -multiple peaks.bed old_to_new.chain lifted.bed unmapped.bed",
+ "clean": "liftOver -multiple -noSerial peaks.bed old_to_new.chain lifted.bed unmapped.bed",
+ "observe": "cat lifted.bed"
+}

@@ -1,0 +1,18 @@
+{
+ "id": "sc-02",
+ "domain": "sc",
+ "tool": "anndata",
+ "trap_class": "gene intersection dropped",
+ "intent": "Merge the two lung samples (cells in rows, genes in columns, each file lists only the genes detected in that sample) into one object for a joint analysis, keeping every gene found in either sample; a gene missing from one sample just has zero counts there.",
+ "silent_error": "anndata.concat defaults to join='inner', so only genes present in both objects survive: genes detected in only one sample are silently dropped from the merged object (documented in the concat docstring; no warning, exit 0). The merged file looks like a normal two-sample object, just with fewer genes.",
+ "files": {
+  "lung_s1_counts.csv": ",Sftpc,Sftpb,Ager,Hopx,Scgb1a1,Cd68,Ptprc,Col1a1,Actb,Gapdh\nACGT00-1,3,3,5,3,4,0,5,4,20,11\nACGT01-1,1,4,3,3,3,0,3,1,17,16\nACGT02-1,2,5,1,2,6,7,5,2,17,15\nACGT03-1,4,2,4,6,2,4,2,2,17,16\nACGT04-1,1,2,4,4,1,1,0,0,28,21\n",
+  "lung_s2_counts.csv": ",Sftpc,Ager,Scgb1a1,Foxj1,Cd68,Ptprc,Col1a1,Pecam1,Actb,Gapdh\nTGCA00-1,4,2,0,4,4,7,1,1,20,12\nTGCA01-1,3,6,3,0,2,3,3,1,15,18\nTGCA02-1,3,4,4,3,4,2,2,3,22,13\nTGCA03-1,3,0,7,6,0,1,3,1,31,12\n",
+  "merge_samples.py": "import anndata as ad\n\ns1 = ad.io.read_csv(\"lung_s1_counts.csv\")\ns2 = ad.io.read_csv(\"lung_s2_counts.csv\")\nmerged = ad.concat([s1, s2], label=\"sample\", keys=[\"s1\", \"s2\"])\nmerged.write_h5ad(\"lung_merged.h5ad\")\n",
+  "merge_samples_v2.py": "import anndata as ad\n\ns1 = ad.io.read_csv(\"lung_s1_counts.csv\")\ns2 = ad.io.read_csv(\"lung_s2_counts.csv\")\nmerged = ad.concat([s1, s2], label=\"sample\", keys=[\"s1\", \"s2\"], join=\"outer\", fill_value=0)\nmerged.write_h5ad(\"lung_merged.h5ad\")\n"
+ },
+ "setup": [],
+ "faulted": "python-sc merge_samples.py",
+ "clean": "python-sc merge_samples_v2.py",
+ "observe": "python-sc -W ignore -c \"import anndata as ad; a=ad.read_h5ad('lung_merged.h5ad'); print(a.shape); print(' '.join(a.var_names))\""
+}

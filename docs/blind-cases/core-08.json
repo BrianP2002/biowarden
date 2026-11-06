@@ -1,0 +1,18 @@
+{
+ "id": "core-08",
+ "domain": "core",
+ "tool": "bcftools",
+ "trap_class": "FORMAT filter site-level",
+ "intent": "In trio_calls.vcf.gz keep only genotype calls that are supported by at least 10 reads (FORMAT/DP >= 10), so that calls from shallower samples are not used downstream.",
+ "silent_error": "bcftools filter -i with a FORMAT expression selects or drops whole sites: a site passes if ANY sample satisfies FMT/DP>=10 and then ALL its samples are printed (bcftools man page, expressions: 'Print all samples at sites where at least one sample has DP=1 or DP=2'); only -S/--set-GTs ('set genotypes of failed samples to missing value') masks individual calls. The faulted output therefore still carries genotype calls backed by 3 to 7 reads (0/1:4, 0/0:3, 0/1:7) next to the confident ones, and only the one site where every sample is shallow disappears. Exit 0, no message; the VCF looks filtered.",
+ "files": {
+  "trio_calls.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr5,length=181538259>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n##FORMAT=<ID=DP,Number=1,Type=Integer,Description=\"Read depth\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tNA_mother\tNA_father\tNA_child\nchr5\t112100\t.\tA\tG\t50\tPASS\t.\tGT:DP\t0/0:34\t0/1:41\t0/1:38\nchr5\t112250\t.\tC\tT\t50\tPASS\t.\tGT:DP\t0/1:4\t0/0:29\t0/1:33\nchr5\t112310\t.\tG\tA\t50\tPASS\t.\tGT:DP\t0/0:31\t0/0:3\t1/1:36\nchr5\t112480\t.\tT\tC\t50\tPASS\t.\tGT:DP\t0/1:5\t0/1:2\t0/0:6\nchr5\t112600\t.\tA\tT\t50\tPASS\t.\tGT:DP\t0/0:27\t0/0:30\t0/1:7\nchr5\t112755\t.\tG\tC\t50\tPASS\t.\tGT:DP\t1/1:44\t0/1:39\t0/1:12\n"
+ },
+ "setup": [
+  "bgzip -c trio_calls.vcf > trio_calls.vcf.gz",
+  "bcftools index -t trio_calls.vcf.gz"
+ ],
+ "faulted": "bcftools filter -i 'FMT/DP>=10' trio_calls.vcf.gz -o depth_filtered.vcf",
+ "clean": "bcftools filter -S . -e 'FMT/DP<10' trio_calls.vcf.gz -o depth_filtered.vcf",
+ "observe": "bcftools query -f '%POS[\\t%GT:%DP]\\n' depth_filtered.vcf"
+}

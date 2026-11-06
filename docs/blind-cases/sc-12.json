@@ -1,0 +1,19 @@
+{
+ "id": "sc-12",
+ "domain": "sc",
+ "tool": "mudata",
+ "trap_class": "modality intersection",
+ "intent": "Merge the cells of run 1 (RNA plus antibody-derived tag counts) and run 2 (RNA only) into one multimodal MuData with a run label, keeping both modalities: the RNA of all cells and the protein counts of the run-1 cells.",
+ "silent_error": "mudata.concat keeps only the intersection of the modalities of the inputs ('The intersection of modalities is taken', concat docstring). Because run 2 has no 'prot' modality, the whole protein modality is silently dropped, including the run-1 ADT counts. Exit 0 and a valid, plausible RNA-only h5mu; no message names the loss.",
+ "files": {
+  "make_runs.py": "import anndata as ad\nimport mudata as md\nimport numpy as np\nimport pandas as pd\n\nmd.set_options(pull_on_update=False)\nrng = np.random.default_rng(12)\ngenes = [\"CD3E\", \"CD19\", \"LYZ\", \"NKG7\", \"ACTB\", \"GAPDH\"]\nadts = [\"CD3_TotalSeqB\", \"CD19_TotalSeqB\", \"CD14_TotalSeqB\"]\n\ndef rna(prefix, n):\n    cells = [f\"{prefix}{i:02d}-1\" for i in range(n)]\n    X = rng.poisson([3, 2, 4, 2, 15, 10], size=(n, 6)).astype(\"float32\")\n    return ad.AnnData(X, obs=pd.DataFrame(index=cells), var=pd.DataFrame(index=genes))\n\ndef adt(a):\n    X = rng.poisson([40, 25, 30], size=(a.n_obs, 3)).astype(\"float32\")\n    return ad.AnnData(X, obs=pd.DataFrame(index=a.obs_names), var=pd.DataFrame(index=adts))\n\nr1 = rna(\"TTAG\", 5)\nr2 = rna(\"GCCA\", 4)\nmd.MuData({\"rna\": r1, \"prot\": adt(r1)}).write_h5mu(\"run1_cite.h5mu\")\nmd.MuData({\"rna\": r2}).write_h5mu(\"run2_rna.h5mu\")\n",
+  "merge_runs.py": "import anndata as ad\nimport mudata as md\n\nmd.set_options(pull_on_update=False)\nm1 = md.read_h5mu(\"run1_cite.h5mu\")\nm2 = md.read_h5mu(\"run2_rna.h5mu\")\nmerged = md.concat([m1, m2], label=\"run\", keys=[\"run1\", \"run2\"])\nmerged.write_h5mu(\"merged_runs.h5mu\")\n",
+  "merge_runs_v2.py": "import anndata as ad\nimport mudata as md\n\nmd.set_options(pull_on_update=False)\nm1 = md.read_h5mu(\"run1_cite.h5mu\")\nm2 = md.read_h5mu(\"run2_rna.h5mu\")\nrna = ad.concat([m1[\"rna\"], m2[\"rna\"]], label=\"run\", keys=[\"run1\", \"run2\"])\nmerged = md.MuData({\"rna\": rna, \"prot\": m1[\"prot\"]})\nmerged.write_h5mu(\"merged_runs.h5mu\")\n"
+ },
+ "setup": [
+  "python-sc make_runs.py"
+ ],
+ "faulted": "python-sc merge_runs.py",
+ "clean": "python-sc merge_runs_v2.py",
+ "observe": "python-sc -c \"import mudata as md; md.set_options(pull_on_update=False); m=md.read_h5mu('merged_runs.h5mu'); print(sorted(m.mod)); print({k: v.shape for k, v in sorted(m.mod.items())})\""
+}

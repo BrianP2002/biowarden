@@ -1,0 +1,18 @@
+{
+ "id": "sc-07",
+ "domain": "sc",
+ "tool": "scanpy",
+ "trap_class": "DE reference is rest",
+ "intent": "Find the genes that best distinguish stromal cluster 1 from stromal cluster 2 (t-test on log-normalised data) and save the ranked table for cluster 1, best first, to cluster1_vs_cluster2.csv.",
+ "silent_error": "rank_genes_groups compares every requested group with reference='rest' by default, i.e. with the union of ALL other cells (cluster 0 as well), not with the other requested group (docstring: 'Note that if reference=rest all groups will still be used as the reference, not just those specified in groups'). With groups=['1','2'] the table for group '1' is cluster 1 versus clusters 0+2, so shared-fibroblast genes rank first instead of the genes that separate 1 from 2. Valid-looking table, no warning, exit 0.",
+ "files": {
+  "stroma_counts.csv": ",EPCAM,KRT8,KRT18,COL1A1,COL1A2,DCN,CXCL12,IGFBP5,APOD,ACTA2,TAGLN,MYH11,ACTB,GAPDH,B2M,VIM\nstroma_00,16,19,15,1,4,3,13,13,13,1,1,0,21,15,19,1\nstroma_01,12,19,10,3,4,2,8,11,6,0,0,1,15,12,15,4\nstroma_02,17,22,15,3,3,2,8,10,16,1,2,1,28,18,17,5\nstroma_03,18,15,11,6,2,1,11,8,8,1,1,1,10,16,7,1\nstroma_04,12,17,20,6,4,3,6,6,10,0,2,1,13,11,9,2\nstroma_05,13,17,20,3,3,4,10,7,9,1,1,2,24,14,7,3\nstroma_06,15,19,14,3,4,3,7,9,12,1,0,1,22,21,5,2\nstroma_07,14,11,14,4,1,2,6,7,9,0,0,0,17,12,4,3\nstroma_08,0,1,1,24,18,11,17,8,15,4,3,1,20,14,8,6\nstroma_09,1,0,2,12,14,19,14,11,10,0,2,3,16,15,9,11\nstroma_10,0,2,1,24,16,17,7,17,15,2,4,0,24,14,11,12\nstroma_11,0,2,2,11,12,15,8,7,12,2,1,4,21,21,8,7\nstroma_12,2,0,2,11,10,13,13,9,9,0,2,1,20,19,13,6\nstroma_13,1,0,2,12,19,18,17,11,11,1,2,3,19,13,9,7\nstroma_14,3,1,1,14,15,19,10,13,9,1,1,2,35,17,13,12\nstroma_15,0,1,1,11,16,13,6,10,7,3,0,3,16,13,10,8\nstroma_16,2,1,4,7,11,10,3,2,1,15,11,10,12,19,12,5\nstroma_17,3,0,0,7,6,11,1,3,1,8,13,13,19,14,8,9\nstroma_18,0,0,1,8,5,4,1,1,3,12,8,4,14,13,5,6\nstroma_19,1,0,2,4,4,2,5,2,0,7,6,5,23,16,6,7\nstroma_20,2,2,1,20,12,6,3,2,0,10,12,7,16,27,9,5\nstroma_21,0,2,1,11,10,11,1,0,0,8,6,6,26,23,9,8\nstroma_22,0,0,1,14,8,8,1,3,1,4,5,7,23,17,15,7\nstroma_23,2,2,0,9,9,8,3,1,3,8,14,2,16,27,6,8\n",
+  "stroma_clusters.csv": "cell,cluster\nstroma_00,0\nstroma_01,0\nstroma_02,0\nstroma_03,0\nstroma_04,0\nstroma_05,0\nstroma_06,0\nstroma_07,0\nstroma_08,1\nstroma_09,1\nstroma_10,1\nstroma_11,1\nstroma_12,1\nstroma_13,1\nstroma_14,1\nstroma_15,1\nstroma_16,2\nstroma_17,2\nstroma_18,2\nstroma_19,2\nstroma_20,2\nstroma_21,2\nstroma_22,2\nstroma_23,2\n",
+  "cluster_markers.py": "import pandas as pd\nimport scanpy as sc\n\nadata = sc.read_csv(\"stroma_counts.csv\")\nmeta = pd.read_csv(\"stroma_clusters.csv\", index_col=0)\nadata.obs[\"cluster\"] = pd.Categorical(meta.loc[adata.obs_names, \"cluster\"].astype(str).values)\nsc.pp.normalize_total(adata, target_sum=1e4)\nsc.pp.log1p(adata)\n\nsc.tl.rank_genes_groups(adata, \"cluster\", groups=[\"1\", \"2\"], method=\"t-test\")\nsc.get.rank_genes_groups_df(adata, group=\"1\").to_csv(\"cluster1_vs_cluster2.csv\", index=False)\n",
+  "cluster_markers_v2.py": "import pandas as pd\nimport scanpy as sc\n\nadata = sc.read_csv(\"stroma_counts.csv\")\nmeta = pd.read_csv(\"stroma_clusters.csv\", index_col=0)\nadata.obs[\"cluster\"] = pd.Categorical(meta.loc[adata.obs_names, \"cluster\"].astype(str).values)\nsc.pp.normalize_total(adata, target_sum=1e4)\nsc.pp.log1p(adata)\n\nsc.tl.rank_genes_groups(adata, \"cluster\", groups=[\"1\"], reference=\"2\", method=\"t-test\")\nsc.get.rank_genes_groups_df(adata, group=\"1\").to_csv(\"cluster1_vs_cluster2.csv\", index=False)\n"
+ },
+ "setup": [],
+ "faulted": "python-sc cluster_markers.py",
+ "clean": "python-sc cluster_markers_v2.py",
+ "observe": "head -n 4 cluster1_vs_cluster2.csv | cut -d, -f1-3"
+}

@@ -1,0 +1,54 @@
+name: Missed silent error
+description: A tool call that gives a wrong result without any error and that the layer lets through, or a rule you would like.
+title: "[missed error] "
+labels: ["missed-error"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A silent error is a call that exits 0 or prints a valid-looking result that is scientifically
+        wrong. Please report one error per issue, and say how you know the right answer: a rule can
+        only be written for a behaviour that can be checked. Do not paste API keys, patient data or
+        files you may not share.
+  - type: input
+    id: tool
+    attributes:
+      label: Tool and version
+      description: The program and the version line it prints, for example `samtools 1.24`.
+      placeholder: samtools 1.24
+    validations:
+      required: true
+  - type: textarea
+    id: command
+    attributes:
+      label: The command
+      description: The exact command, with its options. Add the first lines of the input file if the error depends on the data.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: silent
+    attributes:
+      label: What goes wrong, silently
+      description: >-
+        What the command does that is wrong, what it prints, its exit status, and why nothing in the
+        output says so. Say whether the layer printed nothing or a warning you did not expect.
+    validations:
+      required: true
+  - type: textarea
+    id: truth
+    attributes:
+      label: How you know the right answer
+      description: >-
+        A second command or tool that gives the right result, the sentence of the tool's
+        documentation, a hand count on a small file, or a published issue.
+    validations:
+      required: true
+  - type: textarea
+    id: input
+    attributes:
+      label: A minimal input that shows it (optional)
+      description: The smallest file on which the wrong result appears. A few lines are enough.
+      render: text
+    validations:
+      required: false

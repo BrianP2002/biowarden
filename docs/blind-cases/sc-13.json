@@ -1,0 +1,19 @@
+{
+ "id": "sc-13",
+ "domain": "sc",
+ "tool": "mudata",
+ "trap_class": "union of cells",
+ "intent": "Combine the RNA and the ATAC AnnData of one 10x multiome run into a single MuData that contains only the cells measured in both assays (paired cells), and save it as pbmc_multiome.h5mu so that a joint analysis can use it directly.",
+ "silent_error": "MuData takes the union of the observations of its modalities (mdata.n_obs counts every cell seen in any modality; obsmap holds 0 for a missing cell). Building MuData({'rna': rna, 'atac': atac}) from objects with only partly overlapping barcodes therefore keeps cells that have data in one assay only, with empty rows in the other. No warning, exit 0; nothing intersects the cells, so downstream joint analysis silently includes unpaired cells.",
+ "files": {
+  "make_multiome.py": "import anndata as ad\nimport numpy as np\nimport pandas as pd\n\nrng = np.random.default_rng(13)\nbc = [\"AAACAGCCAAGGAATC\", \"AAACAGCCAATGCGCT\", \"AAACAGCCACACTAAT\", \"AAACAGCCACCAACCG\", \"AAACAGCCAGGATAAC\",\n      \"AAACAGCCAGTAGGTG\", \"AAACAGCCAGTTTACG\", \"AAACAGCCATCCTTGC\", \"AAACATGCAAGGTCTG\", \"AAACATGCAGACACCG\"]\nrna_cells = [f\"{b}-1\" for b in bc[:8]]\natac_cells = [f\"{b}-1\" for b in bc[2:]]\nrna = ad.AnnData(rng.poisson(3, size=(8, 5)).astype(\"float32\"), obs=pd.DataFrame(index=rna_cells),\n                 var=pd.DataFrame(index=[\"CD3E\", \"CD19\", \"LYZ\", \"NKG7\", \"ACTB\"]))\natac = ad.AnnData(rng.poisson(1, size=(8, 4)).astype(\"float32\"), obs=pd.DataFrame(index=atac_cells),\n                  var=pd.DataFrame(index=[\"chr1:1000-1500\", \"chr1:5000-5600\", \"chr2:700-1300\", \"chr3:900-1400\"]))\nrna.write_h5ad(\"pbmc_rna.h5ad\")\natac.write_h5ad(\"pbmc_atac.h5ad\")\n",
+  "build_mudata.py": "import anndata as ad\nimport mudata as md\n\nmd.set_options(pull_on_update=False)\nrna = ad.read_h5ad(\"pbmc_rna.h5ad\")\natac = ad.read_h5ad(\"pbmc_atac.h5ad\")\nmdata = md.MuData({\"rna\": rna, \"atac\": atac})\nmdata.write_h5mu(\"pbmc_multiome.h5mu\")\n",
+  "build_mudata_v2.py": "import anndata as ad\nimport mudata as md\n\nmd.set_options(pull_on_update=False)\nrna = ad.read_h5ad(\"pbmc_rna.h5ad\")\natac = ad.read_h5ad(\"pbmc_atac.h5ad\")\npaired = rna.obs_names.intersection(atac.obs_names)\nrna = rna[paired].copy()\natac = atac[paired].copy()\nmdata = md.MuData({\"rna\": rna, \"atac\": atac})\nmdata.write_h5mu(\"pbmc_multiome.h5mu\")\n"
+ },
+ "setup": [
+  "python-sc make_multiome.py"
+ ],
+ "faulted": "python-sc build_mudata.py",
+ "clean": "python-sc build_mudata_v2.py",
+ "observe": "python-sc -c \"import mudata as md; md.set_options(pull_on_update=False); m=md.read_h5mu('pbmc_multiome.h5mu'); print(m.n_obs, {k: v.n_obs for k, v in sorted(m.mod.items())}); print(int(((m.obsmap['rna'] > 0) & (m.obsmap['atac'] > 0)).sum()), 'cells in both')\""
+}

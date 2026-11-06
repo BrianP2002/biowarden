@@ -1,0 +1,1232 @@
+[
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-01",
+  "plausible": true,
+  "reason": "Without -a samtools depth lists only the 513 covered positions, so the awk mean is 9.75 instead of 4.17 over the 1200-bp reference named in the intent, and nothing in stdout, stderr or the exit status says positions were left out (re-run reproduces 9.75 vs 4.17).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-02",
+  "plausible": true,
+  "reason": "Pasting the 0-based BED start/end into a 1-based samtools region (chr1:99-100 instead of chr1:100-100) also counts reads ending on the preceding base, giving 'snpA 5 / snpC 3' instead of 'snpA 4 / snpC 2' (checked by hand against the read coordinates), with no message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-03",
+  "plausible": true,
+  "reason": "Plain samtools markdup -r ignores read groups and removed 30 library-B reads that merely share start and strand with library-A reads (S2.libB 37 of 67 left), whereas --use-read-groups keeps all 67 B reads and still removes the 8 within-A duplicates (A 74 in both); exit 0, empty stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-04",
+  "plausible": true,
+  "reason": "samtools bedcov prints the per-base depth sum, so exon_a (100 bp, mean depth 3) and exon_b (300 bp, mean 1) both show 300 and exon_c 100, inverting the requested ranking, while the clean division by interval length gives 3.00 / 1.00 / 2.00 (hand-checked from the read starts).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-05",
+  "plausible": true,
+  "reason": "Column 10 of flag-16 records is stored reverse-complemented, so the awk FASTA holds the wrong sequence for 6 of 12 reads (ctrl_02 'TCCACCGC...' instead of the original 'TCAGGCTA...') while samtools fasta restores the sequencer orientation; the faulted run prints nothing.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-06",
+  "plausible": true,
+  "reason": "bwa mem's default -T 30 writes 20 of the 30 short or 1-mismatch reads as flag-4 records (10 mapped) with only routine log lines, while bwa aln/samse (the documented route for reads under 70 bp) maps 30/30; even bwa mem -T 0 leaves the four 32-35 nt mismatched reads unmapped.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-07",
+  "plausible": true,
+  "reason": "Without -p bwa mem treats the interleaved FASTQ as single-end (flagstat '0 + 0 paired in sequencing', only flags 0/16, no mate fields) whereas -p gives 60 properly paired records (83/99/147/163), and the faulted stderr never mentions pairing; it is a forgotten flag, so plausibility is the softest point.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-08",
+  "plausible": true,
+  "reason": "After ref.fa was overwritten bwa mem silently used the index of the previous assembly (@SQ LN:3000, rd02 at 1418, rd01 72M28S) instead of the corrected one (LN:3120, rd02 at 1538, 100M) with no warning; the error only exists when an older index sits next to the FASTA, which is the setup.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-09",
+  "plausible": true,
+  "reason": "bowtie2 assumes Phred+33 on this Phred+64 file, so only 17 of 24 reads align (70.83%, several with spurious indels and MAPQ 0, QUAL left as 'h...B') versus 24/24 with --phred64 (QUAL converted to 'I...#'), and the summary says nothing about quality encoding.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-10",
+  "plausible": true,
+  "reason": "The default -X 500 makes the 6 pairs longer than 500 bp non-concordant (68 of 80 records properly paired instead of 80) while the summary still reports '100.00% overall alignment rate' and only lists them as 'aligned discordantly 1 time' without naming the fragment-size limit (a symptom, not the cause).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-11",
+  "plausible": true,
+  "reason": "-ax map-ont has no splice model, so 0 of 14 cDNA reads carry an N in the CIGAR (e.g. 108S152M142S plus 6 supplementary records) whereas -ax splice gives 14 spliced primaries such as 104M700N150M500N159M, and minimap2 prints only its usual log.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-12",
+  "plausible": true,
+  "reason": "Without -x sr minimap2 maps the two FASTQs as 60 unpaired reads (flagstat '0 + 0 paired in sequencing', flags only 0/16) instead of 60 properly paired records (83/99/147/163), and its log lines ('mapped 30 sequences' twice) say nothing about pairing.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-13",
+  "plausible": true,
+  "reason": "STAR's default --readNameSeparator '/' trims every PacBio name to m64011_190830_220126 (1 distinct QNAME in Aligned.out.sam) while the clean run keeps the 12 complete movie/zmw/ccs names, with no warning in stdout, stderr or Log.out, which breaks the join the intent requires.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-14",
+  "plausible": true,
+  "reason": "For the dUTP library the unstranded column 2 of ReadsPerGene.out.tab loses 18 reads as N_ambiguous and gives geneA 12 / geneB 6 instead of the strand-aware column 4 (24 / 12, all 36 reads assigned), and the cut table looks like an ordinary count table.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-15",
+  "plausible": true,
+  "reason": "With Ensembl '1' versus FASTA 'chr1' hisat2-build accepts the splice-site and exon files without any message (I also ran it without -q: no warning) and builds a junction-free index, leaving 4 spliced reads and 5 unaligned (75.00%) versus 20 spliced and 100% after the rename.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-16",
+  "plausible": true,
+  "reason": "HISAT2 gives multi-mappers MAPQ 1 (unique 60), so samtools view -q 1 keeps all 46 records including 16 with NH:i:2 whereas -e '[NH]==1' leaves the 30 unique records, and both runs print the same hisat2 summary.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-17",
+  "plausible": true,
+  "reason": "samtools view -c -F 4 also counts the 3 supplementary records of chimeric reads and reports 13 'mapped reads' instead of 10 distinct ones (flagstat: '10 + 0 primary mapped'), the standard recipe prints nothing, and -F 2308 gives the correct 10.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "align-18",
+  "plausible": true,
+  "reason": "Without the space-comma-space separator STAR writes one malformed '@RG ID:lane1 SM:S1 ID:lane2 SM:S1' line and tags all 16 reads RG:Z:lane1, whereas the documented ' , ' form gives two @RG lines and 8 reads per lane, with exit 0 and no message in stdout or stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-01",
+  "plausible": true,
+  "reason": "Default htseq-count (-s yes) on a dUTP library prints only '15 GFF lines processed. 98 alignment records processed.' and writes ENSG00000100001 1, ENSG00000100002 0, ENSG00000100003 0, ENSG00000100004 1, __no_feature 96, whereas -s reverse gives 29/20/8/39 with __no_feature 2, which matches my own overlap count (96 of 98 reads antisense to their gene, 2 sense).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-02",
+  "plausible": true,
+  "reason": "Copying the 0-based BED start into the 1-based SAF Start gives 'peak_1 1000 1300 301 9' (9/6/11/6 overall) instead of 'peak_1 1001 1300 300 6' (6/6/9/5) because reads ending on the base just before each peak (e.g. 965-1000, 4965-5000) are counted, with only the normal featureCounts banner; it is a real off-by-one but only a 1-bp boundary effect, large here because the toy reads sit exactly on the boundaries.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-03",
+  "plausible": true,
+  "reason": "With an Ensembl GTF (MT) and a UCSC-named BAM (chrM) the default run exits 0 with no warning, assigns only 76 of 100 alignments and reports 'ENSG00000198888 MT 0' and 'ENSG00000198804 MT 0', whereas the documented -A alias file 'MT,chrM' assigns 100% and gives 14 and 10, equal to my independent overlap count.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-04",
+  "plausible": true,
+  "reason": "Bowtie2 writes no NH tag, so default featureCounts counts the 18 MAPQ-1 (AS=XS) insertion-element reads as BSU_30010 8, BSU_30020 4, BSU_30030 6 while its banner still says 'Multimapping reads : not counted' and Unassigned_MultiMapping is 0; -Q 10 moves exactly those 18 to Unassigned_MappingQuality, keeps all 39 unique reads (24 and 15) and gives 0/0/0.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-05",
+  "plausible": true,
+  "reason": "The transcript-only index gives 'ENST00000500001 52' because reads from an unannotated genomic copy (my check: 35 pairs match the genome perfectly but have 1-10 mismatches to the transcript) are assigned to it, while salmon only logs '112 quantified (93.33%)' with no decoy message; the documented gentrome+decoys.txt index gives 25/35/25, equal to the 25 transcript-derived pairs, and both results are stable over repeated runs (salmon 2.8.0).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-06",
+  "plausible": true,
+  "reason": "With the coordinate-sorted BAM (@HD SO:coordinate) RSEM treats non-adjacent alignments of one read as separate reads, logging 'N = 143, NHit = 143' for a 115-read FASTQ and writing 48.00/40.00 (total 143) instead of 37.21/22.79 (total 115) with an empty stderr; rsem-sam-validator would say 'alignments of read ... are not grouped together' but rsem-calculate-expression never calls it.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-07",
+  "plausible": true,
+  "reason": "Without --single-overhang kallisto prints 'processed 175 reads, 77 reads pseudoaligned' and writes est_counts 47/30/0/0/0, losing all three short RNAs the intent says matter, whereas --single-overhang pseudoaligns all 175 reads and gives 60/40/30/20/25, which equals the true source transcript of every read (verified by exact matching).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-08",
+  "plausible": true,
+  "reason": "The build-if-missing guard reuses the stale index (mtime 3 days older than transcripts.fa), so kallisto prints '[index] number of targets: 3' and writes only ENST00000800001 80, ENST00000800002 30, ENST00000800003 20 with no ENST00000800004, whereas rebuilding gives 29/30/20/51; this is the weakest case on plausibility because the error comes from the user's caching guard, not from a kallisto default.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-09",
+  "plausible": true,
+  "reason": "Default --strandedness none gives 'ENST00000900001 52.00 / ENST00000900002 0.00' (log 'N = 82, NHit = 134') with no strand message, whereas --strandedness reverse gives 40.00/12.00/30.00, which matches my orientation check of all 82 pairs (mate 1 antisense to its source transcript: 40, 12, 30).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-10",
+  "plausible": true,
+  "reason": "Without --rf StringTie 3.0.3 silently skips the XS-less spliced reads of the STAR BAM and writes three strandless fragments ('chr3 504 800 .', 'chr3 1201 1473 .', 'chr3 2508 2800 .', transcripts=3 exons=3) with empty stderr, whereas --rf gives 504-1473 +, 2508-3497 -, 4014-4997 + (6 exons), consistent with the read flags (all 16 over genes 1 and 3, all 0 over gene 2 for dUTP).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-11",
+  "plausible": true,
+  "reason": "Default prepDE.py (-l 75) on 150-nt reads writes 'ENSG00000300001|LRRC8X,40,16' and every other count exactly doubled with no output, whereas -l 150 gives 20/8, 14/18, 8/8, 6/16, which equals the per-gene read counts I recomputed from the two SAMs (a constant factor of 2, so the counts are wrong as read counts even though DE ranking would barely change).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-12",
+  "plausible": true,
+  "reason": "The merge keeps htseq-count's five '__' pseudo-rows in counts.sum(), so cpm.csv has 'ENSG00000141510,157082.0,...' instead of 204293.6 (gene-only library size) plus __no_feature/__ambiguous/... rows, with no message; the '__' rows are visible in the file but nothing names the problem, and v2 drops them correctly.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-13",
+  "plausible": true,
+  "reason": "The left merge leaves NaN gene_id for the three MSTRG transcripts and pandas groupby drops NaN keys by default, so gene_counts.csv sums to 'total 202 204' instead of the 252 286 reads in quant.sf that the intent requires, with exit 0 and empty stderr; v2 (fillna with the transcript Name) preserves the totals.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-14",
+  "plausible": true,
+  "reason": "Default -i gene_id on this UCSC-style GTF (gene_id equals the NM_ transcript accession) yields nine per-transcript rows and '__ambiguous 96' of 170 reads with only the two-line stderr, whereas -i gene_name gives CCDC88X 35, PLEKHM3X 22, RBM47X 35, SLC38A9X 50, TMEM63X 28 with __ambiguous 0.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "quant-15",
+  "plausible": true,
+  "reason": "--ignoreDup on a never-marked Bowtie2 BAM counts everything ('peak_A 15, peak_B 11, peak_C 7', Unassigned_Duplicate 0) while the banner claims 'Duplicated Reads : ignored', whereas samtools markdup first flags 11 reads and gives 9/6/7, equal to the number of distinct start+strand groups I counted per peak (9, 6, 7).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-01",
+  "plausible": true,
+  "reason": "Re-run confirms bcftools view -q 0.05 defaults to the non-ref allele frequency (help text says '[nref]'), so the faulted file keeps pos 4000 (AF 0.98), 5000 (AF 1) and 7000 (AF 0.96), whose MAF is 0.02/0/0.04, while -q 0.05:minor keeps exactly 2000, 3000, 6000, 8000; stderr empty, exit 0.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-02",
+  "plausible": true,
+  "reason": "Re-run confirms a .txt regions file is read as 1-based 'CHROM BEG END', so the BED intervals are widened and the faulted output adds the out-of-target variants chr1:1000, chr1:2000 and chr2:500 (10 records), whereas the .bed copy returns exactly the 7 variants inside 1-based 1001-1100, 2001-2100, 501-600; stderr empty.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-03",
+  "plausible": true,
+  "reason": "FORMAT expressions in bcftools filter are evaluated per site (any sample), so the faulted command drops 4 of 6 sites and writes no './.' (only 2400 and 5600 remain), whereas adding -S . keeps all 6 sites and sets exactly the DP<10 calls to missing (e.g. '1200 1/1 0/1 ./. 0/0', '4800 ./. ./. ./. ./.'); stderr empty.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-04",
+  "plausible": true,
+  "reason": "Cohort contig '1' versus extract 'chr1' is never matched, so the faulted output has ID '.' for all six variants with empty stderr and exit 0, while --rename-chrs on the extract fills rs367896724 ... rs118100551 (only blemish: the two toy headers give different chr1 lengths, 249250621 vs 248956422).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-05",
+  "plausible": true,
+  "reason": "bcftools view -s refreshes only AC/AN, so the faulted file keeps pos 1500 ('AC=0;AN=8;AF=0.438', monomorphic in A1-A4) and drops pos 7000 (true AF 2/8 = 0.25), whereas subsetting, +fill-tags -t AF, then filtering returns 2600 (0.5), 4800 (0.75), 7000 (0.25), which matches a hand count of the genotypes.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-06",
+  "plausible": true,
+  "reason": "Plain concat of the overlapping chunks writes pos 11800 and 12300 twice and out of order ('... 12300 11800 12300 12950 ...') with only the informational 'Checking the headers...' and 'Concatenating ...' lines on stderr, whereas -a -d all gives the 10 unique positions in order (-d exact gives the same here).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-07",
+  "plausible": true,
+  "reason": "vcftools --max-missing is the minimum fraction of called genotypes, so 0.2 keeps 5 of 6 sites including the 70%-missing site 10680 (log: 'kept 5 out of a possible 6 Sites'), whereas --missing-site gives F_MISS 0, 0.1, 0.3, 0.6, 0.7, 0.9 so only 5200 and 6570 have at most 20% missing, exactly what --max-missing 0.8 returns.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-08",
+  "plausible": true,
+  "reason": "Without --recode-INFO-all the faulted VCF has INFO '.' on all three kept records (clean keeps 'DP=410;AF=0.35;ANN=missense_variant|GENE1' etc.) and the log says nothing; it is the stock '--recode --out' recipe, although the intent's explicit 'INFO must survive' makes an attentive LLM somewhat less likely to omit the flag.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-09",
+  "plausible": true,
+  "reason": "plink 1.9 forces A1 to the minor allele on VCF import, so the faulted .raw header shows rs3002_C and rs3004_T (the REF alleles; R1 at rs3002 is 0 although its genotype is 1/1) while --keep-allele-order gives rs3002_T/rs3004_C with R1 = 2, i.e. true ALT counts; the plink log is silent.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-10",
+  "plausible": true,
+  "reason": "Without --double-id plink 1.9 splits sample names at the first underscore, so the faulted .fam holds 'NA12878 rep1', 'NA12878 rep2', ... (IID rep1/rep2 repeated under three families) and the log never mentions it, whereas --double-id gives 'NA12878_rep1 NA12878_rep1'.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-11",
+  "plausible": true,
+  "reason": "plink2 --vcf ignores FORMAT/DS unless dosage=DS ('By default, dosage information is not imported' in plink2 --help vcf), so the faulted hard-call scores differ from the dosage scores (I04 0.00666667 vs -0.00279989, I08 -0.00666667 vs 0.000600586; I01 dosage score checked by hand = 0.1816/6 = 0.0302677) with no log message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-12",
+  "plausible": true,
+  "reason": "tabix -s 1 -b 2 -e 3 without -0 reads BED starts as 1-based, so the faulted query returns probe_a+probe_b for chr1:100 and probe_c+probe_d for chr1:300, whereas -p bed returns only probe_a and probe_c; silent, and the explicit-column form is a documented generic recipe though less usual than -p bed for a BED file.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-13",
+  "plausible": true,
+  "reason": "VariantFiltration only writes FT=LowGQ unless --set-filtered-genotype-to-no-call is given, so the faulted GT columns are unchanged (e.g. '4800 0/1 1/1 1/1 0/1') whereas the clean run gives './.' for every GQ<20 call (e.g. '4800 ./. ./. ./. ./.') with all 6 sites kept; stderr holds only INFO/progress lines.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-14",
+  "plausible": true,
+  "reason": "GATK types 'A>G,AT' at chr11:4720 as MIXED, so --select-type-to-include INDEL silently yields 3 records (log only says 'Processed 3 total variants') while adding MIXED yields all 4 records that carry an indel allele (3350, 4720, 6010, 9150); no warning is printed.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "variants-15",
+  "plausible": true,
+  "reason": "picard GenotypeConcordance compares alleles as written, so the faulted INDEL row is 0/0/0/0 (contingency TP 0, FP 1, FN 1) although bcftools norm -f turns the call '17 TT>T' into the truth's '13 AT>A' and then gives INDEL 1/1/1/1; stderr has no message about representation.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-01",
+  "plausible": true,
+  "reason": "Without -s the minus-strand promoters land on the gene's 3' side (LOC_B 'chr1 11000 12000' vs clean 'chr1 15000 16000'; LOC_C 20000-21000 vs 22500-23500; LOC_E 7000-8000 vs 9500-10500) with empty stderr, and the clean -s windows equal my hand-derived upstream windows for all five genes.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-02",
+  "plausible": true,
+  "reason": "A Python slice of genome.fa confirms enhC/enhD are 'GGTTAATCAAGACGG...'/'TCCGACGGCACTTC...' but the faulted run returns the sequence 12 bp upstream ('TAGCGGCAAGATGG...') with exit 0 and empty stderr, because the stale .fai (chr2 offset 113 vs real 125) is newer than the FASTA (when I reversed the mtimes bedtools did print 'Warning: the index file is older than the FASTA file' but still used the stale index), and samtools faidx rebuilds it correctly.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-03",
+  "plausible": true,
+  "reason": "bedtools subtract without -A trims and splits peaks (peak_02 becomes 2500-2850, peak_03 splits into 4000-4100 and 4150-4300, peak_06 becomes 3050-3300) instead of dropping them, contradicting 'original, unmodified peak calls', whereas intersect -v leaves exactly peak_01 and peak_04, and nothing is printed on stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-04",
+  "plausible": true,
+  "reason": "Without -split the 600-nt intron is reported as covered ('chr1 285 900 4') whereas -split gives 'chr1 285 300 4' followed by 900-915, and the clean track equals an independent CIGAR-walk coverage I computed in Python, with no stderr in either run.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-05",
+  "plausible": true,
+  "reason": "-wa writes peak_01 and peak_04 twice ('chr1 900 1300 peak_01 50 .' x2), giving 6 byte-identical-valid lines for 4 peaks, while -u gives the 4 distinct peaks; -wa is the usual way to keep original coordinates and nothing is printed on stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-06",
+  "plausible": true,
+  "reason": "The default -e 100% keeps only fully covered peaks (peak_02, peak_05; identical to my run of 'bedops --element-of 100%') and silently drops the partial overlaps peak_01 and peak_04 that -e 1 keeps, contradicting 'overlap at least one promoter'; only the help text mentions the default, nothing is printed at run time.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-07",
+  "plausible": true,
+  "reason": "On natural-order input bedmap leaves the chr10 and chr11 peaks without a gene ('peak_05 88 <empty>', 'peak_06 35 <empty>') although sort-bed first yields GENE_E and GENE_F, exit 0 and empty stderr, and only the optional --ec flag reports 'Bed file not properly sorted by first column'.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-08",
+  "plausible": true,
+  "reason": "bedmap --mean on the 4-column bedGraph prints '0.000000' for GENE_A and 'NAN' for GENE_B/GENE_D although --count shows they overlap 3 and 2 intervals, while the BED5-reshaped clean gives 16.916667/3.000000/NAN/15.000000 (matches my hand calculation of the unweighted mean; --wmean would give 17.375) and stderr is empty.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-09",
+  "plausible": true,
+  "reason": "vcf2bed's default [POS-1,POS) interval loses del_into_ex2 and del_into_ex3 (faulted lists only snv_ex1, del_ex1, snv_ex3) while REF-span intervals from bcftools list all five exonic variants, and the only stderr is an unrelated 'Warning: If your Wiggle data is a significant portion of available system memory' notice.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-10",
+  "plausible": true,
+  "reason": "-multiple without -noSerial overwrites the scores 850/640/410/320/770 with serial numbers ('chr1 1000 1100 peak_01 1 +', 'peak_02 ... 2 +'), stderr only says 'Reading liftover chains / Mapping coordinates', and -noSerial keeps the original score at both copies.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-11",
+  "plausible": true,
+  "reason": "--filterRNAstrand forward keeps minus-strand alignments (its documented dUTP assumption), so the 'plus-gene' track is 'chr1 500 600 1 / 1200 1600 2 / 1600 1700 1' instead of the chr1:200-700 signal that --samFlagExclude 16 (equal to --filterRNAstrand reverse in my run) returns, and stderr only echoes 'filter_strand: forward'.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-12",
+  "plausible": true,
+  "reason": "Default readCount scaling counts the 40 chrM reads (treated 80 vs control 44 mapped), so identical chr1 signal shows 'chr1 0 10000 -0.767339' and similar, whereas --ignoreForNormalization chrM gives 'chr1 0 20000 0', and stderr is only the parameter listing.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-13",
+  "plausible": true,
+  "reason": "multiBamSummary counts the flag-1024 duplicates (prom_1 6.0 vs 2.0, prom_2 3.0 vs 9.0) while --samFlagExclude 1024 gives 1.0 vs 2.0 and 3.0 vs 1.0, which matches my hand count of non-duplicate reads and reverses the A/B direction, with stderr only 'Number of bins found: 3'.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-14",
+  "plausible": true,
+  "reason": "Without --missingDataAsZero the three read-free genes are 'nan' rows that plotProfile skips, so the profile is 4.0...5.33 (three genes) instead of the requested all-six-gene 2.0...2.67, with empty stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "intervals-15",
+  "plausible": true,
+  "reason": "macs3 -f BEDPE reads only columns 1-3 of the bedtools BEDPE (first mate), giving 'mean fragment size is determined as 50.0 bp' (297.8 after conversion), peaks about 230 bp wide with -log10(q) 23.7-37.0 versus about 450 bp and 71.7-91.3, and an INFO-only log that never names a problem.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-01",
+  "plausible": true,
+  "reason": "Re-run reproduced: `seqtk trimfq -q 20` exits 0 with empty stderr and keeps every base (\"reads 24 bases 2400 bases_below_Q6 430\") because -q is an error-probability threshold (usage text: 'error rate threshold ... [0.05]'), while `-q 0.01` (=Q20) trims the Q2-Q5 tails (\"bases 1970 bases_below_Q6 0\").",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-02",
+  "plausible": true,
+  "reason": "Re-run reproduced: passing GFF3 1-based starts to seqtk subseq as BED drops the first base of all four genes (\"ctg1:22-89 len=68 first=TGC ... frame_ok=0\", exit 0, empty stderr), whereas start-1 gives \"ctg1:21-89 len=69 first=ATG ... frame_ok=1\".",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-03",
+  "plausible": true,
+  "reason": "Re-run reproduced: default table 1 gives \"MT-ND1 ... internal_stops=4 Met=1 last=*\" (and last=R for ND2/CO1) with empty stderr, while `-T 2` (vertebrate mitochondrial code) gives internal_stops=0, Met=9/12/10/6 and a terminal stop in all four genes; the only trace is the internal '*' in the data, which is a symptom, not a message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-04",
+  "plausible": true,
+  "reason": "Re-run reproduced: without -P, `rmdup -s` collapses each bottom-strand oligo into its reverse-complement top oligo (\"records=6\", log only '[INFO] 9 duplicated records removed' although the file has just 3 exact repeats; 12 distinct sequences, 6 if reverse complements are merged), while -P keeps all 12 ('3 duplicated records removed').",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-05",
+  "plausible": true,
+  "reason": "Re-run reproduced: without --phred64 fastp passes all 40 reads untouched (\"reads=40 bases=3000\", output quality still 'fggghgeh...', report 'Q20 bases: 3000(100%)', no encoding warning in stderr, JSON or HTML), whereas --phred64 trims the Q2 'B' tails, drops the 10 failed reads (\"reads=30 bases=2055\") and converts the output to Phred+33.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-06",
+  "plausible": true,
+  "reason": "Re-run reproduced: SRA-style names (@SRR14781203.1) do not trigger fastp's automatic poly-G trimming (\"reads_ending_in_polyG=32\", bases=3600, report never mentions poly-G) while -g gives \"reads_ending_in_polyG=0\", bases=2432; I also confirmed that the same reads renamed NovaSeq-style (@A00834:...) are auto-trimmed, so the default is silently name-dependent.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-07",
+  "plausible": true,
+  "reason": "Re-run reproduced: without --revcomp the 18 reverse-strand reads are discarded (\"reads_kept=18\"; the log gives only the plain statistic 'Reads discarded as untrimmed: 18 (50.0%)') whereas --revcomp keeps all 36 (\"reads_kept=36\", flipped reads tagged ' rc'), which is what the intent's 'whichever strand' requires.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-08",
+  "plausible": true,
+  "reason": "Re-run reproduced: the manual-style ILLUMINACLIP:...:2:30:10 leaves only 9 of 32 pairs in the paired files and orphans 23 forward reads in 1U (log: 'Both Surviving: 9 (28.12%) Forward Only Surviving: 23 (71.88%)' then 'Completed successfully'), whereas :2:True keeps 32/32 pairs (also with :8:True), as 'keep the read pairs together' asks; borderline only because dropping the redundant mate is Trimmomatic's documented default.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-09",
+  "plausible": true,
+  "reason": "Re-run reproduced: default megablast reports only sp1 and sp2 (\"scaffolds_with_hit=2\", empty stderr) while -task blastn also finds sp3 (78.5% id) and sp4 (71.8% id); dc-megablast gives the same four and sp5 has no homolog even under tblastx, so the clean result is complete.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-10",
+  "plausible": true,
+  "reason": "Re-run reproduced: makeblastdb -parse_seqids plus an explicit sseqid column makes blastn report 'ref|NC_000913.3|', 'gb|CP032666.1|', 'dbj|AB123456.1|', so `seqkit grep -f` (log only '8 patterns loaded from file', no unmatched-pattern warning) extracts just the 4 local contigs (\"sequences_extracted=4\" vs hits_in_blast=8), whereas omitting -parse_seqids extracts all 8.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-11",
+  "plausible": true,
+  "reason": "Re-run reproduced: diamond blastp's default cap yields \"family_members=25\" (stderr only echoes '#Target sequences to report alignments for: 25' and 'Reported 25 pairwise alignments', nothing about truncation), while -k 0 reports all 45 homologs (E-values up to 4.75e-78) and none of the 15 hypothetical proteins.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-12",
+  "plausible": true,
+  "reason": "Re-run reproduced: default MAFFT silently deletes every '*' (\"stops=0\" for all six strains, 140 columns, stderr has only the normal progress text) while --anysymbol keeps all eight including the premature stops of strain_C3 and strain_E5 (\"strain_C3 stops=2\", 141 columns), as the intent requires.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-13",
+  "plausible": true,
+  "reason": "Re-run reproduced: hmmscan silently uses the stale 2-model pressed files (only \"prot_001 lectin_like 4e-45\" and \"prot_002 kinase_like 2e-43\", empty stderr, E-values scaled to 2 models) whereas `hmmpress -f` first adds \"prot_003 porin_like 2.9e-34\" and \"prot_004 porin_like 2.1e-32\".",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-14",
+  "plausible": true,
+  "reason": "Re-run reproduced and cross-checked: per-chunk hmmsearch without -Z uses Z=10 and returns 17 hits (the six extras have whole-proteome E-values of 1.4e-5 to 6.6e-5), while -Z 120 returns the 11 hits, identical in set and E-values to one hmmsearch on the whole 120-protein file.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "seq-15",
+  "plausible": true,
+  "reason": "Re-run reproduced: default -c 0.8 --cov-mode 0 leaves the five fragments (ASM3_g0301, ASM4_g0555, ASM2_g1102, ASM3_g0777, ASM4_g0099) as singletons (\"clusters=9\", log only echoes 'Coverage mode 0'), whereas --cov-mode 1 absorbs them into their longer proteins (\"clusters=4\").",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-01",
+  "plausible": true,
+  "reason": "Default TMalign (-ter 3) reads only chain A ('TM2=0.9819 L1=24 L2=24 Lali=24') although chain B differs by 13-43 A between the files, whereas -ter 1 scores all 44 residues ('TM2=0.5355 L1=44 L2=44 Lali=29'; my own identity-mapping TM-score is about 0.548); exit 0 and empty stderr in both.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-02",
+  "plausible": true,
+  "reason": "Column 3 is TM1 normalised by the 34-residue model ('0.8603') while the score against the 60-residue native is TM2 ('0.5360', independently confirmed by the TMscore program: 'TM-score = 0.5360', Length=60), and -outfmt 2 drops the 'use TM-score normalized by length of the reference' hint.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-03",
+  "plausible": true,
+  "reason": "mkdssp 4.5.3 reads only MODEL 1 ('helix fraction: 0.917'; per-model fractions I measured are 0.917/0.625/0.750/0.375) while the split-and-average pipeline gives 'helix fraction: 0.667', and the only stderr is the identical missing-CCD notice text in both variants, which never mentions models.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-04",
+  "plausible": true,
+  "reason": "pdb_selatom -CA strips spaces from atom names and keeps the Ca2+ ion ('24 ATOM' plus '1 HETATM' with name CA, a 25th bead), whereas pdb_delhetatm first gives exactly '24 ATOM'; pdb-tools 2.7.0 warns only in its docstring, stderr empty.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-05",
+  "plausible": true,
+  "reason": "With -A, Leu20 (labelled B and C only) keeps both copies ('20 LEU CG alt=[B]' and '20 LEU CG alt=[C]', four duplicated atoms, 161 vs 157 ATOM lines) and Ser10 keeps the 0.40 minor conformer, whereas the default gives each atom once ('20 LEU CG alt=[ ] occ= 0.50', 'SER OG occ= 0.60'), with exit 0 and no message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-06",
+  "plausible": true,
+  "reason": "Without -multi the output is the single fused record '>PDB|AB' with the 44-residue sequence, instead of '>PDB|A' (24 aa) and '>PDB|B' (20 aa) from -multi; nothing is printed (the 'AB' in the header is only a visible hint, not a message).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-07",
+  "plausible": true,
+  "reason": "pdb_reres 2.7.0 resets its counter only at MODEL (source checked), so the faulted file has 'chain B: first 21 last 40' instead of the requested 'chain B: first 1 last 20' that the select-chain/reres/tidy loop produces, with exit 0 and empty stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-08",
+  "plausible": true,
+  "reason": "The cell-aware gemmi search prints 'A-B atom pairs within 4.0 A: 24', all 24 with image_idx=1 (a symmetry mate, closest 2.88 A), although the as-placed minimum A-B distance is 32.67 A (numpy), so the image_idx filter's 'A-B atom pairs within 4.0 A: 0' is the true answer for the stated 'as placed in the model file'.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-09",
+  "plausible": true,
+  "reason": "The textbook PPBuilder().build_peptides(chain) has aa_only=True and drops the four selenomethionines (output 'KTAYIAKQRISFVKSHFSRQLEERLGAEIVKQRSLG', 36 aa), whereas aa_only=False returns all 40 residues with M at 1, 11, 23 and 36, matching the 40 CA atoms in the file; stderr is empty.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-10",
+  "plausible": true,
+  "reason": "ProDy's 'resnum 10:20' is right-exclusive (select.py docstring: ':' is left inclusive) and gives 'residues: 10' with centroid '13.20 12.43 12.46', while 'resnum 10 to 20' gives the requested 'residues: 11' and '13.81 12.89 12.74'; no warning.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-11",
+  "plausible": true,
+  "reason": "rms.rmsd defaults to center=False, superposition=False and prints 'CA RMSD (A): 25.99', while center=True, superposition=True gives 'CA RMSD (A): 0.87' (my own numpy Kabsch gives plain 25.99 and fitted 0.87); stderr empty.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-12",
+  "plausible": true,
+  "reason": "md.compute_distances defaults to periodic=True and uses the CRYST1 cell (50 A), printing '13.9' for a peptide whose first-last CA distance is 36.06 A (numpy), which periodic=False reproduces ('36.1'); no message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-13",
+  "plausible": true,
+  "reason": "mdtraj's probe_radius is in nm (docstring 'in nm', default 0.14), so 1.4 is a 14 A probe and prints 'total SASA (A^2): 8094' versus 1714 with 0.14, which Bio.PDB ShrakeRupley with a 1.4 A probe confirms (1716); the call is accepted silently.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-14",
+  "plausible": true,
+  "reason": "MolFromPDBFile on a bond-order-free HETATM block yields a saturated molecule ('formula: C6H14N2O', 'molecular weight: 130.19', 'aromatic atoms: 0'), while AssignBondOrdersFromTemplate gives nicotinamide ('C6H6N2O', '122.13', 'aromatic atoms: 6'); exit 0, empty stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "struct-15",
+  "plausible": true,
+  "reason": "GetBestRMS superposes the probe first and prints 'heavy-atom RMSD (A): 1.34' (a false success under 2 A) while the in-place CalcRMS prints 7.89, matching my brute-force minimum over the 4 symmetry mappings of the unaligned poses (7.90); stderr empty.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-01",
+  "plausible": true,
+  "reason": "Re-run: faulted 'samtools depth | awk' divides by the 210 covered positions (3.095) instead of the 400 bp target the intent names, while the '-a' clean gives 1.625 (identical to 'samtools coverage' meandepth 1.625); exit 0 and no message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-02",
+  "plausible": true,
+  "reason": "Re-run: pasting the 0-based BED start into the 1-based faidx region returns shifted 21-nt sequences ('21 TTCCAACTCCTTTACAGTCTT') instead of the 20-nt sites ('20 TCCAACTCCTTTACAGTCTT'), exit 0 with no message about it.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-03",
+  "plausible": true,
+  "reason": "Re-run: '-F 4' also counts the 2 secondary and 1 supplementary records (flagstat '10 + 0 mapped' vs '7 + 0 primary mapped'), giving 10 for an 8-read library, while '-F 2308' gives 7; only an integer is printed.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-04",
+  "plausible": true,
+  "reason": "Re-run: with chr1 vs 1 contig names annotate exits 0 with empty stderr and leaves every ID '.', while the --rename-chrs clean returns rs142614334 etc. (I also confirmed annotate still matches on ALT, so 'position and alleles' holds in the clean run).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-05",
+  "plausible": true,
+  "reason": "Re-run: the .txt name makes bcftools read the BED as 1-based so 7 variants are kept (extra chr3:178916500, chr3:178921400, chr17:7577000) versus the 4 that BED semantics give (I recomputed this independently), with no warning.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-06",
+  "plausible": true,
+  "reason": "Re-run: 'view -s' refreshes only AC/AN, so the faulted run keeps var2 with 'AC=0 AN=6 AF=0.5' and drops var1 (true 4/6), whereas '+fill-tags -t AF' returns var1 and var4; the single-command 'view -s ... -i INFO/AF>=0.5' form fails identically.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-07",
+  "plausible": true,
+  "reason": "Re-run: '-q 0.05' defaults to the non-reference frequency, so rs1476413 (196/200, MAF 2%) and rs4846048 (200/200, MAF 0) pass, while '-q 0.05:minor' keeps only the four sites with MAF >= 5%; no message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-08",
+  "plausible": true,
+  "reason": "Re-run: site-level 'FMT/DP>=10' leaves shallow genotype calls in place ('0/1:4', '0/0:3', '0/1:7') whereas '-S . -e FMT/DP<10' turns exactly those into './.', with empty stderr in both.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-09",
+  "plausible": true,
+  "reason": "Re-run: without -split the bedGraph shows 'chr4 64 260 4' across the intron (280 covered bases) versus 84 with -split, and the clean track equals per-base 'samtools depth' (zero-depth run aside); no message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-10",
+  "plausible": true,
+  "reason": "Re-run: without -s the minus-strand genes come out as genomic plus strand (MIR2 'TGTCGCCTTGCC...') instead of the transcript-sense 'AGGCCTAGATGG...' that -s gives (exact reverse complement), exit 0 with empty stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-11",
+  "plausible": true,
+  "reason": "Re-run: groupby on the unsorted concatenation prints 12 lines ('TP53 41' ... 'TP53 38') instead of one total per gene, while 'sort -k1,1' first gives 'TP53 79', 'BRCA1 39', 'EGFR 484' (correct sums), with empty stderr.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-12",
+  "plausible": true,
+  "reason": "Re-run: the CR-terminated keys ('IL6\\r' per od -c) never match, so the output is 'gene TPM' plus 'SOCS3' only, whereas 'tr -d \\r' returns all five genes; exit 0 and no message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-13",
+  "plausible": true,
+  "reason": "Re-run: 'sort -n' reads 1e-300 as 1 and 3.2e-05 as 3.2, so 0.0021 ranks first, while '-g' gives 1e-300, 1e-30, 2.5e-12 (identical to an independent python float sort), silently.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-14",
+  "plausible": true,
+  "reason": "Re-run: default header inference swallows the first BED row, giving 'n_peaks 5', 'total_width 2510' and no chrX line, versus 'n_peaks 6', 'total_width 2960' with header=None; no exception or warning.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "core-15",
+  "plausible": true,
+  "reason": "Re-run: pysam returns the stored reverse-complemented SEQ/QUAL for flag-16 reads so frag_2/4/6 are wrong in the faulted FASTQ, while the v2 output is byte-identical to 'samtools fastq'; no warning.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-01",
+  "plausible": true,
+  "reason": "Re-run reproduces: faulted pseudobulk_counts.csv holds sums of log values (ctrl Epcam 38.087906, Actb 49.38143) instead of raw-count sums (24.0, 151.0) because layers['counts'] = adata.X aliases X and normalize_total/log1p work in place, while the .copy() version gives the true integer sums (3+3+3+7+4+4=24); stderr empty, exit 0.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-02",
+  "plausible": true,
+  "reason": "Faulted merged object is (9, 8) 'Sftpc Ager Scgb1a1 Cd68 Ptprc Col1a1 Actb Gapdh', silently losing Sftpb, Hopx, Foxj1 and Pecam1 (concat default join='inner'), whereas join='outer', fill_value=0 gives (9, 12) with real zeros (I checked the matrix) as the intent requires; stderr empty.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-03",
+  "plausible": true,
+  "reason": "Faulted writes 'cross_batch_neighbour_fraction 0.13', which I confirmed equals the uncorrected object (0.133) because neighbors silently reuses the stale obsm['X_pca'] after ComBat (60 genes > 50), whereas recomputing PCA gives 0.55 (use_rep='X' gives 0.557); nothing is printed at default verbosity.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-04",
+  "plausible": true,
+  "reason": "Faulted umi_per_cell.csv gives 40/54/43/52/54/33 (spliced layer only, because read_loom defaults to X_name='spliced', confirmed in the installed source) against 73/93/88/80/96/78 for the full matrix with X_name='' that the 'spliced or not' intent asks for; no warning.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-05",
+  "plausible": true,
+  "reason": "Faulted loaded_features.tsv counts only '6 Gene Expression' because read_10x_mtx defaults to gex_only=True and drops the 3 Antibody Capture features the intent wants, while gex_only=False gives '3 Antibody Capture / 6 Gene Expression'; no message in stderr or in the scanpy source path.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-06",
+  "plausible": true,
+  "reason": "Faulted (layer='counts' with the default seurat flavor, which applies expm1 to its input) selects 'AKT1 CASP3 COX4I1 FTH1 GSTP1 IL32 JUN LGALS1 NKG7 RHOA STAT3 YWHAZ', i.e. high-count genes and 0 of 12 lineage genes, versus 7 of 12 for the default call on log-normalised X, with no warning (only seurat_v3 checks for non-integers); plausibility is the weakest point, as it relies on mixing in the seurat_v3 recipe's layer='counts'.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-07",
+  "plausible": true,
+  "reason": "Faulted cluster1_vs_cluster2.csv is really cluster 1 vs rest (reference='rest' default; top DCN 6.00, COL1A2, COL1A1, the stroma-vs-epithelium genes) while the intent and the file name say 1 vs 2 (clean top CXCL12 5.40, APOD, COL1A2 from groups=['1'], reference='2'); no warning.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-08",
+  "plausible": true,
+  "reason": "Both variants have identical X and t-test scores (VEGFA 9.0723) but the faulted logfoldchanges are inflated about 1.44x because uns['log1p']['base'] is unset (VEGFA 2.534 vs clean 1.759; my direct log2 ratio of mean normalised expression is 1.703, MYC 1.044 vs 0.724 vs 0.712), with nothing printed.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-09",
+  "plausible": true,
+  "reason": "Faulted neural_qc.h5ad is (11, 13) with obs_names 'Sox2 Pax6 Nes Dcx' (genes treated as cells, so both filters hit the wrong axis) versus (12, 12) with 'GSM5012001 GSM5012002 GSM5012004 GSM5012005' after .T; read_csv/filter_* print nothing.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-10",
+  "plausible": true,
+  "reason": "Faulted gives deep -2.84 vs shallow -0.53 because adata.raw = adata.copy() makes score_genes (use_raw=None) score raw counts, while the clean gives -0.14 vs -0.09; I confirmed that use_raw=False on the faulted script reproduces -0.14/-0.09 and the library sizes differ about 3.5x (647 vs 187), and nothing is printed.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-11",
+  "plausible": true,
+  "reason": "Faulted startswith('MT-') flags no mouse 'mt-' gene so kept_cells.csv has 16 cells all at 0.0 percent, whereas 'mt-' keeps 13 and drops the dying cells MSB1_03/04/11 (about 23%, 80%, 79% mitochondrial); no warning.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-12",
+  "plausible": true,
+  "reason": "Faulted merged_runs.h5mu contains only ['rna'] {'rna': (9, 6)} because mudata.concat takes the intersection of modalities (stated in its docstring), silently losing the run-1 ADT counts that the clean keeps (['prot', 'rna'], prot (5, 3)); stderr empty (minor: the clean's run label sits only in rna.obs, not in the global obs).",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-13",
+  "plausible": true,
+  "reason": "Faulted MuData reports '10 {'atac': 8, 'rna': 8}' with '6 cells in both', so 4 unpaired cells are kept despite the 'only paired cells' intent, whereas intersecting barcodes first gives '6 {'atac': 6, 'rna': 6}'; MuData's union of obs raises no message.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-14",
+  "plausible": true,
+  "reason": "Faulted combine without key puts P2's alphabetically ordered rows under P1's gene labels (Sox2 8.7 1.5, Mki67 0.8 10.3) against the correct Sox2 8.7 10.3 / Mki67 0.8 1.5 with key='Accession'; the only stderr is an identical, unrelated \"'batch_scan_layers' is deprecated\" notice in both variants, which does not name the row-order problem.",
+  "silent": true,
+  "verdict": "accept"
+ },
+ {
+  "clean_right": true,
+  "duplicate_of": "",
+  "faulted_wrong": true,
+  "id": "sc-15",
+  "plausible": true,
+  "reason": "Faulted loom is (5, 6) with only ['CellID'] ('no Cluster attribute', 'no Sample attribute') because add_columns deletes every unprovided column attribute for all cells (documented), whereas the clean keeps Cluster [0, 0, 1, 1, -1, -1] and Sample ['run1'x4, 'run2'x2]; no warning (the faulted also ignores the 'sample run2' given in the intent, but omitting attributes is a realistic slip).",
+  "silent": true,
+  "verdict": "accept"
+ }
+]

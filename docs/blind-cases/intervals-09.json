@@ -1,0 +1,16 @@
+{
+ "id": "intervals-09",
+ "domain": "intervals",
+ "tool": "vcf2bed",
+ "trap_class": "deletion span ignored",
+ "intent": "List the IDs of the variants in variants.vcf (SNVs and deletions) that overlap an exon in exons.bed; a deletion counts as exonic when any of the reference bases it removes lies in an exon.",
+ "silent_error": "vcf2bed (convert2bed -i vcf) maps every record to the one-base interval [POS-1, POS) in its default mode and ignores the length of REF, so a deletion is represented by its anchor base only. The two deletions whose anchor base lies just before an exon but whose deleted bases fall inside it (del_into_ex2, del_into_ex3) do not overlap the exon in the converted BED, and bedops --element-of silently omits them: 3 of the 5 exonic variants are reported. The result is a normal ID list with exit 0; the only stderr text is an unrelated memory notice about Wiggle data. The same VCF read with the REF span, [POS-1, POS-1+len(REF)), gives all 5. The vcf2bed help says only that 'the POS column is mapped to the second and third BED columns'; only vcf2bed --deletions switches to the REF span, the default mode does not.",
+ "files": {
+  "variants.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr1,length=100000>\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nchr1\t1050\tsnv_ex1\tC\tT\t60\tPASS\t.\nchr1\t1060\tdel_ex1\tACGTAC\tA\t58\tPASS\t.\nchr1\t1500\tsnv_intron\tG\tA\t60\tPASS\t.\nchr1\t2000\tdel_into_ex2\tACGTACGT\tA\t55\tPASS\t.\nchr1\t2500\tdel_intron\tTTGCATGC\tT\t60\tPASS\t.\nchr1\t2995\tdel_into_ex3\tGATTACAG\tG\t52\tPASS\t.\nchr1\t3100\tsnv_ex3\tA\tC\t60\tPASS\t.\n",
+  "exons.bed": "chr1\t1000\t1100\tEX1\nchr1\t2000\t2100\tEX2\nchr1\t3000\t3100\tEX3\n"
+ },
+ "setup": [],
+ "faulted": "vcf2bed < variants.vcf | bedops --element-of 1 - exons.bed | cut -f4 > exonic_variants.txt",
+ "clean": "bcftools query -f '%CHROM\\t%POS0\\t%END\\t%ID\\n' variants.vcf | sort-bed - | bedops --element-of 1 - exons.bed | cut -f4 > exonic_variants.txt",
+ "observe": "cat exonic_variants.txt"
+}

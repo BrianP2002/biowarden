@@ -1,0 +1,15 @@
+{
+ "id": "seq-12",
+ "domain": "seq",
+ "tool": "mafft",
+ "trap_class": "stop symbol stripped",
+ "intent": "Align these six translated copies of a gene. Two of them are suspected pseudogenes with a premature stop codon: keep every '*' in its alignment column so the stops can be located.",
+ "silent_error": "By default MAFFT deletes unusual symbols such as '*' from the input sequences (they are neither kept nor turned into gaps), so the premature stops of the pseudogene copies vanish and the residues after them are shifted left into other columns. It exits 0 and prints only its normal progress text; the alignment looks clean and every sequence appears to be intact. --anysymbol keeps the symbol in the output.",
+ "files": {
+  "gene_family.faa": ">strain_A1 translated CDS\nMLLWPFTVFMQLCAPYNPVWEPCNMARLYDCWERTPGRTYTAAYPQVEGLAQWNFLDMPT\nHFPLWYTIDCNAMNWTSARYYAFVECFKWDMQWLNPIWDPPDSCGVQMDEYSFHHQFCDT\nTWYECAIMMRFVMKCNEWQG*\n>strain_B2 translated CDS\nMLNWPFLVFMGLCAPYNPVWEPCNMARIYDCWEATPGRTYTAAYPQVEGLAQWNFEWMPA\nHFPLWYTINCNAINWTCARYYAFHECFKWDDQWLNPHWDPPDSCYVQMDEDSTHHQFCDT\nTWYKCAIMTRFAMKCNEEQG*\n>strain_C3 translated CDS\nMLLNPFTVFGQLCAPYNPVWEPCNMARIWDAWERTIGYIYTAAY*QVEGLHMWNFQDMPY\nHFPLWYTINCNAINWTSARYYAFVCCFKWDMQWLNPHWDPPDSCGVQMDEYWFHHQFCDT\nTWYKCAIMTRFAMDCNEWQG*\n>strain_D4 translated CDS\nMILWPFTVFMQLCATCNPVWEPCNMARIYDCWERTPGRTYTAAYPEVEGLAQWNFLDIPA\nHFPLWYTINCNAINMTSARYYADIMCFKWGMQWLNPHWDPCDDCGVQMDEYSFHHQFCDT\nWWYKCAIMTYFAQKCNEWQG*\n>strain_E5 translated CDS\nMLLWPFTVFMQLCAWYNPVWEPCNMKPIYDCWERTPGRPVTAAYPQVEGLAQWNFLDQPA\nHFPAWYTINCNAFNWTSARYYAFVECFKWDM*WLNPHWDPPDSCGVQMDELSFHHQFRDT\nTGVKCKIMTRFAMKCNAWQS*\n>strain_F6 translated CDS\nMLLWPFTVFMHLCAPYNPVWEPCNMANQYDCWERTPGRTYTAAYPDVEGLAQWNFLDMPA\nHFCLWYTINCNAINWTSARYYAFVECFKWDMQWLNPHWDNNDSCGVQMDEYSFHIQFCDT\nTWYKCAIMTRFAMKCNEWQG*\n"
+ },
+ "setup": [],
+ "faulted": "mafft gene_family.faa > aln.faa",
+ "clean": "mafft --anysymbol gene_family.faa > aln.faa",
+ "observe": "awk '/^>/{if(h!=\"\")print h, \"stops=\" s; h=substr($0,2,9); s=0; next} {s+=gsub(/\\*/,\"*\")} END{print h, \"stops=\" s}' aln.faa; awk '/^>/{n++; next} n==1{l+=length($0)} END{print \"alignment_columns=\" l}' aln.faa"
+}

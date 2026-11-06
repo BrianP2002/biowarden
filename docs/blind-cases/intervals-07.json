@@ -1,0 +1,16 @@
+{
+ "id": "intervals-07",
+ "domain": "intervals",
+ "tool": "bedmap",
+ "trap_class": "chromosome sort order",
+ "intent": "For every peak in peaks.bed, report the gene (name column) of genes.bed that the peak overlaps: peak record followed by the gene name, one line per peak.",
+ "silent_error": "Both BED files are sorted in natural chromosome order (chr1, chr2, chr3, chr10, chr11, chrX), which is what sort -V, many genome-browser exports and R/Bioconductor produce. BEDOPS tools require sort-bed order, which is lexicographic (chr1, chr10, chr11, chr2, ...), and only check it with the optional --ec flag. Without it bedmap silently pairs the wrong stretches of the two files: the peaks on chr10 and chr11 are reported with an empty gene column, exactly as if they overlapped no gene, while chr1, chr2, chr3 and chrX look right. Exit 0, no stderr. The BEDOPS manual: 'Every input file must be sorted per the sort-bed utility'.",
+ "files": {
+  "peaks.bed": "chr1\t1200\t1500\tpeak_01\t55\nchr2\t800\t1100\tpeak_02\t60\nchr2\t4000\t4300\tpeak_03\t41\nchr3\t300\t600\tpeak_04\t75\nchr10\t2200\t2500\tpeak_05\t88\nchr11\t900\t1200\tpeak_06\t35\nchrX\t1500\t1800\tpeak_07\t64\n",
+  "genes.bed": "chr1\t1000\t2000\tGENE_A\nchr2\t500\t1500\tGENE_B\nchr2\t3800\t4600\tGENE_C\nchr3\t100\t900\tGENE_D\nchr10\t2000\t3000\tGENE_E\nchr11\t700\t1400\tGENE_F\nchrX\t1000\t2000\tGENE_G\n"
+ },
+ "setup": [],
+ "faulted": "bedmap --echo --echo-map-id --delim '\\t' peaks.bed genes.bed > peak_genes.tsv",
+ "clean": "sort-bed peaks.bed > peaks.sorted.bed && sort-bed genes.bed > genes.sorted.bed && bedmap --echo --echo-map-id --delim '\\t' peaks.sorted.bed genes.sorted.bed > peak_genes.tsv",
+ "observe": "sort -k4,4 peak_genes.tsv"
+}

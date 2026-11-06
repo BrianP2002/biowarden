@@ -1,0 +1,18 @@
+{
+ "id": "intervals-04",
+ "domain": "intervals",
+ "tool": "bedtools",
+ "trap_class": "spliced reads intron",
+ "intent": "Make a bedGraph of per-base RNA-seq read coverage from rnaseq.bam (the spliced alignment of one library) to measure how much of this locus is covered by sequenced bases.",
+ "silent_error": "Without -split, bedtools genomecov uses each alignment's start and end only and ignores the CIGAR N (skipped-region) operation, so the 600-nt intron under every spliced read is reported as covered. The bedGraph is well formed, the intron appears as one long block of depth 1 to 6 between the two exons, and neither stdout, stderr nor the exit status says that these bases were never sequenced. Anything computed from it (breadth of coverage, intron retention, expressed length) is inflated. Documented in the genomecov usage: '-split Treat \"split\" BAM or BED12 entries as distinct BED intervals ... uses the CIGAR N and D operations to infer the blocks'.",
+ "files": {
+  "rnaseq.sam": "@HD\tVN:1.6\tSO:coordinate\n@SQ\tSN:chr1\tLN:3000\n@PG\tID:aligner\tPN:aligner\tVN:1.0\nread01\t0\tchr1\t101\t255\t50M\t*\t0\t0\tTGCCTGGTACATCCGCGAAATGCAGTCAAACCAGGCACTAGTCAATATTC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread02\t0\tchr1\t141\t255\t50M\t*\t0\t0\tAACATTTGAATGCCAAACTATACCTGTTTAGCCGTGTGTACCCACCTCAC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread03\t0\tchr1\t201\t255\t50M\t*\t0\t0\tCTGACTATCTTGGGACCCCTAAGCTGGCGTCAGTGTTCATTCTCTGACTT\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread04\t0\tchr1\t251\t255\t50M600N0M\t*\t0\t0\tTAACTTGGCTACCTCATACGACTCAGCTAACGCGTATAGAGTAGTGCAAG\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread05\t16\tchr1\t266\t255\t35M600N15M\t*\t0\t0\tTGCTCGCAAAGGGGACATAACGGGCTTTGGCCAGACGGGGGGGAAGGCTA\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread06\t16\tchr1\t276\t255\t25M600N25M\t*\t0\t0\tGCGTTTCACAGGACTTATAATTAAAAGTTTGACATTGTCGACGCCGGTTA\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread07\t16\tchr1\t286\t255\t15M600N35M\t*\t0\t0\tCCCAAAGGCCCGCCGATAAAAGCACGGCACGACACTCCGTCGAGTTGTTG\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread08\t16\tchr1\t921\t255\t50M\t*\t0\t0\tTGCAATCGTTTCTGCAGAAGGGCGCATTATCATCTCAATCCTGTCTTGGT\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread09\t16\tchr1\t981\t255\t50M\t*\t0\t0\tATGCGCCAGTATATTGCTCTTACTAACCGAAGAGTGGGGCACAATTAATC\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\nread10\t16\tchr1\t1031\t255\t50M\t*\t0\t0\tACTTAAACTCCCATCCAACAAATGAGGACGGTATTGCGTAAATTTGCGAG\tIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII\tNH:i:1\n"
+ },
+ "setup": [
+  "samtools view -b -o rnaseq.bam rnaseq.sam",
+  "samtools index rnaseq.bam"
+ ],
+ "faulted": "bedtools genomecov -ibam rnaseq.bam -bg > coverage.bedgraph",
+ "clean": "bedtools genomecov -ibam rnaseq.bam -bg -split > coverage.bedgraph",
+ "observe": "cat coverage.bedgraph"
+}

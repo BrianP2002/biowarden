@@ -1,0 +1,19 @@
+{
+ "id": "core-05",
+ "domain": "core",
+ "tool": "bcftools",
+ "trap_class": "file suffix sets coordinates",
+ "intent": "Keep only the variants of proband_calls.vcf.gz that lie inside the capture-panel intervals listed in exome_panel_regions.txt, which is a BED file (0-based start, end-exclusive).",
+ "silent_error": "bcftools view -R decides the coordinate system from the file name: only a '.bed' or '.bed.gz' suffix makes it 0-based half-open, any other name is read as a tab-delimited file with 1-based inclusive coordinates (bcftools man page, -R: 'To indicate that a file be treated as BED rather than the 1-based tab-delimited file, the file must have the \".bed\" or \".bed.gz\" suffix'). The BED content named .txt is therefore shifted by one base on the left edge: the base just before each interval start is kept (3 extra variants). No warning, valid VCF output.",
+ "files": {
+  "proband_calls.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr3,length=198295559>\n##contig=<ID=chr17,length=83257441>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tproband\nchr3\t178916500\t.\tA\tG\t60\tPASS\t.\tGT\t0/1\nchr3\t178916501\t.\tC\tT\t60\tPASS\t.\tGT\t0/1\nchr3\t178916620\t.\tG\tA\t60\tPASS\t.\tGT\t0/1\nchr3\t178916621\t.\tT\tC\t60\tPASS\t.\tGT\t0/1\nchr3\t178921400\t.\tC\tG\t60\tPASS\t.\tGT\t0/1\nchr3\t178921450\t.\tA\tC\t60\tPASS\t.\tGT\t0/1\nchr17\t7577000\t.\tG\tT\t60\tPASS\t.\tGT\t0/1\nchr17\t7577100\t.\tC\tA\t60\tPASS\t.\tGT\t0/1\nchr17\t7577151\t.\tT\tG\t60\tPASS\t.\tGT\t0/1\n",
+  "exome_panel_regions.txt": "chr3\t178916500\t178916620\nchr3\t178921400\t178921500\nchr17\t7577000\t7577150\n"
+ },
+ "setup": [
+  "bgzip -c proband_calls.vcf > proband_calls.vcf.gz",
+  "bcftools index -t proband_calls.vcf.gz"
+ ],
+ "faulted": "bcftools view -R exome_panel_regions.txt proband_calls.vcf.gz -o on_target.vcf",
+ "clean": "cp exome_panel_regions.txt exome_panel_regions.bed && bcftools view -R exome_panel_regions.bed proband_calls.vcf.gz -o on_target.vcf",
+ "observe": "bcftools query -f '%CHROM:%POS\\n' on_target.vcf"
+}

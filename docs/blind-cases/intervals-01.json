@@ -1,0 +1,16 @@
+{
+ "id": "intervals-01",
+ "domain": "intervals",
+ "tool": "bedtools",
+ "trap_class": "strand-blind flank",
+ "intent": "Build a promoter set: for every gene in genes.bed take the 1 kb of sequence immediately upstream of its transcription start site (the gene body itself is not part of the promoter).",
+ "silent_error": "bedtools flank treats -l as 'left of the interval' in genome coordinates unless -s is given, so for every minus-strand gene the 1 kb window is placed on the 3' (downstream) side of the gene, inside the neighbouring sequence, while plus-strand genes are fine. The output is a valid BED with the same names and nothing on stderr or in the header says that half of the promoters sit at the wrong end. Documented in the bedtools flank usage: '-s Define -l and -r based on strand. E.g. if used, -l 500 for a negative-stranded feature, it will start the flank 500 bp downstream. Default = false.'",
+ "files": {
+  "genes.bed": "chr1\t5000\t7000\tLOC_A\t0\t+\nchr1\t12000\t15000\tLOC_B\t0\t-\nchr1\t21000\t22500\tLOC_C\t0\t-\nchr2\t3000\t4200\tLOC_D\t0\t+\nchr2\t8000\t9500\tLOC_E\t0\t-\n",
+  "genome.txt": "chr1\t30000\nchr2\t20000\n"
+ },
+ "setup": [],
+ "faulted": "bedtools flank -i genes.bed -g genome.txt -l 1000 -r 0 > promoters.bed",
+ "clean": "bedtools flank -i genes.bed -g genome.txt -l 1000 -r 0 -s > promoters.bed",
+ "observe": "cat promoters.bed"
+}

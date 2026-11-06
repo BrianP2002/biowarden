@@ -1,0 +1,15 @@
+{
+ "id": "variants-09",
+ "domain": "variants",
+ "tool": "plink",
+ "trap_class": "counted allele is minor",
+ "intent": "Export a sample-by-variant matrix with the number of copies of the ALT allele (0, 1 or 2) of each variant, for use in R.",
+ "silent_error": "plink 1.9 re-assigns A1/A2 by frequency when it imports a VCF: A1 becomes the MINOR allele, not the ALT allele, unless --keep-allele-order is given. --recode A counts copies of A1, so at variants where the ALT allele is the major allele (rs3002, rs3004) the matrix holds REFERENCE-allele counts. Only the column header (e.g. rs3002_C) differs; no message, exit 0. Documented in plink --help (--keep-allele-order: keep the allele order instead of forcing A2 to be the major allele; --recode A counts A1).",
+ "files": {
+  "cohort.vcf": "##fileformat=VCFv4.2\n##contig=<ID=8,length=145000000>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tR1\tR2\tR3\tR4\tR5\tR6\tR7\tR8\n8\t1100\trs3001\tA\tG\t90\tPASS\t.\tGT\t0/0\t0/1\t0/0\t0/0\t0/1\t0/0\t0/0\t1/1\n8\t2300\trs3002\tC\tT\t90\tPASS\t.\tGT\t1/1\t1/1\t0/1\t1/1\t1/1\t0/1\t1/1\t1/1\n8\t3500\trs3003\tG\tA\t90\tPASS\t.\tGT\t0/1\t0/0\t0/1\t0/0\t0/0\t0/1\t0/0\t0/0\n8\t4700\trs3004\tT\tC\t90\tPASS\t.\tGT\t1/1\t0/1\t1/1\t1/1\t1/1\t1/1\t0/1\t0/1\n"
+ },
+ "setup": [],
+ "faulted": "plink --vcf cohort.vcf --double-id --recode A --out alt_counts",
+ "clean": "plink --vcf cohort.vcf --double-id --keep-allele-order --recode A --out alt_counts",
+ "observe": "cut -d' ' -f2,7- alt_counts.raw"
+}

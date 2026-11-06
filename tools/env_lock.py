@@ -32,8 +32,8 @@ from collections.abc import Sequence
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOLS_ENV_VAR = "SCIENCE_HARNESS_TOOLS"
-BWRAP_ENV_VAR = "SCIENCE_HARNESS_BWRAP"
+TOOLS_ENV_VAR = "BIOWARDEN_TOOLS"
+BWRAP_ENV_VAR = "BIOWARDEN_BWRAP"
 HEADER = ("name", "version", "build", "url", "sha256")
 TOOLS = ("samtools", "bcftools", "bedtools")
 ENV_NAME = re.compile(r"[A-Za-z0-9][A-Za-z0-9._-]*")

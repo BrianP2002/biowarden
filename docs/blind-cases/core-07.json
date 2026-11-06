@@ -1,0 +1,18 @@
+{
+ "id": "core-07",
+ "domain": "core",
+ "tool": "bcftools",
+ "trap_class": "min-af allele type default",
+ "intent": "Select the common variants of panel_sites.vcf.gz: keep a site only if its minor allele frequency (from INFO AC and AN) is at least 5%.",
+ "silent_error": "bcftools view -q/--min-af measures the frequency of the non-reference allele by default (usage text: '-q/Q, --min-af/--max-af FLOAT[:TYPE]  Minimum/maximum frequency for non-reference (nref), 1st alternate (alt1), least frequent (minor), most frequent (major) or sum of all but most frequent (nonmajor) alleles [nref]'). -q 0.05 is therefore 'ALT frequency >= 5%', not 'MAF >= 5%': rs1476413 (ALT 98%, MAF 2%) and rs4846048 (ALT 100%, monomorphic for ALT) pass although the reference allele is the rare one. The minor-allele filter needs -q 0.05:minor. Exit 0, no message, well-formed VCF.",
+ "files": {
+  "panel_sites.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr1,length=248956422>\n##contig=<ID=chr2,length=242193529>\n##INFO=<ID=AC,Number=A,Type=Integer,Description=\"Alternate allele count\">\n##INFO=<ID=AN,Number=1,Type=Integer,Description=\"Total number of alleles\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\nchr1\t11856378\trs1801133\tG\tA\t.\tPASS\tAC=3;AN=200\nchr1\t11856400\trs2274976\tC\tT\t.\tPASS\tAC=80;AN=200\nchr1\t11863000\trs1476413\tT\tC\t.\tPASS\tAC=196;AN=200\nchr1\t11871020\trs4846048\tA\tG\t.\tPASS\tAC=200;AN=200\nchr2\t27730940\trs1260326\tC\tT\t.\tPASS\tAC=24;AN=200\nchr2\t27741237\trs780094\tG\tA\t.\tPASS\tAC=150;AN=200\nchr2\t27750112\trs1128249\tT\tG\t.\tPASS\tAC=185;AN=200\n"
+ },
+ "setup": [
+  "bgzip -c panel_sites.vcf > panel_sites.vcf.gz",
+  "bcftools index -t panel_sites.vcf.gz"
+ ],
+ "faulted": "bcftools view -q 0.05 panel_sites.vcf.gz -o common_maf05.vcf",
+ "clean": "bcftools view -q 0.05:minor panel_sites.vcf.gz -o common_maf05.vcf",
+ "observe": "bcftools query -f '%ID\\t%INFO/AC/%INFO/AN\\n' common_maf05.vcf"
+}

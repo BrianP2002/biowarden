@@ -1,0 +1,15 @@
+{
+ "id": "variants-14",
+ "domain": "variants",
+ "tool": "gatk",
+ "trap_class": "mixed-type records dropped",
+ "intent": "Extract into indels.vcf every record of the callset that carries an insertion or deletion allele, so that indel-specific filters can be applied to it.",
+ "silent_error": "GATK classifies a multiallelic record with both a SNP and an indel allele (A -> G,AT) as type MIXED. --select-type-to-include INDEL selects only records whose alleles are all indels, so the mixed record is in neither the SNP nor the INDEL selection and is lost from the indel file, with no message and exit 0. The indel selection must also include MIXED, which SelectVariants accepts as a separate type (--select-type-to-include: NO_VARIATION, SNP, MNP, INDEL, SYMBOLIC, MIXED).",
+ "files": {
+  "callset.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr11,length=135000000>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tH1\tH2\tH3\nchr11\t2100\t.\tA\tG\t150\tPASS\t.\tGT\t0/1\t0/0\t1/1\nchr11\t3350\t.\tCT\tC\t150\tPASS\t.\tGT\t0/1\t0/1\t0/0\nchr11\t4720\t.\tA\tG,AT\t150\tPASS\t.\tGT\t1/2\t0/1\t0/0\nchr11\t6010\t.\tG\tGAA\t150\tPASS\t.\tGT\t0/0\t0/1\t0/1\nchr11\t7288\t.\tC\tT,A\t150\tPASS\t.\tGT\t0/1\t1/2\t0/0\nchr11\t9150\t.\tTC\tT,TCC\t150\tPASS\t.\tGT\t0/1\t0/2\t0/0\n"
+ },
+ "setup": [],
+ "faulted": "gatk SelectVariants -V callset.vcf -O indels.vcf --select-type-to-include INDEL",
+ "clean": "gatk SelectVariants -V callset.vcf -O indels.vcf --select-type-to-include INDEL --select-type-to-include MIXED",
+ "observe": "grep -v '^#' indels.vcf | cut -f1,2,4,5"
+}

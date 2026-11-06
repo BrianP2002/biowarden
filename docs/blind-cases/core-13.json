@@ -1,0 +1,15 @@
+{
+ "id": "core-13",
+ "domain": "core",
+ "tool": "sort",
+ "trap_class": "numeric sort of exponents",
+ "intent": "Rank the SNPs in gwas_assoc.tsv (columns: chromosome, SNP, position, association p-value) from the most significant (smallest p) to the least significant.",
+ "silent_error": "GNU sort -n compares only the plain decimal prefix of a field and does not understand exponents (sort man page: '-g, --general-numeric-sort  compare according to general numerical value' versus '-n  compare according to string numerical value'). '1e-300' is read as 1, '2.5e-12' as 2, '0.0021' as 0.0021, so the faulted order is 0.0021, 0.048, 0.6, 1e-30, 1e-300, 2.5e-12, 3.2e-05, 4.1e-08, 7.7e-09: the strongest hits sit in the middle and at the end of the file and a nominal 0.0021 is ranked first. sort exits 0 without any message and the file looks sorted.",
+ "files": {
+  "gwas_assoc.tsv": "1\trs3820568\t154426970\t3.2e-05\n2\trs1260326\t27730940\t0.0021\n3\trs9939609\t53820527\t2.5e-12\n6\trs2395029\t31464003\t0.6\n7\trs10228796\t99512341\t4.1e-08\n11\trs12361912\t2160994\t1e-30\n16\trs1421085\t53800954\t7.7e-09\n19\trs429358\t44908684\t1e-300\n20\trs6060369\t33000112\t0.048\n"
+ },
+ "setup": [],
+ "faulted": "sort -k4,4n gwas_assoc.tsv > ranked_snps.tsv",
+ "clean": "sort -k4,4g gwas_assoc.tsv > ranked_snps.tsv",
+ "observe": "head -n 4 ranked_snps.tsv"
+}

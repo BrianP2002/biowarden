@@ -1,0 +1,986 @@
+{
+ "align-01": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (depth -a) was allowed with no finding.",
+  "family": "",
+  "family_reason": "samtools depth leaving out zero-depth positions without -a matches no family (F5 is 1-based positions, F6 is duplicate reads skipped).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-02": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command ($((s+1))) was allowed with no finding.",
+  "family": "F2",
+  "family_reason": "A 0-based BED start pasted unchanged into a 1-based samtools region string is F2's 'region strings whose start is 0-based' fault (F2 names no program, so this rests on the shared convention).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-03": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command was allowed with no finding.",
+  "family": "",
+  "family_reason": "samtools markdup ignoring read groups unless --use-read-groups matches no family (F37 is samtools merge -c colliding read groups, F64 is Picard marking).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-04": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command was allowed with no finding.",
+  "family": "",
+  "family_reason": "samtools bedcov reporting summed per-base depth instead of the mean matches no family (F66 is bedtools map -o mean, a different program).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-05": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (samtools fasta) was allowed with no finding.",
+  "family": "",
+  "family_reason": "SAM SEQ stored reverse-complemented for flag 0x10 reads and taken from column 10 matches no family (F12 and F16 concern interval strand, not SEQ orientation).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-06": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (bwa aln/samse) has only the fastq.phred_offset warning and no finding.",
+  "family": "F30",
+  "family_reason": "bwa mem not writing alignments scoring below -T 30 is exactly F30.",
+  "on_target": "yes",
+  "on_target_reason": "The message says 'bwa mem outputs no alignment scoring below -T 30 (default): 16 of 30 sampled reads are shorter than 30 bases ... so they come out as unmapped records', which is the -T 30 error of the silent_error (I counted the FASTQ: 16 of 30 reads are under 30 nt)."
+ },
+ "align-07": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command has only the same warning and no finding.",
+  "family": "",
+  "family_reason": "bwa mem without -p on an interleaved FASTQ matches no family (F72 is MACS3 read layout, F42 is featureCounts -p).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is warned: only the fastq.phred_offset warning, no finding on the faulted command."
+ },
+ "align-08": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (bwa index first) has only the same warning and no finding.",
+  "family": "",
+  "family_reason": "A bwa index left stale after ref.fa changed is the snapshot idea of F78, but F78 is the BLAST database, a different program.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is warned: only the fastq.phred_offset warning, no finding on the faulted command."
+ },
+ "align-09": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (--phred64) was allowed with no finding.",
+  "family": "F13",
+  "family_reason": "A Phred+64 FASTQ read as Phred+33 by default is F13's data trap (the intent does not state the encoding, so not F22).",
+  "on_target": "yes",
+  "on_target_reason": "The message says 'run_2010.fastq is Phred+64, not Phred+33 ... read as Phred+33 every quality is 31 too high', which is the bowtie2 default-+33 error of the silent_error."
+ },
+ "align-10": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-X 2000) got only a declaration request (fragment_length_max), which is not a finding.",
+  "family": "F33",
+  "family_reason": "bowtie2 calling pairs longer than the default -X 500 non-concordant is exactly F33.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is declaration: the faulted command got only a --declare request (bowtie2.maxins_default), no finding."
+ },
+ "align-11": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-ax splice) was allowed with no finding.",
+  "family": "",
+  "family_reason": "minimap2 -x map-ont having no splice model matches no family (F35 is loss of reads under ~60 bases without a short-read preset).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-12": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-ax sr) has only the same warning and no finding.",
+  "family": "",
+  "family_reason": "minimap2 not pairing two query files without -x sr is a different behaviour from F35 (reads under ~60 bases lost); here all 100 bp reads align.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is warned: only the fastq.phred_offset warning, no finding on the faulted command."
+ },
+ "align-13": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command was allowed with no finding.",
+  "family": "",
+  "family_reason": "STAR --readNameSeparator truncating read names at '/' matches no family (F29, F31 and F34 are other aligner behaviours).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-14": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (cut -f1,4) was allowed with no finding.",
+  "family": "F31",
+  "family_reason": "Taking column 2 instead of the strand-appropriate column of STAR's ReadsPerGene.out.tab is exactly F31.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-15": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (chr prefix added) has only the same warning and no finding.",
+  "family": "",
+  "family_reason": "A chr1-versus-1 contig mismatch silently accepted by hisat2-build shares F3's convention, but F3 is a VCF versus regions case, not hisat2.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is warned: only the fastq.phred_offset warning, no finding on the faulted command."
+ },
+ "align-16": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (NH==1 filter) has only the same warning and no finding.",
+  "family": "",
+  "family_reason": "HISAT2 giving multi-mappers MAPQ 1 resembles F29's idea, but F29 is STAR output, a different program.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is warned: only the fastq.phred_offset warning, no finding on the faulted command."
+ },
+ "align-17": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-F 2308) was allowed with no finding.",
+  "family": "F8",
+  "family_reason": "samtools view -c -F 4 counting supplementary records of chimeric reads as reads is F8, 'records are not reads' (F8 names no program, so this rests on the behaviour).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "align-18": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command was allowed with no finding.",
+  "family": "",
+  "family_reason": "STAR --outSAMattrRGline needing ' , ' between read-group lines matches no family (F37 is samtools merge -c).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "core-01": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "",
+  "family_reason": "No family covers samtools depth omitting zero-depth positions without -a (F5 is 1-based positions, F6 is duplicate skipping).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-02": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "F2",
+  "family_reason": "F2 is region strings whose start is 0-based instead of 1-based, which is what pasting the BED start unchanged into a samtools faidx chr:start-end string does.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-03": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "F8",
+  "family_reason": "F8 'records are not reads' is this trap: samtools view -c -F 4 counts secondary and supplementary alignment records as mapped reads (10 instead of 8).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-04": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "F3",
+  "family_reason": "F3 is chr-prefixed contig names against unprefixed ones in bcftools; here bcftools annotate -a silently matches nothing between chr1 calls and a dbSNP file using 1 (same convention, annotation file instead of a regions list).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-05": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean has no findings, only a bcftools.region_semantics declaration request, which is not a finding.",
+  "family": "F1",
+  "family_reason": "F1 is exactly this: BED content in a file whose extension (.txt, not .bed) makes bcftools -R read it as 1-based.",
+  "on_target": "yes",
+  "on_target_reason": "The bcftools.regions_file_base message says the name 'does not end in .bed or .bed.gz, but its 3 data lines look like BED intervals (0-based, half-open)... read as 1-based it selects 7 records... read as BED 4', matching the case's one-base-early shift with 3 extra variants."
+ },
+ "core-06": {
+  "clean_finding": "false_positive",
+  "clean_reason": "The clean pipeline recomputes AF with +fill-tags and then filters INFO/AF>=0.5, so the no-ALT sites var2 and var5 (AF=0) are dropped downstream and the output holds only var1 and var4, both polymorphic in P1-P3.",
+  "family": "",
+  "family_reason": "F57 is bcftools view -s keeping monomorphic sites, a different pitfall from view -s recomputing only INFO/AC and AN and leaving INFO/AF at the cohort value, which no family covers.",
+  "on_target": "no",
+  "on_target_reason": "The bcftools.subset_monomorphic message ('selecting samples does not select variants... sites have no alternate allele in the 3 selected samples (for example var2)') is about sites being retained and never mentions the stale INFO/AF, so its fix would still lose var1."
+ },
+ "core-07": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "",
+  "family_reason": "No family covers bcftools view -q defaulting to non-reference allele frequency rather than minor allele frequency (F60 is vcftools --max-missing).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-08": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean (-S . -e 'FMT/DP<10') was allowed with no findings.",
+  "family": "F54",
+  "family_reason": "F54 is exactly 'a FORMAT test in bcftools -i is any sample': FMT/DP>=10 keeps a site if one sample passes and prints all samples.",
+  "on_target": "yes",
+  "on_target_reason": "The bcftools.format_filter_scope message says '-i keeps a site when ANY of the 3 samples satisfies the FORMAT test... 3 of 6 records have samples that satisfy FMT/DP>=10 and samples that do not', which is the case's site-level any-sample behaviour."
+ },
+ "core-09": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean (-split) was allowed with no findings.",
+  "family": "F67",
+  "family_reason": "F67 'bedtools counts the intron of a spliced read' is exactly genomecov -ibam without -split covering the CIGAR N gap.",
+  "on_target": "yes",
+  "on_target_reason": "The bedtools.spliced_without_split message says 'genomecov without -split treats each read as one interval from its first to its last base: every intron the reads skip is reported as covered', which is the case's silent error."
+ },
+ "core-10": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "F12",
+  "family_reason": "F12 (minus-strand features need the reverse complement) is this trap: bedtools getfasta ignores the BED strand column unless -s is given.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-11": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "",
+  "family_reason": "No family covers bedtools groupby needing input grouped by key (F70 is BEDOPS sort order, a different program and behaviour).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-12": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "",
+  "family_reason": "No family covers CRLF line endings in a lookup list breaking an awk key match (F28 is blank lines in region files, from documentation).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-13": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "",
+  "family_reason": "No family covers GNU sort -n ignoring exponent notation (needs -g).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-14": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "",
+  "family_reason": "No family covers pandas read_csv consuming the first BED row as a header (F53 is vcftools --bed, a different program).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "core-15": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command was allowed with no findings.",
+  "family": "",
+  "family_reason": "No family covers pysam query_sequence/query_qualities returning the stored reverse-complemented values for reverse-strand reads when writing FASTQ (F12/F16 are interval strand, F23/F34/F41/F43/F46 are library strandedness).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: the faulted command was allowed with no finding."
+ },
+ "intervals-01": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F16",
+  "family_reason": "Same bedtools behaviour: flank -l is placed on the left in genome coordinates unless -s is given, so the 'upstream of the TSS' window lands on the wrong side for - strand genes (program inferred from the 'tool default' locus, families.md does not name it).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "intervals-02": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers bedtools getfasta trusting a stale .fai (F78 is a stale BLAST database, a different program).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "intervals-03": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F68",
+  "family_reason": "Same bedtools behaviour: subtract trims or splits overlapping features instead of removing them (intersect -v or -A removes).",
+  "on_target": "yes",
+  "on_target_reason": "Message 'bedtools subtract does not drop a feature that overlaps blacklist.bed, it cuts out the overlapping bases: 4 output line(s) are shortened or split pieces' matches the silent_error."
+ },
+ "intervals-04": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F67",
+  "family_reason": "Same bedtools behaviour: without -split a spliced read is one block, so its intron (CIGAR N) is reported as covered.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'bedtools genomecov without -split treats each read as one interval from its first to its last base: every intron the reads skip is reported as covered' matches the silent_error."
+ },
+ "intervals-05": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "F75 (bedtools subcommands disagree on duplicates) is not bedtools intersect -wa writing the A record once per overlapping B record, so no family has it.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "intervals-06": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers bedops --element-of defaulting to 100% overlap (F70 and F71 are other BEDOPS pitfalls).",
+  "on_target": "yes",
+  "on_target_reason": "Message 'bedops --element-of without an amount defaults to 100 percent: only reference elements entirely covered ... partly overlapped elements are silently left out' is exactly the silent_error."
+ },
+ "intervals-07": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F70",
+  "family_reason": "Same BEDOPS behaviour: inputs must be in sort-bed (lexicographic chromosome) order and nothing is checked without --ec.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'peaks.bed: data line 5 (chr10 2200-2500) comes after chr3, but chr10 sorts before chr3 as text' names the natural-order input that gives the empty gene column."
+ },
+ "intervals-08": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F71",
+  "family_reason": "Same bedmap behaviour: score operations read column 5 of the map file only, so a 4-column bedGraph gives 0/NAN.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'bedmap score operations read the value from column 5 of the map file, but signal.bedGraph has only 4 columns ... the result is 0.000000 or NAN, silently' matches the silent_error."
+ },
+ "intervals-09": {
+  "clean_finding": "false_positive",
+  "clean_reason": "The anchor-inclusive REF span the rule flags would misplace only a deletion anchored inside an exon with its deleted bases outside, and no record here is (1060 has anchor and deleted bases in EX1; anchors 2000 and 2995 lie outside), so the clean pipeline returns the same 5 exonic IDs; the off-by-one is only latent on this data.",
+  "family": "",
+  "family_reason": "F10 also concerns the anchor base of VCF deletions but for REF-length spans built with bcftools query/awk, whereas here vcf2bed maps only the POS base and ignores REF length, a different program and pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: the faulted command was allowed with no finding (the only finding is on the clean twin)."
+ },
+ "intervals-10": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "F74 is liftOver leaving extra BED columns untouched, whereas here -multiple overwrites column 5 with a serial number unless -noSerial, a different pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "intervals-11": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command has only the same track-unit declaration request, no finding.",
+  "family": "",
+  "family_reason": "No family covers bamCoverage --filterRNAstrand assuming a dUTP library (F23, F41 and F43 are other tools' strandedness conventions).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome declaration: the only request is about bamCoverage track units, unrelated to the strand error."
+ },
+ "intervals-12": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers deepTools bamCompare scaling on total mapped reads including chrM.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "intervals-13": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F76",
+  "family_reason": "Same deepTools behaviour: the duplicate flag 0x400 is not honoured (only --ignoreDuplicates re-detects duplicates itself) unless --samFlagExclude 1024 is given.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "intervals-14": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F73",
+  "family_reason": "Same deepTools behaviour: a bin with no bigWig entry becomes NaN, not zero, unless --missingDataAsZero is set.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'signal.bw has no entry for 18 bins of 3 of the 6 regions ... computeMatrix writes NaN for them, so any mean that skips NaN ... overstates it' matches the silent_error."
+ },
+ "intervals-15": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "F72 is MACS3 reading a paired-end BAM as single-end tags, whereas here -f BEDPE reads only the first three columns of a bedtools-style BEDPE (first mate alone), a different format convention.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "quant-01": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-s reverse) was allowed with no finding.",
+  "family": "F41",
+  "family_reason": "htseq-count's default -s yes (forward-stranded) on a dUTP library is exactly F41.",
+  "on_target": "yes",
+  "on_target_reason": "The message says '-s yes (the default) tells htseq-count the library is forward, but liver_rep1.bam is reverse-stranded (dUTP): 2 of 98 reads sit on their gene's strand', which is the case's silent_error."
+ },
+ "quant-02": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command ($2+1) was allowed with no finding.",
+  "family": "",
+  "family_reason": "A BED start copied into the 1-based SAF Start of featureCounts matches no family (F2 is region strings, F11 is BED versus GFF3).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-03": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-A alias file) was allowed with no finding.",
+  "family": "",
+  "family_reason": "featureCounts tolerating the chr prefix but not chrM versus MT matches no family (F3 is a VCF versus regions case).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-04": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-Q 10) was allowed with no finding.",
+  "family": "",
+  "family_reason": "featureCounts using the NH tag so Bowtie2 multimappers are counted matches no family (F29 is STAR MAPQ, F44 is htseq-count MAPQ).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-05": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (gentrome with decoys) has only the same warning and no finding.",
+  "family": "",
+  "family_reason": "salmon index built without decoys matches no family (F45 is salmon index dropping duplicate transcripts, a different behaviour).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is warned: only the fastq.phred_offset warning, no finding on the faulted command."
+ },
+ "quant-06": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (samtools sort -n first) was allowed with no finding.",
+  "family": "",
+  "family_reason": "RSEM needing all alignments of a read adjacent is the record-order idea of F36, but F36 is samtools fixmate, a different program.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-07": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (--single-overhang) has only the same warning and no finding.",
+  "family": "",
+  "family_reason": "kallisto discarding single-end reads whose fragment overhangs the transcript matches no family.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is warned: only the fastq.phred_offset warning, no finding on the faulted command."
+ },
+ "quant-08": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (index rebuilt first) was allowed with no finding.",
+  "family": "",
+  "family_reason": "A kallisto index left stale after transcripts.fa changed is the snapshot idea of F78, but F78 is the BLAST database, a different program.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-09": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (--strandedness reverse) was allowed with no finding.",
+  "family": "",
+  "family_reason": "RSEM's default --strandedness none on a dUTP library is not F46, which is RSEM keeping only the reads in the orientation it is told, a different behaviour.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-10": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (--rf) was allowed with no finding.",
+  "family": "",
+  "family_reason": "StringTie without --rf ignoring spliced reads that carry no XS tag matches no family (F34 is HISAT2 --rna-strandness writing XS).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-11": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-l 150) was allowed with no finding.",
+  "family": "",
+  "family_reason": "prepDE.py assuming a 75 nt read length by default matches no family.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-12": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean script (drops '__' rows) was allowed with no finding.",
+  "family": "",
+  "family_reason": "htseq-count's __ pseudo-feature rows inflating a pandas library size matches no family (F41 and F44 are htseq-count strandedness and MAPQ).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-13": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean script (fillna with transcript id) was allowed with no finding.",
+  "family": "",
+  "family_reason": "pandas groupby dropping NaN gene ids after a left merge matches no family (F14 is version-suffix ID joins).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-14": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (-i gene_name) was allowed with no finding.",
+  "family": "",
+  "family_reason": "htseq-count's default --idattr gene_id equalling the transcript id in a UCSC refGene GTF matches no family (F41 and F44 are strandedness and MAPQ).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "quant-15": {
+  "clean_finding": "n/a",
+  "clean_reason": "The clean command (markdup first) was allowed with no finding.",
+  "family": "",
+  "family_reason": "featureCounts --ignoreDup relying on the 0x400 flag matches no family (F76 is deepTools --ignoreDuplicates, F6 is samtools depth).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed, so there is no finding on the faulted command."
+ },
+ "sc-01": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "The trap is `layers['counts'] = adata.X` aliasing X (no .copy()) so in-place normalise/log1p overwrites the layer; F103/F104 are about the wrong matrix state being read, not aliasing.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-02": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "F110",
+  "family_reason": "`ad.concat` with the default join='inner' silently drops genes found in only one sample, exactly F110 (anndata.concat needs join='outer').",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-03": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "`sc.pp.neighbors` silently reuses the stale obsm['X_pca'] after ComBat rewrote only X; no family (F101-F112) covers a stale derived embedding.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-04": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "`read_loom` defaults to X_name='spliced', so X is the spliced layer and the total matrix moves to layers['matrix']; no family covers loom loading (F104 is about count steps run on a normalised X).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-05": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "`read_10x_mtx` has gex_only=True and silently drops Antibody Capture features; no family covers feature-type filtering on load.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-06": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "The default 'seurat' HVG flavor expects log-normalised data but is fed layer='counts'; F104 is the mirror image (count-based step run on a normalised X) and F101/F103 are different behaviours.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-07": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "`rank_genes_groups` reference='rest' also uses the non-requested clusters as reference; F101 is the same function but a different pitfall (.raw default), so same program alone does not count.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-08": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "A hand-made log2 X leaves uns['log1p']['base'] unset so scanpy assumes natural log in logfoldchanges; F15 (raw vs log2 matrix for count tools) and F103 (double log) are different behaviours.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-09": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "F107",
+  "family_reason": "`scanpy.read_csv` always takes rows as cells, so a genes-in-rows table needs a transpose; this is the F107 orientation pitfall, with a CSV instead of a MatrixMarket file (borderline).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-10": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "F101",
+  "family_reason": "`score_genes` use_raw=None silently reads adata.raw when present, the same .raw-by-default pitfall as F101 but in a sibling scanpy function instead of rank_genes_groups (borderline).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-11": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "F111",
+  "family_reason": "The faulted script flags mitochondrial genes with startswith('MT-') on mouse data whose genes are 'mt-', exactly F111.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-12": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "`mudata.concat` silently keeps only the intersection of modalities (drops 'prot'); F106 is the MuData.n_obs union of cells and F110 is the anndata.concat gene join, neither is this behaviour.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-13": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "F106",
+  "family_reason": "A MuData built from RNA and ATAC with partly overlapping barcodes takes the union of cells (n_obs counts any modality), exactly F106.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-14": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "`loompy.combine` without key stacks rows by position so a reordered gene list misaligns counts; F105 is cell annotations joined by position in AnnData, a different program and object.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "sc-15": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no findings.",
+  "family": "",
+  "family_reason": "`loompy` add_columns deletes the column attributes that are not supplied for the new cells; no family covers loompy.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome is missed: faulted command allowed, no finding and no message."
+ },
+ "seq-01": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers seqtk trimfq -q taking an error probability instead of a Phred score; F81 is trimfq's 30 bp minimum, a different pitfall of the same program.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "seq-02": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "F11",
+  "family_reason": "F11 is the same convention slip (1-based GFF3 coordinates used where a 0-based BED is read); the family line names no program, so it is matched on the identical convention.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "seq-03": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family concerns a default genetic code (table 1 vs the mitochondrial table 2) in seqkit translate.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "seq-04": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command (-P) allowed, no finding.",
+  "family": "F82",
+  "family_reason": "F82 is exactly seqkit rmdup -s treating a sequence and its reverse complement as duplicates.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'seqkit rmdup -s also treats a sequence and its reverse complement as duplicates ... one of each pair is dropped' is exactly the lost bottom-strand oligos."
+ },
+ "seq-05": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command (--phred64) allowed, no finding.",
+  "family": "F13",
+  "family_reason": "F13 is the same trap of Phred+64 FASTQ qualities read as Phred+33 (fastp does not auto-detect); the family line names no program, so it is matched on the identical convention.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'lane1_R1.fastq is Phred+64, not Phred+33 ... read as Phred+33 every quality is 31 too high' is exactly fastp run without --phred64."
+ },
+ "seq-06": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers fastp poly-G trimming being on by default only for recognised NovaSeq/NextSeq read names; F87 (adapter detection needing 10,000 reads) is a different fastp pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "seq-07": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command only warned (offset_not_provable), no finding.",
+  "family": "",
+  "family_reason": "No family covers cutadapt searching one orientation only (needs --revcomp); F84 (-n, one adapter per read) is a different cutadapt pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is warned; the phred_offset warning is unrelated to read orientation."
+ },
+ "seq-08": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command only warned (offset_not_provable), no finding.",
+  "family": "",
+  "family_reason": "No family covers Trimmomatic ILLUMINACLIP keepBothReads=false dropping the mate; F85 (step order, MINLEN) is a different Trimmomatic pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is warned; the phred_offset warning is unrelated to keepBothReads."
+ },
+ "seq-09": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "F77",
+  "family_reason": "F77 is exactly blastn defaulting to megablast with its 28-base exact seed.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "seq-10": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers makeblastdb -parse_seqids rewriting sseqid (ref|...|) so IDs no longer match the FASTA; F78 (database is a snapshot) is a different BLAST pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "seq-11": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command (-k 0) allowed, no finding.",
+  "family": "F79",
+  "family_reason": "F79 is exactly diamond blastp reporting at most 25 target sequences per query by default.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'diamond reports at most 25 target sequences per query (the default) ... LRR_kinase_ref has 45' is the default -k cap of the case."
+ },
+ "seq-12": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers MAFFT deleting '*' symbols unless --anysymbol; F86 (MAFFT aligns sequences as written) is a different MAFFT pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "seq-13": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers hmmscan reading stale hmmpress files; F78 is a stale BLAST database, a different program and behaviour.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "seq-14": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command (-Z 120) allowed, no finding.",
+  "family": "F88",
+  "family_reason": "F88 is exactly HMMER E-values scaling with the number of target sequences in the file searched.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'every E-value is 12.0 times smaller than in a search of the whole collection' is exactly the chunk-size Z error of the case."
+ },
+ "seq-15": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command (--cov-mode 1) allowed, no finding.",
+  "family": "F94",
+  "family_reason": "F94 is exactly mmseqs easy-cluster demanding 80% coverage of both sequences by default.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'mmseqs cluster demands that the coverage rule (-c, default 0.8, --cov-mode 0) holds for both sequences, so a fragment stays out of its parent's cluster' is the case."
+ },
+ "struct-01": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers TMalign reading only the first chain (-ter 3); F93 (two normalised TM-scores) is a different TMalign pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-02": {
+  "clean_finding": "false_positive",
+  "clean_reason": "The clean call takes column 4 (TM2, normalised by the 60-residue native reference), which is the value the message says to quote, so the flagged wrong-normalisation hazard is not present; the layer cannot see which column awk selects.",
+  "family": "F93",
+  "family_reason": "F93 is exactly TMalign printing two TM-scores normalised by structure 1 and by structure 2.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'TMalign prints two TM-scores that differ here (34 vs 60 residues) ... the value to quote is the one normalised by the reference structure' is the TM1-vs-TM2 choice of the case."
+ },
+ "struct-03": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers mkdssp 4 using only the first MODEL; F98 (mmCIF _pdbx_poly_seq_scheme) is a different mkdssp pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-04": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers pdb_selatom -CA also matching calcium; F99 is a different program (MDAnalysis) and pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-05": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers pdb_selaltloc -A selecting the labelled (possibly minor) conformer and keeping B/C copies; F95 (residue-number string compare) and F90 (library default altloc) are different pitfalls.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-06": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers pdb_tofasta concatenating all chains without -multi; F96 concerns MSE in sequence extraction, not chain merging.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-07": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers pdb_reres keeping one running counter across chains.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-08": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers gemmi's symmetry-aware contact search counting symmetry-mate contacts.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-09": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command (aa_only=False) allowed, no finding.",
+  "family": "F96",
+  "family_reason": "F96 is the same trap of selenomethionine (MSE) being dropped from the extracted sequence, here by Bio.PDB PPBuilder aa_only.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'holds modified residues (MSE) ... writes them as nothing (Biopython's peptide builders skip hetero residues, split the chain)' is the PPBuilder aa_only drop of the case."
+ },
+ "struct-10": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command ('resnum 10 to 20') allowed, no finding.",
+  "family": "F91",
+  "family_reason": "F91 is exactly the ProDy selection 'resnum a:b' excluding the end while 'a to b' includes it.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'ProDy reads resnum 10:20 like a Python slice: residue 20 is left out' is the case."
+ },
+ "struct-11": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers MDAnalysis rms.rmsd defaulting to no centering or superposition.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-12": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers mdtraj compute_distances applying the periodic minimum image from CRYST1; F92 (mdtraj resid is an index) is a different mdtraj pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-13": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers mdtraj shrake_rupley taking probe_radius in nm; F92 is a different mdtraj pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "struct-14": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command (AssignBondOrdersFromTemplate) allowed, no finding.",
+  "family": "F100",
+  "family_reason": "F100 is exactly RDKit's PDB reader making every bond single unless CONECT records say otherwise.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'RDKit's PDB reader makes every bond single, fills the valences with implicit hydrogens and finds no aromatic atom, so the weight and the formula come out wrong' is the case."
+ },
+ "struct-15": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed, no finding.",
+  "family": "",
+  "family_reason": "No family covers rdMolAlign.GetBestRMS superposing before the RMSD (CalcRMS is in place); F100 is a different RDKit pitfall.",
+  "on_target": "n/a",
+  "on_target_reason": "n/a: outcome is missed, no finding."
+ },
+ "variants-01": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers bcftools view -q/--min-af defaulting to the non-reference allele frequency (nref) instead of the minor allele frequency.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-02": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command has only a region_semantics declaration request, no finding.",
+  "family": "F1",
+  "family_reason": "Same bcftools behaviour: a regions file is read as BED only when named .bed/.bed.gz, so BED intervals in capture_targets.txt are read 1-based.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'its name does not end in .bed or .bed.gz, but its 3 data lines look like BED intervals ... each interval would start one base early' (10 records vs 7) is exactly the silent_error."
+ },
+ "variants-03": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F54",
+  "family_reason": "Same bcftools behaviour: a FORMAT test (FMT/DP<10, here under -e) is evaluated per site with any-sample semantics, dropping whole records instead of masking genotypes.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-04": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F3",
+  "family_reason": "Same bcftools literal contig-name matching ('1' vs 'chr1') that silently matches nothing; F3 states it for regions, here it is the annotation file of annotate -a (same program, different subcommand).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-05": {
+  "clean_finding": "false_positive",
+  "clean_reason": "The clean pipeline recomputes AF with +fill-tags and its last stage 'view -i INFO/AF>=0.2' removes the AF=0 sites (1500, 5900), so no monomorphic site reaches popA.vcf; the rule fired on the first stage alone.",
+  "family": "",
+  "family_reason": "F57 (a sample subset keeps monomorphic sites) is the nearest, but the trap here is bcftools view -s refreshing only AC/AN so the INFO/AF filter uses the stale cohort value, which no family states.",
+  "on_target": "no",
+  "on_target_reason": "Message 'selecting samples does not select variants ... 2 of 6 sites have no alternate allele in the 4 selected samples' is the monomorphic-sites rule and never mentions the stale INFO/AF; its fix (-c 1) would still wrongly drop site 7000 (cohort AF 0.188, popA AF 0.25)."
+ },
+ "variants-06": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers bcftools concat emitting duplicated, unsorted records for overlapping chunks without -a/-d (F62 and F63 concern isec and merge).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-07": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command has only the same declaration request, no finding.",
+  "family": "F60",
+  "family_reason": "Same vcftools behaviour: --max-missing is the minimum fraction of called genotypes (a completeness), not a maximum missing rate.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome declaration: only a missing_threshold_meaning request, no finding."
+ },
+ "variants-08": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers vcftools --recode writing INFO as '.' without --recode-INFO-all (F53 is a different vcftools pitfall, --bed skipping a line).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-09": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "F58",
+  "family_reason": "Same plink 1.9 behaviour: after a VCF import A1 is the minor allele (no --keep-allele-order), so --recode A counts REF copies where ALT is the major allele.",
+  "on_target": "yes",
+  "on_target_reason": "Message 'plink 1.9 sets A1 to the minor allele of the data, not to ALT: at 2 of 4 sites ... the ALT allele is the major one (for example rs3002, ALT frequency 0.88)' matches the silent_error."
+ },
+ "variants-10": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers plink 1.9 --vcf splitting sample names at the first underscore into FID/IID without --double-id (F59 is the dropped second ALT).",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-11": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers plink2 --vcf ignoring FORMAT/DS dosage unless dosage=DS is given.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-12": {
+  "clean_finding": "false_positive",
+  "clean_reason": "The clean call uses -p bed and 1-based region strings for the stated 1-based positions and returns exactly probe_a and probe_c, so the 'if chr1:100-100 is a BED window' hazard is absent (the intent says the numbers are already 1-based).",
+  "family": "F61",
+  "family_reason": "Same tabix behaviour: indexing with explicit -s/-b/-e (no -0, no -p bed) treats BED coordinates as 1-based closed.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: the faulted command was allowed with no finding (the only finding is on the clean twin)."
+ },
+ "variants-13": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers GATK VariantFiltration --genotype-filter-expression only annotating FORMAT/FT without --set-filtered-genotype-to-no-call.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-14": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "No family covers GATK SelectVariants --select-type-to-include INDEL leaving out MIXED records.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ },
+ "variants-15": {
+  "clean_finding": "n/a",
+  "clean_reason": "Clean command allowed with no finding.",
+  "family": "",
+  "family_reason": "F62 is the same right-aligned indel representation pitfall but for bcftools isec, while this case is picard GenotypeConcordance, a different program.",
+  "on_target": "n/a",
+  "on_target_reason": "Outcome missed: no finding on the faulted command."
+ }
+}

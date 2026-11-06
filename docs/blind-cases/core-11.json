@@ -1,0 +1,16 @@
+{
+ "id": "core-11",
+ "domain": "core",
+ "tool": "bedtools",
+ "trap_class": "groupby needs sorted input",
+ "intent": "Add up the read counts of each gene over the two sequencing lanes (lane1_counts.tsv and lane2_counts.tsv, columns: gene, count) to get one total per gene.",
+ "silent_error": "bedtools groupby only collapses consecutive lines with the same key; its usage text states '(1) The input file/stream should be sorted/grouped by the -grp. columns'. The two lane tables concatenated are not grouped by gene, so each gene appears twice and groupby prints 12 lines, one per original line, each with its single-lane count. No error and no warning, exit 0; the table has the right columns and the numbers look like counts.",
+ "files": {
+  "lane1_counts.tsv": "TP53\t41\nBRCA1\t17\nEGFR\t233\nMYC\t95\nKRAS\t60\nPTEN\t8\n",
+  "lane2_counts.tsv": "TP53\t38\nBRCA1\t22\nEGFR\t251\nMYC\t87\nKRAS\t71\nPTEN\t12\n"
+ },
+ "setup": [],
+ "faulted": "cat lane1_counts.tsv lane2_counts.tsv | bedtools groupby -g 1 -c 2 -o sum > gene_totals.tsv",
+ "clean": "cat lane1_counts.tsv lane2_counts.tsv | sort -k1,1 | bedtools groupby -g 1 -c 2 -o sum > gene_totals.tsv",
+ "observe": "cat gene_totals.tsv"
+}

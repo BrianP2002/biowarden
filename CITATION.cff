@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+# The title is the working name of the project; it changes with the project rename.
+title: "biowarden"
+version: 0.0.1
+license: Apache-2.0
+authors:
+  - family-names: "Ha"
+    given-names: "Lin"
+abstract: >-
+  Catch silent errors in bioinformatics tool calls before they run, and measure how often LLM agents
+  make them. The project has a checking layer of 108 rules that blocks such a call and prints a
+  fix, and a benchmark of 105 clean/faulted task families that was used in two pre-registered
+  studies.
+keywords:
+  - bioinformatics
+  - LLM agents
+  - silent errors
+  - tool calls
+  - benchmark
+  - rule engine
+  - Model Context Protocol

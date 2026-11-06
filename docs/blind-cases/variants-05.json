@@ -1,0 +1,15 @@
+{
+ "id": "variants-05",
+ "domain": "variants",
+ "tool": "bcftools",
+ "trap_class": "stale INFO tag",
+ "intent": "From the cohort VCF take the four samples of population A (A1 to A4) and keep the variants whose allele frequency within those four samples is at least 20%.",
+ "silent_error": "bcftools view -s recalculates only INFO/AC and INFO/AN for the retained samples; INFO/AF keeps the whole-cohort value. The frequency filter in the same command therefore uses the stale cohort AF: sites that are monomorphic in population A (AC=0) but common in the cohort are kept, and sites common in A but rare in the cohort are dropped. Output looks consistent (AC/AN look updated), no message, exit 0. Documented in the bcftools man page (view -I/--no-update: 'do not (re)calculate INFO fields for the subset (currently INFO/AC and INFO/AN)'; other tags have to be recomputed, e.g. with +fill-tags).",
+ "files": {
+  "cohort.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr4,length=190000>\n##INFO=<ID=AC,Number=A,Type=Integer,Description=\"Allele count in genotypes\">\n##INFO=<ID=AN,Number=1,Type=Integer,Description=\"Total number of alleles in called genotypes\">\n##INFO=<ID=AF,Number=A,Type=Float,Description=\"Allele frequency\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tA1\tA2\tA3\tA4\tB1\tB2\tB3\tB4\nchr4\t1500\t.\tA\tG\t60\tPASS\tAC=7;AN=16;AF=0.438\tGT\t0/0\t0/0\t0/0\t0/0\t1/1\t1/1\t0/1\t1/1\nchr4\t2600\t.\tC\tT\t60\tPASS\tAC=4;AN=16;AF=0.250\tGT\t0/1\t0/1\t1/1\t0/0\t0/0\t0/0\t0/0\t0/0\nchr4\t3700\t.\tG\tC\t60\tPASS\tAC=2;AN=16;AF=0.125\tGT\t0/0\t0/1\t0/0\t0/0\t0/1\t0/0\t0/0\t0/0\nchr4\t4800\t.\tT\tA\t60\tPASS\tAC=13;AN=16;AF=0.812\tGT\t1/1\t0/1\t1/1\t0/1\t1/1\t1/1\t1/1\t0/1\nchr4\t5900\t.\tA\tT\t60\tPASS\tAC=0;AN=16;AF=0.000\tGT\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\nchr4\t7000\t.\tC\tA\t60\tPASS\tAC=3;AN=16;AF=0.188\tGT\t0/1\t0/0\t0/1\t0/0\t0/0\t0/0\t0/0\t0/1\n"
+ },
+ "setup": [],
+ "faulted": "bcftools view -s A1,A2,A3,A4 -i 'INFO/AF>=0.2' -o popA.vcf cohort.vcf",
+ "clean": "bcftools view -s A1,A2,A3,A4 -Ou cohort.vcf | bcftools +fill-tags -Ou -- -t AF | bcftools view -i 'INFO/AF>=0.2' -o popA.vcf",
+ "observe": "bcftools query -f '%POS\\t%AC\\t%AN\\t%AF\\n' popA.vcf"
+}

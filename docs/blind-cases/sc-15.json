@@ -1,0 +1,19 @@
+{
+ "id": "sc-15",
+ "domain": "sc",
+ "tool": "loompy",
+ "trap_class": "attributes dropped on append",
+ "intent": "Append two newly sequenced cells (CellID N1 and N2, sample run2, not yet clustered) to a copy of the existing organoid atlas loom file, keeping the Cluster and Sample annotation of the four existing cells.",
+ "silent_error": "LoomConnection.add_columns deletes every column attribute of the file that is not supplied for the new cells ('Column attributes in the file that are NOT provided, will be deleted (unless fill value provided)'). Passing only CellID for the new cells silently removes Cluster and Sample for all existing cells, as well. The call returns normally, exit 0, and the matrix is extended correctly, so the loss of annotation is invisible.",
+ "files": {
+  "make_atlas.py": "import numpy as np\nimport loompy\n\nrng = np.random.default_rng(15)\ngenes = np.array([\"Sox2\", \"Nes\", \"Pax6\", \"Dcx\", \"Actb\"])\nM = rng.poisson([6, 4, 3, 2, 30], size=(4, 5)).T.astype(\"float32\")\nloompy.create(\"organoid_atlas.loom\", M,\n              {\"Gene\": genes},\n              {\"CellID\": np.array([\"O1\", \"O2\", \"O3\", \"O4\"]),\n               \"Cluster\": np.array([0, 0, 1, 1]),\n               \"Sample\": np.array([\"run1\"] * 4)})\n",
+  "append_cells.py": "import shutil\nimport numpy as np\nimport loompy\n\nshutil.copyfile(\"organoid_atlas.loom\", \"organoid_atlas_updated.loom\")\nnew_counts = np.array([[5, 7], [3, 4], [2, 2], [1, 0], [28, 33]], dtype=\"float32\")\nwith loompy.connect(\"organoid_atlas_updated.loom\") as ds:\n    ds.add_columns(new_counts, {\"CellID\": np.array([\"N1\", \"N2\"])})\n",
+  "append_cells_v2.py": "import shutil\nimport numpy as np\nimport loompy\n\nshutil.copyfile(\"organoid_atlas.loom\", \"organoid_atlas_updated.loom\")\nnew_counts = np.array([[5, 7], [3, 4], [2, 2], [1, 0], [28, 33]], dtype=\"float32\")\nwith loompy.connect(\"organoid_atlas_updated.loom\") as ds:\n    ds.add_columns(new_counts, {\"CellID\": np.array([\"N1\", \"N2\"]), \"Cluster\": np.array([-1, -1]), \"Sample\": np.array([\"run2\", \"run2\"])})\n"
+ },
+ "setup": [
+  "python-sc make_atlas.py"
+ ],
+ "faulted": "python-sc append_cells.py",
+ "clean": "python-sc append_cells_v2.py",
+ "observe": "python-sc -c \"import loompy; ds = loompy.connect('organoid_atlas_updated.loom', 'r'); print(ds.shape, sorted(ds.ca.keys())); print([int(x) for x in ds.ca.Cluster] if 'Cluster' in ds.ca.keys() else 'no Cluster attribute'); print([str(x) for x in ds.ca.Sample] if 'Sample' in ds.ca.keys() else 'no Sample attribute')\""
+}

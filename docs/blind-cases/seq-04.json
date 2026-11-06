@@ -1,0 +1,15 @@
+{
+ "id": "seq-04",
+ "domain": "seq",
+ "tool": "seqkit",
+ "trap_class": "reverse-complement duplicates",
+ "intent": "Build the synthesis order list for these oligos: keep one copy of each distinct oligo sequence. The top-strand and bottom-strand oligo of each adaptor are different molecules, and both must be ordered.",
+ "silent_error": "'seqkit rmdup -s' compares sequences on both strands unless -P/--only-positive-strand is given (this is stated in its help). Every bottom-strand oligo is the reverse complement of its top-strand oligo, so the default treats it as a duplicate and deletes it; only one oligo per adaptor survives. seqkit exits 0 and logs only '[INFO] 9 duplicated records removed' (the file has just 3 exact repeats), which reads like normal deduplication.",
+ "files": {
+  "oligo_requests.fa": ">adaptor_F_top_req2\nGAATTTCAATATCCTTAGCTGATGGT\n>adaptor_C_top\nACGATATTAAGAGGTGCTACAAGTAG\n>adaptor_B_top\nAGATTTCTACGAGGGCTCTCTGGG\n>adaptor_E_bottom\nTGTGTTTCGTATGTCATTCCATCCAA\n>adaptor_D_bottom_req2\nAAAATATAGAGTTTAGACGAGGGA\n>adaptor_A_bottom\nGCCTCACGGGGGTTATTAGCTTTA\n>adaptor_B_bottom\nCCCAGAGAGCCCTCGTAGAAATCT\n>adaptor_A_top\nTAAAGCTAATAACCCCCGTGAGGC\n>adaptor_B_top_req2\nAGATTTCTACGAGGGCTCTCTGGG\n>adaptor_C_bottom\nCTACTTGTAGCACCTCTTAATATCGT\n>adaptor_E_top\nTTGGATGGAATGACATACGAAACACA\n>adaptor_D_top\nTCCCTCGTCTAAACTCTATATTTT\n>adaptor_F_bottom\nACCATCAGCTAAGGATATTGAAATTC\n>adaptor_F_top\nGAATTTCAATATCCTTAGCTGATGGT\n>adaptor_D_bottom\nAAAATATAGAGTTTAGACGAGGGA\n"
+ },
+ "setup": [],
+ "faulted": "seqkit rmdup -s oligo_requests.fa -o order_list.fa",
+ "clean": "seqkit rmdup -s -P oligo_requests.fa -o order_list.fa",
+ "observe": "echo \"records=$(grep -c '>' order_list.fa)\"; seqkit seq -n order_list.fa | sort | tr '\\n' ' '; echo"
+}

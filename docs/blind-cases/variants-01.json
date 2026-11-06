@@ -1,0 +1,15 @@
+{
+ "id": "variants-01",
+ "domain": "variants",
+ "tool": "bcftools",
+ "trap_class": "allele frequency type",
+ "intent": "From this population VCF keep only the common variants, those whose minor allele frequency is at least 5%, and write them to a new VCF.",
+ "silent_error": "bcftools view -q/--min-af takes an optional allele-type suffix and the default is nref, the summed frequency of the NON-REFERENCE alleles (INFO/AC / INFO/AN), not the minor allele frequency. A site where the ALT allele is nearly fixed (AF 0.98, 0.96, 1.0, i.e. the reference allele is the rare one, MAF <= 0.04) therefore passes '-q 0.05' and stays in the 'common variants' file, while '-q 0.05:minor' removes it. Nothing is printed and the exit status is 0. Documented in the bcftools view man page (-q, --min-af FLOAT[:nref|:alt1|:minor|:major|:nonmajor]; default nref).",
+ "files": {
+  "population.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr3,length=250000>\n##INFO=<ID=AC,Number=A,Type=Integer,Description=\"Allele count in genotypes\">\n##INFO=<ID=AN,Number=1,Type=Integer,Description=\"Total number of alleles in called genotypes\">\n##INFO=<ID=AF,Number=A,Type=Float,Description=\"Allele frequency\">\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tIND01\tIND02\tIND03\tIND04\tIND05\tIND06\tIND07\tIND08\tIND09\tIND10\tIND11\tIND12\tIND13\tIND14\tIND15\tIND16\tIND17\tIND18\tIND19\tIND20\tIND21\tIND22\tIND23\tIND24\tIND25\nchr3\t1000\t.\tA\tG\t60\tPASS\tAC=2;AN=50;AF=0.04\tGT\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\nchr3\t2000\t.\tC\tT\t60\tPASS\tAC=15;AN=50;AF=0.30\tGT\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t0/0\t1/1\t0/0\t0/0\t1/1\t0/0\t0/0\t0/1\t1/1\t0/0\t1/1\t1/1\t0/0\t1/1\t0/0\nchr3\t3000\t.\tG\tA\t60\tPASS\tAC=25;AN=50;AF=0.50\tGT\t1/1\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t0/0\t1/1\t1/1\t0/0\t1/1\t1/1\t0/1\t0/0\t0/0\t1/1\t1/1\t0/0\t1/1\t1/1\t1/1\t1/1\t0/0\t0/0\nchr3\t4000\t.\tT\tC\t60\tPASS\tAC=49;AN=50;AF=0.98\tGT\t1/1\t1/1\t1/1\t1/1\t0/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\nchr3\t5000\t.\tA\tC\t60\tPASS\tAC=50;AN=50;AF=1.00\tGT\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\nchr3\t6000\t.\tC\tG\t60\tPASS\tAC=40;AN=50;AF=0.80\tGT\t0/0\t1/1\t1/1\t1/1\t0/0\t1/1\t1/1\t0/0\t1/1\t0/0\t1/1\t0/0\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\nchr3\t7000\t.\tG\tT\t60\tPASS\tAC=48;AN=50;AF=0.96\tGT\t1/1\t0/0\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\t1/1\nchr3\t8000\t.\tA\tT\t60\tPASS\tAC=3;AN=50;AF=0.06\tGT\t0/0\t0/0\t0/0\t0/0\t1/1\t0/0\t0/0\t0/0\t0/0\t0/1\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\t0/0\n"
+ },
+ "setup": [],
+ "faulted": "bcftools view -q 0.05 -o common.vcf population.vcf",
+ "clean": "bcftools view -q 0.05:minor -o common.vcf population.vcf",
+ "observe": "bcftools query -f '%POS\\t%AC\\t%AN\\t%AF\\n' common.vcf"
+}

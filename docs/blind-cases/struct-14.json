@@ -1,0 +1,17 @@
+{
+ "id": "struct-14",
+ "domain": "struct",
+ "tool": "RDKit",
+ "trap_class": "bond orders missing",
+ "intent": "Report the molecular formula, the molecular weight and the number of aromatic atoms of the ligand as it sits in the PDB file ligand_pose.pdb (the compound is nicotinamide, SMILES NC(=O)c1cccnc1), and write the three lines to ligand_props.txt.",
+ "silent_error": "A PDB HETATM block carries no bond orders. Chem.MolFromPDBFile only guesses single bonds from distances (proximityBonding) and then sanitises, filling the valences with implicit hydrogens, so nicotinamide comes out as a saturated piperidine amide: C6H14N2O, 130.19, no aromatic atom, instead of C6H6N2O, 122.13, six aromatic atoms. The usual RDKit remedy is AllChem.AssignBondOrdersFromTemplate with a template molecule of known chemistry. No warning, exit status 0, empty stderr.",
+ "files": {
+  "ligand_pose.pdb": "HETATM    1  N1  NCA A 301      19.058   8.457  -1.912  1.00 22.50           N  \nHETATM    2  C1  NCA A 301      19.866   7.837  -2.825  1.00 22.50           C  \nHETATM    3  O1  NCA A 301      19.500   6.813  -3.387  1.00 22.50           O  \nHETATM    4  C2  NCA A 301      21.169   8.463  -3.138  1.00 22.50           C  \nHETATM    5  C3  NCA A 301      21.815   8.149  -4.336  1.00 22.50           C  \nHETATM    6  C4  NCA A 301      23.043   8.736  -4.631  1.00 22.50           C  \nHETATM    7  C5  NCA A 301      23.587   9.617  -3.710  1.00 22.50           C  \nHETATM    8  N2  NCA A 301      22.998   9.935  -2.536  1.00 22.50           N  \nHETATM    9  C6  NCA A 301      21.806   9.342  -2.273  1.00 22.50           C  \nEND                                                                             \n",
+  "ligand_props.py": "import sys\nfrom rdkit import Chem\nfrom rdkit.Chem import Descriptors, rdMolDescriptors\n\nmol = Chem.MolFromPDBFile(sys.argv[1])\nprint('formula:', rdMolDescriptors.CalcMolFormula(mol))\nprint('molecular weight: %.2f' % Descriptors.MolWt(mol))\nprint('aromatic atoms:', sum(a.GetIsAromatic() for a in mol.GetAtoms()))\n",
+  "ligand_props_v2.py": "import sys\nfrom rdkit import Chem\nfrom rdkit.Chem import AllChem, Descriptors, rdMolDescriptors\n\npdb_mol = Chem.MolFromPDBFile(sys.argv[1])\ntemplate = Chem.MolFromSmiles('NC(=O)c1cccnc1')\nmol = AllChem.AssignBondOrdersFromTemplate(template, pdb_mol)\nprint('formula:', rdMolDescriptors.CalcMolFormula(mol))\nprint('molecular weight: %.2f' % Descriptors.MolWt(mol))\nprint('aromatic atoms:', sum(a.GetIsAromatic() for a in mol.GetAtoms()))\n"
+ },
+ "setup": [],
+ "faulted": "python-struct ligand_props.py ligand_pose.pdb > ligand_props.txt",
+ "clean": "python-struct ligand_props_v2.py ligand_pose.pdb > ligand_props.txt",
+ "observe": "cat ligand_props.txt"
+}

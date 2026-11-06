@@ -1,0 +1,5878 @@
+{
+ "environment": {
+  "bcftools": "bcftools 1.24",
+  "bedtools": "bedtools v2.31.1",
+  "mode": "promoted",
+  "python": "3.12.13",
+  "rules": 108,
+  "samtools": "samtools 1.24"
+ },
+ "sandbox": true,
+ "schema": 1,
+ "suites": {
+  "bcftools": {
+   "baseline_ok": 1979,
+   "calls_by_action": {
+    "allow": 4084,
+    "block": 152,
+    "warn": 13
+   },
+   "calls_by_tool": {
+    "awk": 1,
+    "bcftools": 3771,
+    "perl": 146,
+    "sort": 15,
+    "tabix": 316
+   },
+   "calls_checked": 4249,
+   "disturbed": 146,
+   "disturbed_tests": {
+    "bcftools": 146
+   },
+   "firing": {
+    "bcftools.format_filter_scope|scope_undeclared|block": 11,
+    "bcftools.format_filter_scope|scope_unverified|warn": 6,
+    "bcftools.isec_representation|normalisation_not_checked|warn": 11,
+    "bcftools.merge_absent_sites|absent_sites_missing|block": 26,
+    "bcftools.missing_value_filter|missing_values_kept|block": 10,
+    "bcftools.region_semantics|declaration_missing|block": 101,
+    "bcftools.subset_monomorphic|monomorphic_sites_kept|block": 4
+   },
+   "flaky": 0,
+   "ms_added_per_call": 320.5,
+   "non_allowed": [
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.2.tab.gz",
+      "/tmp/ws/test/mpileup.2.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.3.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.3.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.4.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.3.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.5.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.3.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.6.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.4.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.7.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.5.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.cals.1.tab.gz",
+      "/tmp/ws/test/mpileup.cals.1.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.cals.2.tab.gz",
+      "/tmp/ws/test/mpileup.cals.2.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "--no-version",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.tab.gz",
+      "/tmp/ws/test/mpileup.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.2.tab.gz",
+      "/tmp/ws/test/mpileup.2.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.3.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.3.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.4.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.3.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.5.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.3.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.6.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.4.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.7.tab.gz",
+      "-i",
+      "/tmp/ws/test/mpileup.5.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.cals.1.tab.gz",
+      "/tmp/ws/test/mpileup.cals.1.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.cals.2.tab.gz",
+      "/tmp/ws/test/mpileup.cals.2.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "call",
+      "-Ob",
+      "-mA",
+      "-C",
+      "alleles",
+      "-T",
+      "/tmp/9WrnIrSnHs/mpileup.tab.gz",
+      "/tmp/ws/test/mpileup.vcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-Ob",
+      "-eINFO/DP=19",
+      "-s",
+      "XX",
+      "-m+",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-Ob",
+      "-eINFO/DP=19",
+      "-s",
+      "XX",
+      "-m+x",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-Ob",
+      "-eINFO/DP=19",
+      "-s",
+      "XX",
+      "-mx",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-Ob",
+      "-eINFO/DP=19",
+      "-s",
+      "XX",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-Ob",
+      "-eINFO/DP=19",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-eINFO/DP=19",
+      "-s",
+      "XX",
+      "-m+",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-eINFO/DP=19",
+      "-s",
+      "XX",
+      "-m+x",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-eINFO/DP=19",
+      "-s",
+      "XX",
+      "-mx",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-eINFO/DP=19",
+      "-s",
+      "XX",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "filter",
+      "-eINFO/DP=19",
+      "/tmp/ws/test/filter.3.vcf"
+     ],
+     "codes": [
+      "missing_values_kept"
+     ],
+     "rules": [
+      "bcftools.missing_value_filter"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "gtcheck",
+      "-t",
+      "11:33",
+      "-p",
+      "A,D,A,E,D,E",
+      "-u",
+      "GT",
+      "-e",
+      "10",
+      "/tmp/9WrnIrSnHs/gtcheck.3.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "isec",
+      "--no-version",
+      "-T",
+      "/tmp/9WrnIrSnHs/isec.tab.gz",
+      "/tmp/9WrnIrSnHs/isec.a.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "isec",
+      "-Ob",
+      "-T",
+      "/tmp/9WrnIrSnHs/isec.tab.gz",
+      "/tmp/9WrnIrSnHs/isec.a.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "isec",
+      "-R",
+      "/tmp/ws/test/isec-miss.1.regs.txt",
+      "-n",
+      "+1",
+      "/tmp/9WrnIrSnHs/isec-miss.1.1.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec-miss.1.2.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec-miss.1.3.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing",
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation",
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "isec",
+      "-R",
+      "/tmp/ws/test/isec-miss.1.regs.txt",
+      "-n",
+      "+1",
+      "/tmp/9WrnIrSnHs/isec-miss.2.1.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec-miss.2.2.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec-miss.2.3.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing",
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation",
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "isec",
+      "-n",
+      "+1",
+      "-r",
+      "20:100,20:140,12:55,20:140,20:100",
+      "/tmp/9WrnIrSnHs/isec-miss.1.1.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec-miss.1.2.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec-miss.1.3.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing",
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation",
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "isec",
+      "-n",
+      "+1",
+      "-r",
+      "20:100,20:140,12:55,20:140,20:100",
+      "/tmp/9WrnIrSnHs/isec-miss.2.1.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec-miss.2.2.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec-miss.2.3.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing",
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation",
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--force-samples",
+      "-L",
+      "1",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--force-samples",
+      "-L",
+      "2",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--force-samples",
+      "-L",
+      "3",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--force-samples",
+      "-L",
+      "4",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--force-samples",
+      "-L",
+      "5",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--force-samples",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--gvcf",
+      "/tmp/ws/test/gvcf.fa",
+      "-r",
+      "22:21-23",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9a.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9b.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9c.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9d.bcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--gvcf",
+      "/tmp/ws/test/gvcf.fa",
+      "-r",
+      "22:21-23",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9a.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9b.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9c.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9d.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9e.bcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--gvcf",
+      "/tmp/ws/test/gvcf.fa",
+      "-r",
+      "22:21-23",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9c.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9d.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--gvcf",
+      "/tmp/ws/test/gvcf.fa",
+      "-r",
+      "22:21-23",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9c.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9d.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9e.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "--no-index",
+      "/tmp/ws/test/merge.noidx.a.vcf",
+      "/tmp/ws/test/merge.noidx.b.vcf",
+      "/tmp/ws/test/merge.noidx.c.vcf"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--force-samples",
+      "-L",
+      "1",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--force-samples",
+      "-L",
+      "2",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--force-samples",
+      "-L",
+      "3",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--force-samples",
+      "-L",
+      "4",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--force-samples",
+      "-L",
+      "5",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--force-samples",
+      "/tmp/9WrnIrSnHs/merge.LPL.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.LPL.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--gvcf",
+      "/tmp/ws/test/gvcf.fa",
+      "-r",
+      "22:21-23",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9a.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9b.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9c.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9d.bcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--gvcf",
+      "/tmp/ws/test/gvcf.fa",
+      "-r",
+      "22:21-23",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9a.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9b.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9c.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9d.bcf",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9e.bcf"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--gvcf",
+      "/tmp/ws/test/gvcf.fa",
+      "-r",
+      "22:21-23",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9c.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9d.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--gvcf",
+      "/tmp/ws/test/gvcf.fa",
+      "-r",
+      "22:21-23",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9c.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9d.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.gvcf.9e.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "--no-index",
+      "/tmp/ws/test/merge.noidx.a.vcf",
+      "/tmp/ws/test/merge.noidx.b.vcf",
+      "/tmp/ws/test/merge.noidx.c.vcf"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "-m",
+      "both",
+      "/tmp/9WrnIrSnHs/merge.10.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.10.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "-m",
+      "none",
+      "/tmp/9WrnIrSnHs/merge.10.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.10.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "-m",
+      "snp-ins-del",
+      "/tmp/9WrnIrSnHs/merge.10.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.10.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/merge.5.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.5.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/merge.6.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.6.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/merge.noidx.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.noidx.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.noidx.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-m",
+      "both",
+      "/tmp/9WrnIrSnHs/merge.10.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.10.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-m",
+      "none",
+      "/tmp/9WrnIrSnHs/merge.10.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.10.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "-m",
+      "snp-ins-del",
+      "/tmp/9WrnIrSnHs/merge.10.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.10.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/merge.5.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.5.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/merge.6.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.6.b.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/merge.noidx.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.noidx.b.vcf.gz",
+      "/tmp/9WrnIrSnHs/merge.noidx.c.vcf.gz"
+     ],
+     "codes": [
+      "absent_sites_missing"
+     ],
+     "rules": [
+      "bcftools.merge_absent_sites"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-R",
+      "/tmp/9WrnIrSnHs/regions.bed",
+      "/tmp/9WrnIrSnHs/regions.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-R",
+      "/tmp/9WrnIrSnHs/regions.bed.gz",
+      "/tmp/9WrnIrSnHs/regions.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-R",
+      "/tmp/9WrnIrSnHs/regions.tab.gz",
+      "/tmp/9WrnIrSnHs/regions.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-R",
+      "/tmp/ws/test/regions.tab",
+      "/tmp/9WrnIrSnHs/regions.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-T",
+      "/tmp/9WrnIrSnHs/regions.bed"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-T",
+      "/tmp/9WrnIrSnHs/regions.bed",
+      "/tmp/9WrnIrSnHs/regions.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-T",
+      "/tmp/9WrnIrSnHs/regions.bed.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-T",
+      "/tmp/9WrnIrSnHs/regions.bed.gz",
+      "/tmp/9WrnIrSnHs/regions.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-T",
+      "/tmp/9WrnIrSnHs/regions.tab.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-T",
+      "/tmp/9WrnIrSnHs/regions.tab.gz",
+      "/tmp/9WrnIrSnHs/regions.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-T",
+      "/tmp/ws/test/regions.tab"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f%CHROM %POS %REF,%ALT\\n",
+      "-T",
+      "/tmp/ws/test/regions.tab",
+      "/tmp/9WrnIrSnHs/regions.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %DP %GQ\\n]\\n",
+      "-iFMT/DP=19 &  FMT/GQ=589",
+      "/tmp/9WrnIrSnHs/view.filter.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %DP %GQ\\n]\\n",
+      "-iFMT/DP=19 && FMT/GQ=1",
+      "/tmp/9WrnIrSnHs/view.filter.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %DP\\n]\\n",
+      "-iFMT/DP=1 | FMT/DP=\".\"",
+      "/tmp/9WrnIrSnHs/filter.5.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %DP\\n]\\n",
+      "-iFMT/DP=1 | FMT/DP=2",
+      "/tmp/9WrnIrSnHs/filter.5.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %DP\\n]\\n",
+      "-iFMT/DP=19",
+      "/tmp/9WrnIrSnHs/view.filter.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %DP\\n]\\n",
+      "-iFMT/DP=19 |  FMT/DP=\".\"",
+      "/tmp/9WrnIrSnHs/view.filter.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %DP\\n]\\n",
+      "-iFMT/DP=19 || FMT/DP=\".\"",
+      "/tmp/9WrnIrSnHs/view.filter.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %GT\\n]",
+      "-iGT =\"1\"",
+      "/tmp/9WrnIrSnHs/query.filter.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%POS %SAMPLE %GT\\n]",
+      "-iGT!=\"1\"",
+      "/tmp/9WrnIrSnHs/query.filter.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%SAMPLE %DP\\n]",
+      "-iDP=1 |  DP=2",
+      "/tmp/9WrnIrSnHs/query.filter-or.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "query",
+      "-f[%SAMPLE %DP\\n]",
+      "-iDP=1 || DP=2",
+      "/tmp/9WrnIrSnHs/query.filter-or.vcf.gz"
+     ],
+     "codes": [
+      "scope_undeclared"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "roh",
+      "/tmp/ws/test/roh.1.vcf.gz",
+      "-G30",
+      "--AF-dflt",
+      "0.4",
+      "-r",
+      "1:100174876-100318245"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "roh",
+      "/tmp/ws/test/roh.1.vcf.gz",
+      "-G30",
+      "--AF-dflt",
+      "0.4",
+      "-r",
+      "1:100174876-100318245",
+      "--ignore-homref"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "roh",
+      "/tmp/ws/test/roh.1.vcf.gz",
+      "-G30",
+      "--AF-dflt",
+      "0.4",
+      "-r",
+      "1:100174876-100318245",
+      "--ignore-homref",
+      "--include-noalt"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "roh",
+      "/tmp/ws/test/roh.1.vcf.gz",
+      "-G30",
+      "--AF-dflt",
+      "0.4",
+      "-r",
+      "1:100174876-100318245",
+      "--include-noalt"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "stats",
+      "-r",
+      "1",
+      "/tmp/9WrnIrSnHs/check.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "stats",
+      "-r",
+      "2",
+      "/tmp/9WrnIrSnHs/check.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "stats",
+      "-r",
+      "3",
+      "/tmp/9WrnIrSnHs/check.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "stats",
+      "-r",
+      "4",
+      "/tmp/9WrnIrSnHs/check.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-R",
+      "/tmp/ws/test/idx.2.bed",
+      "/tmp/9WrnIrSnHs/idx.2.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-R",
+      "/tmp/ws/test/idx.3.bed",
+      "/tmp/9WrnIrSnHs/idx.3.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-R",
+      "/tmp/ws/test/idx.4.bed",
+      "/tmp/9WrnIrSnHs/idx.4.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-r",
+      "1:10,1:12,1:10",
+      "/tmp/9WrnIrSnHs/idx.1.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-r",
+      "1:1172777-1172804,1:1172806-1172808",
+      "/tmp/9WrnIrSnHs/idx.2.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-r",
+      "chr1:100-200",
+      "--regions-overlap",
+      "0",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-r",
+      "chr1:100-200",
+      "--regions-overlap",
+      "1",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-r",
+      "chr1:100-200",
+      "--regions-overlap",
+      "2",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-t",
+      "^chr1:100-200",
+      "--targets-overlap",
+      "0",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-t",
+      "^chr1:100-200",
+      "--targets-overlap",
+      "1",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-t",
+      "^chr1:100-200",
+      "--targets-overlap",
+      "2",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-t",
+      "chr1:100-200",
+      "--targets-overlap",
+      "0",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-t",
+      "chr1:100-200",
+      "--targets-overlap",
+      "1",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-H",
+      "-t",
+      "chr1:100-200",
+      "--targets-overlap",
+      "2",
+      "/tmp/9WrnIrSnHs/overlap.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-T",
+      "/tmp/ws/test/view.chrs.tab",
+      "/tmp/9WrnIrSnHs/view.chrs.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-T",
+      "/tmp/ws/test/view.sites.txt",
+      "/tmp/9WrnIrSnHs/view.sites.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-T",
+      "/tmp/ws/test/view.sites.txt.gz",
+      "/tmp/9WrnIrSnHs/view.sites.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-aUc1",
+      "-C1",
+      "-s",
+      "NA00002",
+      "-v",
+      "snps",
+      "/tmp/9WrnIrSnHs/view.vcf.gz"
+     ],
+     "codes": [
+      "monomorphic_sites_kept"
+     ],
+     "rules": [
+      "bcftools.subset_monomorphic"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-f",
+      "PASS",
+      "-Xks",
+      "NA00003",
+      "/tmp/9WrnIrSnHs/view.vcf.gz",
+      "-r20,Y"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "-s",
+      "^NA00003",
+      "/tmp/9WrnIrSnHs/view.vcf.gz"
+     ],
+     "codes": [
+      "monomorphic_sites_kept"
+     ],
+     "rules": [
+      "bcftools.subset_monomorphic"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "1"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "1:1,1:2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "1:1-1"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "1:1-2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}-2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}:1,{1:1-1}:2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}:1-1"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}:1-2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1}"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1}:1,{1:1}:2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1}:1-1"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1}:1-2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "-T",
+      "/tmp/ws/test/view.chrs.tab",
+      "/tmp/9WrnIrSnHs/view.chrs.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "-T",
+      "/tmp/ws/test/view.sites.txt",
+      "/tmp/9WrnIrSnHs/view.sites.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "-T",
+      "/tmp/ws/test/view.sites.txt.gz",
+      "/tmp/9WrnIrSnHs/view.sites.vcf.gz"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "-aUc1",
+      "-C1",
+      "-s",
+      "NA00002",
+      "-v",
+      "snps",
+      "/tmp/9WrnIrSnHs/view.vcf.gz"
+     ],
+     "codes": [
+      "monomorphic_sites_kept"
+     ],
+     "rules": [
+      "bcftools.subset_monomorphic"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "-f",
+      "PASS",
+      "-Xks",
+      "NA00003",
+      "/tmp/9WrnIrSnHs/view.vcf.gz",
+      "-r20,Y"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "-s",
+      "^NA00003",
+      "/tmp/9WrnIrSnHs/view.vcf.gz"
+     ],
+     "codes": [
+      "monomorphic_sites_kept"
+     ],
+     "rules": [
+      "bcftools.subset_monomorphic"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "1"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "1:1,1:2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "1:1-1"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "1:1-2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}-2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}:1,{1:1-1}:2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}:1-1"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1-1}:1-2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1}"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1}:1,{1:1}:2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1}:1-1"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "view",
+      "-Ob",
+      "/tmp/9WrnIrSnHs/weird-chr-names.vcf.gz",
+      "-r",
+      "{1:1}:1-2"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bcftools.region_semantics"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "filter",
+      "-Ob",
+      "-i",
+      "QUAL/FMT/AD==55",
+      "/tmp/ws/test/filter.9.vcf"
+     ],
+     "codes": [
+      "scope_unverified"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "filter",
+      "-i",
+      "QUAL/FMT/AD==55",
+      "/tmp/ws/test/filter.9.vcf"
+     ],
+     "codes": [
+      "scope_unverified"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "isec",
+      "-C",
+      "-c",
+      "any",
+      "/tmp/9WrnIrSnHs/isec.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec.b.vcf.gz"
+     ],
+     "codes": [
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "isec",
+      "-n",
+      "=2",
+      "-c",
+      "any",
+      "/tmp/9WrnIrSnHs/isec.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec.b.vcf.gz"
+     ],
+     "codes": [
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "isec",
+      "-n",
+      "=2",
+      "-c",
+      "both",
+      "/tmp/9WrnIrSnHs/isec.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec.b.vcf.gz"
+     ],
+     "codes": [
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "isec",
+      "-n",
+      "=2",
+      "-iSTRLEN(REF)==2",
+      "/tmp/9WrnIrSnHs/isec.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec.b.vcf.gz"
+     ],
+     "codes": [
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "isec",
+      "-n",
+      "=2",
+      "-w",
+      "2",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/isec.match-id.1.1.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec.match-id.1.2.vcf.gz"
+     ],
+     "codes": [
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "isec",
+      "-n",
+      "=2",
+      "-w",
+      "2",
+      "-c",
+      "id",
+      "--no-version",
+      "/tmp/9WrnIrSnHs/isec.match-id.1.1.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec.match-id.1.2.vcf.gz"
+     ],
+     "codes": [
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "isec",
+      "-n",
+      "=2",
+      "/tmp/9WrnIrSnHs/isec.a.vcf.gz",
+      "/tmp/9WrnIrSnHs/isec.b.vcf.gz"
+     ],
+     "codes": [
+      "normalisation_not_checked"
+     ],
+     "rules": [
+      "bcftools.isec_representation"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "query",
+      "-f",
+      "%CHROM\\t%POS[\\t%STR]\\n",
+      "-iFMT/STR=@/tmp/ws/test/query.string.2.2.txt",
+      "/tmp/9WrnIrSnHs/query.string.2.vcf.gz"
+     ],
+     "codes": [
+      "scope_unverified"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "query",
+      "-f[\\t%GT\\n]\\n",
+      "-iGT~\"1\" &  GT~\"2\"",
+      "/tmp/9WrnIrSnHs/query.filter.3.vcf.gz"
+     ],
+     "codes": [
+      "scope_unverified"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "query",
+      "-f[\\t%GT\\n]\\n",
+      "-iGT~\"1\" && GT~\"2\"",
+      "/tmp/9WrnIrSnHs/query.filter.3.vcf.gz"
+     ],
+     "codes": [
+      "scope_unverified"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "query",
+      "-iFMT/FINT!=\".\"",
+      "-f[\\t%FINT]\\n",
+      "/tmp/9WrnIrSnHs/missing.vcf.gz"
+     ],
+     "codes": [
+      "scope_unverified"
+     ],
+     "rules": [
+      "bcftools.format_filter_scope"
+     ],
+     "times": 1,
+     "tool": "bcftools"
+    }
+   ],
+   "seconds_base": 107.2,
+   "seconds_guarded": 1468.9,
+   "tests": 1981,
+   "units": 1,
+   "version": "1.24"
+  },
+  "bedtools": {
+   "baseline_ok": 663,
+   "calls_by_action": {
+    "allow": 714,
+    "block": 14,
+    "warn": 90
+   },
+   "calls_by_tool": {
+    "awk": 7,
+    "bedtools": 808,
+    "python": 1,
+    "sort": 2
+   },
+   "calls_checked": 818,
+   "disturbed": 15,
+   "disturbed_tests": {
+    "coverage": [
+     "coverage.t11",
+     "coverage.t11b"
+    ],
+    "general": [
+     "general.t16",
+     "general.t17",
+     "general.t18",
+     "general.t19"
+    ],
+    "merge": [
+     "merge.t23b",
+     "merge.t47"
+    ],
+    "subtract": [
+     "subtract.t1",
+     "subtract.t11",
+     "subtract.t13",
+     "subtract.t15",
+     "subtract.t19",
+     "subtract.t3",
+     "subtract.t5"
+    ]
+   },
+   "firing": {
+    "bedtools.closest_distance_unit|distance_unit_undeclared|warn": 71,
+    "bedtools.merge_bookended|merge_adjacent_undeclared|warn": 19,
+    "bedtools.prec_significant|declaration_missing|block": 1,
+    "bedtools.spliced_without_split|spliced_reads_without_split|block": 2,
+    "bedtools.subtract_trims|subtract_trims_not_removes|block": 11
+   },
+   "flaky": 0,
+   "ms_added_per_call": 132.6,
+   "non_allowed": [
+    {
+     "action": "block",
+     "argv": [
+      "coverage",
+      "-a",
+      "c.bed",
+      "-b",
+      "three_blocks_match.bam"
+     ],
+     "codes": [
+      "spliced_reads_without_split"
+     ],
+     "rules": [
+      "bedtools.spliced_without_split"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "coverage",
+      "-a",
+      "c.bed",
+      "-b",
+      "three_blocks_match.bam",
+      "-sorted"
+     ],
+     "codes": [
+      "spliced_reads_without_split"
+     ],
+     "rules": [
+      "bedtools.spliced_without_split"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "merge",
+      "-i",
+      "precisionTest2.bed",
+      "-c",
+      "8",
+      "-o",
+      "sum",
+      "-prec",
+      "5"
+     ],
+     "codes": [
+      "declaration_missing"
+     ],
+     "rules": [
+      "bedtools.prec_significant"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 2,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed",
+      "-S"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed",
+      "-S",
+      "-sorted"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed",
+      "-f",
+      "0.1"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed",
+      "-f",
+      "0.1",
+      "-sorted"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed",
+      "-sorted"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed",
+      "b2.bed"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed.gz"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed.gz",
+      "-b",
+      "b.bed"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "block",
+     "argv": [
+      "subtract",
+      "-a",
+      "a.bed.gz",
+      "-b",
+      "b.bed.gz"
+     ],
+     "codes": [
+      "subtract_trims_not_removes"
+     ],
+     "rules": [
+      "bedtools.subtract_trims"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "a.bed",
+      "-b",
+      "b-one-bp-closer.bed",
+      "-d"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "a.bed",
+      "-b",
+      "b.bed",
+      "-d"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "a.names.bed",
+      "-b",
+      "b.names.bed",
+      "-d"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "a.names.bed",
+      "-b",
+      "b.names.bed",
+      "-d",
+      "-N"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "b-one-bp-closer.bed",
+      "-b",
+      "a.bed",
+      "-d"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "b.bed",
+      "-b",
+      "a.bed",
+      "-d"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "bug157_a.bed",
+      "-b",
+      "bug157_b.bed",
+      "-D",
+      "ref",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "bug157_a.bed",
+      "-b",
+      "bug157_b.bed",
+      "-D",
+      "ref",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d.bed",
+      "-b",
+      "d_id.bed",
+      "-D",
+      "ref",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d.bed",
+      "-b",
+      "d_iu.bed",
+      "-D",
+      "ref",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d1F.bed",
+      "-D",
+      "a"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d1F.bed",
+      "-D",
+      "b"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d1F.bed",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d1R.bed",
+      "-D",
+      "a"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d1R.bed",
+      "-D",
+      "b"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d1R.bed",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d2F.bed",
+      "-D",
+      "a"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d2F.bed",
+      "-D",
+      "b"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d2F.bed",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d2R.bed",
+      "-D",
+      "a"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d2R.bed",
+      "-D",
+      "b"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q1.bed",
+      "-b",
+      "d_d2R.bed",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d1F.bed",
+      "-D",
+      "a"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d1F.bed",
+      "-D",
+      "b"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d1F.bed",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d1R.bed",
+      "-D",
+      "a"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d1R.bed",
+      "-D",
+      "b"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d1R.bed",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d2F.bed",
+      "-D",
+      "a"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d2F.bed",
+      "-D",
+      "b"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d2F.bed",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d2R.bed",
+      "-D",
+      "a"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d2R.bed",
+      "-D",
+      "b"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 2,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "d_q2.bed",
+      "-b",
+      "d_d2R.bed",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "dmr.bed",
+      "-b",
+      "islands.2.bed",
+      "tfbs.bed",
+      "shores.bed",
+      "-filenames",
+      "-d",
+      "-mdb",
+      "all"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "dmr.bed",
+      "-b",
+      "islands.2.bed",
+      "tfbs.bed",
+      "shores.bed",
+      "-filenames",
+      "-d",
+      "-mdb",
+      "each"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "dmr.bed",
+      "-b",
+      "islands.bed",
+      "tfbs.bed",
+      "shores.bed",
+      "-filenames",
+      "-d",
+      "-mdb",
+      "all"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q1.bed",
+      "-b",
+      "d2.bed",
+      "-k",
+      "7",
+      "-id",
+      "-D",
+      "ref"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q1.bed",
+      "-b",
+      "d2.bed",
+      "-k",
+      "7",
+      "-id",
+      "-D",
+      "ref",
+      "-t",
+      "first"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q1.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "ref",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q1.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "ref",
+      "-io"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q1.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "ref",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d2.bed",
+      "d3.bed",
+      "-mdb",
+      "all",
+      "-k",
+      "10",
+      "-D",
+      "ref",
+      "-t",
+      "all"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d2.bed",
+      "d3.bed",
+      "-mdb",
+      "all",
+      "-k",
+      "10",
+      "-D",
+      "ref",
+      "-t",
+      "first"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d2.bed",
+      "d3.bed",
+      "-mdb",
+      "all",
+      "-k",
+      "10",
+      "-D",
+      "ref",
+      "-t",
+      "last"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "a",
+      "-S",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "a",
+      "-S",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "a",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "a",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "a",
+      "-s",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "a",
+      "-s",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "b",
+      "-S",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "b",
+      "-S",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "b",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "b",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "b",
+      "-s",
+      "-id"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "15",
+      "-D",
+      "b",
+      "-s",
+      "-iu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "5",
+      "-D",
+      "a",
+      "-t",
+      "first",
+      "-fd"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "5",
+      "-D",
+      "a",
+      "-t",
+      "first",
+      "-fu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "5",
+      "-D",
+      "b",
+      "-t",
+      "first",
+      "-fd"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "5",
+      "-D",
+      "b",
+      "-t",
+      "first",
+      "-fu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "5",
+      "-D",
+      "ref",
+      "-t",
+      "first",
+      "-fd"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-a",
+      "q2.bed",
+      "-b",
+      "d3.bed",
+      "-k",
+      "5",
+      "-D",
+      "ref",
+      "-t",
+      "first",
+      "-fu"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-k",
+      "3",
+      "-S",
+      "-D",
+      "a",
+      "-a",
+      "bug471_a.bed",
+      "-b",
+      "bug471_b.bed"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-k",
+      "3",
+      "-S",
+      "-D",
+      "b",
+      "-a",
+      "bug471_a.bed",
+      "-b",
+      "bug471_b.bed"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-k",
+      "3",
+      "-S",
+      "-d",
+      "-a",
+      "bug471_a.bed",
+      "-b",
+      "bug471_b.bed"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 2,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-k",
+      "3",
+      "-s",
+      "-D",
+      "a",
+      "-a",
+      "bug471_a.bed",
+      "-b",
+      "bug471_b.bed"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-k",
+      "3",
+      "-s",
+      "-D",
+      "b",
+      "-a",
+      "bug471_a.bed",
+      "-b",
+      "bug471_b.bed"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "closest",
+      "-k",
+      "3",
+      "-s",
+      "-d",
+      "-a",
+      "bug471_a.bed",
+      "-b",
+      "bug471_b.bed"
+     ],
+     "codes": [
+      "distance_unit_undeclared"
+     ],
+     "rules": [
+      "bedtools.closest_distance_unit"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-c",
+      "1",
+      "-o",
+      "count"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-iobuf"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-iobuf",
+      "128M"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-iobuf",
+      "20L"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-iobuf",
+      "7"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-iobuf",
+      "8192"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-iobuf",
+      "beerM"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-n"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.bed",
+      "-nms"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.full.bed"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.full.bed",
+      "-c",
+      "4,5",
+      "-o",
+      "collapse,sum"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.full.bed",
+      "-c",
+      "4,5,4",
+      "-o",
+      "collapse,sum,count"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.full.bed",
+      "-c",
+      "5",
+      "-o",
+      "count,sum"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.names.bed",
+      "-c",
+      "4",
+      "-o",
+      "collapse"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.names.bed",
+      "-c",
+      "4",
+      "-o",
+      "sum"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "a.names.bed",
+      "-delim",
+      "|",
+      "-c",
+      "4",
+      "-o",
+      "collapse"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "big4.bed"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-i",
+      "chained.bed.gz"
+     ],
+     "codes": [
+      "merge_adjacent_undeclared"
+     ],
+     "rules": [
+      "bedtools.merge_bookended"
+     ],
+     "times": 1,
+     "tool": "bedtools"
+    }
+   ],
+   "seconds_base": 11.7,
+   "seconds_guarded": 120.2,
+   "tests": 715,
+   "units": 31,
+   "version": "2.31.1"
+  },
+  "samtools": {
+   "baseline_ok": 952,
+   "calls_by_action": {
+    "allow": 1336,
+    "warn": 18
+   },
+   "calls_by_tool": {
+    "perl": 8,
+    "samtools": 1346
+   },
+   "calls_checked": 1354,
+   "disturbed": 0,
+   "disturbed_tests": {},
+   "firing": {
+    "fastq.phred_offset|offset_not_provable|warn": 2,
+    "samtools.mapq_unique_cutoff|alignment_unreadable|warn": 10,
+    "samtools.merge_combine_rg|read_group_fields_differ|warn": 6
+   },
+   "flaky": 0,
+   "ms_added_per_call": 163.5,
+   "non_allowed": [
+    {
+     "action": "warn",
+     "argv": [
+      "import",
+      "--no-PG",
+      "--i1",
+      "test/import/5-i1.fq",
+      "--i2",
+      "test/import/5-i2.fq",
+      "--r1",
+      "test/import/5-r1.fq",
+      "--r2",
+      "test/import/5-r2.fq"
+     ],
+     "codes": [
+      "offset_not_provable"
+     ],
+     "rules": [
+      "fastq.phred_offset"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "import",
+      "--no-PG",
+      "--i1",
+      "test/import/5-i1.fq",
+      "--i2",
+      "test/import/5-i2.fq",
+      "--r1",
+      "test/import/5-r1.fq",
+      "--r2",
+      "test/import/5-r2.fq",
+      "--barcode-tag",
+      "OX",
+      "--quality-tag",
+      "BZ"
+     ],
+     "codes": [
+      "offset_not_provable"
+     ],
+     "rules": [
+      "fastq.phred_offset"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-@",
+      "2",
+      "-O",
+      "sam",
+      "-",
+      "-X",
+      "-cp",
+      "-R",
+      "ref2",
+      "/tmp/ws/test/dat/test_input_1_a.bam",
+      "/tmp/ws/test/dat/test_input_1_b.bam",
+      "/tmp/ws/test/dat/test_input_1_a.bam.bai",
+      "/tmp/yT7KrM_79Y/test_input_1_b.bam.bai"
+     ],
+     "codes": [
+      "read_group_fields_differ"
+     ],
+     "rules": [
+      "samtools.merge_combine_rg"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-@",
+      "2",
+      "-cp",
+      "-s",
+      "1",
+      "-O",
+      "sam",
+      "-",
+      "/tmp/ws/test/dat/test_input_1_a.sam",
+      "/tmp/ws/test/dat/test_input_1_b.sam"
+     ],
+     "codes": [
+      "read_group_fields_differ"
+     ],
+     "rules": [
+      "samtools.merge_combine_rg"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-@",
+      "2",
+      "-s",
+      "1",
+      "-p",
+      "-c",
+      "-n",
+      "-t",
+      "PG",
+      "-O",
+      "SAM",
+      "-",
+      "/tmp/yT7KrM_79Y/merge.tag.3.bam",
+      "/tmp/yT7KrM_79Y/merge.tag.4.bam"
+     ],
+     "codes": [
+      "read_group_fields_differ"
+     ],
+     "rules": [
+      "samtools.merge_combine_rg"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-O",
+      "sam",
+      "-",
+      "-X",
+      "-cp",
+      "-R",
+      "ref2",
+      "/tmp/ws/test/dat/test_input_1_a.bam",
+      "/tmp/ws/test/dat/test_input_1_b.bam",
+      "/tmp/ws/test/dat/test_input_1_a.bam.bai",
+      "/tmp/yT7KrM_79Y/test_input_1_b.bam.bai"
+     ],
+     "codes": [
+      "read_group_fields_differ"
+     ],
+     "rules": [
+      "samtools.merge_combine_rg"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-cp",
+      "-s",
+      "1",
+      "-O",
+      "sam",
+      "-",
+      "/tmp/ws/test/dat/test_input_1_a.sam",
+      "/tmp/ws/test/dat/test_input_1_b.sam"
+     ],
+     "codes": [
+      "read_group_fields_differ"
+     ],
+     "rules": [
+      "samtools.merge_combine_rg"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "merge",
+      "-s",
+      "1",
+      "-p",
+      "-c",
+      "-n",
+      "-t",
+      "PG",
+      "-O",
+      "SAM",
+      "-",
+      "/tmp/yT7KrM_79Y/merge.tag.3.bam",
+      "/tmp/yT7KrM_79Y/merge.tag.4.bam"
+     ],
+     "codes": [
+      "read_group_fields_differ"
+     ],
+     "rules": [
+      "samtools.merge_combine_rg"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-c",
+      "-L",
+      "/tmp/ws/test/dat/view.001.01.bed",
+      "-q",
+      "5",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-c",
+      "-q",
+      "100",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-c",
+      "-q",
+      "50",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-c",
+      "-q",
+      "50",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "ref1:15-45",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-c",
+      "-q",
+      "99",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-o",
+      "/tmp/yT7KrM_79Y/view.test161.sam",
+      "-h",
+      "-q",
+      "50",
+      "--save-counts",
+      "/tmp/yT7KrM_79Y/view.test161.counts.json",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-o",
+      "/tmp/yT7KrM_79Y/view.test167.sam",
+      "-h",
+      "-q",
+      "99",
+      "--save-counts",
+      "/tmp/yT7KrM_79Y/view.test167.counts.json",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-o",
+      "/tmp/yT7KrM_79Y/view.test173.sam",
+      "-h",
+      "-q",
+      "100",
+      "--save-counts",
+      "/tmp/yT7KrM_79Y/view.test173.counts.json",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-o",
+      "/tmp/yT7KrM_79Y/view.test324.sam",
+      "-h",
+      "-q",
+      "50",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "ref1:15-45",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    },
+    {
+     "action": "warn",
+     "argv": [
+      "view",
+      "-o",
+      "/tmp/yT7KrM_79Y/view.test392.sam",
+      "-h",
+      "-L",
+      "/tmp/ws/test/dat/view.001.01.bed",
+      "-q",
+      "5",
+      "/tmp/yT7KrM_79Y/view.test006.cram",
+      "--no-PG"
+     ],
+     "codes": [
+      "alignment_unreadable"
+     ],
+     "rules": [
+      "samtools.mapq_unique_cutoff"
+     ],
+     "times": 1,
+     "tool": "samtools"
+    }
+   ],
+   "seconds_base": 103.4,
+   "seconds_guarded": 324.8,
+   "tests": 1032,
+   "units": 1,
+   "version": "1.24"
+  }
+ }
+}

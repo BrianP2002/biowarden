@@ -1,0 +1,22 @@
+{
+ "id": "variants-15",
+ "domain": "variants",
+ "tool": "picard",
+ "trap_class": "indel representation not normalised",
+ "intent": "Measure how well the genotypes in calls.vcf agree with the truth set for sample NA1, separately for SNPs and indels.",
+ "silent_error": "picard GenotypeConcordance matches records by position and alleles as written. The caller reports the one-base deletion inside the T-run right-aligned (17 TT>T) while the truth set has it left-aligned (13 AT>A); these are the same event but not the same record, so the indel counts as one false negative plus one false positive (sensitivity and PPV 0) although the call is correct. Nothing in the output mentions representation; exit 0. A well-known pitfall of tools that compare allele strings: both files have to be left-aligned (bcftools norm -f reference) first.",
+ "files": {
+  "ref.fa": ">chr1\nACGTACGATCGGATTTTTCGATCGGCATCGATACCGATCGATTAGCGATCGAGGCTAGCTAGGATCG\n",
+  "truth.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr1,length=67>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tNA1\nchr1\t13\t.\tAT\tA\t50\tPASS\t.\tGT\t0/1\nchr1\t26\t.\tC\tT\t50\tPASS\t.\tGT\t0/1\nchr1\t41\t.\tA\tG\t50\tPASS\t.\tGT\t1/1\n",
+  "calls.vcf": "##fileformat=VCFv4.2\n##contig=<ID=chr1,length=67>\n##FORMAT=<ID=GT,Number=1,Type=String,Description=\"Genotype\">\n#CHROM\tPOS\tID\tREF\tALT\tQUAL\tFILTER\tINFO\tFORMAT\tNA1\nchr1\t17\t.\tTT\tT\t50\tPASS\t.\tGT\t0/1\nchr1\t26\t.\tC\tT\t50\tPASS\t.\tGT\t0/1\nchr1\t41\t.\tA\tG\t50\tPASS\t.\tGT\t1/1\n"
+ },
+ "setup": [
+  "bgzip -c truth.vcf > truth.vcf.gz",
+  "tabix -p vcf truth.vcf.gz",
+  "bgzip -c calls.vcf > calls.vcf.gz",
+  "tabix -p vcf calls.vcf.gz"
+ ],
+ "faulted": "picard GenotypeConcordance --TRUTH_VCF truth.vcf.gz --CALL_VCF calls.vcf.gz --TRUTH_SAMPLE NA1 --CALL_SAMPLE NA1 --OUTPUT concordance",
+ "clean": "bcftools norm -f ref.fa -Oz -o calls_norm.vcf.gz calls.vcf.gz && tabix -p vcf calls_norm.vcf.gz && picard GenotypeConcordance --TRUTH_VCF truth.vcf.gz --CALL_VCF calls_norm.vcf.gz --TRUTH_SAMPLE NA1 --CALL_SAMPLE NA1 --OUTPUT concordance",
+ "observe": "grep -v '^#' concordance.genotype_concordance_summary_metrics | cut -f1,4,5,10,11 | grep -v '^$'"
+}
