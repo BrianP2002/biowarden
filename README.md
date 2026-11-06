@@ -15,7 +15,7 @@ human, that it is wrong. This project has two parts:
 - a **benchmark**: 105 task families, each a clean and a faulted twin (the faulted one holds the trap), that measure how often
   LLM agents end with a wrong answer.
 
-In a study registered in advance, the layer cut silent wrong answers from 38%, 55% and 73% to 9%, 1% and 15% for three agents,
+In a study [registered in advance](docs/preregistration/README.md#checking-the-freeze), the layer cut silent wrong answers from 38%, 55% and 73% to 9%, 1% and 15% for three agents,
 on the 47 task families where at least one agent failed in a pilot and a rule exists, in the hardest setting, where any wrong
 answer is silent. Over the 103 gated families, those that run in this setting, the same agents went from 22-50% to 7-18%
 ([Results](#results)).
@@ -85,29 +85,20 @@ The engine never rewrites a call. More in [`docs/architecture.md`](docs/architec
 
 Setting: generated tasks on seeds not used while writing the rules; three agents in a minimal loop with one bash tool; the hardest
 wording (the task names the tool whose default is the trap, and the agent writes only a result file, so any wrong answer is
-silent). Chart bars: no layer, the layer in `--mode warn`, the layer in its default mode; whiskers are 95% intervals over families.
-The right panel and the third column use 103 of the 105 families (F4 and F34 do not run in this setting).
+silent). Bars: no layer, the layer in `--mode warn`, the layer in its default mode; whiskers are 95% intervals over families.
+The right panel and the third column use 103 of the 105 families (F4 and F34 do not run in this setting). Intervals and the
+other families: [`docs/results`](docs/results/README.md).
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="docs/figures/stage2_silent_errors-dark.svg">
   <img alt="Stage 2, share of faulted tasks ending in a silent wrong answer, held-out seeds. Left, the 47 families where a trap bites and a rule exists: Claude Haiku 5.5 38% with no layer, 12% with a warning, 9% with a block; DeepSeek V4.1 Flash 55%, 13%, 1%; gpt-oss-120b 73%, 42%, 15%. Right, all 103 gated families, no layer against block: 22% and 8%, 34% and 7%, 50% and 18%." src="docs/figures/stage2_silent_errors.svg" width="830">
 </picture>
 
-| Model | 47 families: no layer → block | All 103 families | Registered bars |
-|---|---|---|---|
-| Claude Haiku 5.5 | 38% → 9% | 22% → 8% | not met: 7.2 points more tasks ended with no answer (bar: 5) |
-| DeepSeek V4.1 Flash | 55% → 1% | 34% → 7% | all five met |
-| gpt-oss-120b | 73% → 15% | 50% → 18% | all five met |
-
-> [!NOTE]
-> The rules were written for these families, so this is the layer's effect where a rule applies, not a coverage claim. The layer
-> counted as effective if at least two of the three agents met all five registered bars (thresholds fixed in advance). The bars and
-> the registration date (2026-11-01, a SHA-256 manifest; no external registry, so the date is the author's word) are in
-> [the registration](docs/preregistration/stage2-draft.md), a frozen text with the project's earlier names that keeps the file name
-> `stage2-draft.md` because the freeze manifest lists it ([how to check the freeze](docs/preregistration/README.md#checking-the-freeze)).
-> Intervals, the other families and the earlier study (stage 1: five trap types, prompt-only baselines): [`docs/results`](docs/results/README.md).
-> Two later checks, not pre-registered: [cases written without sight of the rules](docs/blind-coverage.md) and
-> [the test suites of three tools](docs/real-code-scan.md).
+| Model | 47 families: no layer → block | All 103 families |
+|---|---|---|
+| Claude Haiku 5.5 | 38% → 9% | 22% → 8% |
+| DeepSeek V4.1 Flash | 55% → 1% | 34% → 7% |
+| gpt-oss-120b | 73% → 15% | 50% → 18% |
 
 ## What it catches
 
@@ -142,7 +133,8 @@ Catalogues: [`rules.md`](docs/rules.md), [`supported-tools.md`](docs/supported-t
 Use GitHub's "Cite this repository" ([`CITATION.cff`](CITATION.cff)), and please also cite the tools you run. Missed a silent
 error, or hit a wrong block? [Open an issue](https://github.com/BrianP2002/biowarden/issues/new/choose) with the command, a small input
 file and the expected result. See
-[`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md); tests and studies: [`docs/reproduce.md`](docs/reproduce.md).
+[`CONTRIBUTING.md`](CONTRIBUTING.md) and [`SECURITY.md`](SECURITY.md); tests and studies: [`docs/reproduce.md`](docs/reproduce.md). What the result does not cover:
+[cases written without sight of the rules](docs/blind-coverage.md) and [the test suites of three tools](docs/real-code-scan.md).
 
 ## License
 

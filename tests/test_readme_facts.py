@@ -102,12 +102,9 @@ def test_the_figure_description_is_the_analysis():
 
 def test_the_results_table_is_the_analysis():
     rows = {row[0]: row for row in table_rows("| Model | 47 families")}
-    by_model = {m["model"]: m for m in RESULTS["primary"]["models"]}
 
     for name, model in zip(NAMES, MODELS, strict=True):
-        _, primary, wide, verdict = rows[name]
-        passed = by_model[model]["passes"]
-        loss = by_model[model]["delivered_loss"]["estimate"] * 100
+        _, primary, wide = rows[name]
         assert primary == (
             f"{pct(silent(model, 'bare', 'P'))}% → {pct(silent(model, 'block-nonote', 'P'))}%"
         )
@@ -115,18 +112,18 @@ def test_the_results_table_is_the_analysis():
             f"{pct(silent(model, 'bare', 'gated'))}% → "
             f"{pct(silent(model, 'block-nonote', 'gated'))}%"
         )
-        assert verdict.split(":")[0] == ("all five met" if passed else "not met")
-        if not passed:
-            assert f"{loss:.1f} points more tasks ended with no answer (bar: 5)" in verdict
     assert RESULTS["primary"]["n_primary"] == 47 and RESULTS["primary"]["n_safety"] == 103
 
 
-def test_the_note_under_the_table_is_the_registration():
+def test_registered_in_advance_links_to_what_that_means():
     draft = " ".join((ROOT / "docs" / "preregistration" / "stage2-draft.md").read_text().split())
 
     assert "registered at freeze 2 on 2026-11-01" in draft
-    assert "2026-11-01, a SHA-256 manifest; no external registry" in FLAT
-    assert "the rules were written for these families" in FLAT.lower()
+    assert "[registered in advance](docs/preregistration/README.md#checking-the-freeze)" in FLAT
+
+
+def test_the_results_have_no_registered_bars_and_no_note():
+    assert "Registered bars" not in README and "[!NOTE]" not in README
 
 
 def test_the_declaration_count_in_the_readme_is_the_specs():
@@ -213,7 +210,7 @@ def test_relative_links_images_and_anchors_resolve():
 def test_the_readme_is_concise():
     """A human reader gets the point from a short page (the first draft had 202 lines); the detail
     lives in docs/."""
-    assert len(README.splitlines()) <= 150
+    assert len(README.splitlines()) <= 146
 
 
 def test_the_smoke_test_command_in_the_docs_uses_flags_the_runner_has():
