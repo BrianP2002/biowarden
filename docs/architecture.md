@@ -42,7 +42,7 @@ field. The engine refuses to start on a duplicate rule id or a spec that names a
 | `declare` | optional: `key`, allowed `values`, `required`, `description` |
 | `check`, `params` | the name of the checker and the free-form arguments it receives |
 | `message` | one sentence: what goes wrong without this rule. The agent reads it in the block message for a missing declaration and in the declarations that `biowarden-mcp` and the gateway tool advertise; every other message is written by the checker |
-| `incidents` | optional reference ids; the engine does not read them |
+| `incidents` | optional reference ids (`GEN-20`, `SCD-06`, `T01`, ...) into the author's incident notes, which are not published; the engine does not read them |
 
 **Two kinds of rule.** A *call rule* reads one tool's arguments (at tier T1 also the files those arguments name). It
 applies when the program's basename (a versioned interpreter such as `python3.10` also matches `python3`), an optional
@@ -265,7 +265,7 @@ Every top-level package of `src/biowarden/`:
 |---|---|---|
 | [`engine/`](../src/biowarden/engine/) | the rule engine, the specs, the checkers and the front ends | it is the engine |
 | [`ledger/`](../src/biowarden/ledger/) | the append-only hash-chained decision record | yes: `Engine._log` appends one record per decision |
-| [`bench/`](../src/biowarden/bench/) | the benchmark: task families, sandboxed runner, scorer, the two pre-registered analyses, rule calibration | no. It uses the engine. One exception: `biowarden-mcp` calls `bench.tasks.tools.ToolEnv` at start-up to find the real tool directories |
+| [`bench/`](../src/biowarden/bench/) | the benchmark: task families, sandboxed runner, scorer, the analyses of the two studies, rule calibration | no. It uses the engine. One exception: `biowarden-mcp` calls `bench.tasks.tools.ToolEnv` at start-up to find the real tool directories |
 | [`contracts/`](../src/biowarden/contracts/) | tool contracts for the mock structure predictor `mockfold`: a pydantic schema, two YAML contracts in `data/`, the request payload and the hash helpers `canonical_json` and `sha256_hex` (`request.py`) | only in part: `engine/spec.py` and `ledger/` use the two hash helpers, and the rule `structure.chain_order` reads the contract data through `contracts/loader.py` and `contracts/schema.py` |
 | [`validators/`](../src/biowarden/validators/) | pre-call validation of a request against a contract; a repairable request gets a proposed fix that is never applied silently | no; `gateway/` uses it |
 | [`oracles/`](../src/biowarden/oracles/) | post-call invariants on a tool's output, metamorphic probes, and a gemmi-based output parser | no; `gateway/` and one admission case source (`bench/admission/cases_structure_chain_order.py`) use it |
@@ -294,7 +294,7 @@ Inside `bench/`:
 | [`tasks/`](../src/biowarden/bench/tasks/) | the families: `families.py` (F1-F4 and the registry), `extra/` (the other 101, one module each), `family_rules.json` (the rules written for each family), `locus.py`, `reference.py` (a reference and a naive solver per family), `tools.py` (`ToolEnv`), and the shared `base.py` (the `Task` record), `common.py` and `instance.py` (workspace helpers and the random instance). Each extra family must pass the generic gates of `tests/test_extra_families.py` (F1-F4 are gated in `tests/test_bench_tasks.py`): the reference solver passes, the naive solver passes the clean twin and falls into the trap on the faulted one, the truth is not in the workspace |
 | [`runner/`](../src/biowarden/bench/runner/) | `cli.py` (`run`, `report`, `rescore`, `analyze`), `trial.py` (one trial: build the workspace, run the agent, score), `agent.py` (the minimal tool loop on the Anthropic API), `agent_openai.py` (the same loop on OpenRouter, with provider pins), `opencode.py` with `proxy.py` and `fwd.py` (the OpenCode harness and the route of its API calls out of the sandbox), `sandbox.py` (bubblewrap), `layer.py` (the arms), `gateway_tool.py`, `exposure.py` (whether the trapped route ran), `pricing.py` (model prices for the cost guard), `resources.py` (sizes the worker pool) |
 | [`score.py`](../src/biowarden/bench/score.py), [`analysis.py`](../src/biowarden/bench/analysis.py) | the scorer (pass, silent wrong, flagged wrong and the undelivered outcomes) and clean-against-faulted statistics |
-| [`stage1.py`](../src/biowarden/bench/stage1.py), [`stage2.py`](../src/biowarden/bench/stage2.py), [`pilot.py`](../src/biowarden/bench/pilot.py) | the two pre-registered analyses and the family admission pilot |
+| [`stage1.py`](../src/biowarden/bench/stage1.py), [`stage2.py`](../src/biowarden/bench/stage2.py), [`pilot.py`](../src/biowarden/bench/pilot.py) | the analyses of the two studies and the family admission pilot |
 | [`admission/`](../src/biowarden/bench/admission/) | rule calibration (`__main__.py`, `__init__.py`), the case sources `cases_*.py` (54 modules) and `replay.py` |
 | [`fixtures/mockfold.py`](../src/biowarden/bench/fixtures/mockfold.py) | `mockfold`, a CPU-only stand-in for structure predictors that has the chain-order trap |
 

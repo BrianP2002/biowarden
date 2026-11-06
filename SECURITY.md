@@ -50,5 +50,6 @@ It is a pre-check and a set of shims, not a sandbox.
 ## Telemetry
 
 None. The code in `src/` and `tools/` makes no network request other than the benchmark runner's calls to the Anthropic API
-and OpenRouter and the OpenRouter credit and endpoint checks of `tools/preflight.py`; the engine uses only local Unix sockets
-and, for `biowarden-mcp`, MCP on stdio. This statement does not cover the dependencies.
+and OpenRouter, the OpenRouter credit and endpoint checks of `tools/preflight.py`, and the downloads of the bedtools, samtools
+and bcftools releases from github.com by `tools/real_code_scan.py fetch`, which runs only when you call it. The engine uses
+only local Unix sockets and, for `biowarden-mcp`, MCP on stdio. This statement does not cover the dependencies.

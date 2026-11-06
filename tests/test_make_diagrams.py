@@ -8,7 +8,9 @@ from __future__ import annotations
 import importlib.util
 import inspect
 import json
+import os
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import get_args
@@ -72,14 +74,29 @@ def test_the_captions_state_the_modes_and_arms_of_the_code():
 
     assert get_args(Mode) == ("off", "warn", "block", "promoted")
     assert inspect.signature(Engine.__init__).parameters["mode"].default == "promoted"
-    assert "Modes: `off`, `warn`, `block` and `promoted`, the default" in readme
+    assert (
+        "Modes: `warn`, `block` and `promoted`, the default (`biowarden-mcp` also has `off`)"
+        in readme
+    )
+    # `off` is a mode of the MCP server only: the guard's --mode takes the other three
+    guard_help = subprocess.run(
+        [sys.executable, "-m", "biowarden.engine.guard", "--help"],
+        env={**os.environ, "PYTHONPATH": str(ROOT / "src")},
+        capture_output=True,
+        text=True,
+    ).stdout
+    assert "--mode {warn,block,promoted}" in guard_help
+    assert (
+        '"off", "warn", "block", "promoted"'
+        in (ROOT / "src" / "biowarden" / "engine" / "mcp_server.py").read_text()
+    )
     assert len(promoted) == rules and {e["mode"] for e in promoted.values()} == {"block"}
     assert f"all {rules} shipped rules are promoted, so it blocks" in readme
     # in Results the bars are no layer, --mode warn and the default mode, with shims and pre-check
     assert (block.mode, warn.mode) == ("promoted", "warn")
     assert all(arm.shims and arm.precheck and arm.hide_real for arm in (block, warn))
     assert "the layer in `--mode warn`, the layer in its default mode" in readme
-    assert "measured with PATH shims plus a whole-command pre-check, in a sandbox" in readme
+    assert "measured with shims plus a pre-check of the whole command string" in readme
 
 
 @pytest.mark.parametrize("mode", ["light", "dark"])

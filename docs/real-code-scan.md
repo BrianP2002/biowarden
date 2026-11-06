@@ -59,7 +59,8 @@ is right about the default and cannot know the intent. samtools had no block.
 
 ### Warnings
 
-121 calls got a warning and ran. A warning is written to the tool's stderr, so a script that compares stderr sees it: one
+121 calls got a warning and ran. A warning here is a rule whose verdict was *unknown* (it could not tell, for example, the unit
+of a distance): unknown only warns, in the modes warn, block and promoted, also for a promoted rule. A warning is written to the tool's stderr, so a script that compares stderr sees it: one
 bedtools test (`merge.t23b`) compares the stderr of the call before it, and failed for that reason. The warnings came from
 `bedtools.closest_distance_unit` (71), `bedtools.merge_bookended` (19), `bcftools.isec_representation` (11),
 `samtools.mapq_unique_cutoff` (10), `bcftools.format_filter_scope` (6), `samtools.merge_combine_rg` (6) and

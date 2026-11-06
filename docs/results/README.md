@@ -25,7 +25,8 @@ Terms used on this page.
 
 ## Stage 2: 105 task families, three agents
 
-Registered at freeze 2 on 2026-11-01, before the first held-out trial
+Registered at freeze 2 on 2026-11-01 (a SHA-256 manifest, no external registry: [what that
+shows](../preregistration/README.md#checking-the-freeze)), before the first held-out trial
 ([`stage2-draft.md`](../preregistration/stage2-draft.md); it keeps that name because the freeze manifest lists it by
 path). The benchmark has 105 families. 103 of them, the *gated* families, run in the primary cell: F4 is a must-detect
 family and runs only in the default cell, and F34 was excluded before any held-out trial. Each family has five held-out
@@ -124,9 +125,9 @@ P minus Q1: +22.7 [+0.1, +41.9] (Haiku), +52.8 [+37.2, +68.7] (DeepSeek), +42.4 
 The silent share without the layer in each stratum (Haiku / DeepSeek / gpt-oss): P 38.3 / 55.3 / 72.8%,
 Q1 36.7 / 58.3 / 83.3%, Q2 1.5 / 5.4 / 23.1%, Q3 0.0 / 2.2 / 6.7%.
 
-The effect is +29.4 to +57.4 points where a trap bites and a rule was written for it (P), near zero for Haiku and
-DeepSeek where no rule applies (Q1) or nothing bites (Q3), and diluted to +14.4 to +31.5 points over every gated
-family. For gpt-oss, Q1 and Q2 show movement that the registration cannot attribute: a rule written for another family
+The effect is +29.4 to +57.4 points where a trap bites and a rule was written for it (P), and diluted to +14.4 to +31.5
+points over every gated family. For Haiku and DeepSeek the estimates are near zero where no rule applies (Q1) or nothing
+bites (Q3), but only the Q3 intervals are tight (at most +5.6 points); the Q1 intervals reach +28.3 and +13.3 points. For gpt-oss, Q1 and Q2 show movement that the registration cannot attribute: a rule written for another family
 firing, or the interruption itself.
 
 By pack (silent drop on P, no tests): the original, quantification, sequence and single-cell packs move all three
@@ -181,7 +182,7 @@ Each item is descriptive or carries no claim. The pointer after each names the s
 *Open-weight models pooled, five task families, 500 faulted tasks per bar. Whiskers: 95% intervals from resampling the
 five families.*
 
-Pre-registered ([`stage1.md`](../preregistration/stage1.md), report
+Planned in advance in a written, undated plan ([`stage1.md`](../preregistration/stage1.md), report
 [`stage1-report.md`](../preregistration/stage1-report.md)): 6 models, 5 task families (five trap types: F1, F7, F10, F13,
 F15), 20 held-out seeds (1000-1019), 2 twins, hardest cell, 100 faulted tasks per model and arm. The registered design has
 7,800 trials; post-hoc arms were added afterwards (2,500 trials per model in all). The registered criterion was met: the
@@ -257,7 +258,7 @@ Stage 2, in [`../preregistration/`](../preregistration/) unless noted:
 | [`stage2-plan.json`](../preregistration/stage2-plan.json) | The plan manifest: planned trials per model, arm and cell (11,694 in total) with a digest of their ids. |
 | [`stage2-results.json`](stage2-results.json) | Every number of the analysis, including the per-family differences. |
 
-Stage 1: [`stage1.md`](../preregistration/stage1.md) (registration) and
+Stage 1: [`stage1.md`](../preregistration/stage1.md) (plan) and
 [`stage1-report.md`](../preregistration/stage1-report.md) (report, post-hoc ladder and negative control). The figures are
 in [`../figures/`](../figures/) (SVG in a light and a dark variant, and PNG).
 

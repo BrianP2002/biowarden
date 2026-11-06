@@ -1,23 +1,24 @@
 # Contributing
 
 If the layer let a silent error through, or blocked a call that was right, open an issue with the
-[missed silent error](.github/ISSUE_TEMPLATE/missed-error.yml) or the [wrong block](.github/ISSUE_TEMPLATE/wrong-block.yml)
-form: the exact command, the smallest input that shows it, the tool versions, and how you know the right answer.
-Vulnerabilities go to [`SECURITY.md`](SECURITY.md), not to an issue.
+[missed silent error](https://github.com/BrianP2002/biowarden/issues/new?template=missed-error.yml) or the
+[wrong block](https://github.com/BrianP2002/biowarden/issues/new?template=wrong-block.yml) form: the exact command, the smallest
+input that shows it, the tool versions, and how you know the right answer. Vulnerabilities go to [`SECURITY.md`](SECURITY.md),
+not to an issue.
 
 ## Development setup
 
 ```bash
 python3 -m venv .venv && . .venv/bin/activate     # Python 3.10 or newer
 pip install -e ".[dev]"                           # pytest, pytest-xdist, ruff and the two model SDKs
-python -m pytest -q -m "not slow"                 # the quick tests: about 1,200 of 5,800, one to three minutes
+python -m pytest -q -m "not slow"                 # the quick tests: about 1,300 of 5,900, one to three minutes
 ```
 
 The tests need samtools, bcftools, bedtools and bubblewrap on Linux ([`docs/reproduce.md`](docs/reproduce.md#install)); a test
 whose program is missing skips. The slow tests (`test_rules_*`, `test_family_*`, `test_extra_families.py`, `test_admission*`)
 build real workspaces and need the tool environments of [`docs/supported-tools.md`](docs/supported-tools.md): run those for the
 files you touch, for example `python -m pytest -q tests/test_rules_var_tabix.py`. CI runs the quick tests on Python 3.10 and
-3.12 and does not run ruff.
+3.12, verifies the stage-2 freeze on the tag `stage2-freeze`, and does not run ruff.
 
 Style is set in `pyproject.toml`: line length 100, Python 3.10, ruff rules E, F, I, UP and B (`ruff check src tests tools`,
 `ruff format src tests tools`). New modules start with `from __future__ import annotations`, and function signatures carry
@@ -75,7 +76,7 @@ A family builds a clean and a faulted workspace from a seed; the [families page]
    step 6 above. `tests/test_generated_docs.py` fails when one is out of date.
 
 The two studies ran on frozen code (stage 2: 105 families and 108 rules), so what you add is not part of them. A change to
-`src/` also makes the tree differ from the stage-2 freeze manifest, which the first commit of the repository matches
+`src/` also makes the tree differ from the stage-2 freeze manifest, which only the first commit of the repository (the tag `stage2-freeze`) matches
 ([how to check](docs/reproduce.md#stage-2)).
 
 ## Pull request checklist

@@ -30,7 +30,8 @@ pip install -e ".[bench]"                         # add an extra, or several: ".
 
 **Programs.** The checking layer needs only the programs you call through it. The runner and the calibration need samtools,
 bcftools and bedtools; the runner also needs bubblewrap, and the calibration of a rule needs the tool the rule is about. A test
-that needs a missing program skips. The three are looked up in this order: the JSON file that `BIOWARDEN_TOOLS` names,
+that needs a missing program skips; so do the seven runner tests that run `/usr/bin/python3.12` in the sandbox, which Ubuntu 24.04
+has and Ubuntu 22.04 does not. The three are looked up in this order: the JSON file that `BIOWARDEN_TOOLS` names,
 `.local/tools.json` of the current directory (for `biowarden-mcp`, of its `--cwd` directory), then `PATH`. The file has `bin_dirs` (the
 directories of the three programs) and optionally `lib_dirs` (shared libraries) and `tail_dirs` (more tool directories,
 searched after `/usr/bin`, for example a conda environment's `bin`); `.local/` is git-ignored.
@@ -118,10 +119,12 @@ python -m pytest -q tests/test_rules_var_tabix.py
 `test_admission`: the tests that build real workspaces and run the real tools (family gates, rule calibration). Of about 5,900 tests,
 about 4,600 are marked and 1,300 are not. The quick subset takes one to three minutes in one process, depending on the load of the
 machine; without matplotlib, the two tests of `tools/make_figures.py` and two of `tools/make_diagrams.py` skip. CI runs it with `-n auto` on Python 3.10 and 3.12,
-and fails if a test skips because samtools, bcftools, bedtools or the sandbox is missing, or if more than 250 tests skip.
+and fails if a test skips because samtools, bcftools, bedtools or the sandbox is missing, or if more than 250 tests skip. A second
+CI job runs both freeze checks of [Stage 2](#stage-2) on the tag `stage2-freeze`.
 
-The last recorded run of the full suite, on the tree before the first commit, is [`fulltests.log`](fulltests.log): 5,907 passed,
-10 skipped and 1 expected failure in 2,246.83 s (37 min 26 s), with `-n 16 --dist loadfile` on a 16-core cluster node. An earlier log, taken
+The last recorded run of the full suite, on the tree of the last commit but for this log, is [`fulltests.log`](fulltests.log): 5,911
+passed, 10 skipped and 1 expected failure in 2,429.64 s (40 min 29 s), with `-n 16 --dist loadfile` on a 16-core cluster node
+(five tests that need `git` skipped there; they run on a machine that has it). An earlier log, taken
 before the code freeze of stage 2 and before the project was renamed, is [`preregistration/fulltests.log`](preregistration/fulltests.log):
 5,770 passed, 6 skipped and 1 expected failure in 3,403.74 s (56 min 43 s). The suite needs the tool environments: a test whose
 program is missing skips. Two
@@ -241,7 +244,7 @@ The shipped table holds all 108 rules, promoted for their current spec hashes, s
 
 ## Stage 1
 
-Registered in [`stage1.md`](preregistration/stage1.md), reported in [`stage1-report.md`](preregistration/stage1-report.md): six
+Planned in [`stage1.md`](preregistration/stage1.md) (a written plan, no registration date), reported in [`stage1-report.md`](preregistration/stage1-report.md): six
 models (`haiku`, `dsflash`, `glmflash`, `qwenflash`, `mimo`, `gptoss`) and the families F1, F7, F10, F13 and F15, in two cells.
 
 | Cell | Flags | Seeds | Arms |
@@ -289,22 +292,28 @@ sbatch --export=ALL,MODEL=dsflash,CELL=primary,OUT=runs/stage2/dsflash-primary,C
 ```
 
 Add your account and partition on the `sbatch` command line, which takes precedence over the `#SBATCH` lines. Do not edit the
-template: [`tools/stage2_job.sbatch`](../tools/stage2_job.sbatch) is part of the freeze. The job runs plain `python` with
+template: [`tools/stage2_job.sbatch`](../tools/stage2_job.sbatch) is part of the freeze. On `main` it is the renamed copy: its freeze
+check fails against the manifests, which describe the first commit, so the registered jobs need the tag `stage2-freeze` and a run on `main`
+needs `FREEZE=none` (a replication under new names, [see why](preregistration/README.md#checking-the-freeze)). The job runs plain `python` with
 `PYTHONPATH` set to the frozen copy and `--snapshot`, because `-I` would ignore `PYTHONPATH`, and ends `INCOMPLETE` until every
 planned trial has a final record; submit the same command again to resume.
 
-To check that the code and the registration files are the frozen ones, copy `src/` and verify against the freeze manifest:
+To check that the code and the registration files are the frozen ones, check out the first commit (the tag `stage2-freeze`), copy
+`src/` and verify against the freeze manifest. The tool needs Python 3.9 or later; on `main` it stops with a message, because the
+manifests list the package under its old name:
 
 ```bash
+git switch --detach stage2-freeze
 mkdir -p runs/stage2-code && cp -a src runs/stage2-code/
 python docs/preregistration/freeze_hashes.py --stage2 --code-root runs/stage2-code --repo-root . \
     --verify docs/preregistration/freeze-stage2.txt
 ```
 
 It prints `verified 347 files, root 026780b7...` (the root digest in [`stage2-report.md`](preregistration/stage2-report.md))
-and exits 0. Run it on the first commit of the repository: a later commit that changes `src/`, `pyproject.toml`,
-`tools/stage2_job.sbatch`, `tools/preflight.py`, `tools/env_lock.py`, `envs/locks/` or the three registration files no longer
-matches it.
+and exits 0. It matches only the first commit: a later one changes `src/`, `pyproject.toml`, `tools/stage2_job.sbatch`,
+`tools/preflight.py` and `tools/env_lock.py` (the renames and the few small changes are listed in
+[`preregistration/README.md`](preregistration/README.md#what-changed-in-the-frozen-files-afterwards)). What the check shows and
+does not show, and Windows line ends: [Checking the freeze](preregistration/README.md#checking-the-freeze).
 
 ## Two later checks
 
@@ -329,7 +338,8 @@ commands of each without the layer, `replay` runs them under `biowarden`:
 ```bash
 python tools/blind_coverage.py verify docs/blind-cases --out verified.json
 python tools/blind_coverage.py replay docs/blind-cases --verified verified.json --out replay.json
-python tools/blind_coverage.py summary replay.json --accepted docs/blind-cases/accepted.json
+python tools/blind_coverage.py summary replay.json --accepted docs/blind-cases/accepted.json \
+    --labels docs/blind-cases/labels.json
 ```
 
 The tools the cases call must be on `PATH`, including the Python environments the structure and single-cell cases use; a case

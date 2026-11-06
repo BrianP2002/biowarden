@@ -74,9 +74,36 @@ jobs:
           for reason, count in reasons.most_common():
               print(f"{count:5}  {reason}")
           # what this job installed must not be the reason for a skip
-          core = re.compile(r"samtools, bcftools and bedtools|bubblewrap|bwrap", re.IGNORECASE)
+          core = re.compile(r"samtools, bcftools and bedtools|bubblewrap|bwrap|python3\.12", re.IGNORECASE)
           missing = {r: n for r, n in reasons.items() if core.search(r)}
           if missing:
               print("skipped for a program this job installed:", missing)
           sys.exit(1 if missing or total > limit else 0)
           PY
+
+  # The pre-registered freeze: the tagged first commit must still hold the files whose digests the
+  # two manifests list. The check runs the freeze tool of that commit on that commit's tree, as
+  # docs/preregistration/README.md says.
+  freeze:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # the tag stage2-freeze is in the history
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Verify both stage-2 manifests on the tag stage2-freeze
+        run: |
+          set -euo pipefail
+          frozen="$RUNNER_TEMP/frozen"
+          mkdir -p "$frozen" "$RUNNER_TEMP/stage2-code"
+          git archive stage2-freeze | tar -x -C "$frozen"
+          cp -a "$frozen/src" "$RUNNER_TEMP/stage2-code/"
+          for manifest in freeze-stage2.txt freeze-stage2-code.txt; do
+            python -I "$frozen/docs/preregistration/freeze_hashes.py" --stage2 \
+              --code-root "$RUNNER_TEMP/stage2-code" --repo-root "$frozen" \
+              --verify "$frozen/docs/preregistration/$manifest"
+          done

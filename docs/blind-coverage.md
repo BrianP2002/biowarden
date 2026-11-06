@@ -66,16 +66,16 @@ their data themselves, and the single-cell rules look for the data files a call 
 layout that the family's rule did not recognise, for example `samtools view -c -F 4` (F8), `bcftools annotate -a` with other contig
 names (F3) or `bedtools flank` (F16). The 9 cases that only got a warning all got the same one, from `fastq.phred_offset`, which could not
 decide the encoding of a tiny FASTQ and says nothing about the error of the case. The one new trap that was caught (`intervals-06`,
-the default 100% overlap of `bedops --element-of`) belongs to `bedops.element_of_amount`, a rule that no family lists as its own. Of the faulted commands that were not caught, 5 ran a
-program the layer has no shim for (STAR three times, `pdb_selatom` and `pdb_reres`), and the rest ran under a shim that no rule answered.
+the default 100% overlap of `bedops --element-of`) belongs to `bedops.element_of_amount`, a rule that no family lists as its own. Of the 86 faulted commands that were missed (no rule
+answered), 5 ran a program the layer has no shim for (STAR three times, `pdb_selatom` and `pdb_reres`), and the rest ran under a shim that no rule answered.
 
 **What it asks.** 5 correct commands were blocked by a finding. In all 5 the labellers found the hazard absent from the command as
 written or latent on its data: a rule saw one stage of a pipeline, or could not tell which column or which coordinate base was meant.
 The four rules involved (one of them twice) all take a `--declare` that lifts the block. 5 more were held up by a request. 10 of the
 123 correct commands (8%) were stopped in all.
 
-**What it changes.** Of the 208 commands that were allowed, all 208 gave the result they give without the layer: the shims were
-transparent.
+**What it changes.** Of the 208 commands that ran (189 allowed, 19 warned), all 208 gave the result they give without the layer.
+The 19 warned ones also carry the layer's warning on stderr, which a script that compares stderr would see.
 
 ### What was caught
 

@@ -72,6 +72,16 @@ def test_the_headline_in_the_intro_is_the_analysis():
     ) in FLAT
 
 
+def test_the_range_over_all_gated_families_is_the_analysis():
+    bare = [pct(silent(m, "bare", "gated")) for m in MODELS]
+    block = [pct(silent(m, "block-nonote", "gated")) for m in MODELS]
+
+    assert (
+        f"Over the 103 gated families, those that run in this setting, the same agents went from "
+        f"{min(bare)}-{max(bare)}% to {min(block)}-{max(block)}% ([Results](#results))"
+    ) in FLAT
+
+
 def test_the_figure_description_is_the_analysis():
     left = [
         f"{name} {pct(silent(m, 'bare', 'P'))}%(?: with no layer)?, "
@@ -201,8 +211,9 @@ def test_relative_links_images_and_anchors_resolve():
 
 
 def test_the_readme_is_concise():
-    """A human reader gets the point from a short page; the detail lives in docs/."""
-    assert len(README.splitlines()) <= 138
+    """A human reader gets the point from a short page (the first draft had 202 lines); the detail
+    lives in docs/."""
+    assert len(README.splitlines()) <= 150
 
 
 def test_the_smoke_test_command_in_the_docs_uses_flags_the_runner_has():
