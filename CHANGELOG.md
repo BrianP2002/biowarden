@@ -7,10 +7,10 @@ software at version 0.0.x: rule ids, messages and the command line may change be
 
 Nothing yet.
 
-## [0.0.1] - Unreleased
+## [0.0.1] - 2026-11-05
 
-The first public state. The version is the one in `pyproject.toml`; the date is set when the first release tag (`v0.0.1`) is
-made.
+The first public release, tagged `v0.0.1`. The version is the one in `pyproject.toml`. It is not on PyPI: install from a clone
+([Get started](README.md#get-started)).
 
 Until 2026-11-04 the project was called `trustworthy-bio-MCP`: its Python package was `science_harness`, its commands
 `tbm-guard` and `tbm-mcp`, its environment variables `TBM_*`, `SCIENCE_HARNESS_*` and `HARNESS_*_API_KEY`, and the sandbox
@@ -47,3 +47,6 @@ that a replication runs the trials in the order the stage-2 jobs used.
 - Documentation and project files: the README; pages in `docs/` for the architecture, the rule catalogue, the task families,
   the supported tools, the detailed results and how to reproduce them; `CONTRIBUTING.md`, `SECURITY.md`, `CITATION.cff`, two
   issue forms and a pull request template; a CI workflow that runs the quick tests and checks the stage-2 freeze on the tag.
+
+[Unreleased]: https://github.com/BrianP2002/biowarden/compare/v0.0.1...HEAD
+[0.0.1]: https://github.com/BrianP2002/biowarden/releases/tag/v0.0.1
