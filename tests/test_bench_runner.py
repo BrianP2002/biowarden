@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -21,6 +22,12 @@ from biowarden.bench.tasks import ToolEnv, build_task
 ROOT = Path(__file__).resolve().parents[1]
 MODEL = "claude-haiku-5-5"
 SECRET = "sk-test-DO-NOT-LEAK-0123456789"
+
+# the sandbox binds /usr and its scripted commands run the host's python3.12
+needs_python312 = pytest.mark.skipif(
+    not os.access("/usr/bin/python3.12", os.X_OK),
+    reason="/usr/bin/python3.12 is missing (the sandbox runs it)",
+)
 
 
 @pytest.fixture(scope="module")
@@ -41,6 +48,7 @@ def work(tmp_path):
 # --- sandbox -------------------------------------------------------------------------------------
 
 
+@needs_python312
 def test_the_sandbox_runs_the_real_tools_and_both_pythons(tools, work):
     out = sandbox.run_command(
         work,
@@ -155,6 +163,7 @@ def solved(truth_answer, flags=()):
     return {"status": "ok", "answer": truth_answer, "flags": list(flags), "method": "scripted"}
 
 
+@needs_python312
 def test_a_scripted_agent_that_writes_the_right_answer_passes_and_the_trial_is_resumable(
     tools, tmp_path
 ):
@@ -194,6 +203,7 @@ def test_a_scripted_agent_that_writes_the_right_answer_passes_and_the_trial_is_r
     ]["counts"] == {"pass": 1}
 
 
+@needs_python312
 def test_the_naive_bcftools_call_inside_the_sandbox_is_scored_silent_wrong(tools, tmp_path):
     command = (
         "bcftools view -H -R regions.tsv variants.vcf.gz | cut -f3 | python3.12 -c "
@@ -348,6 +358,7 @@ def test_parse_seeds_and_plan_order():
     assert {s.seed for s in specs[:8]} == {0}  # seed-major: a cut-short run stays balanced
 
 
+@needs_python312
 def test_rescore_applies_the_current_rules_to_finished_trials(tools, tmp_path):
     spec = TrialSpec(MODEL, "F1", 0, "faulted")
     truth = build_task("F1", 0, "faulted", tmp_path / "peek", tools).truth["expected"]
@@ -507,6 +518,7 @@ def test_exposure_f4_is_true_whenever_the_reference_is_read(tmp_path):
     assert not exposure("F4", commands_of([call("ls")]), tmp_path)["exposed"]
 
 
+@needs_python312
 def test_scripted_trial_records_exposure_route_and_contract(tools, tmp_path):
     spec = TrialSpec(MODEL, "F1", 0, "faulted", route="forced", contract="bare")
     truth = build_task("F1", 0, "faulted", tmp_path / "peek", tools, "explicit", "forced").truth
@@ -592,6 +604,7 @@ class ScriptedOpenAI:
         return step
 
 
+@needs_python312
 def test_openai_loop_runs_commands_scores_and_records_cost_and_provider(tools, tmp_path):
     spec = TrialSpec(OPEN_MODEL, "F1", 0, "faulted")
     truth = build_task("F1", 0, "faulted", tmp_path / "peek", tools).truth["expected"]
@@ -623,6 +636,7 @@ def test_openai_loop_runs_commands_scores_and_records_cost_and_provider(tools, t
     assert (tmp_path / "run" / "trials" / spec.trial_id / "score.json").exists()
 
 
+@needs_python312
 def test_a_pinned_provider_is_sent_with_every_request_and_recorded(tools, tmp_path):
     spec = TrialSpec(OPEN_MODEL, "F1", 0, "faulted")
     truth = build_task("F1", 0, "faulted", tmp_path / "peek", tools).truth["expected"]

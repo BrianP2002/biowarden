@@ -10,6 +10,7 @@ from pathlib import Path
 import pytest
 
 from biowarden.bench.tasks import ToolEnv, build_task
+from biowarden.engine import guard as guard_module
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -73,3 +74,33 @@ def test_a_missing_command_is_reported(tmp_path, tools):
     out = guard(tools, tmp_path, "no-such-command-xyz")
 
     assert out.returncode == 127 and "command not found" in out.stderr
+
+
+def test_a_long_tmpdir_falls_back_to_tmp(tmp_path, tools):
+    long_tmp = tmp_path.joinpath(*["a-long-directory-name"] * 5)
+    long_tmp.mkdir(parents=True)
+    env = {**os.environ, **tools.process_env(), "PYTHONPATH": str(ROOT / "src")}
+    env["TMPDIR"] = str(long_tmp)
+    assert len(os.fsencode(long_tmp / "biowarden-guard-XXXXXXXX" / "e.sock")) > 107
+
+    out = subprocess.run(
+        [sys.executable, "-m", "biowarden.engine.guard", "--", "bash", "-c", "echo hello"],
+        cwd=tmp_path,
+        env=env,
+        capture_output=True,
+        text=True,
+    )
+
+    assert out.returncode == 0 and out.stdout.split() == ["hello"] and not out.stderr
+    assert not list(long_tmp.iterdir())  # nothing was made under the long $TMPDIR
+
+
+def test_no_short_enough_tmpdir_is_an_error_that_says_what_to_do(monkeypatch, capsys):
+    monkeypatch.setattr(guard_module, "SOCKET_PATH_MAX", 10)
+
+    assert guard_module.private_dir() is None
+    with pytest.raises(SystemExit) as stop:
+        guard_module.main(["--", "true"])
+
+    assert stop.value.code == 2
+    assert "set it to a shorter directory" in capsys.readouterr().err

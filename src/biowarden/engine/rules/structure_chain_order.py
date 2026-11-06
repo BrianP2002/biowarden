@@ -1,6 +1,6 @@
 """Rule structure.chain_order (slot chain_order, incident T01): mockfold's chain assembly order.
 
-The trap (docs/research/toolset.md T01; tFold-TCR `_build_inputs`). Structure predictors differ in
+The trap (incident T01; tFold-TCR `_build_inputs`). Structure predictors differ in
 how they order and name the chains of a complex. `mockfold predict --backend tfoldlike` assembles
 B:A + M:N + P (D:G + M:N + P for gamma/delta) in that fixed order whatever the order of the request
 and names the output chains by role code; `--backend boltzlike` keeps the request order and names

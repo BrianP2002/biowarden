@@ -66,7 +66,7 @@ def import_python_rules(dirs: Iterable[str | Path]) -> list[str]:
     loaded: list[str] = []
     for directory in dirs:
         for file in sorted(Path(directory).glob("*.py")):
-            name = f"tbm_user_rules_{abs(hash(str(file.resolve())))}_{file.stem}"
+            name = f"biowarden_user_rules_{abs(hash(str(file.resolve())))}_{file.stem}"
             if name in sys.modules:
                 continue
             module_spec = importlib.util.spec_from_file_location(name, file)

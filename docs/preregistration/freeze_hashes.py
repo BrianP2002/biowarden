@@ -1,7 +1,9 @@
 """Print SHA-256 digests of the files a run depends on; freeze and verify a stage-2 snapshot.
 
-Stage 1 (legacy mode; the algorithm is unchanged, so `freeze.txt` and `freeze-rerun.txt` still
-reproduce from the snapshot they were taken from)
+Stage 1 (legacy mode: the algorithm of the stage-1 files `freeze.txt`, `freeze-rerun.txt` and the
+others, which hold group digests only. The snapshot they were taken from is not published, and the
+digests were computed over paths under `src/science_harness`, so they are records here: this tool
+cannot reproduce them from a checkout)
 
     python docs/preregistration/freeze_hashes.py [ROOT]
 
@@ -21,8 +23,10 @@ root digest over all the lines. `code` equals the `code_digest` the runner stamp
 
 Exit status 2: an unknown flag, a missing root, a root without `src/biowarden`, a group
 without files (printed as MISSING, never as the digest of empty input), a group below its expected
-size, a `src/` that differs from the snapshot, or a mismatch under `--verify`. Nothing is written
-then, and `--write` does not replace a different file unless `--overwrite` is given.
+size, a `src/` that differs from the snapshot, a manifest that lists the package under its old
+name `science_harness` (check out the tag `stage2-freeze` and run the tool there), or a mismatch
+under `--verify`. Nothing is written then, and `--write` does not replace a different file unless
+`--overwrite` is given. Python 3.9 or later.
 """
 
 from __future__ import annotations
@@ -74,6 +78,7 @@ def legacy_main(root: Path) -> int:
 # -- stage 2 ------------------------------------------------------------------------------------
 
 PACKAGE = "biowarden"
+OLD_PACKAGE = "science_harness"  # its name when stage 2 was frozen (the first commit)
 SRC = f"src/{PACKAGE}"
 PYPROJECT = "pyproject.toml"
 JOB_TEMPLATE = "tools/stage2_job.sbatch"
@@ -363,6 +368,14 @@ def stage2_main(args: argparse.Namespace) -> int:
             except OSError as exc:
                 raise Refused([f"--verify {args.verify}: {exc.strerror or exc}"]) from exc
             recorded_heads, recorded_files = parse(text)
+            if any(p.startswith(f"src/{OLD_PACKAGE}/") for p in recorded_files):
+                raise Refused(
+                    [
+                        f"{args.verify} lists the package as src/{OLD_PACKAGE}/, its name when it "
+                        f"was frozen; this checkout calls it {PACKAGE}. Check out the first commit "
+                        "and run the tool there: git switch --detach stage2-freeze"
+                    ]
+                )
             # the sets files are the ones the freeze lists, plus any named again
             sets += [p for p in recorded_files if group_of(p) == "sets" and p not in sets]
         freeze = build(code_root, repo_root, sets)

@@ -12,7 +12,9 @@ from typing import Any
 
 from biowarden.contracts import Entity, ToolContract, load_packaged
 
-# tFold-TCR role code -> (label, sequence); sequences are made up but distinct.
+# tFold-TCR role code -> (label, sequence). The sequences are public, not invented (the peptide
+# is the influenza A M1 epitope GILGFVFTL; M and N start the chains of HLA-A*02:01, UniProt
+# P01892, and of beta-2-microglobulin, P61769); only their being distinct matters here.
 ROLES = {
     "B": ("tcr_beta", "NAGVTQTPKFQVLKTGQSMTLQCAQDMNHEY"),
     "A": ("tcr_alpha", "KEVEQNSGPLSVPEGAIASLNCTYSDRGSQS"),

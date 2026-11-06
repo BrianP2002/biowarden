@@ -32,6 +32,19 @@ from biowarden.engine.tools import (
 )
 from biowarden.ledger import Ledger
 
+SOCKET_NAME = "e.sock"
+SOCKET_PATH_MAX = 107  # bytes of an AF_UNIX path
+
+
+def private_dir() -> Path | None:
+    """A new private directory for the shims, the socket and the block counts: under $TMPDIR, or
+    under /tmp when $TMPDIR is too long for a unix socket path (None if neither is short enough)."""
+    for root in (tempfile.gettempdir(), "/tmp"):
+        longest = Path(root) / "biowarden-guard-XXXXXXXX" / SOCKET_NAME
+        if len(os.fsencode(longest)) <= SOCKET_PATH_MAX:
+            return Path(tempfile.mkdtemp(prefix="biowarden-guard-", dir=root))
+    return None
+
 
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="biowarden", description=__doc__.split("\n\n")[0])
@@ -59,7 +72,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         import_python_rules(args.specs)
     specs = collect_specs(args.specs, packaged=not args.no_packaged)
     names = watched_tools(specs, args.watch)
-    tmp = Path(tempfile.mkdtemp(prefix="biowarden-guard-"))
+    tmp = private_dir()
+    if tmp is None:
+        parser.error("$TMPDIR is too long for a unix socket path: set it to a shorter directory")
     try:
         shims = tmp / "shims"
         if not install_shims(shims, dirs, names, sys.executable):
@@ -75,7 +90,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             state=BlockState(tmp / "blocks.json"),
             ledger=Ledger(args.ledger) if args.ledger else None,
         )
-        server = EngineServer(tmp / "e.sock", engine, PathMap(cwd, str(cwd)))
+        server = EngineServer(tmp / SOCKET_NAME, engine, PathMap(cwd, str(cwd)))
         serve_in_thread(server)
         env = dict(os.environ)
         env.update(

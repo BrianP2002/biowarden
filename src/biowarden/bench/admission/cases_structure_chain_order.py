@@ -54,7 +54,7 @@ BY_POSITION, BY_ROLE = "by_request_position", "by_role"
 MODULE = "biowarden.bench.fixtures.mockfold"
 FAMILY = "T01"
 
-# role code -> (label, synthetic template sequence)
+# role code -> (label, template sequence); public sequences, see tests/helpers.py
 ROLES = {
     "B": ("tcr_beta", "NAGVTQTPKFQVLKTGQSMTLQCAQDMNHEY"),
     "A": ("tcr_alpha", "KEVEQNSGPLSVPEGAIASLNCTYSDRGSQS"),

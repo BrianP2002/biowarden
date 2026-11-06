@@ -8,6 +8,7 @@ version = "0.0.1"
 description = "Pre-run checks for silent errors in bioinformatics tool calls made by LLM agents, with a benchmark of 105 task families."
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
+authors = [{ name = "Lin Ha" }]
 readme = "README.md"
 requires-python = ">=3.10"
 classifiers = [
@@ -31,6 +32,11 @@ bench = ["anthropic>=2.3,<3", "openai>=3.40,<4"]
 # the tests import the runner, so the development extra repeats the two lines of `bench`
 dev = ["pytest", "pytest-xdist", "ruff", "anthropic>=2.3,<3", "openai>=3.40,<4"]
 figures = ["matplotlib"]  # tools/make_figures.py
+
+[project.urls]
+Repository = "https://github.com/BrianP2002/biowarden"
+Issues = "https://github.com/BrianP2002/biowarden/issues"
+Changelog = "https://github.com/BrianP2002/biowarden/blob/main/CHANGELOG.md"
 
 [project.scripts]
 mockfold = "biowarden.bench.fixtures.mockfold:main"

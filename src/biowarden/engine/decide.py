@@ -140,7 +140,6 @@ class Decision:
     mode: Mode
     stop: bool = False  # the same call was already blocked `retry_cap` times
     acknowledged: bool = False  # generic style: a second identical call is let through
-    acknowledged: bool = False  # generic style: a second identical call is let through
 
     def firing(self) -> list[RuleOutcome]:
         return [o for o in self.outcomes if o.effective != "none"]

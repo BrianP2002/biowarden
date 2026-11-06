@@ -1,6 +1,6 @@
 """mockfold: a CPU-only stand-in for structure predictors.
 
-It reproduces the tFold-TCR class of silent failure (see docs/research/toolset.md, T01) without any
+It reproduces the tFold-TCR class of silent failure (incident T01) without any
 GPU, weights or licence: the process exits 0 and writes a valid PDB, but the chain order and
 labelling follow the tool's own convention instead of the caller's.
 

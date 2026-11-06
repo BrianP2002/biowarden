@@ -236,7 +236,7 @@ def breaker_for(client: Any, cfg: AgentConfig) -> CircuitBreaker:
     if cfg.breaker is not None:
         return cfg.breaker
     try:
-        return vars(client).setdefault("_tbm_breaker", CircuitBreaker())
+        return vars(client).setdefault("_biowarden_breaker", CircuitBreaker())
     except TypeError:  # a client without __dict__ keeps no state: no breaker
         return CircuitBreaker(0)
 

@@ -479,6 +479,17 @@ def test_verify_without_a_freeze_file_or_with_garbage_is_refused(fh, repo, tmp_p
     assert "unreadable line" in capsys.readouterr().err
 
 
+def test_a_manifest_with_the_old_package_name_says_where_to_verify_it(fh, repo, tmp_path, capsys):
+    old = tmp_path / "old-names.txt"
+    old.write_text(f"scorer abc\n--\n{EMPTY}  src/science_harness/__init__.py\n")
+
+    assert verify(fh, repo, old, snapshot_of(repo)) == 2
+
+    err = capsys.readouterr().err
+    assert "src/science_harness/" in err and "git switch --detach stage2-freeze" in err
+    assert "MISSING" not in err  # not the bare "sets: MISSING src/science_harness/__init__.py"
+
+
 # -- freeze 2: the sets file, the plan manifest, the draft ----------------------------------------
 
 

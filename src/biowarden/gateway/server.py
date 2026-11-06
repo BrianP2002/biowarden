@@ -21,7 +21,7 @@ INSTRUCTIONS = (
 
 
 def build_server(gateway: Gateway) -> FastMCP:
-    mcp = FastMCP("biowarden", instructions=INSTRUCTIONS)
+    mcp = FastMCP("biowarden-gateway", instructions=INSTRUCTIONS)
 
     @mcp.tool
     def predict_complex(

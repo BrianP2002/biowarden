@@ -13,6 +13,7 @@ import os
 import shutil
 import subprocess
 import sys
+import uuid
 from pathlib import Path
 
 import pytest
@@ -174,6 +175,8 @@ class Job:
             },
             "SLURM_SUBMIT_DIR": str(repo),
             "SLURM_JOB_ID": "4242",
+            # a root of its own: jobs of different tests run side by side under pytest-xdist
+            "BIOWARDEN_NEUTRAL_ROOT": f"/tmp/bw-job-{uuid.uuid4().hex[:8]}",
             "PYTHON": sys.executable,
             "MODEL": "haiku",
             "CELL": "primary",
@@ -571,9 +574,17 @@ def test_the_pilot_needs_no_sets_file_and_only_the_code_freeze(repo, tmp_path):
 def test_the_sandboxed_work_directories_get_a_root_of_their_own_that_is_removed_afterwards(
     repo, tmp_path
 ):
-    job = Job(repo, tmp_path, CHUNK="5", AA="0")
+    # the default root, /tmp/biowarden-<job id>: an id of its own, so no other job's root is checked
+    job = Job(
+        repo,
+        tmp_path,
+        CHUNK="5",
+        AA="0",
+        SLURM_JOB_ID=str(os.getpid()),
+        BIOWARDEN_NEUTRAL_ROOT=None,
+    )
 
     assert job.run().returncode == 0
 
     assert "BIOWARDEN_NEUTRAL_ROOT" in (repo / "tools" / "stage2_job.sbatch").read_text()
-    assert not Path("/tmp/biowarden-4242").exists()  # the trap removed it when the job ended
+    assert not Path(f"/tmp/biowarden-{os.getpid()}").exists()  # the trap removed it at the end
