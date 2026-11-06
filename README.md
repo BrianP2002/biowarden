@@ -1,6 +1,6 @@
 # biowarden
 
-[![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-246893?labelColor=0C1F4B)](LICENSE) [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-246893?labelColor=0C1F4B)](pyproject.toml) [![Version 0.0.1](https://img.shields.io/badge/version-0.0.1-246893?labelColor=0C1F4B)](CHANGELOG.md)
+[![tests](https://github.com/BrianP2002/biowarden/actions/workflows/ci.yml/badge.svg)](https://github.com/BrianP2002/biowarden/actions/workflows/ci.yml) [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-246893?labelColor=0C1F4B)](LICENSE) [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-246893?labelColor=0C1F4B)](pyproject.toml) [![Version 0.0.1](https://img.shields.io/badge/version-0.0.1-246893?labelColor=0C1F4B)](CHANGELOG.md)
 
 **Catch silent errors in bioinformatics tool calls before they run, and measure how often LLM agents make them.**
 
