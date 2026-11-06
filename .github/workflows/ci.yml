@@ -24,8 +24,9 @@ jobs:
       matrix:
         python-version: ["3.10", "3.12"]
     env:
-      # Set from the first run (the last step prints the count and the reasons); lower it, never raise it.
-      MAX_SKIPS: "250"
+      # Set from the first run, which skipped 7 tests on Python 3.10 and 6 on 3.12 (the last step prints the
+      # count and the reasons); lower it, never raise it.
+      MAX_SKIPS: "15"
     steps:
       - uses: actions/checkout@v4
 

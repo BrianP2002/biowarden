@@ -280,6 +280,9 @@ def test_the_declaration_unlocks_the_call_and_the_ledger_records_it(tmp_path, to
 
 
 def test_hidden_real_tools_are_not_on_path_but_bypass_arm_keeps_them(tmp_path, tools):
+    # the sandbox always has /usr/bin on PATH, so tools installed there (a distribution's
+    # packages, as on CI) cannot be hidden: only the order of PATH and the shim can be checked
+    hideable = str(tools.bin_dirs[0]) != "/usr/bin"
     for arm, on_path in (("blockall", False), ("block-bypass", True)):
         work, _, rig = f1_layer(tmp_path / arm, tools, arm)
         try:
@@ -288,7 +291,8 @@ def test_hidden_real_tools_are_not_on_path_but_bypass_arm_keeps_them(tmp_path, t
             rig.close()
         lines = out.stdout.split()
         assert lines[0].startswith("/opt/biowarden/bin:")
-        assert (str(tools.bin_dirs[0]) in lines[0]) is on_path
+        if hideable:
+            assert (str(tools.bin_dirs[0]) in lines[0]) is on_path
         assert "/opt/biowarden/bin/bcftools" in out.stdout
 
 

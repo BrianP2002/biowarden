@@ -34,7 +34,9 @@ that needs a missing program skips; so do the seven runner tests that run `/usr/
 has and Ubuntu 22.04 does not. The three are looked up in this order: the JSON file that `BIOWARDEN_TOOLS` names,
 `.local/tools.json` of the current directory (for `biowarden-mcp`, of its `--cwd` directory), then `PATH`. The file has `bin_dirs` (the
 directories of the three programs) and optionally `lib_dirs` (shared libraries) and `tail_dirs` (more tool directories,
-searched after `/usr/bin`, for example a conda environment's `bin`); `.local/` is git-ignored.
+searched after `/usr/bin`, for example a conda environment's `bin`); `.local/` is git-ignored. The arms that hide the real tools
+can hide a directory only if it is not `/usr/bin`, which the sandbox always has on `PATH`: with a distribution's samtools,
+bcftools and bedtools the tools stay reachable by name, so for such runs point `bin_dirs` at a separate directory.
 [`supported-tools.md`](supported-tools.md) lists the versions of the other programs the studies used, and
 [`envs/locks/`](../envs/locks/) pins them.
 
@@ -119,7 +121,7 @@ python -m pytest -q tests/test_rules_var_tabix.py
 `test_admission`: the tests that build real workspaces and run the real tools (family gates, rule calibration). Of about 5,900 tests,
 about 4,600 are marked and 1,300 are not. The quick subset takes one to three minutes in one process, depending on the load of the
 machine; without matplotlib, the two tests of `tools/make_figures.py` and two of `tools/make_diagrams.py` skip. CI runs it with `-n auto` on Python 3.10 and 3.12,
-and fails if a test skips because samtools, bcftools, bedtools or the sandbox is missing, or if more than 250 tests skip. A second
+and fails if a test skips because samtools, bcftools, bedtools or the sandbox is missing, or if more than 15 tests skip (a clean runner skips 6 or 7). A second
 CI job runs both freeze checks of [Stage 2](#stage-2) on the tag `stage2-freeze`.
 
 The last recorded run of the full suite, on the tree of the last commit but for this log, is [`fulltests.log`](fulltests.log): 5,911

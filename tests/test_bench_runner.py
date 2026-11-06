@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+import subprocess
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -28,6 +29,14 @@ needs_python312 = pytest.mark.skipif(
     not os.access("/usr/bin/python3.12", os.X_OK),
     reason="/usr/bin/python3.12 is missing (the sandbox runs it)",
 )
+
+
+def first_line_of_version(tools, name, work):
+    """The first line of `name --version`; the rest may not be UTF-8 (Ubuntu's samtools)."""
+    done = subprocess.run(
+        [name, "--version"], cwd=work, env=tools.process_env(), capture_output=True, check=False
+    )
+    return done.stdout.split(b"\n", 1)[0].decode()
 
 
 @pytest.fixture(scope="module")
@@ -58,10 +67,7 @@ def test_the_sandbox_runs_the_real_tools_and_both_pythons(tools, work):
     )
 
     # the programs of this machine, whatever their version (CI installs the distribution's)
-    banner = {
-        name: tools.run([name, "--version"], work).stdout.splitlines()[0]
-        for name in ("samtools", "bcftools")
-    }
+    banner = {name: first_line_of_version(tools, name, work) for name in ("samtools", "bcftools")}
     assert out.exit_code == 0
     assert banner["samtools"] in out.stdout and banner["bcftools"] in out.stdout
     assert "42" in out.stdout
